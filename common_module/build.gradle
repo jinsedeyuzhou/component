@@ -21,6 +21,11 @@ android {
     }
 
 }
+//
+
+
+
+
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
@@ -29,18 +34,42 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     api rootProject.ext.dependencies.appcompat_v7
+    api rootProject.ext.dependencies.support_v4
+    api rootProject.ext.dependencies.constraint_layout
     api rootProject.ext.dependencies.design
+    api rootProject.ext.dependencies.multidex
+
+
     api rootProject.ext.dependencies.retrofit
     api rootProject.ext.dependencies.retrofit_converter_gson
     api rootProject.ext.dependencies.retrofit_adapter_rxjava2
-    api rootProject.ext.dependencies.gson
+    api rootProject.ext.dependencies.urlconnection
+    api rootProject.ext.dependencies.okhttp_apache
+    api rootProject.ext.dependencies.okhttp
+    api rootProject.ext.dependencies.logging_interceptor
     api rootProject.ext.dependencies.rxandroid
     api rootProject.ext.dependencies.rxjava
+
+    api rootProject.ext.dependencies.gson
+
     api rootProject.ext.dependencies.glide
-    api rootProject.ext.dependencies.constraint_layout
+    api rootProject.ext.dependencies.fresco
+
     api rootProject.ext.dependencies.eventbus
-    api rootProject.ext.dependencies.okhttp3_logging
-    api rootProject.ext.dependencies.SmartRefreshLayout
-    api rootProject.ext.dependencies.banner
+
     api rootProject.ext.dependencies.arouter_api
+//    annotationProcessor rootProject.ext.dependencies.arouter_compiler
+//    api rootProject.ext.dependencies.logger
+
+
+
+
+    implementation project(':baseLib:banner')
+    implementation project(':baseLib:FlycoTabLayout')
+    implementation project(':baseLib:photoview')
+    implementation project(':baseLib:pickerview')
+    implementation project(':baseLib:retrofitrxc')
+    implementation project(':baseLib:viewanimations')
+    //公共库导入
+    implementation project(':common_data')
 }

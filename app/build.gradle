@@ -19,12 +19,17 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:design:27.1.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation 'com.orhanobut:logger:2.2.0'
+
+    implementation rootProject.ext.dependencies.multidex
     implementation project(':common_module')
+    if (!isModule.toBoolean()) {
+        implementation project(':main_module')
+        implementation project(':module_user')
+    }
+//    implementation 'com.android.support:support-v4:27.1.1'
 }

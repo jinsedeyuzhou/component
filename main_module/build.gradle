@@ -1,19 +1,48 @@
-apply plugin: 'com.android.library'
+if (isModule.toBoolean()) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
 
 android {
-    compileSdkVersion 27
-
-
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+
+        //ARouter
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
+
     }
+
+
+
+
+    sourceSets {
+        main {
+            if (isModule.toBoolean()) {
+                manifest.srcFile 'src/main/module/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                //集成开发模式下则需要排除debug文件夹中的所有Java文件
+                java {
+                    exclude 'debug/**'
+                }
+            }
+        }
+    }
+
+
 
     buildTypes {
         release {
@@ -22,21 +51,26 @@ android {
         }
     }
 
-    sourceSets {
-        main {
-            manifest.srcFile 'src/main/AndroidManifest.xml'
-        }
-    }
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:support-v4:27.1.1'
-    implementation 'com.android.support:design:27.1.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+
+
+    implementation project(':baseLib:banner')
+    implementation project(':baseLib:FlycoTabLayout')
+    implementation project(':baseLib:photoview')
+    implementation project(':baseLib:pickerview')
+    implementation project(':baseLib:retrofitrxc')
+    implementation project(':baseLib:viewanimations')
+    //公共库导入
+    annotationProcessor rootProject.ext.dependencies.arouter_compiler
+    implementation project(':common_data')
+    implementation project(':common_module')
+
 }

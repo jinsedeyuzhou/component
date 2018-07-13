@@ -9,9 +9,17 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/baseLib" />
+            <option value="$PROJECT_DIR$/baseLib/FlycoTabLayout" />
+            <option value="$PROJECT_DIR$/baseLib/banner" />
+            <option value="$PROJECT_DIR$/baseLib/photoview" />
+            <option value="$PROJECT_DIR$/baseLib/pickerview" />
+            <option value="$PROJECT_DIR$/baseLib/retrofitrxc" />
+            <option value="$PROJECT_DIR$/baseLib/viewanimations" />
             <option value="$PROJECT_DIR$/common_data" />
             <option value="$PROJECT_DIR$/common_module" />
             <option value="$PROJECT_DIR$/main_module" />
+            <option value="$PROJECT_DIR$/module_user" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

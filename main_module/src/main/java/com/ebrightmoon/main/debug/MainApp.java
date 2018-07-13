@@ -1,4 +1,13 @@
 package com.ebrightmoon.main.debug;
 
-public class MainApp {
+import android.app.Application;
+
+public class MainApp extends Application {
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+
+    }
 }
