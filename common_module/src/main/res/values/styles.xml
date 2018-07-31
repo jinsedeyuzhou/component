@@ -19,17 +19,7 @@
 
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/primaryTitle1</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="clickableBackground">@drawable/bg_clickable</item>
-        <item name="mainBackground">@color/white</item>
-        <item name="android:windowBackground">@color/bgPrimary</item>
-        <item name="android:listDivider">@drawable/bg_divider_shap</item>
-        <!--<item name="android:windowAnimationStyle">@style/activityAnimation</item>-->
-    </style>
+
 
     <style name="AppTools" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
