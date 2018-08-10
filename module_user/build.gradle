@@ -62,7 +62,7 @@ dependencies {
 
 
     implementation project(':baseLib:banner')
-    implementation project(':baseLib:FlycoTabLayout')
+    implementation project(':baseLib:magicindicator')
     implementation project(':baseLib:photoview')
     implementation project(':baseLib:pickerview')
     implementation project(':baseLib:retrofitrxc')

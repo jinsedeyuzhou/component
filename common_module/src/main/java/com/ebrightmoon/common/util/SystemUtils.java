@@ -23,7 +23,7 @@ import android.view.Display;
 import android.view.WindowManager;
 
 
-import com.ebrightmoon.common.base.CommonApplication;
+import com.ebrightmoon.common.common.CommonApplication;
 
 import java.io.BufferedReader;
 import java.io.File;

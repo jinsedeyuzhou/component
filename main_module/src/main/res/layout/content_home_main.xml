@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".ui.activity.HomeMainActivity"
+    tools:showIn="@layout/app_bar_home_main">
+
+    <net.lucode.hackware.magicindicator.MagicIndicator
+        android:id="@+id/main_home_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_margin_45" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/main_home_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/main_home_indicator"
+       />
+
+
+</android.support.constraint.ConstraintLayout>

@@ -3,7 +3,7 @@ if (isModule.toBoolean()) {
 } else {
     apply plugin: 'com.android.library'
 }
-
+apply plugin: 'org.greenrobot.greendao'
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
 
@@ -14,7 +14,6 @@ android {
         versionName rootProject.ext.android.versionName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
 
         //ARouter
         javaCompileOptions {
@@ -42,7 +41,11 @@ android {
         }
     }
 
-
+    greendao {
+        schemaVersion 1
+        targetGenDir 'src/main/java'
+        daoPackage 'com.ebrightmoon.main.gen'
+    }
 
     buildTypes {
         release {
@@ -56,6 +59,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
@@ -63,7 +67,7 @@ dependencies {
 
 
     implementation project(':baseLib:banner')
-    implementation project(':baseLib:FlycoTabLayout')
+    implementation project(':baseLib:magicindicator')
     implementation project(':baseLib:photoview')
     implementation project(':baseLib:pickerview')
     implementation project(':baseLib:retrofitrxc')

@@ -57,15 +57,19 @@ dependencies {
 
     api rootProject.ext.dependencies.eventbus
 
-    api rootProject.ext.dependencies.arouter_api
-//    annotationProcessor rootProject.ext.dependencies.arouter_compiler
-//    api rootProject.ext.dependencies.logger
+
+    api rootProject.ext.dependencies["tencent-bugly"]
+    api rootProject.ext.dependencies["stetho"]
+    api rootProject.ext.dependencies["stetho-okhttp3"]
+    api rootProject.ext.dependencies["logger"]
+
+    api rootProject.ext.dependencies.greendao
 
 
 
 
     implementation project(':baseLib:banner')
-    implementation project(':baseLib:FlycoTabLayout')
+    implementation project(':baseLib:magicindicator')
     implementation project(':baseLib:photoview')
     implementation project(':baseLib:pickerview')
     implementation project(':baseLib:retrofitrxc')
