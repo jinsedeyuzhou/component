@@ -37,4 +37,8 @@
     <color name="darkslateblue">#483D8B</color>
     <!-- 水蓝色 -->
     <color name="aqua">#66ccff</color>
+
+    <color  name="transparentTitle">#88FFFFFF</color>
+    <color name="bgSecond">#FFCCCCCC</color>
+    <color name="bgPrimary">#FFEEEEEE</color>
 </resources>

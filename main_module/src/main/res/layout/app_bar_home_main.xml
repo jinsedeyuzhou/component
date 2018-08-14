@@ -19,6 +19,12 @@
             app:title="@string/app_name"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
+
+        <net.lucode.hackware.magicindicator.MagicIndicator
+            android:id="@+id/main_home_indicator"
+            android:layout_width="match_parent"
+            android:background="@color/colorPrimary"
+            android:layout_height="@dimen/activity_margin_45" />
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_home_main" />

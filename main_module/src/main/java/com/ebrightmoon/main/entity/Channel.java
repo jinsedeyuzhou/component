@@ -2,7 +2,7 @@ package com.ebrightmoon.main.entity;
 
 import java.io.Serializable;
 
-public class ChannelType implements Serializable {
+public class Channel implements Serializable {
     public static final String KEY_COURSE_TYPE= "key_course_type";
     //课程ID
     private int id;
@@ -11,7 +11,7 @@ public class ChannelType implements Serializable {
     //课程类型
     private int type;
 
-    public ChannelType(int id, String name, int type) {
+    public Channel(int id, String name, int type) {
         this.id = id;
         this.name = name;
         this.type = type;
