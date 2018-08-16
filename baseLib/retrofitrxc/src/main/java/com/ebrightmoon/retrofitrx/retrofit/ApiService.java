@@ -133,6 +133,15 @@ public interface ApiService {
     @GET()
     Observable<ResponseBody> downFile(@Url() String url, @QueryMap Map<String, String> maps);
 
+    /**
+     * @param url
+     * @param responseBody
+     * @return
+     */
+    @Streaming
+    @POST()
+    Observable<ResponseBody> downFile(@Url() String url, @Body RequestBody responseBody);
+
 
 
 

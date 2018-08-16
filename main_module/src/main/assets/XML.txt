@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="GBK"?>
+<PACKET>
+  <requesthead>
+    <user>0384</user>
+    <request_type>01590015</request_type>
+    <password>6b8f52cb-be11-4977-83d2-f448bed38e35</password>
+    <server_version>00000000</server_version>
+    <sender>0384</sender>
+    <uuid>5226244b-fc0d-4723-b619-bc2ba179c332</uuid>
+    <flowintime>2018-08-10 10:37:29</flowintime>
+    <zoneNo>44000000</zoneNo>
+  </requesthead>
+  <BODY>
+    <instanceName>getEpolicyFile</instanceName>
+    <data name="3in_2.xml" dataName="3in_2.xml">
+      <root>
+        <EDI>
+          <KEY>getEpolicyFile</KEY>
+          <VISACODE>PZFG201844010000021546</VISACODE>
+          <TYPE>E</TYPE>
+          <GROUP>0</GROUP>
+          <CALL_SYSTEM>EasyOrder</CALL_SYSTEM>
+          <FILE_TYPE>ZIP</FILE_TYPE>
+        </EDI>
+      </root>
+    </data>
+  </BODY>
+</PACKET>

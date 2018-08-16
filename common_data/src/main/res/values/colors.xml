@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#D73D33</color>
     <color name="colorPrimaryDark">#D53B33</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#D73D33</color>
 
 
 
@@ -38,7 +38,7 @@
     <!-- 水蓝色 -->
     <color name="aqua">#66ccff</color>
 
-    <color  name="transparentTitle">#88FFFFFF</color>
+    <color  name="transparentTitle">#CCFFFFFF</color>
     <color name="bgSecond">#FFCCCCCC</color>
     <color name="bgPrimary">#FFEEEEEE</color>
 </resources>

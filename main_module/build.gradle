@@ -38,6 +38,7 @@ android {
                     exclude 'debug/**'
                 }
             }
+            assets.srcDirs = ['src/main/assets', 'src/main/assets/']
         }
     }
 
