@@ -1,9 +1,7 @@
 package com.ebrightmoon.data;
 
 /**
- * @Created by TOME .
- * @时间 2018/4/26 10:18
- * @描述 ${Intent 键 值}
+ * 存储跳转键值对
  */
 
 public interface IntentKV {

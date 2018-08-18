@@ -31,6 +31,7 @@ dependencies {
     if (!isModule.toBoolean()) {
         implementation project(':main_module')
         implementation project(':module_user')
+        implementation project(':ui_module')
     }
 //    implementation 'com.android.support:support-v4:27.1.1'
 }

@@ -20,6 +20,7 @@ import com.ebrightmoon.retrofitrx.mode.MediaTypes;
 import com.ebrightmoon.retrofitrx.response.ResponseResult;
 import com.ebrightmoon.retrofitrx.subscriber.ApiCallbackSubscriber;
 import com.ebrightmoon.retrofitrx.subscriber.DownCallbackSubscriber;
+import com.ebrightmoon.retrofitrx.temp.SSL;
 
 import org.json.JSONObject;
 import org.reactivestreams.Publisher;
@@ -30,11 +31,14 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
+import java.security.cert.CertificateException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
+import javax.net.ssl.X509TrustManager;
 
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
@@ -55,6 +59,7 @@ import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+
 
 
 /**
@@ -99,9 +104,27 @@ public class AppClient {
                 .baseUrl(baseUrl)
                 .build();
 
-
+        okHttpBuilder.sslSocketFactory(new SSL(trustAllCert), trustAllCert);
 
     }
+
+
+
+    //定义一个信任所有证书的TrustManager
+    final X509TrustManager trustAllCert = new X509TrustManager() {
+        @Override
+        public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+        }
+
+        @Override
+        public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+        }
+
+        @Override
+        public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+            return new java.security.cert.X509Certificate[]{};
+        }
+    };
 
 
     private static AppClient instance;
