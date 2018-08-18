@@ -3,6 +3,7 @@ package com.ebrightmoon.common.util;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.FloatRange;
 import android.support.annotation.RequiresApi;
@@ -25,8 +26,13 @@ import java.util.regex.Pattern;
 @SuppressWarnings("unused")
 public class StatusBarUtils {
 
-    public static int DEFAULT_COLOR = 0;
-    public static float DEFAULT_ALPHA = 0;//Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ? 0.2f : 0.3f;
+    private StatusBarUtils() {
+        /** cannot be instantiated **/
+        throw new UnsupportedOperationException("cannot be instantiated");
+    }
+
+    public static final  int  DEFAULT_COLOR = 0;
+    public static final float  DEFAULT_ALPHA = 0;//Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ? 0.2f : 0.3f;
     public static final int MIN_API = 19;
 
     //<editor-fold desc="沉侵">
@@ -288,4 +294,30 @@ public class StatusBarUtils {
         }
         return result;
     }
+
+    /**
+     * 启用 透明状态栏
+     *
+     * @param activity
+     */
+    public static void enableTranslucentStatusbar(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window window = activity.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = activity.getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
+                    | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
+            window.setNavigationBarColor(Color.TRANSPARENT);
+        }
+    }
+
 }

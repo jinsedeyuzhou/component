@@ -3,6 +3,7 @@ package com.ebrightmoon.retrofitrx.func;
 import android.content.Context;
 import android.os.Environment;
 
+import com.ebrightmoon.retrofitrx.common.HttpUtils;
 import com.ebrightmoon.retrofitrx.mode.DownProgress;
 
 import org.reactivestreams.Publisher;
@@ -30,10 +31,18 @@ import static com.ebrightmoon.retrofitrx.common.HttpUtils.fileName;
 public class ApiDownloadFunc implements Function<ResponseBody, Publisher<DownProgress>> {
     private String rootName;
     private Context mContext;
+    private String fileName;
+
+    public ApiDownloadFunc(Context mContext,String fileName) {
+        this.mContext = mContext;
+        this.rootName = getDiskCachePath(mContext);
+        this.fileName=fileName;
+    }
 
     public ApiDownloadFunc(Context mContext) {
         this.mContext = mContext;
         this.rootName = getDiskCachePath(mContext);
+        this.fileName= HttpUtils.fileName;
     }
 
     @Override

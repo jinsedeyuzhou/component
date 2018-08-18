@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#D73D33</color>
+    <color name="colorPrimaryDark">#D53B33</color>
+    <color name="colorAccent">#D73D33</color>
+
+
+
+
+    <!-- 常用颜色 -->
+    <color name="transparent">#00000000</color>
+    <color name="dialog_transparent">#55000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="red">#FF0000</color>
+    <color name="green">#008000</color>
+    <color name="blue">#0000FF</color>
+    <color name="orange">#FFA500</color>
+    <color name="grey">#808080</color>
+    <!-- 浅橘色 -->
+    <color name="fleetorange">#FFFF7D25</color>
+    <!-- 暗红色 -->
+    <color name="kermesinus">#bb0d18</color>
+    <!-- 暗灰色 -->
+    <color name="darkgrey">#A9A9A9</color>
+    <!-- 象牙色 -->
+    <color name="ivory">#FFFFF0</color>
+    <!-- 淡灰色 -->
+    <color name="gainsboro">#DCDCDC</color>
+    <!-- 暗蓝色 -->
+    <color name="darkblue">#00008B</color>
+    <!-- 浅蓝色 -->
+    <color name="fleetblue">#FF4285E9</color>
+    <!-- 暗绿色 -->
+    <color name="darkgreen">#006400</color>
+    <!-- 暗灰蓝色 -->
+    <color name="darkslateblue">#483D8B</color>
+    <!-- 水蓝色 -->
+    <color name="aqua">#66ccff</color>
+
+    <color  name="transparentTitle">#CCFFFFFF</color>
+    <color name="bgSecond">#FFCCCCCC</color>
+    <color name="bgPrimary">#FFEEEEEE</color>
+</resources>

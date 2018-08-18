@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ui_module</string>
+
+    <!--BottomNavigation-->
+    <string name="title_home">主页</string>
+    <string name="title_discovery">发现</string>
+    <string name="title_message">消息</string>
+    <string name="title_account">账户</string>
+</resources>

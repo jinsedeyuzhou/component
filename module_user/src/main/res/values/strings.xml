@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">module_user</string>
+    <string name="app_name">新资讯</string>
     <string name="title_activity_login">Sign in</string>
     <string name="title_activity_main">MainActivity</string>
 

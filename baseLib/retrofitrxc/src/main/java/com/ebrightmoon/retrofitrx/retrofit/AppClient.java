@@ -20,6 +20,7 @@ import com.ebrightmoon.retrofitrx.mode.MediaTypes;
 import com.ebrightmoon.retrofitrx.response.ResponseResult;
 import com.ebrightmoon.retrofitrx.subscriber.ApiCallbackSubscriber;
 import com.ebrightmoon.retrofitrx.subscriber.DownCallbackSubscriber;
+import com.ebrightmoon.retrofitrx.temp.SSL;
 
 import org.json.JSONObject;
 import org.reactivestreams.Publisher;
@@ -28,11 +29,16 @@ import org.reactivestreams.Subscriber;
 import java.io.File;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
+import java.security.cert.CertificateException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
+import javax.net.ssl.X509TrustManager;
 
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
@@ -53,6 +59,7 @@ import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+
 
 
 /**
@@ -84,18 +91,40 @@ public class AppClient {
         if (url != null)
             baseUrl = url;
 
-
         okHttpBuilder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+        okHttpBuilder .proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress("192.168.1.185", 82)));
+
         retrofitBuilder = new Retrofit.Builder();
 
         retrofit = retrofitBuilder
+
                 .client(okHttpBuilder.build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .baseUrl(baseUrl)
                 .build();
 
+        okHttpBuilder.sslSocketFactory(new SSL(trustAllCert), trustAllCert);
+
     }
+
+
+
+    //定义一个信任所有证书的TrustManager
+    final X509TrustManager trustAllCert = new X509TrustManager() {
+        @Override
+        public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+        }
+
+        @Override
+        public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+        }
+
+        @Override
+        public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+            return new java.security.cert.X509Certificate[]{};
+        }
+    };
 
 
     private static AppClient instance;
@@ -190,7 +219,7 @@ public class AppClient {
      * @param <T>
      */
     public <T> void post(String url, Map<String, String> params, ACallback<T> callback) {
-        RequestBody body = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), GsonUtil.gson().toJson(params));
+        RequestBody body = RequestBody.create(MediaTypes.APPLICATION_JSON_TYPE, GsonUtil.gson().toJson(params));
         DisposableObserver disposableObserver = new ApiCallbackSubscriber<T>(callback);
         CreateApiService().post(url, body)
                 .compose(ApiTransformer.<T>Transformer(getSubType(callback)))
@@ -206,7 +235,7 @@ public class AppClient {
      * @param <T>
      */
     public <T> void json(String url, String jsonObject, ACallback<T> callback) {
-        RequestBody body = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"),jsonObject);
+        RequestBody body = RequestBody.create(MediaTypes.APPLICATION_JSON_TYPE,jsonObject);
         DisposableObserver disposableObserver = new ApiCallbackSubscriber<T>(callback);
         CreateApiService().post(url, body)
                 .compose(ApiTransformer.<T>Transformer(getSubType(callback)))
@@ -240,7 +269,7 @@ public class AppClient {
      * @param <T>
      */
     public <T> void executePost(String url, Map<String, String> params, ACallback<T> callback) {
-        RequestBody body = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), GsonUtil.gson().toJson(params));
+        RequestBody body = RequestBody.create(MediaTypes.APPLICATION_JSON_TYPE, GsonUtil.gson().toJson(params));
         DisposableObserver disposableObserver = new ApiCallbackSubscriber<T>(callback);
         CreateApiService().executePost(url, params, body)
                 .map(new ApiResultFunc<T>(getSubType(callback)))
@@ -298,7 +327,7 @@ public class AppClient {
      * @param <T>
      */
     public <T> void postResponseResult(String url, Map<String, String> params, ACallback<ResponseResult<T>> callback) {
-        RequestBody body = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), GsonUtil.gson().toJson(params));
+        RequestBody body = RequestBody.create(MediaTypes.APPLICATION_JSON_TYPE, GsonUtil.gson().toJson(params));
         DisposableObserver disposableObserver = new ApiCallbackSubscriber<ResponseResult<T>>(callback);
         CreateApiService().executePost(url, params, body)
                 .compose(ApiTransformer.<ResponseResult<T>>RRTransformer(getSubType(callback)))
@@ -360,13 +389,35 @@ public class AppClient {
     public <T> void uploadFiles(String url, Map<String, File> files, ACallback<T> callback) {
         params = new HashMap<>();
         for (Map.Entry<String, File> entry : files.entrySet()) {
-            RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), entry.getValue());
+            RequestBody requestBody = RequestBody.create(MediaTypes.APPLICATION_FORM_URLENCODED_TYPE, entry.getValue());
             params.put("file\"; filename=\"" + entry.getValue() + "", requestBody);
         }
         DisposableObserver disposableObserver = new ApiCallbackSubscriber<T>(callback);
         CreateApiService().uploadFiles(url, params)
                 .map(new ApiResultFunc<T>(getSubType(callback)))
                 .compose(ApiTransformer.<T>apiTransformer())
+                .subscribe(disposableObserver);
+
+
+    }
+
+    /**
+     * 下载文件
+     *
+     * @param url
+     * @param params
+     */
+    public <T> void downloadFile(String url, Map<String, String> params,String fileName, Context context, ACallback<T> callback) {
+        DisposableObserver disposableObserver = new DownCallbackSubscriber(callback);
+        CreateApiService().downFile(url, params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .toFlowable(BackpressureStrategy.LATEST)
+                .flatMap(new ApiDownloadFunc(context,fileName))
+                .sample(1, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .toObservable()
+                .retryWhen(new ApiRetryFunc(0, 60))
                 .subscribe(disposableObserver);
 
 
@@ -396,12 +447,36 @@ public class AppClient {
 
 
     /**
+     * 下载文件
+     *
+     * @param url
+     * @param xml
+     */
+    public <T> void downloadFile(String url, String xml,String fileName, Context context, ACallback<T> callback) {
+        RequestBody body = RequestBody.create(MediaTypes.APPLICATION_XML_TYPE, xml);
+        DisposableObserver disposableObserver = new DownCallbackSubscriber(callback);
+        CreateApiService().downFile(url, body)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .toFlowable(BackpressureStrategy.LATEST)
+                .flatMap(new ApiDownloadFunc(context,fileName))
+                .sample(1, TimeUnit.SECONDS)  //如果碰见小文件一秒之内下载完成会看不到进度，可以注掉也可以改变发送次数
+                .observeOn(AndroidSchedulers.mainThread())
+                .toObservable()
+                .retryWhen(new ApiRetryFunc(0, 60))
+                .subscribe(disposableObserver);
+
+
+    }
+
+
+    /**
      * @param params
      * @param callback
      */
     public void getMobileCode(HashMap<String, String> params, ACallback<ResponseResult<String>> callback) {
         DisposableObserver disposableObserver = new ApiCallbackSubscriber<ResponseResult<String>>(callback);
-        RequestBody body = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), GsonUtil.gson().toJson(params));
+        RequestBody body = RequestBody.create(MediaTypes.APPLICATION_JSON_TYPE, GsonUtil.gson().toJson(params));
         CreateApiService().getMobileCode(params, body)
                 .compose(ApiTransformer.<ResponseResult<String>>norTransformer())
                 .subscribe(disposableObserver);
