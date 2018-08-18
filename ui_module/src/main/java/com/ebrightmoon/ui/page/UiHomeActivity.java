@@ -46,12 +46,12 @@ public class UiHomeActivity extends BaseActivity {
     @Override
     public void initView() {
         viewPager = (CustomViewPager) findViewById(R.id.viewpager);
-        bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
 
         tabTitles = new ArrayList();
         tabTitles.add("发现");
         tabTitles.add("消息");
-        fragmentList=new ArrayList();
+        fragmentList = new ArrayList();
         fragmentList.add(new HomeFragment());
         fragmentList.add(new AccountFragment());
 
@@ -59,26 +59,26 @@ public class UiHomeActivity extends BaseActivity {
         newsAdapter = new NewsAdapter(getSupportFragmentManager(), fragmentList, tabTitles);
         viewPager.setAdapter(newsAdapter);
         viewPager.setCurrentItem(3);
-        viewPager.setScrollable(false);
+        viewPager.setScrollable(true);
         //默认 >3 的选中效果会影响ViewPager的滑动切换时的效果，故利用反射去掉
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.navigation_practice:
-                                viewPager.setCurrentItem(1);
-                                break;
-                            case R.id.navigation_home:
-                                viewPager.setCurrentItem(0);
-                                break;
+                        if (item.getItemId() == R.id.navigation_practice) {
+                            viewPager.setCurrentItem(0);
+                        } else if (item.getItemId() == R.id.navigation_home) {
+                            viewPager.setCurrentItem(1);
                         }
+
                         return false;
                     }
                 });
 
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
+
+        {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -109,7 +109,6 @@ public class UiHomeActivity extends BaseActivity {
 //        });
 
     }
-
 
 
     @Override
