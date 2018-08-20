@@ -1,6 +1,10 @@
 <resources>
 
     <style name="AppMainTheme" parent="BaseAppTheme">
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
         <item name="actionMenuTextColor">@color/white</item> <!--  敲定颜色-->
         <item name="titleTextColor">@android:color/white</item>
 

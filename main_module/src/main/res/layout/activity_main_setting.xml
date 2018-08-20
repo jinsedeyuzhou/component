@@ -3,28 +3,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <!--<include layout="@layout/layout_common_refresh" />-->
-    <ProgressBar
-        android:id="@+id/pb"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:layout_marginTop="20dp"
-        android:max="100"
-        android:progress="80"
-       />
 
-    <TextView
-        android:id="@+id/tv_show_percent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="进度" />
-
-    <Button
-        android:id="@+id/btn_download"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="下载" />
 </LinearLayout>

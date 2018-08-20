@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "D:\\git_project\\component\\baseLib\\FlycoTabLayout\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_layout_tab_right.xml.flat",
+        "source": "D:\\git_project\\component\\baseLib\\FlycoTabLayout\\build\\intermediates\\packaged_res\\debug\\layout\\layout_tab_right.xml"
+    },
+    {
+        "merged": "D:\\git_project\\component\\baseLib\\FlycoTabLayout\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_layout_tab_left.xml.flat",
+        "source": "D:\\git_project\\component\\baseLib\\FlycoTabLayout\\build\\intermediates\\packaged_res\\debug\\layout\\layout_tab_left.xml"
+    },
+    {
+        "merged": "D:\\git_project\\component\\baseLib\\FlycoTabLayout\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_layout_tab.xml.flat",
+        "source": "D:\\git_project\\component\\baseLib\\FlycoTabLayout\\build\\intermediates\\packaged_res\\debug\\layout\\layout_tab.xml"
+    },
+    {
+        "merged": "D:\\git_project\\component\\baseLib\\FlycoTabLayout\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_layout_tab_top.xml.flat",
+        "source": "D:\\git_project\\component\\baseLib\\FlycoTabLayout\\build\\intermediates\\packaged_res\\debug\\layout\\layout_tab_top.xml"
+    },
+    {
+        "merged": "D:\\git_project\\component\\baseLib\\FlycoTabLayout\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_layout_tab_segment.xml.flat",
+        "source": "D:\\git_project\\component\\baseLib\\FlycoTabLayout\\build\\intermediates\\packaged_res\\debug\\layout\\layout_tab_segment.xml"
+    },
+    {
+        "merged": "D:\\git_project\\component\\baseLib\\FlycoTabLayout\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_layout_tab_bottom.xml.flat",
+        "source": "D:\\git_project\\component\\baseLib\\FlycoTabLayout\\build\\intermediates\\packaged_res\\debug\\layout\\layout_tab_bottom.xml"
+    }
+]
