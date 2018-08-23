@@ -3,15 +3,24 @@ package com.ebrightmoon.ui.page.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.ebrightmoon.common.base.BaseFragment;
+import com.ebrightmoon.common.widget.CustomDialogFragment;
 import com.ebrightmoon.retrofitrx.callback.ACallback;
 import com.ebrightmoon.retrofitrx.mode.DownProgress;
 import com.ebrightmoon.retrofitrx.retrofit.AppClient;
 import com.ebrightmoon.ui.R;
+import com.ebrightmoon.ui.widget.popupWindow.CommonPopupWindow;
+import com.ebrightmoon.ui.widget.popupWindow.CustomPopWindow;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,6 +34,10 @@ public class UiHomeFragment extends BaseFragment {
     private TextView mTvShowCount;
     private DownProgress downProgress;
     private String fileName;
+    private CommonPopupWindow popupWindow;
+    private Button mBtnPop;
+    private View content;
+    private Button mBtnDialog;
 
     public static UiHomeFragment newInstance() {
         UiHomeFragment uiHomeFragment = new UiHomeFragment();
@@ -40,11 +53,14 @@ public class UiHomeFragment extends BaseFragment {
 
     @Override
     protected void initView(View view) {
+        content = view;
         mPb = view.findViewById(R.id.pb);
         mPb.setMax(100);
         mPb.setProgress(0);
         mTvShowPercent = view.findViewById(R.id.tv_show_percent);
         mTvShowCount = view.findViewById(R.id.tv_show_count);
+        mBtnPop = view.findViewById(R.id.btn_pop);
+        mBtnDialog = view.findViewById(R.id.btn_dialog);
         view.findViewById(R.id.btn_download).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,10 +76,7 @@ public class UiHomeFragment extends BaseFragment {
                         if (downProgress!=null) {
                             mPb.setProgress((int) (downProgress.getDownloadSize()*1.0/downProgress.getTotalSize()*100));
                             mTvShowPercent.setText("进度："+downProgress.getPercent());
-
                         }
-
-
                     }
 
                     @Override
@@ -73,11 +86,60 @@ public class UiHomeFragment extends BaseFragment {
                 });
             }
         });
+
+
+
     }
 
+    /**
+     * 点击弹框
+     * @param view
+     */
+    public void btClick1(View view){
+      View  contentView = LayoutInflater.from(mContext).inflate(R.layout.popup_child_menu, null);
+        TextView tvLike = (TextView)contentView.findViewById(R.id.tv_like);
+        if (popupWindow != null && popupWindow.isShowing()){
+            return;
+        }
+        popupWindow = new CommonPopupWindow.Builder(mContext)
+                .setView(contentView)
+                .setWidthAndHeight(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                .setAnimationStyle(R.style.AnimRight)
+                .setOutsideTouchable(true)
+                .create();
+        //根据view的位置设置
+        popupWindow.showAsDropDown(view, -popupWindow.getWidth(), -view.getHeight());
+    }
+
+    //建议使用
+    public void btClick2(View view){
+        View contentView = LayoutInflater.from(mContext).inflate(R.layout.pop_product_detail_video, null);
+        //创建并显示popWindow
+        final CustomPopWindow popWindow = new CustomPopWindow.PopupWindowBuilder(mContext)
+                .setView(contentView)
+                .enableBackgroundDark(true)
+                .setBgDarkAlpha(0.7f)
+                .setAnimationStyle(R.style.pop_bottom_anim)
+                .size(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)//显示大小
+                .create()
+                .showAtLocation(content, Gravity.BOTTOM, 0, 0);
+
+    }
     @Override
     protected void bindEvent() {
-
+        mBtnPop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btClick1(mBtnPop);
+            }
+        });
+        mBtnDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CustomDialogFragment newFragment =CustomDialogFragment.newInstance();
+                newFragment.show(getChildFragmentManager(),"dialog");
+            }
+        });
     }
 
     @Override
@@ -118,4 +180,6 @@ public class UiHomeFragment extends BaseFragment {
         }
         return "读取错误，请检查文件名";
     }
+
+
 }

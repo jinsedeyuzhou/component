@@ -10,7 +10,9 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/baseLib" />
+            <option value="$PROJECT_DIR$/baseLib/alertview" />
             <option value="$PROJECT_DIR$/baseLib/banner" />
+            <option value="$PROJECT_DIR$/baseLib/kprogresshud" />
             <option value="$PROJECT_DIR$/baseLib/magicindicator" />
             <option value="$PROJECT_DIR$/baseLib/photoview" />
             <option value="$PROJECT_DIR$/baseLib/pickerview" />
