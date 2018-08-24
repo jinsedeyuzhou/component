@@ -1,6 +1,7 @@
 package com.ebrightmoon.main.ui.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,6 +20,7 @@ import com.ebrightmoon.main.R;
 import com.ebrightmoon.main.adapter.NewsFeedAdapter;
 import com.ebrightmoon.main.entity.Channel;
 import com.ebrightmoon.main.entity.NewsFeed;
+import com.ebrightmoon.main.view.LoadMoreView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +37,8 @@ public class NewsMainFragment extends BaseFragment {
     private LoadMoreWrapper mLoadMoreWrapper;
     private int curPage = 1;
     private static final int PAGE_SIZE = 15;
+    private LoadMoreView loadMoreView;
+    private Handler handler=new Handler();
 
 
     public static NewsMainFragment newInstance(Channel courseType) {
@@ -81,7 +85,12 @@ public class NewsMainFragment extends BaseFragment {
         mainRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerViewAdapter = new NewsFeedAdapter(mContext,newsFeedList );
         initEmptyView();
+
+        loadMoreView = new LoadMoreView(mContext);
+        RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        loadMoreView.setLayoutParams(layoutParams);
         mLoadMoreWrapper = new LoadMoreWrapper(mEmptyWrapper);
+        mLoadMoreWrapper.setLoadMoreView(loadMoreView);
 //        mLoadMoreWrapper.setLoadMoreView(R.layout.default_loading);
         mainRecyclerView.setAdapter(mLoadMoreWrapper);
 
@@ -122,9 +131,13 @@ public class NewsMainFragment extends BaseFragment {
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (Tools.isVisBottom(mainRecyclerView)) {
-                    mLoadMoreWrapper.setLoadMoreView(R.layout.default_loading);
-                    mLoadMoreWrapper.notifyDataSetChanged();
+                    loadMoreView.startLoading();
+//                    mLoadMoreWrapper.notifyDataSetChanged();
                     curPage++;
+                    getData();
+                }else
+                {
+//                    loadMoreView.hideLoading();
                 }
             }
 
@@ -144,6 +157,12 @@ public class NewsMainFragment extends BaseFragment {
      * 获取请求数据
      */
     private void getData() {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                loadMoreView.finishLoading();
+            }
+        },10000);
     }
 
     @Override
