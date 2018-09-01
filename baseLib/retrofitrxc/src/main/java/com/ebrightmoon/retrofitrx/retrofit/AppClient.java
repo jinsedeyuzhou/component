@@ -406,6 +406,9 @@ public class AppClient {
      *
      * @param url
      * @param params
+     * @param fileName
+     * @param context
+     * @param callback
      */
     public <T> void downloadFile(String url, Map<String, String> params,String fileName, Context context, ACallback<T> callback) {
         DisposableObserver disposableObserver = new DownCallbackSubscriber(callback);
