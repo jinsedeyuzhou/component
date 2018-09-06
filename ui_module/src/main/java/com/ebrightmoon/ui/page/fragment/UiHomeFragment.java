@@ -19,6 +19,7 @@ import com.ebrightmoon.retrofitrx.callback.ACallback;
 import com.ebrightmoon.retrofitrx.mode.DownProgress;
 import com.ebrightmoon.retrofitrx.retrofit.AppClient;
 import com.ebrightmoon.ui.R;
+import com.ebrightmoon.ui.page.WebViewActivity;
 import com.ebrightmoon.ui.widget.popupWindow.CommonPopupWindow;
 import com.ebrightmoon.ui.widget.popupWindow.CustomPopWindow;
 
@@ -87,6 +88,16 @@ public class UiHomeFragment extends BaseFragment {
             }
         });
 
+
+        view.findViewById(R.id.btn_webview).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle=new Bundle();
+                bundle.putString("title","测试");
+                bundle.putString("url","http://192.168.8.18:8087/EditUrl.html");
+                toOtherActivity(WebViewActivity.class,bundle,false);
+            }
+        });
 
 
     }

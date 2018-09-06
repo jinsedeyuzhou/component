@@ -2,9 +2,11 @@ package com.ebrightmoon.common.util;
 
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.os.Build;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.webkit.WebSettings;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -264,6 +266,34 @@ public class Tools {
         return format.format(date);
     }
 
+
+    public static void initWebViewSettings(WebSettings wSet) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            wSet.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        }
+        // 是否显示缩放按钮
+        wSet.setBuiltInZoomControls(false);
+        // 支持缩放
+        wSet.setSupportZoom(false);
+        wSet.setTextZoom(100);
+        // 默认字体大小
+        wSet.setDefaultFontSize(12);
+        wSet.setAllowFileAccess(false);
+        // 设置可以访问文件
+        wSet.setAllowFileAccess(true);
+        // 设置支持webView JavaScript
+        wSet.setJavaScriptEnabled(true);
+        // 设置缓冲的模式
+        wSet.setCacheMode(WebSettings.LOAD_NO_CACHE);
+        // 设置字符编码
+        wSet.setDefaultTextEncodingName("utf-8");
+        //优先使用缓存
+//        wSet.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        wSet.setAppCacheEnabled(false);
+        wSet.setDomStorageEnabled(true);
+        wSet.setDatabaseEnabled(true);
+
+    }
 
 
 

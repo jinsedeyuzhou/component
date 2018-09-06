@@ -1,6 +1,8 @@
 package com.ebrightmoon.common.base;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
@@ -24,11 +26,13 @@ public abstract class BaseFragment
     protected LayoutInflater mInflater;
     private boolean mIsRegisterEvent = false;
     protected boolean mIsFirstVisible = true;
+    protected Activity mActivity;
 
     @Override
     public void onAttach(Context activity) {
         super.onAttach(activity);
         mContext = activity;
+        mActivity= (Activity) activity;
         mResources = mContext.getResources();
         mInflater = LayoutInflater.from(activity);
     }
@@ -102,6 +106,40 @@ public abstract class BaseFragment
         if (isRegisterEvent()) {
             BusManager.getBus().unregister(this);
         }
+    }
+
+    /**
+     * @param clazz   目标类
+     * @param bundle  参数
+     * @param isLogin 是否需要判断登录状态  true需要  false 不需要
+     */
+    protected void toOtherActivity(Class clazz, Bundle bundle, boolean isLogin) {
+        if (!isLogin) {
+            Intent intent = new Intent(mActivity, clazz);
+            if (bundle != null) {
+                intent.putExtras(bundle);
+            }
+            mActivity.startActivity(intent);
+        } else {
+            if (isLogin()) {
+                Intent intent = new Intent(mActivity, clazz);
+                if (bundle != null) {
+                    intent.putExtras(bundle);
+                }
+                mActivity.startActivity(intent);
+            }
+        }
+
+    }
+
+    /**
+     * 判断是否需要登录
+     *
+     * @return
+     */
+    private boolean isLogin() {
+
+        return false;
     }
 
     /**
