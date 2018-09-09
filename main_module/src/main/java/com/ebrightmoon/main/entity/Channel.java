@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 public class Channel implements Serializable {
     public static final String KEY_COURSE_TYPE= "key_course_type";
-    //课程ID
+    //频道Id
     private int id;
-    //课程 标题
+    //频道名称
     private String name;
-    //课程类型
+    //频道类型
     private int type;
 
     public Channel(int id, String name, int type) {

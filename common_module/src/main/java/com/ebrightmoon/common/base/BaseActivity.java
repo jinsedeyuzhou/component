@@ -9,6 +9,9 @@ import android.os.PowerManager;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -39,6 +42,7 @@ public abstract class BaseActivity
     protected Context mContext;
     protected Activity mActivity;
     protected int screenWidth, screenHeight;
+    private Toolbar mToolbar;
 
     public abstract void initData();
 
@@ -116,6 +120,65 @@ public abstract class BaseActivity
         screenHeight = getResources().getDisplayMetrics().heightPixels;
     }
 
+    /**
+     * 初始化titlebar
+     */
+    protected void initToolsBar() {
+        mToolbar = findViewById(R.id.toolbar);
+        if (mToolbar != null) {
+            setSupportActionBar(mToolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+    }
+
+    /**
+     * 设置标题
+     *
+     * @param title
+     */
+    protected void setTitle(String title) {
+        if (mToolbar!=null) {
+            mToolbar.setTitle(title);
+            //设置标题后需要调用 如下方法 否则不显示
+            setSupportActionBar(mToolbar);
+        }
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.common_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+                onBackPressed();
+        } else if (id == R.id.share) {//TODO search
+            actionShare();
+        } else if (id == R.id.settings) {
+            actionSettings();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * 分享跳转
+     */
+    protected void actionSettings() {
+
+    }
+
+    /**
+     * 设置跳转
+     */
+    protected void actionShare() {
+
+    }
+
     private boolean isNeedAnimation() {
         return true;
     }
@@ -125,14 +188,17 @@ public abstract class BaseActivity
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
         super.setContentView(layoutResID);
+        initToolsBar();
         initView();
         bindEvent();
         initData();
+
     }
 
     @Override
     public void setContentView(View view) {
         super.setContentView(view);
+        initToolsBar();
         initView();
         bindEvent();
         initData();

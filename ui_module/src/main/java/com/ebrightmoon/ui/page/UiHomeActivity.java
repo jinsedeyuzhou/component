@@ -3,7 +3,6 @@ package com.ebrightmoon.ui.page;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,8 +13,8 @@ import com.ebrightmoon.common.widget.CustomViewPager;
 import com.ebrightmoon.data.RouterURLS;
 import com.ebrightmoon.ui.R;
 import com.ebrightmoon.ui.adapter.NewsAdapter;
-import com.ebrightmoon.ui.page.fragment.AccountFragment;
-import com.ebrightmoon.ui.page.fragment.HomeFragment;
+import com.ebrightmoon.ui.page.fragment.UiAccountFragment;
+import com.ebrightmoon.ui.page.fragment.UiHomeFragment;
 import com.ebrightmoon.ui.utils.BottomNavigationViewHelper;
 
 import java.util.ArrayList;
@@ -52,8 +51,8 @@ public class UiHomeActivity extends BaseActivity {
         tabTitles.add("发现");
         tabTitles.add("消息");
         fragmentList = new ArrayList();
-        fragmentList.add(new HomeFragment());
-        fragmentList.add(new AccountFragment());
+        fragmentList.add(new UiHomeFragment());
+        fragmentList.add(new UiAccountFragment());
 
 
         newsAdapter = new NewsAdapter(getSupportFragmentManager(), fragmentList, tabTitles);

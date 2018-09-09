@@ -1,36 +1,45 @@
 package com.ebrightmoon.main.ui.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.view.ViewGroup;
 
+import com.ebrightmoon.common.adapter.recycler.absrecyclerview.EmptyWrapper;
+import com.ebrightmoon.common.adapter.recycler.absrecyclerview.HeaderAndFooterWrapper;
+import com.ebrightmoon.common.adapter.recycler.absrecyclerview.LoadMoreWrapper;
+import com.ebrightmoon.common.adapter.recycler.divider.DividerItemDecoration;
 import com.ebrightmoon.common.base.BaseFragment;
+import com.ebrightmoon.common.util.Tools;
 import com.ebrightmoon.main.R;
+import com.ebrightmoon.main.adapter.NewsFeedAdapter;
 import com.ebrightmoon.main.entity.Channel;
-import com.ebrightmoon.retrofitrx.callback.ACallback;
-import com.ebrightmoon.retrofitrx.mode.DownProgress;
-import com.ebrightmoon.retrofitrx.retrofit.AppClient;
+import com.ebrightmoon.main.entity.NewsFeed;
+import com.ebrightmoon.main.view.LoadMoreView;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class NewsMainFragment extends BaseFragment {
-
-
-    private ProgressBar mPb;
-    private TextView mTvShowPercent;
+    private static final int[] drawables = {R.mipmap.one, R.mipmap.two, R.mipmap.four, R.mipmap
+            .three, R.mipmap.five};
+    private SwipeRefreshLayout mainSwipe;
+    private RecyclerView mainRecyclerView;
+    private LinearLayoutManager mLayoutManager;
+    private List<NewsFeed> newsFeedList=new ArrayList<>();
+    private NewsFeedAdapter mRecyclerViewAdapter;
+    private EmptyWrapper mEmptyWrapper;
+    private LoadMoreWrapper mLoadMoreWrapper;
+    private int curPage = 1;
+    private static final int PAGE_SIZE = 15;
+    private LoadMoreView loadMoreView;
     private Handler handler=new Handler();
-    private int i=1;
-    private TextView mTvShowCount;
-    private DownProgress downProgress;
-    private String fileName;
+
 
     public static NewsMainFragment newInstance(Channel courseType) {
         NewsMainFragment newsMainFragment = new NewsMainFragment();
@@ -49,50 +58,111 @@ public class NewsMainFragment extends BaseFragment {
 
     @Override
     protected void initView(View view) {
-
-        mPb = view.findViewById(R.id.pb);
-        mPb.setMax(100);
-        mPb.setProgress(0);
-        mTvShowPercent = view.findViewById(R.id.tv_show_percent);
-        mTvShowCount = view.findViewById(R.id.tv_show_count);
-        view.findViewById(R.id.btn_download).setOnClickListener(new View.OnClickListener() {
+        newsFeedList.add(new NewsFeed());
+        newsFeedList.add(new NewsFeed());
+        newsFeedList.add(new NewsFeed());
+        newsFeedList.add(new NewsFeed());
+        newsFeedList.add(new NewsFeed());
+        newsFeedList.add(new NewsFeed());
+        newsFeedList.add(new NewsFeed());
+        newsFeedList.add(new NewsFeed());
+        newsFeedList.add(new NewsFeed());
+        mainSwipe = view.findViewById(R.id.main_swipe);
+        mainRecyclerView = view.findViewById(R.id.main_recyclerView);
+        mainSwipe.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light,
+                android.R.color.holo_orange_light, android.R.color.holo_red_light);
+        mainSwipe.setSize(SwipeRefreshLayout.DEFAULT);
+        mainSwipe.post(new Runnable() {
             @Override
-            public void onClick(View view) {
-                i=1;
-                fileName=System.currentTimeMillis()+".zip";
-                String xml = readAssetsTxt(mContext,"XML");
-                AppClient.getInstance(mContext,"http://10.10.68.180:8001").downloadFile("/IDPBootstrap/IDPServletDataProvider", xml,"PZFG201844010000021546.zip", mContext, new ACallback<DownProgress>() {
-                    @Override
-                    public void onSuccess( DownProgress data) {
-                        downProgress=data;
-                        i++;
-                        mTvShowCount.setText(i+"");
-                        if (downProgress!=null) {
-                            mPb.setProgress((int) (downProgress.getDownloadSize()*1.0/downProgress.getTotalSize()*100));
-                            mTvShowPercent.setText("进度："+downProgress.getPercent());
+            public void run() {
+//                mainSwipe.setRefreshing(true);
+            }
+        });
+//        mainRecyclerView.addItemDecoration(new DividerItemDecoration(
+//                getActivity(), DividerItemDecoration.VERTICAL_LIST));
+        mainRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mLayoutManager = new LinearLayoutManager(mContext);
+        mainRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerViewAdapter = new NewsFeedAdapter(mContext,newsFeedList );
+        initEmptyView();
 
-                        }
+        loadMoreView = new LoadMoreView(mContext);
+        RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        loadMoreView.setLayoutParams(layoutParams);
+        mLoadMoreWrapper = new LoadMoreWrapper(mEmptyWrapper);
+        mLoadMoreWrapper.setLoadMoreView(loadMoreView);
+//        mLoadMoreWrapper.setLoadMoreView(R.layout.default_loading);
+        mainRecyclerView.setAdapter(mLoadMoreWrapper);
 
+    }
 
-                    }
+    /**
+     * 无数据布局
+     */
+    private void initEmptyView() {
+        mEmptyWrapper = new EmptyWrapper(mRecyclerViewAdapter);
+        View item_empty = View.inflate(mContext, R.layout.item_main_empty, null);
+        RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        item_empty.setLayoutParams(layoutParams);
+        mEmptyWrapper.setEmptyView(item_empty);
 
-                    @Override
-                    public void onFail(int errCode, String errMsg) {
+    }
 
-                    }
-                });
+    /**
+     * 初始化头布局
+     */
+    private void initHeaderAndFooter() {
+        HeaderAndFooterWrapper    mHeaderAndFooterWrapper = new HeaderAndFooterWrapper(mEmptyWrapper);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_main_empty, mainRecyclerView, false);
+        mHeaderAndFooterWrapper.addHeaderView(view);
+    }
+
+    @Override
+    protected void bindEvent() {
+        mainSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+            }
+        });
+
+        mainRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (Tools.isVisBottom(mainRecyclerView)) {
+                    loadMoreView.startLoading();
+//                    mLoadMoreWrapper.notifyDataSetChanged();
+                    curPage++;
+                    getData();
+                }else
+                {
+//                    loadMoreView.hideLoading();
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
             }
         });
     }
 
     @Override
-    protected void bindEvent() {
-
+    protected void initData(Bundle savedInstanceState) {
+        getData();
     }
 
-    @Override
-    protected void initData(Bundle savedInstanceState) {
-
+    /**
+     * 获取请求数据
+     */
+    private void getData() {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                loadMoreView.finishLoading();
+            }
+        },10000);
     }
 
     @Override
@@ -100,32 +170,15 @@ public class NewsMainFragment extends BaseFragment {
 
     }
 
-    /*
 
-   **
-           * 读取assets下的txt文件，返回utf-8 String
-     * @param context
-     * @param fileName 不包括后缀
+
+    /**
+     * 提供当前Fragment的主色调的Bitmap对象,供Palette解析颜色
+     *
      * @return
-             */
-    public static String readAssetsTxt(Context context, String fileName){
-        try {
-            //Return an AssetManager instance for your application's package
-            InputStream is = context.getAssets().open(fileName+".txt");
-            int size = is.available();
-            // Read the entire asset into a local byte buffer.
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            // Convert the buffer into a string.
-            String text = new String(buffer, "utf-8");
-            // Finally stick the string into the text view.
-            return text;
-        } catch (IOException e) {
-            // Should never happen!
-//            throw new RuntimeException(e);
-            e.printStackTrace();
-        }
-        return "读取错误，请检查文件名";
+     */
+    public static int getBackgroundBitmapPosition(int selectViewPagerItem) {
+        return drawables[selectViewPagerItem];
     }
+
 }

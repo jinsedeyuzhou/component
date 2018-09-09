@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="?attr/colorPrimary"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    app:title=""
+    app:titleTextColor="@color/white"/>
+
+    <!-- 可以设置标题  布局中使用app:title=""是不会起作用的，会显示ActionBar的标题，所以在代码中隐藏ActionBar的标题即可：
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        也可以设置左侧箭头  设置监听
+          mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    onBackPressed();
+//                }
+//            });
+        -->
+    <!--<TextView-->
+        <!--android:id="@+id/tv_middle_title"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:text="标题"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:textSize="@dimen/text_size_20"-->
+        <!--android:visibility="gone" />-->

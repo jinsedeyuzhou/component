@@ -56,6 +56,8 @@ dependencies {
     api rootProject.ext.dependencies.fresco
 
     api rootProject.ext.dependencies.eventbus
+    api rootProject.ext.dependencies.circleimage
+    api rootProject.ext.dependencies.cardview
 
 
     api rootProject.ext.dependencies["tencent-bugly"]
@@ -73,6 +75,8 @@ dependencies {
     implementation project(':baseLib:photoview')
     implementation project(':baseLib:pickerview')
     implementation project(':baseLib:retrofitrxc')
+    implementation project(':baseLib:alertview')
+    implementation project(':baseLib:kprogresshud')
     implementation project(':baseLib:viewanimations')
     //公共库导入
     implementation project(':common_data')
