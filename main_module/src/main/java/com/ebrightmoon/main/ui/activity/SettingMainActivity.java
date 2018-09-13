@@ -2,6 +2,7 @@ package com.ebrightmoon.main.ui.activity;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -27,7 +28,7 @@ public class SettingMainActivity extends BaseActivity {
 
     @Override
     public void initData() {
-
+        invalidateOptionsMenu();
     }
 
     @Override
@@ -36,6 +37,11 @@ public class SettingMainActivity extends BaseActivity {
 
     }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.share).setVisible(false);
+        return super.onPrepareOptionsMenu(menu);
+    }
 
     @Override
     protected void bindEvent() {
@@ -45,5 +51,10 @@ public class SettingMainActivity extends BaseActivity {
     @Override
     public void processClick(View paramView) {
 
+    }
+
+    @Override
+    protected void actionSettings() {
+        toOtherActivity(SearchMainActivity.class,null,false);
     }
 }

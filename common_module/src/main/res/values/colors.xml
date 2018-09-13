@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#D73D33</color>
     <color name="colorPrimaryDark">#D53B33</color>
-    <color name="colorAccent">#D73D33</color>
+    <color name="colorAccent">#FFFFFF</color>
 
 
 
@@ -41,4 +41,9 @@
     <color  name="transparentTitle">#CCFFFFFF</color>
     <color name="bgSecond">#FFCCCCCC</color>
     <color name="bgPrimary">#FFEEEEEE</color>
+    
+    <color name="darkColor">#FF333333</color>
+    <color name="lightColor">#FF333333</color>
+
+    
 </resources>

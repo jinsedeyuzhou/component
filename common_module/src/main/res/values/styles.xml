@@ -37,4 +37,7 @@
         <item name="android:textSize">@dimen/text_size_17</item>
         <item name="android:textColor">@color/grey</item>
     </style>
+
+
+
 </resources>
