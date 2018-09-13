@@ -98,21 +98,22 @@ public class SearchMainActivity extends BaseActivity {
             for (SearchHistory searchHistory : searchHistories) {
                 historys.add(searchHistory.getName());
             }
-            mHisAdapter = new TagAdapter<String>(historys) {
-
-                @Override
-                public View getView(FlowLayout parent, int position, String s) {
-                    TextView his = (TextView) LayoutInflater.from(mContext).inflate(R.layout.layout_tag,
-                            mHisFlowLayout, false);
-                    his.setText(s);
-                    return his;
-                }
-            };
-            mHisFlowLayout.setAdapter(mHisAdapter);
         } else {
             mLlHistory.setVisibility(View.GONE);
         }
 
+        mHisAdapter = new TagAdapter<String>(historys) {
+
+            @Override
+            public View getView(FlowLayout parent, int position, String s) {
+                TextView his = (TextView) LayoutInflater.from(mContext).inflate(R.layout.layout_tag,
+                        mHisFlowLayout, false);
+                his.setText(s);
+                return his;
+            }
+        };
+
+        mHisFlowLayout.setAdapter(mHisAdapter);
 
     }
 
