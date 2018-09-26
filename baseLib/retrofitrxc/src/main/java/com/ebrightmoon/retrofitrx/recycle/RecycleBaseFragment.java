@@ -14,6 +14,7 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.functions.Predicate;
+import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.PublishSubject;
 
 
@@ -88,7 +89,7 @@ public abstract class RecycleBaseFragment extends Fragment {
 
 
 
-    public final static PublishSubject<ActivityLifeCycleEvent> lifecycleSubject = PublishSubject.create();
+    protected   BehaviorSubject<ActivityLifeCycleEvent> lifecycleSubject = BehaviorSubject.create();
 
 
     @Override
@@ -123,25 +124,6 @@ public abstract class RecycleBaseFragment extends Fragment {
 
 
 
-    public static <T> ObservableTransformer<T, T> bindUntilEvent(@NonNull final ActivityLifeCycleEvent event) {
-        return new ObservableTransformer<T, T>() {
-            @Override
-            public ObservableSource<T> apply(Observable<T> upstream) {
-                Observable<ActivityLifeCycleEvent> compareLifecycleObservable =
-                        lifecycleSubject.filter(new Predicate<ActivityLifeCycleEvent>() {
-                            @Override
-                            public boolean test(ActivityLifeCycleEvent activityLifeCycleEvent) throws Exception {
-                                return activityLifeCycleEvent.equals(event);
-                            }
-                        }).firstElement().toObservable().publish();
-
-
-                return upstream.takeUntil(compareLifecycleObservable);
-            }
-
-
-        };
-    }
 
 
 }

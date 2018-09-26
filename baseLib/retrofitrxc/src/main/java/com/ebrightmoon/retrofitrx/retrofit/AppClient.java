@@ -17,6 +17,7 @@ import com.ebrightmoon.retrofitrx.interceptor.HeadersInterceptor;
 import com.ebrightmoon.retrofitrx.interceptor.LoggingInterceptor;
 import com.ebrightmoon.retrofitrx.mode.DownProgress;
 import com.ebrightmoon.retrofitrx.mode.MediaTypes;
+import com.ebrightmoon.retrofitrx.recycle.RxHelper;
 import com.ebrightmoon.retrofitrx.response.ResponseResult;
 import com.ebrightmoon.retrofitrx.subscriber.ApiCallbackSubscriber;
 import com.ebrightmoon.retrofitrx.subscriber.DownCallbackSubscriber;
@@ -64,6 +65,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 /**
  * Created by wyy on 2017/9/6.
+ *   利用Recycle 管理生命周期  利用返回DisposableObserver 和RxApiManager，取消网络请求
  */
 
 public class AppClient {
@@ -207,7 +209,25 @@ public class AppClient {
         DisposableObserver disposableObserver = new ApiCallbackSubscriber<T>(callback);
         CreateApiService().get(url, params)
                 .compose(ApiTransformer.<T>Transformer(getSubType(callback)))
+//                .compose(RxHelper.<T>bindUntilEvent(recycle))
                 .subscribe(disposableObserver);
+    }
+
+  /**
+     * Get 返回数据  无模型无校验
+     *
+     * @param url
+     * @param params
+     * @param callback
+     * @param <T>
+     */
+    public <T> DisposableObserver getd(String url, Map<String, String> params, ACallback<T> callback) {
+        DisposableObserver disposableObserver = new ApiCallbackSubscriber<T>(callback);
+        CreateApiService().get(url, params)
+                .compose(ApiTransformer.<T>Transformer(getSubType(callback)))
+//                .compose(RxHelper.<T>bindUntilEvent(recycle))
+                .subscribe(disposableObserver);
+        return  disposableObserver;
     }
 
     /**
@@ -218,12 +238,14 @@ public class AppClient {
      * @param callback
      * @param <T>
      */
-    public <T> void post(String url, Map<String, String> params, ACallback<T> callback) {
+    public <T> DisposableObserver post(String url, Map<String, String> params, ACallback<T> callback) {
         RequestBody body = RequestBody.create(MediaTypes.APPLICATION_JSON_TYPE, GsonUtil.gson().toJson(params));
         DisposableObserver disposableObserver = new ApiCallbackSubscriber<T>(callback);
         CreateApiService().post(url, body)
                 .compose(ApiTransformer.<T>Transformer(getSubType(callback)))
                 .subscribe(disposableObserver);
+
+        return disposableObserver;
     }
 
     /**
@@ -234,12 +256,13 @@ public class AppClient {
      * @param callback
      * @param <T>
      */
-    public <T> void json(String url, String jsonObject, ACallback<T> callback) {
+    public <T> DisposableObserver json(String url, String jsonObject, ACallback<T> callback) {
         RequestBody body = RequestBody.create(MediaTypes.APPLICATION_JSON_TYPE,jsonObject);
         DisposableObserver disposableObserver = new ApiCallbackSubscriber<T>(callback);
         CreateApiService().post(url, body)
                 .compose(ApiTransformer.<T>Transformer(getSubType(callback)))
                 .subscribe(disposableObserver);
+        return  disposableObserver;
     }
 
 
@@ -251,12 +274,14 @@ public class AppClient {
      * @param callback
      * @param <T>
      */
-    public <T> void executeGet(String url, Map<String, String> params, ACallback<T> callback) {
+    public <T> DisposableObserver executeGet(String url, Map<String, String> params, ACallback<T> callback) {
         DisposableObserver disposableObserver = new ApiCallbackSubscriber<T>(callback);
         CreateApiService().executeGet(url, params, params)
                 .map(new ApiResultFunc<T>(getSubType(callback)))
                 .compose(ApiTransformer.<T>apiTransformer())
                 .subscribe(disposableObserver);
+
+        return disposableObserver;
 
     }
 
@@ -268,13 +293,15 @@ public class AppClient {
      * @param callback
      * @param <T>
      */
-    public <T> void executePost(String url, Map<String, String> params, ACallback<T> callback) {
+    public <T> DisposableObserver executePost(String url, Map<String, String> params, ACallback<T> callback) {
         RequestBody body = RequestBody.create(MediaTypes.APPLICATION_JSON_TYPE, GsonUtil.gson().toJson(params));
         DisposableObserver disposableObserver = new ApiCallbackSubscriber<T>(callback);
         CreateApiService().executePost(url, params, body)
                 .map(new ApiResultFunc<T>(getSubType(callback)))
                 .compose(ApiTransformer.<T>apiTransformer())
                 .subscribe(disposableObserver);
+
+        return disposableObserver;
     }
 
     public <T> T execute(Observable<T> observable, ACallback<T> callback) {
@@ -293,12 +320,14 @@ public class AppClient {
      * @param callback
      * @param <T>
      */
-    public <T> void executePut(String url, Map<String, String> params, ACallback<T> callback) {
+    public <T> DisposableObserver executePut(String url, Map<String, String> params, ACallback<T> callback) {
         DisposableObserver disposableObserver = new ApiCallbackSubscriber<T>(callback);
         CreateApiService().executePut(url, params, params)
                 .map(new ApiResultFunc<T>(getSubType(callback)))
                 .compose(ApiTransformer.<T>apiTransformer())
                 .subscribe(disposableObserver);
+
+        return disposableObserver;
     }
 
 
@@ -310,12 +339,12 @@ public class AppClient {
      * @param callback
      * @param <T>
      */
-    public <T> void getResponseResult(String url, Map<String, String> params, ACallback<ResponseResult<T>> callback) {
+    public <T> DisposableObserver getResponseResult(String url, Map<String, String> params, ACallback<ResponseResult<T>> callback) {
         DisposableObserver disposableObserver = new ApiCallbackSubscriber<ResponseResult<T>>(callback);
         CreateApiService().executeGet(url, params, params)
                 .compose(ApiTransformer.<ResponseResult<T>>RRTransformer(getSubType(callback)))
                 .subscribe(disposableObserver);
-
+        return  disposableObserver;
     }
 
     /**
@@ -326,12 +355,14 @@ public class AppClient {
      * @param callback
      * @param <T>
      */
-    public <T> void postResponseResult(String url, Map<String, String> params, ACallback<ResponseResult<T>> callback) {
+    public <T> DisposableObserver postResponseResult(String url, Map<String, String> params, ACallback<ResponseResult<T>> callback) {
         RequestBody body = RequestBody.create(MediaTypes.APPLICATION_JSON_TYPE, GsonUtil.gson().toJson(params));
         DisposableObserver disposableObserver = new ApiCallbackSubscriber<ResponseResult<T>>(callback);
         CreateApiService().executePost(url, params, body)
                 .compose(ApiTransformer.<ResponseResult<T>>RRTransformer(getSubType(callback)))
                 .subscribe(disposableObserver);
+
+        return  disposableObserver;
     }
 
     /**
@@ -342,11 +373,13 @@ public class AppClient {
      * @param callback
      * @param <T>
      */
-    public <T> void putResponseResult(String url, Map<String, String> params, ACallback<ResponseResult<T>> callback) {
+    public <T> DisposableObserver putResponseResult(String url, Map<String, String> params, ACallback<ResponseResult<T>> callback) {
         DisposableObserver disposableObserver = new ApiCallbackSubscriber<ResponseResult<T>>(callback);
         CreateApiService().executePut(url, params, params)
                 .compose(ApiTransformer.<ResponseResult<T>>RRTransformer(getSubType(callback)))
                 .subscribe(disposableObserver);
+
+        return  disposableObserver;
     }
 
 
