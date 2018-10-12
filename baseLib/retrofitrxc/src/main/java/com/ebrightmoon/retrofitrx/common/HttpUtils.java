@@ -1,6 +1,17 @@
 package com.ebrightmoon.retrofitrx.common;
 
 
+import org.apache.http.message.BasicNameValuePair;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by wyy on 2018/1/29.
@@ -22,25 +33,25 @@ public class HttpUtils {
     public static final String dirName = "download";
     public static final String fileName = "lantern-installer.apk";
 
-//    /**
-//     * 生成header相关数据
-//     * @param params
-//     * @return
-//     */
-//    public static Map<String, String> excute(Map<String, String> params) {
-//        String timestamp = System.currentTimeMillis() / 1000 + "";
-//        Map<String, String> temp = new HashMap<>();
-//        temp.putAll(params);
-//        temp.put("Timestamp", timestamp);
-//        temp.put("Platform", "Android");
-//        temp.put("PublicKey", "A4GNADCBiQKBgQDi7DfgJeRzqEiBgQDi");
-//        StringBuffer requestParams = spellParams(temp);
-//        HashMap<String, String> headers = new HashMap<>();
-//        headers.put("Timestamp", timestamp);
-//        headers.put("Platform", "Android");
-//        headers.put("Sign", MD5.encode(requestParams.toString()));
-//        return headers;
-//    }
+    /**
+     * 生成header相关数据
+     * @param params
+     * @return
+     */
+    public static Map<String, String> excute(Map<String, String> params) {
+        String timestamp = System.currentTimeMillis() / 1000 + "";
+        Map<String, String> temp = new HashMap<>();
+        temp.putAll(params);
+        temp.put("Timestamp", timestamp);
+        temp.put("Platform", "Android");
+        temp.put("PublicKey", "A4GNADCBiQKBgQDi7DfgJeRzqEiBgQDi");
+        StringBuffer requestParams = spellParams(temp);
+        HashMap<String, String> headers = new HashMap<>();
+        headers.put("Timestamp", timestamp);
+        headers.put("Platform", "Android");
+        headers.put("Sign", MD5.encode(requestParams.toString()));
+        return headers;
+    }
 //
 //
 //    /**
@@ -67,60 +78,60 @@ public class HttpUtils {
 //    }
 //
 //
-//    /**
-//     * 判断是否是汉字
-//     */
-//    /**
-//     * 是否是中文
-//     *
-//     * @param str
-//     * @return
-//     */
-//    public static boolean isContainChinese(String str) {
+    /**
+     * 判断是否是汉字
+     */
+    /**
+     * 是否是中文
+     *
+     * @param str
+     * @return
+     */
+    public static boolean isContainChinese(String str) {
+
+        Pattern p = Pattern.compile("[u4e00-u9fa5]");
+        Matcher m = p.matcher(str);
+        if (m.find()) {
+            return true;
+        }
+        return false;
+    }
 //
-//        Pattern p = Pattern.compile("[u4e00-u9fa5]");
-//        Matcher m = p.matcher(str);
-//        if (m.find()) {
-//            return true;
-//        }
-//        return false;
-//    }
 //
-//
-//    /**
-//     * 拼接参数
-//     *
-//     * @param hashmap
-//     * @return
-//     * @throws UnsupportedEncodingException
-//     */
-//    public static StringBuffer spellParams(Map<String, String> hashmap) {
-//        List<BasicNameValuePair> array = new ArrayList();
-//        Object[] key = hashmap.keySet().toArray();
-//        Arrays.sort(key);
-//        for (int i = 0; i < key.length; i++) {
-//            if (isContainChinese(hashmap.get(key[i]))) {
-//                String encode = null;
-//                try {
-//                    encode = URLEncoder.encode(hashmap.get(key[i]), "UTF-8");
-//                } catch (UnsupportedEncodingException e) {
-//                    e.printStackTrace();
-//                }
-//                array.add(new BasicNameValuePair(key[i] + "", encode + ""));
-//            } else {
-//                array.add(new BasicNameValuePair(key[i] + "", hashmap.get(key[i]) + ""));
-//            }
-//        }
-//        StringBuffer sb = new StringBuffer();
-//        for (int i = 0; i < array.size(); i++) {
-//            if ((array.size() - 1) == i) {
-//                sb.append(array.get(i).toString());
-//            } else {
-//                sb.append(array.get(i).toString() + "&");
-//            }
-//        }
-//        return sb;
-//    }
+    /**
+     * 拼接参数
+     *
+     * @param hashmap
+     * @return
+     * @throws UnsupportedEncodingException
+     */
+    public static StringBuffer spellParams(Map<String, String> hashmap) {
+        List<BasicNameValuePair> array = new ArrayList();
+        Object[] key = hashmap.keySet().toArray();
+        Arrays.sort(key);
+        for (int i = 0; i < key.length; i++) {
+            if (isContainChinese(hashmap.get(key[i]))) {
+                String encode = null;
+                try {
+                    encode = URLEncoder.encode(hashmap.get(key[i]), "UTF-8");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                array.add(new BasicNameValuePair(key[i] + "", encode + ""));
+            } else {
+                array.add(new BasicNameValuePair(key[i] + "", hashmap.get(key[i]) + ""));
+            }
+        }
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < array.size(); i++) {
+            if ((array.size() - 1) == i) {
+                sb.append(array.get(i).toString());
+            } else {
+                sb.append(array.get(i).toString() + "&");
+            }
+        }
+        return sb;
+    }
 
 
 

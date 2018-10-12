@@ -2,12 +2,14 @@ package com.ebrightmoon.retrofitrx.retrofit;
 
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.ebrightmoon.retrofitrx.body.UploadProgressRequestBody;
 import com.ebrightmoon.retrofitrx.callback.ACallback;
 import com.ebrightmoon.retrofitrx.callback.UCallback;
 import com.ebrightmoon.retrofitrx.common.AppConfig;
 import com.ebrightmoon.retrofitrx.common.GsonUtil;
+import com.ebrightmoon.retrofitrx.common.HttpUtils;
 import com.ebrightmoon.retrofitrx.convert.GsonConverterFactory;
 import com.ebrightmoon.retrofitrx.core.ApiTransformer;
 import com.ebrightmoon.retrofitrx.func.ApiDownloadFunc;
@@ -348,9 +350,10 @@ public class AppClient {
      * @param <T>
      */
     public <T> DisposableObserver postResponseResult(String url, Map<String, String> params, ACallback<ResponseResult<T>> callback) {
+
         RequestBody body = RequestBody.create(MediaTypes.APPLICATION_JSON_TYPE, GsonUtil.gson().toJson(params));
         DisposableObserver disposableObserver = new ApiCallbackSubscriber<ResponseResult<T>>(callback);
-        CreateApiService().executePost(url, params, body)
+        CreateApiService().executePost(url, HttpUtils.excute(params), body)
                 .compose(ApiTransformer.<ResponseResult<T>>RRTransformer(getSubType(callback)))
                 .subscribe(disposableObserver);
 
@@ -608,5 +611,25 @@ public class AppClient {
         return finalNeedType;
     }
 
+    /**
+     * 全局添加参数添加参数
+     *
+     * @param params
+     * @return
+     */
+    private Map<String, String> addParams(Map<String, String> params) {
+        if (params == null)
+            params = new HashMap<>();
+        int userId = 0;
+        if (userId != -1&&userId!=0) {
+            params.put("UserId", userId + "");
+        }
+        if (!TextUtils.isEmpty(""))
+        {
+            params.put("Token", "");
+        }
+        return params;
+
+    }
 
 }

@@ -76,35 +76,35 @@ public class ApiTransformer {
         };
     }
 
-    /**
-     * 未测试暂时不要用
-     * @param retryCount
-     * @param retryDelayMillis
-     * @param event
-     * @param <T>
-     * @return
-     */
-    public static <T> ObservableTransformer<T, T> norTransformer(final int retryCount, final int retryDelayMillis,final ActivityLifeCycleEvent event) {
-        return new ObservableTransformer<T, T>() {
-            @Override
-            public ObservableSource<T> apply(Observable<T> apiResultObservable) {
-                ObservableSource<ActivityLifeCycleEvent> compareLifecycleObservable =
-                        RecycleBaseActivity.lifecycleSubject.filter(new Predicate<ActivityLifeCycleEvent>() {
-                            @Override
-                            public boolean test(ActivityLifeCycleEvent activityLifeCycleEvent) throws Exception {
-                                return activityLifeCycleEvent.equals(event);
-                            }
-                        }).firstElement().toObservable().publish();
-                return apiResultObservable
-                        .takeUntil(compareLifecycleObservable)
-                        .subscribeOn(Schedulers.io())
-                        .unsubscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .retryWhen(new ApiRetryFunc(retryCount, retryDelayMillis));
-            }
-        };
-    }
-
+//    /**
+//     * 未测试暂时不要用
+//     * @param retryCount
+//     * @param retryDelayMillis
+//     * @param event
+//     * @param <T>
+//     * @return
+//     */
+//    public static <T> ObservableTransformer<T, T> norTransformer(final int retryCount, final int retryDelayMillis,final ActivityLifeCycleEvent event) {
+//        return new ObservableTransformer<T, T>() {
+//            @Override
+//            public ObservableSource<T> apply(Observable<T> apiResultObservable) {
+//                ObservableSource<ActivityLifeCycleEvent> compareLifecycleObservable =
+//                        RecycleBaseActivity.lifecycleSubject.filter(new Predicate<ActivityLifeCycleEvent>() {
+//                            @Override
+//                            public boolean test(ActivityLifeCycleEvent activityLifeCycleEvent) throws Exception {
+//                                return activityLifeCycleEvent.equals(event);
+//                            }
+//                        }).firstElement().toObservable().publish();
+//                return apiResultObservable
+//                        .takeUntil(compareLifecycleObservable)
+//                        .subscribeOn(Schedulers.io())
+//                        .unsubscribeOn(Schedulers.io())
+//                        .observeOn(AndroidSchedulers.mainThread())
+//                        .retryWhen(new ApiRetryFunc(retryCount, retryDelayMillis));
+//            }
+//        };
+//    }
+//
 
     public static  <T> ObservableTransformer<ResponseBody, T> Transformer(final Type type) {
         return new ObservableTransformer<ResponseBody, T>() {
@@ -122,26 +122,26 @@ public class ApiTransformer {
     }
 
 
-
-    public static <T> ObservableTransformer<T, T> bindUntilEvent(@NonNull final ActivityLifeCycleEvent event) {
-        return new ObservableTransformer<T, T>() {
-            @Override
-            public ObservableSource<T> apply(Observable<T> upstream) {
-                Observable<ActivityLifeCycleEvent> compareLifecycleObservable =
-                        RecycleBaseActivity.lifecycleSubject.filter(new Predicate<ActivityLifeCycleEvent>() {
-                            @Override
-                            public boolean test(ActivityLifeCycleEvent activityLifeCycleEvent) throws Exception {
-                                return activityLifeCycleEvent.equals(event);
-                            }
-                        }).firstElement().toObservable().publish();
-
-
-                return upstream.takeUntil(compareLifecycleObservable);
-            }
-
-
-        };
-    }
+//
+//    public static <T> ObservableTransformer<T, T> bindUntilEvent(@NonNull final ActivityLifeCycleEvent event) {
+//        return new ObservableTransformer<T, T>() {
+//            @Override
+//            public ObservableSource<T> apply(Observable<T> upstream) {
+//                Observable<ActivityLifeCycleEvent> compareLifecycleObservable =
+//                        RecycleBaseActivity.lifecycleSubject.filter(new Predicate<ActivityLifeCycleEvent>() {
+//                            @Override
+//                            public boolean test(ActivityLifeCycleEvent activityLifeCycleEvent) throws Exception {
+//                                return activityLifeCycleEvent.equals(event);
+//                            }
+//                        }).firstElement().toObservable().publish();
+//
+//
+//                return upstream.takeUntil(compareLifecycleObservable);
+//            }
+//
+//
+//        };
+//    }
 
 
     public static  <T> ObservableTransformer<ResponseBody, ResponseResult<T>> RRTransformer(final Type type) {

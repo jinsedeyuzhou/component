@@ -3,6 +3,7 @@ package com.ebrightmoon.retrofitrx.exception;
 import android.net.ParseException;
 
 import com.ebrightmoon.retrofitrx.mode.ApiCode;
+import com.ebrightmoon.retrofitrx.response.ResponseCode;
 import com.google.gson.JsonParseException;
 
 import org.json.JSONException;
@@ -76,11 +77,41 @@ public class ApiException extends Exception {
             ex = new ApiException(e, ApiCode.Request.TIMEOUT_ERROR);
             ex.message = "TIMEOUT_ERROR";
             return ex;
-        } else {
+        }else if (e instanceof  ApiException)
+        {
+            ex = (ApiException) e;
+            return ex;
+        }
+        else {
             ex = new ApiException(e, ApiCode.Request.UNKNOWN);
             ex.message = "UNKNOWN";
             return ex;
         }
     }
 
+
+    /**
+     * //条件不符合
+     * public static final int NOT_CONDITION = 299;
+     * //操作失败
+     * public static final int FAILED_OPERATE = 298;
+     * //账号或密码不正确
+     * public static final int LOGIN_FAILED = 297;
+     * //手势密码不正确
+     * public static final int LOGIN_GESTURE = 296;
+     * // 账号已经退出登录
+     * public static final int LOGIN_EXIT = 295;
+     * //  在其他设备登录
+     * public static final int OTHER_LOGIN = 294;
+     * //登录过期
+     * public static final int LOGIN_TIME_OUT = 293;
+     *
+     * @param code
+     * @return
+     */
+    public static ApiException newApiException(int code, String msg) {
+        ApiException apiException = new ApiException(new Throwable(), code);
+        apiException.message=msg;
+        return apiException;
+    }
 }

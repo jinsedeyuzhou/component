@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 
 import com.ebrightmoon.retrofitrx.common.GsonUtil;
+import com.ebrightmoon.retrofitrx.exception.ApiException;
 import com.ebrightmoon.retrofitrx.response.ResponseCode;
 import com.ebrightmoon.retrofitrx.response.ResponseResult;
 
@@ -38,12 +39,12 @@ public class ApiResultFunc<T> implements Function<ResponseBody, ResponseResult<T
             ResponseResult result = parseApiResult(json, apiResult);
             if (result != null) {
                 apiResult = result;
-                if (apiResult.getData() != null) {
+                if (apiResult.getData() != null&&apiResult.getCode()==ResponseCode.HTTP_SUCCESS) {
                     T data = GsonUtil.gson().fromJson(apiResult.getData().toString(), type);
                     apiResult.setData(data);
                     apiResult.setCode(ResponseCode.HTTP_SUCCESS);
                 } else {
-                    apiResult.setMsg("ApiResult's data is null");
+                    throw ApiException.newApiException(apiResult.getCode(),apiResult.getMsg());
                 }
             } else {
                 apiResult.setMsg("json is null");

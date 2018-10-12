@@ -55,6 +55,6 @@ public class SettingMainActivity extends BaseActivity {
 
     @Override
     protected void actionSettings() {
-        toOtherActivity(SearchMainActivity.class,null,false);
+
     }
 }

@@ -53,12 +53,7 @@ public class InitializeService extends IntentService {
         //Stetho调试工具初始化
         Stetho.initializeWithDefaults(this);
         LogUtils.setShowLog(true);
-        Logger.addLogAdapter(new AndroidLogAdapter() {
-            @Override public boolean isLoggable(int priority, String tag) {
-                return BuildConfig.DEBUG;
-            }
-        });
-        initLogger();
+//        initLogger();
     }
 
     private static  void initLogger() {

@@ -45,5 +45,10 @@
     <color name="darkColor">#FF333333</color>
     <color name="lightColor">#FF333333</color>
 
+
+    <color name="colorPrimaryTitle">#ff333333</color>
+    <color name="colorSecondTitle">#ff666666</color>
+    <color name="colorThreeTitle">#ff999999</color>
+
     
 </resources>

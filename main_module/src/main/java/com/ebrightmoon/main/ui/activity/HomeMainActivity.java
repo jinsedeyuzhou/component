@@ -239,16 +239,16 @@ public class HomeMainActivity extends BaseActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_search) {
-
+            toOtherActivity(SearchMainActivity.class,null,false);
             return true;
         } else if (id == R.id.action_share) {
-
+            toOtherActivity(LoginMainActivity.class,null,false);
             return true;
         } else if (id == R.id.action_settings) {
             toOtherActivity(SettingMainActivity.class, null, false);
             return true;
         } else if (id == R.id.action_about) {
-
+            toOtherActivity(RegisterMainActivity.class,null,false);
             return true;
         }
 
