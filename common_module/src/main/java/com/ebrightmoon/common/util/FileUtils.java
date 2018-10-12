@@ -12,8 +12,7 @@ public class FileUtils {
 
 
 
-	public FileUtils() {
-		super();
+	private FileUtils() {
 	}
 	
 	/* Checks if external storage is available for read and write */

@@ -7,6 +7,7 @@ import android.text.TextUtils;
 
 import com.ebrightmoon.common.BuildConfig;
 import com.ebrightmoon.common.common.CommonApplication;
+import com.ebrightmoon.common.service.InitializeService;
 import com.ebrightmoon.common.util.LogUtils;
 import com.ebrightmoon.common.widget.imageloader.LoaderFactory;
 import com.ebrightmoon.data.RouterConfig;
@@ -33,19 +34,20 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         app = this;
-        CommonApplication.initQDApp(this);
-        LoaderFactory.getLoader().init(this);
-        //路由初始化
-        RouterConfig.init(this, true);
-        //Stetho调试工具初始化
-        Stetho.initializeWithDefaults(this);
-        initCrashReport();
-        LogUtils.setShowLog(true);
-        Logger.addLogAdapter(new AndroidLogAdapter() {
-            @Override public boolean isLoggable(int priority, String tag) {
-                return BuildConfig.DEBUG;
-            }
-        });
+        InitializeService.start(this);
+//        CommonApplication.initQDApp(this);
+//        LoaderFactory.getLoader().init(this);
+//        //路由初始化
+//        RouterConfig.init(this, true);
+//        //Stetho调试工具初始化
+//        Stetho.initializeWithDefaults(this);
+//        initCrashReport();
+//        LogUtils.setShowLog(true);
+//        Logger.addLogAdapter(new AndroidLogAdapter() {
+//            @Override public boolean isLoggable(int priority, String tag) {
+//                return BuildConfig.DEBUG;
+//            }
+//        });
 
     }
 

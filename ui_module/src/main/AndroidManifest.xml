@@ -4,6 +4,7 @@
 
     <application>
         <activity android:name=".page.UiHomeActivity"/>
+        <activity android:name=".page.WebViewActivity"/>
     </application>
 
 </manifest>

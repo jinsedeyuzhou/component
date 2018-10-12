@@ -10,4 +10,9 @@
         <attr name="isOn" format="reference|boolean" />
     </declare-styleable>
 
+
+    <!-- NodeProgressView -->
+    <declare-styleable name="NodeProgressView">
+        <attr name="nodeCompleteDrawable"></attr>
+    </declare-styleable>
 </resources>
