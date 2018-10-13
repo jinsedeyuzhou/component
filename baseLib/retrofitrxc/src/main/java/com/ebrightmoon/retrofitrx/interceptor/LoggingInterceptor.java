@@ -3,6 +3,7 @@ package com.ebrightmoon.retrofitrx.interceptor;
 
 import java.io.IOException;
 import java.net.URLDecoder;
+import java.util.logging.Level;
 
 import okhttp3.Interceptor;
 import okhttp3.Request;
@@ -24,6 +25,7 @@ public class LoggingInterceptor implements Interceptor {
         Request request = chain.request();
 
         long t1 = System.nanoTime();
+        logger.setLevel(Level.WARNING);
         if (request.body() == null) {
             logger.info(String.format("Sending request %s on %s%n%s%n%s",
                     request.url(), chain.connection(), request.headers(), request.body()));
@@ -45,7 +47,6 @@ public class LoggingInterceptor implements Interceptor {
         //个新的response给应用层处理
         ResponseBody responseBody = response.peekBody(1024 * 1024);
 
-        logger.info("Response json:"+responseBody.string());
         logger.info(String.format("Received response: [%s] %n返回json:【%s】 %.1fms%n%s",
                 response.request().url(),
                 responseBody.string(),

@@ -1,6 +1,5 @@
 package com.ebrightmoon.ui.page;
 
-import android.Manifest;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,8 +13,6 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 
 import com.ebrightmoon.common.base.BaseActivity;

@@ -12,12 +12,22 @@
         <activity
             android:name=".ui.activity.HomeMainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppMainTheme"/>
+            android:theme="@style/AppMainTheme" />
         <activity
             android:name=".ui.activity.SettingMainActivity"
-            android:screenOrientation="portrait"
-           />
+            android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".ui.activity.SearchMainActivity"
+            android:screenOrientation="portrait" />
+
+
+        <activity
+            android:name=".ui.activity.RegisterMainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.LoginMainActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

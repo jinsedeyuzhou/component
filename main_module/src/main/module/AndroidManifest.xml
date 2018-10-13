@@ -6,15 +6,13 @@
         android:name=".debug.MainApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/BaseAppTheme"
-        >
+        android:theme="@style/BaseAppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"
-         >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,8 +27,18 @@
 
         <activity
             android:name=".ui.activity.SettingMainActivity"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.activity.SearchMainActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.activity.RegisterMainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.LoginMainActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

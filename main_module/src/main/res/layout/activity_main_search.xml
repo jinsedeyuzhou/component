@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolsbar" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/search_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/ll_tag_flow_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <TextView
+                    android:id="@+id/his_vertical_bar"
+                    android:layout_width="3dp"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="4dp"
+                    android:background="?attr/colorPrimary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/his_vertical_bar"
+                    android:gravity="left"
+                    android:text="历史记录"
+                    android:textColor="@color/darkColor"
+                    android:textSize="@dimen/sub_head" />
+
+                <ImageView
+                    android:id="@+id/delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_delete_black" />
+            </RelativeLayout>
+
+            <com.ebrightmoon.common.view.flowlayout.TagFlowLayout
+                android:id="@+id/his_flowLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_margin_16"
+                android:layout_marginRight="@dimen/activity_margin_16" />
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rl_hot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+            <TextView
+                android:id="@+id/hot_vertical_bar"
+                android:layout_width="3dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="4dp"
+                android:background="?attr/colorPrimary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/hot_vertical_bar"
+                android:gravity="left"
+                android:text="热门标签"
+                android:textColor="@color/darkColor"
+                android:textSize="@dimen/sub_head" />
+
+        </RelativeLayout>
+
+        <com.ebrightmoon.common.view.flowlayout.TagFlowLayout
+            android:id="@+id/hot_flowLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_margin_16"
+            android:layout_marginRight="@dimen/activity_margin_16" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

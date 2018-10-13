@@ -3,6 +3,7 @@ package com.ebrightmoon.main.gen;
 import android.content.Context;
 
 import com.ebrightmoon.main.entity.OrderFeed;
+import com.ebrightmoon.main.entity.SearchHistory;
 
 import org.greenrobot.greendao.AbstractDao;
 
@@ -16,6 +17,7 @@ public class DbHelper {
     private static final String DB_NAME = "news.db";//数据库名称
     private static DbHelper instance;
     private static DBManager<OrderFeed, Long> author;
+    private static DBManager<SearchHistory, Long> history;
     private DaoMaster.DevOpenHelper mHelper;
     private DaoMaster mDaoMaster;
     private DaoSession mDaoSession;
@@ -48,6 +50,9 @@ public class DbHelper {
         mDaoSession = mDaoMaster.newSession();
     }
 
+    /**
+     * @return
+     */
     public DBManager<OrderFeed, Long> author() {
         if (author == null) {
             author = new DBManager<OrderFeed, Long>() {
@@ -58,6 +63,18 @@ public class DbHelper {
             };
         }
         return author;
+    }
+
+  public DBManager<SearchHistory, Long> history() {
+        if (history == null) {
+            history = new DBManager<SearchHistory, Long>() {
+                @Override
+                public AbstractDao<SearchHistory, Long> getAbstractDao() {
+                    return mDaoSession.getSearchHistoryDao();
+                }
+            };
+        }
+        return history;
     }
 
 

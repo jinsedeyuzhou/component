@@ -13,7 +13,9 @@ import com.ebrightmoon.common.widget.imageloader.LoaderFactory;
 import com.ebrightmoon.data.RouterConfig;
 import com.facebook.stetho.Stetho;
 import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
+import com.orhanobut.logger.PrettyFormatStrategy;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import java.io.BufferedReader;
@@ -24,6 +26,7 @@ import java.io.IOException;
  * Created by wyy on 2016/9/11.
  */
 public class BaseApplication extends Application {
+    private static final String TAG=BaseFragment.class.getSimpleName();
     private static BaseApplication app;
 
     public static BaseApplication getApp() {
@@ -34,6 +37,7 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         app = this;
+        initLogger();
         InitializeService.start(this);
 //        CommonApplication.initQDApp(this);
 //        LoaderFactory.getLoader().init(this);
@@ -51,6 +55,17 @@ public class BaseApplication extends Application {
 
     }
 
+    private static  void initLogger() {
+        FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
+                .tag(TAG)
+                .build();
+        Logger.addLogAdapter(new AndroidLogAdapter(formatStrategy) {
+            @Override
+            public boolean isLoggable(int priority, String tag) {
+                return true;
+            }
+        });
+    }
 
     private void initCrashReport() {
         Context context = getApplicationContext();

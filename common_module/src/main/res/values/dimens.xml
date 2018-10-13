@@ -44,4 +44,14 @@
     <dimen name="text_size_11">11dp</dimen>
     <dimen name="text_size_10">10dp</dimen>
     <dimen name="text_size_09">9dp</dimen>
+    
+    
+    <!--<dimen name="display1">45dp</dimen>-->
+    <dimen name="display">34dp</dimen>
+    <dimen name="head_line">@dimen/text_size_24</dimen>
+    <dimen name="title">@dimen/text_size_16</dimen>
+    <!--<dimen name="body1">13dp</dimen>-->
+    <dimen name="body">14dp</dimen>
+    <!--<dimen name="sub_head1">15dp</dimen>-->
+    <dimen name="sub_head">16dp</dimen>
 </resources>

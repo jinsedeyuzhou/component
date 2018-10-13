@@ -15,4 +15,6 @@
     <declare-styleable name="NodeProgressView">
         <attr name="nodeCompleteDrawable"></attr>
     </declare-styleable>
+
+
 </resources>

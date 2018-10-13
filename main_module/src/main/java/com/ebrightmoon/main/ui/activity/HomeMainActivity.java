@@ -146,7 +146,7 @@ public class HomeMainActivity extends BaseActivity
             public IPagerTitleView getTitleView(Context context, final int index) {
                 SimplePagerTitleView simplePagerTitleView = new ColorTransitionPagerTitleView(context);
                 simplePagerTitleView.setText(mSelectedDatas.get(index).getName());
-                simplePagerTitleView.setTextSize(DensityUtils.px2dp(mContext, 48));
+                simplePagerTitleView.setTextSize(DensityUtils.px2dp(mContext, 20));
                 simplePagerTitleView.setNormalColor(mContext.getResources().getColor(R.color.transparentTitle));
                 simplePagerTitleView.setSelectedColor(Color.WHITE);
                 simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
@@ -239,16 +239,16 @@ public class HomeMainActivity extends BaseActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_search) {
-
+            toOtherActivity(SearchMainActivity.class,null,false);
             return true;
         } else if (id == R.id.action_share) {
-
+            toOtherActivity(LoginMainActivity.class,null,false);
             return true;
         } else if (id == R.id.action_settings) {
             toOtherActivity(SettingMainActivity.class, null, false);
             return true;
         } else if (id == R.id.action_about) {
-
+            toOtherActivity(RegisterMainActivity.class,null,false);
             return true;
         }
 

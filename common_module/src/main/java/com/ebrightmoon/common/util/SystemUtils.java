@@ -714,9 +714,9 @@ public class SystemUtils {
      *
      * @return
      */
-    public static String getUUID() {
-        TelephonyManager telephonyManager = (TelephonyManager) CommonApplication.getAppContext().getSystemService(Context.TELEPHONY_SERVICE);
-        String uuid = Build.PRODUCT + getMacAddress(CommonApplication.getAppContext()) + getDeviceSerial() + Settings.Secure.getString(CommonApplication.getAppContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+    public static String getUUID(Context context) {
+        TelephonyManager telephonyManager = (TelephonyManager) context.getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
+        String uuid = Build.PRODUCT + getMacAddress(context.getApplicationContext()) + getDeviceSerial() + Settings.Secure.getString(context.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
         return generateMD5(uuid);
     }
 

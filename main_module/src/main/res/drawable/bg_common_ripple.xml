@@ -5,7 +5,7 @@
         android:drawable="@color/bgPrimary"/>
 
     <item
-        android:drawable="@color/white"
+        android:drawable="@color/colorPrimary"
         />
 
 
