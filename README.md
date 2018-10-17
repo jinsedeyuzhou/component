@@ -10,3 +10,7 @@
 * 基于RxJava2+Retrofit2网络请求封装
 * Glide 图片加载
 * ...
+
+### 参考项目
+网络库参考： https://github.com/xiaoyaoyou1212/XSnow
+...

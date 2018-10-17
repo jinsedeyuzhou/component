@@ -57,6 +57,7 @@ dependencies {
     api rootProject.ext.dependencies.fresco
 
     api rootProject.ext.dependencies.eventbus
+    api rootProject.ext.dependencies.rxbus
     api rootProject.ext.dependencies.circleimage
     api rootProject.ext.dependencies.cardview
 
