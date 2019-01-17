@@ -1,4 +1,4 @@
-package com.ebrightmoon.retrofitrx.common;
+package com.ebrightmoon.retrofitrx.util;
 
 import com.google.gson.Gson;
 

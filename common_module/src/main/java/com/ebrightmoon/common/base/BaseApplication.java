@@ -2,6 +2,7 @@ package com.ebrightmoon.common.base;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Process;
 import android.support.multidex.MultiDex;
 import android.text.TextUtils;
 
@@ -38,6 +39,7 @@ public class BaseApplication extends Application {
         super.onCreate();
         app = this;
         initLogger();
+        init();
         InitializeService.start(this);
 //        CommonApplication.initQDApp(this);
 //        LoaderFactory.getLoader().init(this);
@@ -52,6 +54,26 @@ public class BaseApplication extends Application {
 //                return BuildConfig.DEBUG;
 //            }
 //        });
+
+    }
+    private void init()
+    {
+        new Thread()
+        {
+            @Override
+            public void run() {
+                super.run();
+                Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
+                Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
+                CommonApplication.initQDApp(app);
+                LoaderFactory.getLoader().init(app);
+                //路由初始化
+                RouterConfig.init(app, true);
+                //Stetho调试工具初始化
+                Stetho.initializeWithDefaults(app);
+                LogUtils.setShowLog(true);
+            }
+        }.start();
 
     }
 

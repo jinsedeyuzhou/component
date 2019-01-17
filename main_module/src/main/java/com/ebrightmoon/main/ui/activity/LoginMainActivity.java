@@ -10,12 +10,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ebrightmoon.common.base.BaseActivity;
-import com.ebrightmoon.common.util.SystemUtils;
 import com.ebrightmoon.main.R;
 import com.ebrightmoon.main.entity.UserInfo;
 import com.ebrightmoon.retrofitrx.callback.ACallback;
 import com.ebrightmoon.retrofitrx.common.AppConfig;
-import com.ebrightmoon.retrofitrx.common.MD5;
+import com.ebrightmoon.retrofitrx.util.MD5;
 import com.ebrightmoon.retrofitrx.response.ResponseResult;
 import com.ebrightmoon.retrofitrx.retrofit.AppClient;
 
@@ -77,29 +76,23 @@ public class LoginMainActivity extends BaseActivity {
     @Override
     public void processClick(View paramView) {
         int id =paramView.getId();
-        switch (id) {
-            case R.id.btn_login:
-                hideKeyboard();
-                String username = usernameWrapper.getEditText().getText().toString();
-                String password = passwordWrapper.getEditText().getText().toString();
-                if (!validateEmail(username)) {
-                    usernameWrapper.setError("Not a valid phone!");
-                } else if (!validatePassword(password)) {
-                    passwordWrapper.setError("Not a valid password!");
-                } else {
-                    usernameWrapper.setErrorEnabled(false);
-                    passwordWrapper.setErrorEnabled(false);
-                    doLogin(username,password);
-                }
-                break;
-            case  R.id.tv_register:
-                toOtherActivity(RegisterMainActivity.class,null,false);
-                break;
-            case R.id.tv_forget_pwd:
-                toOtherActivity(LoginMainActivity.class,null,false);
-                break;
-            default:
-                break;
+        if (id== R.id.btn_login) {
+            hideKeyboard();
+            String username = usernameWrapper.getEditText().getText().toString();
+            String password = passwordWrapper.getEditText().getText().toString();
+            if (!validateEmail(username)) {
+                usernameWrapper.setError("Not a valid phone!");
+            } else if (!validatePassword(password)) {
+                passwordWrapper.setError("Not a valid password!");
+            } else {
+                usernameWrapper.setErrorEnabled(false);
+                passwordWrapper.setErrorEnabled(false);
+                doLogin(username, password);
+            }
+        }else if (id==R.id.tv_register) {
+            toOtherActivity(RegisterMainActivity.class, null, false);
+        }else if (id==R.id.tv_forget_pwd) {
+            toOtherActivity(LoginMainActivity.class, null, false);
         }
     }
 

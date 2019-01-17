@@ -176,15 +176,11 @@ public class SearchMainActivity extends BaseActivity {
 
     @Override
     public void processClick(View paramView) {
-        switch (paramView.getId()) {
-            case R.id.delete:
-                DbHelper.getInstance().history().deleteAll();
-                historys.clear();
-                mHisAdapter.notifyDataChanged();
-                mLlHistory.setVisibility(View.GONE);
-                break;
-            default:
-                break;
+        if (paramView.getId()==R.id.delete) {
+            DbHelper.getInstance().history().deleteAll();
+            historys.clear();
+            mHisAdapter.notifyDataChanged();
+            mLlHistory.setVisibility(View.GONE);
         }
     }
 

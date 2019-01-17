@@ -1,4 +1,4 @@
-package com.ebrightmoon.retrofitrx.common;
+package com.ebrightmoon.retrofitrx.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -62,4 +62,6 @@ public class BytesUtils {
             sb.append((bytes[i / Byte.SIZE] << i % Byte.SIZE & 0x80) == 0 ? '0' : '1');
         return sb.toString();
     }
+
+
 }

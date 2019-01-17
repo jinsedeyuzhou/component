@@ -3,7 +3,7 @@ package com.ebrightmoon.retrofitrx.func;
 import android.text.TextUtils;
 
 
-import com.ebrightmoon.retrofitrx.common.GsonUtil;
+import com.ebrightmoon.retrofitrx.util.GsonUtil;
 import com.ebrightmoon.retrofitrx.exception.ApiException;
 import com.ebrightmoon.retrofitrx.response.ResponseCode;
 import com.ebrightmoon.retrofitrx.response.ResponseResult;
