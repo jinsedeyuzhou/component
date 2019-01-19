@@ -8,6 +8,7 @@ import com.ebrightmoon.retrofitrx.body.UploadProgressRequestBody;
 import com.ebrightmoon.retrofitrx.callback.ACallback;
 import com.ebrightmoon.retrofitrx.callback.UCallback;
 import com.ebrightmoon.retrofitrx.common.AppConfig;
+import com.ebrightmoon.retrofitrx.core.ApiManager;
 import com.ebrightmoon.retrofitrx.util.GsonUtil;
 import com.ebrightmoon.retrofitrx.common.HttpUtils;
 import com.ebrightmoon.retrofitrx.convert.GsonConverterFactory;
@@ -22,10 +23,13 @@ import com.ebrightmoon.retrofitrx.response.ResponseResult;
 import com.ebrightmoon.retrofitrx.subscriber.ApiCallbackSubscriber;
 import com.ebrightmoon.retrofitrx.subscriber.DownCallbackSubscriber;
 import com.ebrightmoon.retrofitrx.temp.SSL;
+import com.ebrightmoon.retrofitrx.util.OkHttpDns;
 
 import java.io.File;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.security.cert.CertificateException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,6 +44,7 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.Dns;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
@@ -54,7 +59,6 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
  */
 
 public class AppClient {
-
     private List<MultipartBody.Part> multipartBodyParts;
     private Map<String, RequestBody> params;
     private static Context mContext;
@@ -81,11 +85,10 @@ public class AppClient {
         okHttpBuilder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
 //        设置代理
 //        okHttpBuilder .proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress("192.168.1.185", 82)));
-
+        okHttpBuilder.dns(new OkHttpDns());
         retrofitBuilder = new Retrofit.Builder();
 
         retrofit = retrofitBuilder
-
                 .client(okHttpBuilder.build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -170,6 +173,22 @@ public class AppClient {
         this(context, url, null);
     }
 
+    public OkHttpClient.Builder getOkHttpBuilder() {
+        return okHttpBuilder;
+    }
+
+    public void setOkHttpBuilder(OkHttpClient.Builder okHttpBuilder) {
+        this.okHttpBuilder = okHttpBuilder;
+    }
+
+    public Retrofit.Builder getRetrofitBuilder() {
+        return retrofitBuilder;
+    }
+
+    public void setRetrofitBuilder(Retrofit.Builder retrofitBuilder) {
+        this.retrofitBuilder = retrofitBuilder;
+    }
+
     public ApiService CreateApiService() {
         return apiService = create(ApiService.class);
     }
@@ -191,12 +210,14 @@ public class AppClient {
      * @param callback
      * @param <T>
      */
-    public <T> void get(String url, Map<String, String> params, ACallback<T> callback) {
+    public <T> AppClient get(String url, Map<String, String> params, ACallback<T> callback) {
         DisposableObserver disposableObserver = new ApiCallbackSubscriber<T>(callback);
+        ApiManager.get().add(url,disposableObserver);
         CreateApiService().get(url, params)
                 .compose(ApiTransformer.<T>Transformer(getSubType(callback)))
 //                .compose(RxHelper.<T>bindUntilEvent(recycle))
                 .subscribe(disposableObserver);
+        return this;
     }
 
   /**
@@ -209,6 +230,7 @@ public class AppClient {
      */
     public <T> DisposableObserver getd(String url, Map<String, String> params, ACallback<T> callback) {
         DisposableObserver disposableObserver = new ApiCallbackSubscriber<T>(callback);
+        ApiManager.get().add(url,disposableObserver);
         CreateApiService().get(url, params)
                 .compose(ApiTransformer.<T>Transformer(getSubType(callback)))
 //                .compose(RxHelper.<T>bindUntilEvent(recycle))
@@ -227,6 +249,7 @@ public class AppClient {
     public <T> DisposableObserver post(String url, Map<String, String> params, ACallback<T> callback) {
         RequestBody body = RequestBody.create(MediaTypes.APPLICATION_JSON_TYPE, GsonUtil.gson().toJson(params));
         DisposableObserver disposableObserver = new ApiCallbackSubscriber<T>(callback);
+        ApiManager.get().add(url,disposableObserver);
         CreateApiService().post(url, body)
                 .compose(ApiTransformer.<T>Transformer(getSubType(callback)))
                 .subscribe(disposableObserver);
@@ -245,6 +268,7 @@ public class AppClient {
     public <T> DisposableObserver json(String url, String jsonObject, ACallback<T> callback) {
         RequestBody body = RequestBody.create(MediaTypes.APPLICATION_JSON_TYPE,jsonObject);
         DisposableObserver disposableObserver = new ApiCallbackSubscriber<T>(callback);
+        ApiManager.get().add(url,disposableObserver);
         CreateApiService().post(url, body)
                 .compose(ApiTransformer.<T>Transformer(getSubType(callback)))
                 .subscribe(disposableObserver);
@@ -262,6 +286,7 @@ public class AppClient {
      */
     public <T> DisposableObserver executeGet(String url, Map<String, String> params, ACallback<T> callback) {
         DisposableObserver disposableObserver = new ApiCallbackSubscriber<T>(callback);
+        ApiManager.get().add(url,disposableObserver);
         CreateApiService().executeGet(url, params, params)
                 .map(new ApiResultFunc<T>(getSubType(callback)))
                 .compose(ApiTransformer.<T>apiTransformer())
@@ -282,6 +307,7 @@ public class AppClient {
     public <T> DisposableObserver executePost(String url, Map<String, String> params, ACallback<T> callback) {
         RequestBody body = RequestBody.create(MediaTypes.APPLICATION_JSON_TYPE, GsonUtil.gson().toJson(params));
         DisposableObserver disposableObserver = new ApiCallbackSubscriber<T>(callback);
+        ApiManager.get().add(url,disposableObserver);
         CreateApiService().executePost(url, params, body)
                 .map(new ApiResultFunc<T>(getSubType(callback)))
                 .compose(ApiTransformer.<T>apiTransformer())
@@ -308,6 +334,7 @@ public class AppClient {
      */
     public <T> DisposableObserver executePut(String url, Map<String, String> params, ACallback<T> callback) {
         DisposableObserver disposableObserver = new ApiCallbackSubscriber<T>(callback);
+        ApiManager.get().add(url,disposableObserver);
         CreateApiService().executePut(url, params, params)
                 .map(new ApiResultFunc<T>(getSubType(callback)))
                 .compose(ApiTransformer.<T>apiTransformer())
@@ -327,6 +354,7 @@ public class AppClient {
      */
     public <T> DisposableObserver getResponseResult(String url, Map<String, String> params, ACallback<ResponseResult<T>> callback) {
         DisposableObserver disposableObserver = new ApiCallbackSubscriber<ResponseResult<T>>(callback);
+        ApiManager.get().add(url,disposableObserver);
         CreateApiService().executeGet(url, params, params)
                 .compose(ApiTransformer.<ResponseResult<T>>RRTransformer(getSubType(callback)))
                 .subscribe(disposableObserver);
@@ -345,6 +373,7 @@ public class AppClient {
 
         RequestBody body = RequestBody.create(MediaTypes.APPLICATION_JSON_TYPE, GsonUtil.gson().toJson(params));
         DisposableObserver disposableObserver = new ApiCallbackSubscriber<ResponseResult<T>>(callback);
+        ApiManager.get().add(url,disposableObserver);
         CreateApiService().executePost(url, HttpUtils.excute(params), body)
                 .compose(ApiTransformer.<ResponseResult<T>>RRTransformer(getSubType(callback)))
                 .subscribe(disposableObserver);
@@ -362,6 +391,7 @@ public class AppClient {
      */
     public <T> DisposableObserver putResponseResult(String url, Map<String, String> params, ACallback<ResponseResult<T>> callback) {
         DisposableObserver disposableObserver = new ApiCallbackSubscriber<ResponseResult<T>>(callback);
+        ApiManager.get().add(url,disposableObserver);
         CreateApiService().executePut(url, params, params)
                 .compose(ApiTransformer.<ResponseResult<T>>RRTransformer(getSubType(callback)))
                 .subscribe(disposableObserver);
@@ -378,6 +408,7 @@ public class AppClient {
      */
     public <T> void uploadFiles(String url, ACallback<T> callback) {
         DisposableObserver disposableObserver = new ApiCallbackSubscriber<T>(callback);
+        ApiManager.get().add(url,disposableObserver);
         CreateApiService().uploadFiles(url, multipartBodyParts)
                 .compose(ApiTransformer.<T>Transformer(getSubType(callback)))
                 .subscribe(disposableObserver);
@@ -392,6 +423,7 @@ public class AppClient {
      */
     public <T> void uploadFilesV(String url, ACallback<T> callback) {
         DisposableObserver disposableObserver = new ApiCallbackSubscriber<T>(callback);
+        ApiManager.get().add(url,disposableObserver);
         CreateApiService().uploadFiles(url, multipartBodyParts)
                 .map(new ApiResultFunc<T>(getSubType(callback)))
                 .compose(ApiTransformer.<T>apiTransformer())
@@ -413,6 +445,7 @@ public class AppClient {
             params.put("file\"; filename=\"" + entry.getValue() + "", requestBody);
         }
         DisposableObserver disposableObserver = new ApiCallbackSubscriber<T>(callback);
+        ApiManager.get().add(url,disposableObserver);
         CreateApiService().uploadFiles(url, params)
                 .map(new ApiResultFunc<T>(getSubType(callback)))
                 .compose(ApiTransformer.<T>apiTransformer())
@@ -432,6 +465,7 @@ public class AppClient {
      */
     public <T> void downloadFile(String url, Map<String, String> params,String fileName, Context context, ACallback<T> callback) {
         DisposableObserver disposableObserver = new DownCallbackSubscriber(callback);
+        ApiManager.get().add(url,disposableObserver);
         CreateApiService().downFile(url, params)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -454,6 +488,7 @@ public class AppClient {
      */
     public <T> void downloadFile(String url, Map<String, String> params, Context context, ACallback<T> callback) {
         DisposableObserver disposableObserver = new DownCallbackSubscriber(callback);
+        ApiManager.get().add(url,disposableObserver);
         CreateApiService().downFile(url, params)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -478,6 +513,7 @@ public class AppClient {
     public <T> void downloadFile(String url, String xml,String fileName, Context context, ACallback<T> callback) {
         RequestBody body = RequestBody.create(MediaTypes.APPLICATION_XML_TYPE, xml);
         DisposableObserver disposableObserver = new DownCallbackSubscriber(callback);
+        ApiManager.get().add(url,disposableObserver);
         CreateApiService().downFile(url, body)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
