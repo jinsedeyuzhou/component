@@ -1,4 +1,4 @@
-package com.ebrightmoon.main.gen;
+package com.ebrightmoon.main.dao;
 
 import android.database.sqlite.SQLiteException;
 import android.util.Log;

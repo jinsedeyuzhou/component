@@ -1,9 +1,11 @@
-package com.ebrightmoon.main.gen;
+package com.ebrightmoon.main.dao;
 
 import android.content.Context;
 
 import com.ebrightmoon.main.entity.OrderFeed;
 import com.ebrightmoon.main.entity.SearchHistory;
+import com.ebrightmoon.main.gen.DaoMaster;
+import com.ebrightmoon.main.gen.DaoSession;
 
 import org.greenrobot.greendao.AbstractDao;
 
@@ -39,13 +41,13 @@ public class DbHelper {
     }
 
     public void init(Context context) {
-        mHelper = new DaoMaster.DevOpenHelper(context, DB_NAME, null);
+        mHelper = new MyOpenHelper(context, DB_NAME, null);
         mDaoMaster = new DaoMaster(mHelper.getWritableDatabase());
         mDaoSession = mDaoMaster.newSession();
     }
 
     public void init(Context context, String dbName) {
-        mHelper = new DaoMaster.DevOpenHelper(context, dbName, null);
+        mHelper = new MyOpenHelper(context, dbName, null);
         mDaoMaster = new DaoMaster(mHelper.getWritableDatabase());
         mDaoSession = mDaoMaster.newSession();
     }

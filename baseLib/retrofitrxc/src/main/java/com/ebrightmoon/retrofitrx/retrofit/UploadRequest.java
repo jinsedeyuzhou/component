@@ -1,14 +1,16 @@
 package com.ebrightmoon.retrofitrx.retrofit;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.vise.xsnow.http.body.UploadProgressRequestBody;
-import com.vise.xsnow.http.callback.ACallback;
-import com.vise.xsnow.http.callback.UCallback;
-import com.vise.xsnow.http.core.ApiManager;
-import com.vise.xsnow.http.mode.CacheResult;
-import com.vise.xsnow.http.mode.MediaTypes;
-import com.vise.xsnow.http.subscriber.ApiCallbackSubscriber;
+
+import com.ebrightmoon.retrofitrx.body.UploadProgressRequestBody;
+import com.ebrightmoon.retrofitrx.callback.ACallback;
+import com.ebrightmoon.retrofitrx.callback.UCallback;
+import com.ebrightmoon.retrofitrx.core.ApiManager;
+import com.ebrightmoon.retrofitrx.mode.CacheResult;
+import com.ebrightmoon.retrofitrx.mode.MediaTypes;
+import com.ebrightmoon.retrofitrx.subscriber.ApiCallbackSubscriber;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,14 +41,14 @@ public class UploadRequest extends BaseHttpRequest<UploadRequest> {
     protected List<MultipartBody.Part> multipartBodyParts = new ArrayList<>();
     protected StringBuilder stringBuilder = new StringBuilder();
 
-    public UploadRequest(String suffixUrl) {
-        super(suffixUrl);
+    public UploadRequest(Context context) {
+        super(context);
     }
 
-    public UploadRequest(String suffixUrl, UCallback callback) {
-        super(suffixUrl);
-        this.uploadCallback = callback;
+    public UploadRequest(Context context, String suffixUrl) {
+        super(context, suffixUrl);
     }
+
 
     @Override
     protected <T> Observable<T> execute(Type type) {
@@ -74,9 +76,9 @@ public class UploadRequest extends BaseHttpRequest<UploadRequest> {
     @Override
     protected <T> void execute(ACallback<T> callback) {
         DisposableObserver disposableObserver = new ApiCallbackSubscriber(callback);
-        if (super.tag != null) {
-            ApiManager.get().add(super.tag, disposableObserver);
-        }
+//        if (super.tag != null) {
+//            ApiManager.get().add(super.tag, disposableObserver);
+//        }
         this.execute(getType(callback)).subscribe(disposableObserver);
     }
 

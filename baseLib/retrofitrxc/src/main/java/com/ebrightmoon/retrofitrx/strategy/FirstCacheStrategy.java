@@ -1,7 +1,8 @@
 package com.ebrightmoon.retrofitrx.strategy;
 
-import com.vise.xsnow.http.core.ApiCache;
-import com.vise.xsnow.http.mode.CacheResult;
+
+import com.ebrightmoon.retrofitrx.core.ApiCache;
+import com.ebrightmoon.retrofitrx.mode.CacheResult;
 
 import java.lang.reflect.Type;
 

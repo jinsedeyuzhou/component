@@ -57,6 +57,7 @@ public abstract class BaseRequest<R extends BaseRequest> {
 
     protected BaseRequest(Context context) {
         if (mContext == null && context != null) {
+            mContext=context;
             mContext = mContext.getApplicationContext();
             okHttpBuilder = new OkHttpClient.Builder();
             retrofitBuilder = new Retrofit.Builder();
