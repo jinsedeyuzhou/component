@@ -17,7 +17,7 @@ import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.X509TrustManager;
 
-public class SSL extends SSLSocketFactory {
+public class SSLUtils extends SSLSocketFactory {
     private SSLSocketFactory defaultFactory;
     // Android 5.0+ (API level21) provides reasonable default settings
     // but it still allows SSLv3
@@ -30,12 +30,12 @@ public class SSL extends SSLSocketFactory {
             if (socket != null) {
                 /* set reasonable protocol versions */
                 // - enable all supported protocols (enables TLSv1.1 and TLSv1.2 on Android <5.0)
-                // - remove all SSL versions (especially SSLv3) because they‘re insecure now
+                // - remove all SSLUtils versions (especially SSLv3) because they‘re insecure now
                 List<String> protocols = new LinkedList<>();
                 for (String protocol : socket.getSupportedProtocols())
-                    if (!protocol.toUpperCase().contains("SSL"))
+                    if (!protocol.toUpperCase().contains("SSLUtils"))
                         protocols.add(protocol);
-                SSL.protocols = protocols.toArray(new String[protocols.size()]);
+                SSLUtils.protocols = protocols.toArray(new String[protocols.size()]);
                 /* set up reasonable cipher suites */
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
                     // choose known secure cipher suites
@@ -68,7 +68,7 @@ public class SSL extends SSLSocketFactory {
                     // add preferred ciphers to enabled ciphers
                     HashSet<String> enabledCiphers = preferredCiphers;
                     enabledCiphers.addAll(new HashSet<>(Arrays.asList(socket.getEnabledCipherSuites())));
-                    SSL.cipherSuites = enabledCiphers.toArray(new String[enabledCiphers.size()]);
+                    SSLUtils.cipherSuites = enabledCiphers.toArray(new String[enabledCiphers.size()]);
                 }
             }
         } catch (IOException e) {
@@ -76,7 +76,7 @@ public class SSL extends SSLSocketFactory {
         }
     }
 
-    public SSL(X509TrustManager tm) {
+    public SSLUtils(X509TrustManager tm) {
         try {
             SSLContext sslContext = SSLContext.getInstance("TLS");
             sslContext.init(null, (tm != null) ? new X509TrustManager[]{tm} : null, null);

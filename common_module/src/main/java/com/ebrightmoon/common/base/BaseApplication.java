@@ -6,7 +6,6 @@ import android.os.Process;
 import android.support.multidex.MultiDex;
 import android.text.TextUtils;
 
-import com.ebrightmoon.common.BuildConfig;
 import com.ebrightmoon.common.common.CommonApplication;
 import com.ebrightmoon.common.service.InitializeService;
 import com.ebrightmoon.common.util.LogUtils;

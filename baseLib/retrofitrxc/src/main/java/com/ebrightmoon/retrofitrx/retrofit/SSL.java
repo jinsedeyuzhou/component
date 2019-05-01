@@ -1,13 +1,18 @@
 package com.ebrightmoon.retrofitrx.retrofit;
 
+import android.content.Context;
+
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.KeyManagementException;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.security.SecureRandom;
 import java.security.UnrecoverableKeyException;
+import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
@@ -133,10 +138,57 @@ public class SSL {
 
         @Override
         public boolean verify(String hostname, SSLSession session) {
-            if (this.host == null || "".equals(this.host) || !this.host.contains(hostname)) return false;
+            if (this.host == null || "".equals(this.host) || !this.host.contains(hostname))
+                return false;
             return true;
         }
     }
+
+
+    public static SSLSocketFactory getSSlFactory(Context context, String fileName) {
+
+        try {
+            CertificateFactory cf = CertificateFactory.getInstance("X.509");
+            InputStream caInput = new BufferedInputStream(context.getApplicationContext().getAssets().open(fileName));//把证书打包在asset文件夹中
+            Certificate ca;
+            try {
+                ca = cf.generateCertificate(caInput);
+            } finally {
+                caInput.close();
+            }
+
+            // Create a KeyStore containing our trusted CAs
+            String keyStoreType = KeyStore.getDefaultType();
+            KeyStore keyStore = KeyStore.getInstance(keyStoreType);
+            keyStore.load(null, null);
+            keyStore.setCertificateEntry("ca", ca);
+
+            // Create a TrustManager that trusts the CAs in our KeyStore
+            String tmfAlgorithm = TrustManagerFactory.getDefaultAlgorithm();
+            TrustManagerFactory tmf = TrustManagerFactory.getInstance(tmfAlgorithm);
+            tmf.init(keyStore);
+
+            // Create an SSLContext that uses our TrustManager
+            SSLContext s = SSLContext.getInstance("TLSv1", "AndroidOpenSSL");
+            s.init(null, tmf.getTrustManagers(), null);
+
+            return s.getSocketFactory();
+        } catch (CertificateException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (KeyStoreException e) {
+            e.printStackTrace();
+        } catch (KeyManagementException e) {
+            e.printStackTrace();
+        } catch (NoSuchProviderException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     public static class UnSafeTrustManager implements X509TrustManager {
         @Override

@@ -2,7 +2,6 @@ package com.ebrightmoon.retrofitrx.body;
 
 import android.support.annotation.NonNull;
 
-
 import com.ebrightmoon.retrofitrx.callback.UCallback;
 
 import java.io.IOException;
