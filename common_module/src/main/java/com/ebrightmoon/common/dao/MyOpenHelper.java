@@ -1,8 +1,7 @@
-package com.ebrightmoon.main.dao;
+package com.ebrightmoon.common.dao;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-
 
 import com.ebrightmoon.main.gen.DaoMaster;
 import com.ebrightmoon.main.gen.OrderFeedDao;

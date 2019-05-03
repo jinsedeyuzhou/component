@@ -1,9 +1,8 @@
-package com.ebrightmoon.main.dao;
+package com.ebrightmoon.common.dao;
 
 import android.database.Cursor;
 import android.text.TextUtils;
 import android.util.Log;
-
 
 import com.ebrightmoon.main.gen.DaoMaster;
 

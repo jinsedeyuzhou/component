@@ -3,7 +3,7 @@ if (isModule.toBoolean()) {
 } else {
     apply plugin: 'com.android.library'
 }
-apply plugin: 'org.greenrobot.greendao'
+
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
 
@@ -42,11 +42,6 @@ android {
         }
     }
 
-    greendao {
-        schemaVersion 1
-        targetGenDir 'src/main/java'
-        daoPackage 'com.ebrightmoon.main.gen'
-    }
 
     buildTypes {
         release {

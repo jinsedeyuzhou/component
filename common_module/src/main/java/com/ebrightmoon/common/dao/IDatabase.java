@@ -1,4 +1,4 @@
-package com.ebrightmoon.main.dao;
+package com.ebrightmoon.common.dao;
 
 import org.greenrobot.greendao.AbstractDao;
 import org.greenrobot.greendao.query.Query;

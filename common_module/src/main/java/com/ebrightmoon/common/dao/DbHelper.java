@@ -1,4 +1,4 @@
-package com.ebrightmoon.main.dao;
+package com.ebrightmoon.common.dao;
 
 import android.content.Context;
 
