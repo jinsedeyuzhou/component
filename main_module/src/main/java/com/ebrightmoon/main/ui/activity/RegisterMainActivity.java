@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.ebrightmoon.common.base.BaseActivity;
 import com.ebrightmoon.common.util.SystemUtils;
 import com.ebrightmoon.main.R;
-import com.ebrightmoon.main.entity.UserInfo;
+import entity.UserInfo;
 import com.ebrightmoon.retrofitrx.callback.ACallback;
 import com.ebrightmoon.retrofitrx.common.AppConfig;
 import com.ebrightmoon.retrofitrx.util.MD5;

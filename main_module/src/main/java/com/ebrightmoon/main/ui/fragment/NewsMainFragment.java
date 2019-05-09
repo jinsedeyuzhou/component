@@ -13,13 +13,12 @@ import android.view.ViewGroup;
 import com.ebrightmoon.common.adapter.recycler.absrecyclerview.EmptyWrapper;
 import com.ebrightmoon.common.adapter.recycler.absrecyclerview.HeaderAndFooterWrapper;
 import com.ebrightmoon.common.adapter.recycler.absrecyclerview.LoadMoreWrapper;
-import com.ebrightmoon.common.adapter.recycler.divider.DividerItemDecoration;
 import com.ebrightmoon.common.base.BaseFragment;
 import com.ebrightmoon.common.util.Tools;
 import com.ebrightmoon.main.R;
 import com.ebrightmoon.main.adapter.NewsFeedAdapter;
-import com.ebrightmoon.main.entity.Channel;
-import com.ebrightmoon.main.entity.NewsFeed;
+import entity.Channel;
+import entity.NewsFeed;
 import com.ebrightmoon.main.view.LoadMoreView;
 
 import java.util.ArrayList;

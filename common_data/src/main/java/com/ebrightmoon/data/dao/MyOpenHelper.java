@@ -1,11 +1,11 @@
-package com.ebrightmoon.common.dao;
+package com.ebrightmoon.data.dao;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.ebrightmoon.main.gen.DaoMaster;
-import com.ebrightmoon.main.gen.OrderFeedDao;
-import com.ebrightmoon.main.gen.SearchHistoryDao;
+import com.ebrightmoon.data.gen.DaoMaster;
+import com.ebrightmoon.data.gen.NewsFeedDao;
+import com.ebrightmoon.data.pojo.NewsFeed;
 
 import org.greenrobot.greendao.database.Database;
 
@@ -22,6 +22,6 @@ public class MyOpenHelper extends DaoMaster.DevOpenHelper {
     @Override
     public void onUpgrade(Database db, int oldVersion, int newVersion) {
         super.onUpgrade(db, oldVersion, newVersion);
-        MigrationHelper.getInstance().migrate(db, OrderFeedDao.class, SearchHistoryDao.class);
+        MigrationHelper.getInstance().migrate(db, NewsFeedDao.class);
     }
 }

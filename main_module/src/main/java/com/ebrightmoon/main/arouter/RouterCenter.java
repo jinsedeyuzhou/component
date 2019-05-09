@@ -1,9 +1,7 @@
 package com.ebrightmoon.main.arouter;
 
-import android.support.v4.app.Fragment;
-
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.ebrightmoon.data.RouterURLS;
+import com.ebrightmoon.data.router.RouterURLS;
 
 /**
  * @Created by TOME .

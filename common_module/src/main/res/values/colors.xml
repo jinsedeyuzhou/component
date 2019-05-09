@@ -4,9 +4,6 @@
     <color name="colorPrimaryDark">#D53B33</color>
     <color name="colorAccent">#FFFFFF</color>
 
-
-
-
     <!-- 常用颜色 -->
     <color name="transparent">#00000000</color>
     <color name="dialog_transparent">#55000000</color>

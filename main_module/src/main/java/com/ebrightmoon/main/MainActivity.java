@@ -6,7 +6,6 @@ import android.view.View;
 
 import com.ebrightmoon.common.base.BaseActivity;
 import com.ebrightmoon.main.arouter.RouterCenter;
-import com.ebrightmoon.main.dao.DbHelper;
 import com.ebrightmoon.main.ui.activity.HomeMainActivity;
 import com.ebrightmoon.retrofitrx.callback.ACallback;
 import com.ebrightmoon.retrofitrx.retrofit.GetRequest;
@@ -27,7 +26,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        DbHelper.getInstance().init(this.getApplicationContext());
+//        DbHelper.getInstance().init(this.getApplicationContext());
 
         findViewById(R.id.tv_click).setOnClickListener(new View.OnClickListener() {
             @Override

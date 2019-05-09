@@ -1,4 +1,4 @@
-package com.ebrightmoon.main.entity;
+package entity;
 
 import java.io.Serializable;
 

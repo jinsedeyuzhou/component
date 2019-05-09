@@ -35,7 +35,7 @@ android {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
                 //集成开发模式下则需要排除debug文件夹中的所有Java文件
                 java {
-                    exclude 'debug/**'
+                    exclude 'com/ebrightmoon/main/debug/**'
                 }
             }
             assets.srcDirs = ['src/main/assets', 'src/main/assets/']

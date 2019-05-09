@@ -10,7 +10,8 @@ import com.ebrightmoon.common.common.CommonApplication;
 import com.ebrightmoon.common.service.InitializeService;
 import com.ebrightmoon.common.util.LogUtils;
 import com.ebrightmoon.common.widget.imageloader.LoaderFactory;
-import com.ebrightmoon.data.RouterConfig;
+import com.ebrightmoon.data.dao.DbHelper;
+import com.ebrightmoon.data.router.RouterConfig;
 import com.facebook.stetho.Stetho;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
@@ -37,22 +38,7 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         app = this;
-        initLogger();
         init();
-        InitializeService.start(this);
-//        CommonApplication.initQDApp(this);
-//        LoaderFactory.getLoader().init(this);
-//        //路由初始化
-//        RouterConfig.init(this, true);
-//        //Stetho调试工具初始化
-//        Stetho.initializeWithDefaults(this);
-//        initCrashReport();
-//        LogUtils.setShowLog(true);
-//        Logger.addLogAdapter(new AndroidLogAdapter() {
-//            @Override public boolean isLoggable(int priority, String tag) {
-//                return BuildConfig.DEBUG;
-//            }
-//        });
 
     }
     private void init()
@@ -62,6 +48,7 @@ public class BaseApplication extends Application {
             @Override
             public void run() {
                 super.run();
+                DbHelper.getInstance().init(app.getApplicationContext());
                 Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
                 Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
                 CommonApplication.initQDApp(app);

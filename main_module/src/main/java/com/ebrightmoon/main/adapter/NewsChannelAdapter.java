@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 
 
 import com.ebrightmoon.common.base.BaseFragment;
-import com.ebrightmoon.main.entity.Channel;
+import entity.Channel;
 
 import java.util.ArrayList;
 

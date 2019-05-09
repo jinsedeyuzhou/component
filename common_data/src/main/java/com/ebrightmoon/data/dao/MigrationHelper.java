@@ -1,10 +1,11 @@
-package com.ebrightmoon.common.dao;
+package com.ebrightmoon.data.dao;
 
 import android.database.Cursor;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.ebrightmoon.main.gen.DaoMaster;
+
+import com.ebrightmoon.data.gen.DaoMaster;
 
 import org.greenrobot.greendao.AbstractDao;
 import org.greenrobot.greendao.database.Database;

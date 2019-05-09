@@ -28,7 +28,7 @@ import com.ebrightmoon.common.util.StatusBarUtils;
 
 import com.ebrightmoon.main.R;
 import com.ebrightmoon.main.adapter.NewsChannelAdapter;
-import com.ebrightmoon.main.entity.Channel;
+import entity.Channel;
 import com.ebrightmoon.main.ui.fragment.NewsMainFragment;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;

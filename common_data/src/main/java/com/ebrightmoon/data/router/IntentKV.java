@@ -1,4 +1,4 @@
-package com.ebrightmoon.data;
+package com.ebrightmoon.data.router;
 
 /**
  * 存储跳转键值对

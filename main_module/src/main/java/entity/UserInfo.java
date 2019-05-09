@@ -1,4 +1,4 @@
-package com.ebrightmoon.main.entity;
+package entity;
 
 /**
  * 作者：create by  Administrator on 2018/10/10

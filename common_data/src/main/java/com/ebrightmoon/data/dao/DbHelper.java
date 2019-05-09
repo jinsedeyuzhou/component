@@ -1,11 +1,10 @@
-package com.ebrightmoon.common.dao;
+package com.ebrightmoon.data.dao;
 
 import android.content.Context;
 
-import com.ebrightmoon.main.entity.OrderFeed;
-import com.ebrightmoon.main.entity.SearchHistory;
-import com.ebrightmoon.main.gen.DaoMaster;
-import com.ebrightmoon.main.gen.DaoSession;
+import com.ebrightmoon.data.gen.DaoMaster;
+import com.ebrightmoon.data.gen.DaoSession;
+import com.ebrightmoon.data.pojo.SearchHistory;
 
 import org.greenrobot.greendao.AbstractDao;
 
@@ -18,7 +17,7 @@ import org.greenrobot.greendao.AbstractDao;
 public class DbHelper {
     private static final String DB_NAME = "news.db";//数据库名称
     private static DbHelper instance;
-    private static DBManager<OrderFeed, Long> author;
+//    private static DBManager<OrderFeed, Long> author;
     private static DBManager<SearchHistory, Long> history;
     private DaoMaster.DevOpenHelper mHelper;
     private DaoMaster mDaoMaster;
@@ -52,21 +51,21 @@ public class DbHelper {
         mDaoSession = mDaoMaster.newSession();
     }
 
-    /**
-     * @return
-     */
-    public DBManager<OrderFeed, Long> author() {
-        if (author == null) {
-            author = new DBManager<OrderFeed, Long>() {
-                @Override
-                public AbstractDao<OrderFeed, Long> getAbstractDao() {
-                    return mDaoSession.getOrderFeedDao();
-                }
-            };
-        }
-        return author;
-    }
-
+//    /**
+//     * @return
+//     */
+//    public DBManager<OrderFeed, Long> author() {
+//        if (author == null) {
+//            author = new DBManager<OrderFeed, Long>() {
+//                @Override
+//                public AbstractDao<OrderFeed, Long> getAbstractDao() {
+//                    return mDaoSession.getOrderFeedDao();
+//                }
+//            };
+//        }
+//        return author;
+//    }
+//
   public DBManager<SearchHistory, Long> history() {
         if (history == null) {
             history = new DBManager<SearchHistory, Long>() {

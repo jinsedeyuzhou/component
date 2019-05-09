@@ -1,7 +1,8 @@
-package com.ebrightmoon.common.dao;
+package com.ebrightmoon.data.dao;
 
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
+
 
 import org.greenrobot.greendao.AbstractDao;
 import org.greenrobot.greendao.query.Query;

@@ -1,10 +1,8 @@
-package com.ebrightmoon.main.entity;
+package entity;
 
-import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
 
-@Entity
 public class OrderFeed {
     @Id
     private Long id;
