@@ -5,10 +5,10 @@
     <application
         android:name=".debug.UserApp"
         android:allowBackup="true"
-        android:label="@string/app_name"
-        android:supportsRtl="true"
         android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
         android:theme="@style/BaseAppTheme">
         <activity
             android:name=".MainActivity"
@@ -19,6 +19,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.LoginUserActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeLogin"
+            />
+        <activity
+            android:name=".ui.RegisterUserActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeLogin"
+            />
+        <activity
+            android:name=".ui.SettingUserActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

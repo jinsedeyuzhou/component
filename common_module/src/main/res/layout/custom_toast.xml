@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:background="@drawable/bg_toast_shape"
+        android:background="@drawable/bg_toast_shap"
         android:gravity="center"
         android:paddingBottom="12dp"
         android:paddingLeft="20dp"

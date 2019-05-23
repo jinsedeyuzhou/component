@@ -17,6 +17,20 @@
                 </intent-filter>
             </activity>
 
+        <activity
+            android:name=".ui.LoginUserActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeLogin"
+            />
+        <activity
+            android:name=".ui.RegisterUserActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeLogin"
+            />
+        <activity
+            android:name=".ui.SettingUserActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

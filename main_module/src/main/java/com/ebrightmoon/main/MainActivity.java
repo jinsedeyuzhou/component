@@ -12,15 +12,6 @@ import com.ebrightmoon.retrofitrx.retrofit.GetRequest;
 
 public class MainActivity extends BaseActivity {
 
-    @Override
-    public void initData() {
-
-    }
-
-    @Override
-    public void initView() {
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +44,15 @@ public class MainActivity extends BaseActivity {
         });
     }
 
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
+    public void initView() {
+
+    }
     @Override
     protected void bindEvent() {
 

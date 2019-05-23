@@ -27,7 +27,7 @@ import com.ebrightmoon.data.gen.SearchHistoryDao;
 import com.ebrightmoon.data.pojo.SearchHistory;
 import com.ebrightmoon.main.R;
 import com.ebrightmoon.main.adapter.NewsFeedAdapter;
-import entity.NewsFeed;
+import com.ebrightmoon.main.entity.NewsFeed;
 
 import java.util.ArrayList;
 import java.util.List;

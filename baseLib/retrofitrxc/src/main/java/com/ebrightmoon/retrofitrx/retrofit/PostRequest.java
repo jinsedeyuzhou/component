@@ -3,6 +3,7 @@ package com.ebrightmoon.retrofitrx.retrofit;
 import android.content.Context;
 
 import com.ebrightmoon.retrofitrx.callback.ACallback;
+import com.ebrightmoon.retrofitrx.core.ApiManager;
 import com.ebrightmoon.retrofitrx.mode.CacheResult;
 import com.ebrightmoon.retrofitrx.mode.MediaTypes;
 import com.ebrightmoon.retrofitrx.subscriber.ApiCallbackSubscriber;

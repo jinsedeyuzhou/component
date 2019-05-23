@@ -17,8 +17,8 @@ import com.ebrightmoon.common.base.BaseFragment;
 import com.ebrightmoon.common.util.Tools;
 import com.ebrightmoon.main.R;
 import com.ebrightmoon.main.adapter.NewsFeedAdapter;
-import entity.Channel;
-import entity.NewsFeed;
+import com.ebrightmoon.main.entity.Channel;
+import com.ebrightmoon.main.entity.NewsFeed;
 import com.ebrightmoon.main.view.LoadMoreView;
 
 import java.util.ArrayList;
