@@ -146,7 +146,7 @@ public class HomeMainActivity extends BaseActivity
             public IPagerTitleView getTitleView(Context context, final int index) {
                 SimplePagerTitleView simplePagerTitleView = new ColorTransitionPagerTitleView(context);
                 simplePagerTitleView.setText(mSelectedDatas.get(index).getName());
-                simplePagerTitleView.setTextSize(DensityUtils.px2dp(mContext, 20));
+                simplePagerTitleView.setTextSize(DensityUtils.px2dp(mContext, 48));
                 simplePagerTitleView.setNormalColor(mContext.getResources().getColor(R.color.transparentTitle));
                 simplePagerTitleView.setSelectedColor(Color.WHITE);
                 simplePagerTitleView.setOnClickListener(new View.OnClickListener() {

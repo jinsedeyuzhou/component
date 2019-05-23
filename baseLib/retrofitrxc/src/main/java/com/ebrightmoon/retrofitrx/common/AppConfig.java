@@ -12,7 +12,7 @@ public class AppConfig {
         throw new UnsupportedOperationException("cannot be instantiated");
     }
 
-    public static final String BASE_URL = "http://192.168.7.148:8080";
+    public static final String BASE_URL = "http://192.168.3.45:8080";
     //请求间值
     public static final String MIDDLE_URL =BASE_URL+ "/CommonServlet";
     //注册接口 POST
