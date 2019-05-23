@@ -12,4 +12,14 @@
 .externalNativeBuild
 baseLib/magicindicator/build/
 baseLib/photoview/build/
+baseLib/banner/build/
+baseLib/pickerview/build/
+baseLib/magicindicator/build/
+baseLib/retrofitrxc/build/
+baseLib/viewanimations/build/
+baseLib/alertview/build/
+baseLib/kprogresshud/build/
+baseLib/dNSCache/build/
+baseLib/volley/build/
 /gradle/
+
