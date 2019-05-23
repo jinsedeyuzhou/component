@@ -329,7 +329,7 @@ public abstract class BaseActivity
                             public boolean test(ActivityLifeCycleEvent activityLifeCycleEvent) throws Exception {
                                 return activityLifeCycleEvent.equals(event);
                             }
-                        }).firstElement().toObservable().publish();
+                        });
 
 
                 return upstream.takeUntil(compareLifecycleObservable);

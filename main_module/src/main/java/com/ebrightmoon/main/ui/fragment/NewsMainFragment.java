@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import com.ebrightmoon.common.adapter.recycler.absrecyclerview.EmptyWrapper;
 import com.ebrightmoon.common.adapter.recycler.absrecyclerview.HeaderAndFooterWrapper;
 import com.ebrightmoon.common.adapter.recycler.absrecyclerview.LoadMoreWrapper;
-import com.ebrightmoon.common.adapter.recycler.divider.DividerItemDecoration;
 import com.ebrightmoon.common.base.BaseFragment;
 import com.ebrightmoon.common.util.Tools;
 import com.ebrightmoon.main.R;

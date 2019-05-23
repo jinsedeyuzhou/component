@@ -9,9 +9,12 @@ import com.ebrightmoon.retrofitrx.func.ApiDataFunc;
 import com.ebrightmoon.retrofitrx.func.ApiFunc;
 import com.ebrightmoon.retrofitrx.func.ApiResultFunc;
 import com.ebrightmoon.retrofitrx.func.ApiRetryFunc;
+import com.ebrightmoon.retrofitrx.mode.CacheMode;
+import com.ebrightmoon.retrofitrx.mode.CacheResult;
 import com.ebrightmoon.retrofitrx.recycle.ActivityLifeCycleEvent;
 import com.ebrightmoon.retrofitrx.recycle.RecycleBaseActivity;
 import com.ebrightmoon.retrofitrx.response.ResponseResult;
+import com.ebrightmoon.retrofitrx.strategy.ICacheStrategy;
 
 import org.reactivestreams.Publisher;
 
@@ -75,6 +78,7 @@ public class ApiTransformer {
             }
         };
     }
+
 
 //    /**
 //     * 未测试暂时不要用

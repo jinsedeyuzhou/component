@@ -2,7 +2,6 @@ package com.ebrightmoon.main.ui.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,13 +22,12 @@ import com.ebrightmoon.common.base.BaseActivity;
 import com.ebrightmoon.common.view.flowlayout.FlowLayout;
 import com.ebrightmoon.common.view.flowlayout.TagAdapter;
 import com.ebrightmoon.common.view.flowlayout.TagFlowLayout;
-import com.ebrightmoon.main.MainActivity;
+import com.ebrightmoon.data.dao.DbHelper;
+import com.ebrightmoon.data.gen.SearchHistoryDao;
+import com.ebrightmoon.data.pojo.SearchHistory;
 import com.ebrightmoon.main.R;
 import com.ebrightmoon.main.adapter.NewsFeedAdapter;
 import com.ebrightmoon.main.entity.NewsFeed;
-import com.ebrightmoon.main.entity.SearchHistory;
-import com.ebrightmoon.main.gen.DbHelper;
-import com.ebrightmoon.main.gen.SearchHistoryDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -176,15 +174,11 @@ public class SearchMainActivity extends BaseActivity {
 
     @Override
     public void processClick(View paramView) {
-        switch (paramView.getId()) {
-            case R.id.delete:
-                DbHelper.getInstance().history().deleteAll();
-                historys.clear();
-                mHisAdapter.notifyDataChanged();
-                mLlHistory.setVisibility(View.GONE);
-                break;
-            default:
-                break;
+        if (paramView.getId()==R.id.delete) {
+            DbHelper.getInstance().history().deleteAll();
+            historys.clear();
+            mHisAdapter.notifyDataChanged();
+            mLlHistory.setVisibility(View.GONE);
         }
     }
 

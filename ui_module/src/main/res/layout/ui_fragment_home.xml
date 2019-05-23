@@ -58,6 +58,25 @@
             android:text="WebView"
             />
 
+        <Button
+            android:id="@+id/btn_dialog_fragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dialog"
+
+            />
+        <Button
+            android:id="@+id/btn_dialog_fragment1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dialog1"/>
+        <Button
+            android:id="@+id/btn_dialog_fragment2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dialog2"
+            />
+
     </LinearLayout>
 
 </ScrollView>

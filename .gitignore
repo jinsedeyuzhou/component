@@ -2,9 +2,14 @@
 .gradle
 /local.properties
 /.idea/libraries
+/.idea/caches/
+.idea/
 /.idea/modules.xml
 /.idea/workspace.xml
 .DS_Store
 /build
 /captures
 .externalNativeBuild
+baseLib/magicindicator/build/
+baseLib/photoview/build/
+/gradle/

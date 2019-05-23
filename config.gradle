@@ -41,7 +41,8 @@ ext {
             logger="2.2.0",
             greendao="3.2.2",
             circleimageview="2.2.0",
-            cardview="27.1.1"
+            cardview="27.1.1",
+            rxbus="1.0.6"
     ]
 
 
@@ -73,6 +74,8 @@ ext {
             fresco                  : "com.facebook.fresco:fresco:$rootProject.fresco",
             //主线通信
             eventbus                : "org.greenrobot:eventbus:$rootProject.eventbus",
+            //rxbus
+            rxbus                : "com.hwangjr.rxbus:rxbus:$rootProject.rxbus",
             //分包
             multidex                : "com.android.support:multidex:$rootProject.multidex",
             //圆形头像

@@ -3,6 +3,8 @@
     package="com.ebrightmoon.retrofitrx">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <application android:label="@string/app_name"
        >
 

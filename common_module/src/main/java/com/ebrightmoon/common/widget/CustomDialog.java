@@ -16,7 +16,15 @@ import com.ebrightmoon.common.R;
 /**
  * 重写dialog
  * @author wyy
+ *  CustomDialog.Builder builder = new CustomDialog.Builder(context)
+ *                 .setPositiveButton("", new DialogInterface.OnClickListener() {
+ *                     @Override
+ *                     public void onClick(DialogInterface dialogInterface, int i) {
  *
+ *                     }
+ *                 });
+ *         CustomDialog customDialog = builder.create();
+ *         customDialog.show();
  */
 public class CustomDialog extends Dialog {
 

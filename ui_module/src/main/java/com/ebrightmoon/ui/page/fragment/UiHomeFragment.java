@@ -3,25 +3,31 @@ package com.ebrightmoon.ui.page.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ebrightmoon.common.base.BaseFragment;
 import com.ebrightmoon.common.widget.CustomDialogFragment;
+import com.ebrightmoon.common.widget.dialogfragment.IDialog;
+import com.ebrightmoon.common.widget.dialogfragment.SYDialog;
+import com.ebrightmoon.common.widget.dialogfragment.manager.DialogWrapper;
+import com.ebrightmoon.common.widget.dialogfragment.manager.SYDialogsManager;
+import com.ebrightmoon.common.widget.popwindow.CommonPopupWindow;
+import com.ebrightmoon.common.widget.popwindow.CustomPopWindow;
 import com.ebrightmoon.retrofitrx.callback.ACallback;
 import com.ebrightmoon.retrofitrx.mode.DownProgress;
 import com.ebrightmoon.retrofitrx.retrofit.AppClient;
 import com.ebrightmoon.ui.R;
 import com.ebrightmoon.ui.page.WebViewActivity;
-import com.ebrightmoon.ui.widget.popupWindow.CommonPopupWindow;
-import com.ebrightmoon.ui.widget.popupWindow.CustomPopWindow;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,8 +36,8 @@ public class UiHomeFragment extends BaseFragment {
 
     private ProgressBar mPb;
     private TextView mTvShowPercent;
-    private Handler handler=new Handler();
-    private int i=1;
+    private Handler handler = new Handler();
+    private int i = 1;
     private TextView mTvShowCount;
     private DownProgress downProgress;
     private String fileName;
@@ -65,18 +71,18 @@ public class UiHomeFragment extends BaseFragment {
         view.findViewById(R.id.btn_download).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                i=1;
-                fileName=System.currentTimeMillis()+".zip";
-                String xml = readAssetsTxt(mContext,"XML");
-                AppClient.getInstance(mContext,"http://10.10.68.180:8001").downloadFile("/IDPBootstrap/IDPServletDataProvider", xml,"PZFG201844010000021546.zip", mContext, new ACallback<DownProgress>() {
+                i = 1;
+                fileName = System.currentTimeMillis() + ".zip";
+                String xml = readAssetsTxt(mContext, "XML");
+                AppClient.getInstance(mContext, "http://10.10.68.180:8001").downloadFile("/IDPBootstrap/IDPServletDataProvider", xml, "PZFG201844010000021546.zip", mContext, new ACallback<DownProgress>() {
                     @Override
-                    public void onSuccess( DownProgress data) {
-                        downProgress=data;
+                    public void onSuccess(DownProgress data) {
+                        downProgress = data;
                         i++;
-                        mTvShowCount.setText(i+"");
-                        if (downProgress!=null) {
-                            mPb.setProgress((int) (downProgress.getDownloadSize()*1.0/downProgress.getTotalSize()*100));
-                            mTvShowPercent.setText("进度："+downProgress.getPercent());
+                        mTvShowCount.setText(i + "");
+                        if (downProgress != null) {
+                            mPb.setProgress((int) (downProgress.getDownloadSize() * 1.0 / downProgress.getTotalSize() * 100));
+                            mTvShowPercent.setText("进度：" + downProgress.getPercent());
                         }
                     }
 
@@ -92,10 +98,124 @@ public class UiHomeFragment extends BaseFragment {
         view.findViewById(R.id.btn_webview).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bundle bundle=new Bundle();
-                bundle.putString("title","测试");
-                bundle.putString("url","http://192.168.8.18:8087/EditUrl.html");
-                toOtherActivity(WebViewActivity.class,bundle,false);
+                Bundle bundle = new Bundle();
+                bundle.putString("title", "测试");
+                bundle.putString("url", "http://192.168.8.18:8087/EditUrl.html");
+                toOtherActivity(WebViewActivity.class, bundle, false);
+            }
+        });
+
+        view.findViewById(R.id.btn_dialog_fragment).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SYDialog.Builder builder = new SYDialog.Builder(mContext);
+                    builder.setTitle("标题")
+                            .setContent("这是内容")
+                            .setNegativeButton("取消", new IDialog.OnClickListener() {
+                                @Override
+                                public void onClick(IDialog dialog) {
+                                    dialog.dismiss();
+
+                                }
+                            }).setPositiveButton("确认", new IDialog.OnClickListener() {
+                        @Override
+                        public void onClick(IDialog dialog) {
+                            dialog.dismiss();
+                        }
+                    }).show();
+
+            }
+        });
+
+        view.findViewById(R.id.btn_dialog_fragment1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new SYDialog.Builder(mContext)
+                        .setDialogView(R.layout.layout_dialog)//设置dialog布局
+                        .setAnimStyle(R.style.translate_style)//设置动画 默认没有动画
+                        .setScreenWidthP(0.85f) //设置屏幕宽度比例 0.0f-1.0f
+                        .setGravity(Gravity.CENTER)//设置Gravity
+                        .setWindowBackgroundP(0.2f)//设置背景透明度 0.0f-1.0f 1.0f完全不透明
+                        .setCancelable(true)//设置是否屏蔽物理返回键 true不屏蔽  false屏蔽
+                        .setCancelableOutSide(true)//设置dialog外点击是否可以让dialog消失
+                        .setOnDismissListener(new IDialog.OnDismissListener() {
+                            @Override
+                            public void onDismiss(IDialog dialog) {
+                                //监听dialog dismiss的回调
+                            }
+                        })
+                        .setBuildChildListener(new IDialog.OnBuildListener() {
+                            //设置子View
+                            @Override
+                            public void onBuildChildView(final IDialog dialog, View view, int layoutRes) {
+                                //dialog: IDialog
+                                //view： DialogView
+                                //layoutRes :Dialog的资源文件 如果一个Activity里有多个dialog 可以通过layoutRes来区分
+                                final EditText editText = view.findViewById(R.id.et_content);
+                                Button btn_ok = view.findViewById(R.id.btn_ok);
+                                btn_ok.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        String editTextStr = null;
+                                        if (!TextUtils.isEmpty(editText.getText())) {
+                                            editTextStr = editText.getText().toString();
+                                        }
+                                        dialog.dismiss();
+                                    }
+                                });
+                            }
+                        }).show();
+            }
+        });
+
+        view.findViewById(R.id.btn_dialog_fragment2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Build第一个Dialog
+                SYDialog.Builder builder1 = new SYDialog.Builder(mContext)
+                        .setDialogView(R.layout.layout_ad_dialog)
+                        .setWindowBackgroundP(0.5f)
+                        .setBuildChildListener(new IDialog.OnBuildListener() {
+                            @Override
+                            public void onBuildChildView(final IDialog dialog, View view, int layoutRes) {
+                                ImageView iv_close = view.findViewById(R.id.iv_close);
+                                iv_close.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        dialog.dismiss();
+                                    }
+                                });
+
+                                ImageView iv_ad = view.findViewById(R.id.iv_ad);
+                                iv_ad.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                            }
+                        });
+
+                SYDialog.Builder builder2 = new SYDialog.Builder(mContext);
+                builder2.setTitle("标题")
+                        .setContent("这是内容拉")
+                        .setNegativeButton("取消", new IDialog.OnClickListener() {
+                            @Override
+                            public void onClick(IDialog dialog) {
+                                dialog.dismiss();
+
+                            }
+                        }).setPositiveButton("确认", new IDialog.OnClickListener() {
+                    @Override
+                    public void onClick(IDialog dialog) {
+                        dialog.dismiss();
+
+                    }
+                }).show();
+
+                SYDialogsManager.getInstance().requestShow(new DialogWrapper(builder1));
+                //添加第二个Dialog
+                SYDialogsManager.getInstance().requestShow(new DialogWrapper(builder2));
             }
         });
 
@@ -104,12 +224,13 @@ public class UiHomeFragment extends BaseFragment {
 
     /**
      * 点击弹框
+     *
      * @param view
      */
-    public void btClick1(View view){
-      View  contentView = LayoutInflater.from(mContext).inflate(R.layout.popup_child_menu, null);
-        TextView tvLike = (TextView)contentView.findViewById(R.id.tv_like);
-        if (popupWindow != null && popupWindow.isShowing()){
+    public void btClick1(View view) {
+        View contentView = LayoutInflater.from(mContext).inflate(R.layout.popup_child_menu, null);
+        TextView tvLike = (TextView) contentView.findViewById(R.id.tv_like);
+        if (popupWindow != null && popupWindow.isShowing()) {
             return;
         }
         popupWindow = new CommonPopupWindow.Builder(mContext)
@@ -123,7 +244,7 @@ public class UiHomeFragment extends BaseFragment {
     }
 
     //建议使用
-    public void btClick2(View view){
+    public void btClick2(View view) {
         View contentView = LayoutInflater.from(mContext).inflate(R.layout.pop_product_detail_video, null);
         //创建并显示popWindow
         final CustomPopWindow popWindow = new CustomPopWindow.PopupWindowBuilder(mContext)
@@ -136,19 +257,20 @@ public class UiHomeFragment extends BaseFragment {
                 .showAtLocation(content, Gravity.BOTTOM, 0, 0);
 
     }
+
     @Override
     protected void bindEvent() {
         mBtnPop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btClick1(mBtnPop);
+                btClick2(mBtnPop);
             }
         });
         mBtnDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CustomDialogFragment newFragment =CustomDialogFragment.newInstance();
-                newFragment.show(getChildFragmentManager(),"dialog");
+                CustomDialogFragment newFragment = CustomDialogFragment.newInstance();
+                newFragment.show(getChildFragmentManager(), "dialog");
             }
         });
     }
@@ -171,10 +293,10 @@ public class UiHomeFragment extends BaseFragment {
      * @param fileName 不包括后缀
      * @return
      */
-    public static String readAssetsTxt(Context context, String fileName){
+    public static String readAssetsTxt(Context context, String fileName) {
         try {
             //Return an AssetManager instance for your application's package
-            InputStream is = context.getAssets().open(fileName+".txt");
+            InputStream is = context.getAssets().open(fileName + ".txt");
             int size = is.available();
             // Read the entire asset into a local byte buffer.
             byte[] buffer = new byte[size];

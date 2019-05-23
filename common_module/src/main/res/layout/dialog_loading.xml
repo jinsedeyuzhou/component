@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:wheel="http://schemas.android.com/apk/res-auto"
+    android:layout_width="108dp"
+    android:layout_height="100dp"
+    android:layout_gravity="center"
+    android:background="@drawable/bg_loading_shape"
+    android:gravity="center">
+
+    <View
+        android:layout_width="128.0dip"
+        android:layout_height="120.0dip"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_progress"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:layout_marginBottom="10.0dip"
+            />
+
+        <TextView
+            android:id="@+id/tips_loading_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="6dp"
+            android:lineSpacingExtra="3.0dip"
+            android:textColor="#DEffffff"
+            android:textSize="@dimen/text_size_14" />
+    </LinearLayout>
+</RelativeLayout>

@@ -27,6 +27,17 @@ import okio.ForwardingSource;
 import okio.Okio;
 import okio.Source;
 
+/**
+ * * 使用方法
+ * * RequestManager requestManager
+ * * final MyProgressTarget<Bitmap> target = new MyProgressTarget<>(new BitmapImageViewTarget(imageView), circleProgress);
+ * * final MyProgressTarget targets = new MyProgressTarget<>(new GlideDrawableImageViewTarget(imageView), circleProgress);
+ * * targets.setModel(strImg);
+ * * <p>
+ * * target.setModel(strImg);
+ * * requestManager.load(uri).asBitmap().diskCacheStrategy(DiskCacheStrategy.ALL).into(target);
+ * * requestManager.load(uri).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(targets);
+ */
 public class OkHttpProgressGlideModule implements GlideModule {
     @Override
     public void applyOptions(Context context, GlideBuilder builder) {

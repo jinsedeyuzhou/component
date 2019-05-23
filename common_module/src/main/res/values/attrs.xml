@@ -21,6 +21,13 @@
         <attr name="realtimeOverlayColor" format="color"/>
     </declare-styleable>
 
+    <!-- IOSSwitchView -->
+    <declare-styleable name="IOSSwitchView">
+        <attr name="tintColor" format="reference|color" />
+        <attr name="thumbTintColor" format="reference|color" />
+        <attr name="sstrokeWidth" format="reference|dimension" />
+        <attr name="isOn" format="reference|boolean" />
+    </declare-styleable>
 
 
 

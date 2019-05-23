@@ -10,7 +10,7 @@ import android.view.View;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.ebrightmoon.common.base.BaseActivity;
 import com.ebrightmoon.common.widget.CustomViewPager;
-import com.ebrightmoon.data.RouterURLS;
+import com.ebrightmoon.data.router.RouterURLS;
 import com.ebrightmoon.ui.R;
 import com.ebrightmoon.ui.adapter.NewsAdapter;
 import com.ebrightmoon.ui.page.fragment.UiAccountFragment;

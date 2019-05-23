@@ -9,7 +9,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v7.graphics.Palette;
-import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -28,6 +27,7 @@ import com.ebrightmoon.common.util.StatusBarUtils;
 
 import com.ebrightmoon.main.R;
 import com.ebrightmoon.main.adapter.NewsChannelAdapter;
+import com.ebrightmoon.main.arouter.RouterCenter;
 import com.ebrightmoon.main.entity.Channel;
 import com.ebrightmoon.main.ui.fragment.NewsMainFragment;
 
@@ -242,13 +242,13 @@ public class HomeMainActivity extends BaseActivity
             toOtherActivity(SearchMainActivity.class,null,false);
             return true;
         } else if (id == R.id.action_share) {
-            toOtherActivity(LoginMainActivity.class,null,false);
+            RouterCenter.toLogin();
             return true;
         } else if (id == R.id.action_settings) {
-            toOtherActivity(SettingMainActivity.class, null, false);
+            RouterCenter.toSetting();
             return true;
         } else if (id == R.id.action_about) {
-            toOtherActivity(RegisterMainActivity.class,null,false);
+            RouterCenter.toRegister();
             return true;
         }
 
@@ -280,14 +280,14 @@ public class HomeMainActivity extends BaseActivity
         return true;
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            exit();
-            return false;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        if (keyCode == KeyEvent.KEYCODE_BACK) {
+//            exit();
+//            return false;
+//        }
+//        return super.onKeyDown(keyCode, event);
+//    }
 
 
     /**

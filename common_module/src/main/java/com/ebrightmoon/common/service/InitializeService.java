@@ -5,11 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Process;
 
-import com.ebrightmoon.common.BuildConfig;
 import com.ebrightmoon.common.common.CommonApplication;
 import com.ebrightmoon.common.util.LogUtils;
 import com.ebrightmoon.common.widget.imageloader.LoaderFactory;
-import com.ebrightmoon.data.RouterConfig;
+import com.ebrightmoon.data.router.RouterConfig;
 import com.facebook.stetho.Stetho;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
