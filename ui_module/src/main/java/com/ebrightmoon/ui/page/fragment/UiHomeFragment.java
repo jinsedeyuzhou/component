@@ -13,14 +13,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ebrightmoon.common.base.BaseFragment;
 import com.ebrightmoon.common.widget.CustomDialogFragment;
 import com.ebrightmoon.common.widget.dialogfragment.IDialog;
-import com.ebrightmoon.common.widget.dialogfragment.SYDialog;
+import com.ebrightmoon.common.widget.dialogfragment.SystemDialog;
 import com.ebrightmoon.common.widget.dialogfragment.manager.DialogWrapper;
-import com.ebrightmoon.common.widget.dialogfragment.manager.SYDialogsManager;
+import com.ebrightmoon.common.widget.dialogfragment.manager.SystemDialogsManager;
 import com.ebrightmoon.common.widget.popwindow.CommonPopupWindow;
 import com.ebrightmoon.common.widget.popwindow.CustomPopWindow;
 import com.ebrightmoon.retrofitrx.callback.ACallback;
@@ -108,7 +107,7 @@ public class UiHomeFragment extends BaseFragment {
         view.findViewById(R.id.btn_dialog_fragment).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SYDialog.Builder builder = new SYDialog.Builder(mContext);
+                SystemDialog.Builder builder = new SystemDialog.Builder(mContext);
                     builder.setTitle("标题")
                             .setContent("这是内容")
                             .setNegativeButton("取消", new IDialog.OnClickListener() {
@@ -130,7 +129,7 @@ public class UiHomeFragment extends BaseFragment {
         view.findViewById(R.id.btn_dialog_fragment1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new SYDialog.Builder(mContext)
+                new SystemDialog.Builder(mContext)
                         .setDialogView(R.layout.layout_dialog)//设置dialog布局
                         .setAnimStyle(R.style.translate_style)//设置动画 默认没有动画
                         .setScreenWidthP(0.85f) //设置屏幕宽度比例 0.0f-1.0f
@@ -172,7 +171,7 @@ public class UiHomeFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 //Build第一个Dialog
-                SYDialog.Builder builder1 = new SYDialog.Builder(mContext)
+                SystemDialog.Builder builder1 = new SystemDialog.Builder(mContext)
                         .setDialogView(R.layout.layout_ad_dialog)
                         .setWindowBackgroundP(0.5f)
                         .setBuildChildListener(new IDialog.OnBuildListener() {
@@ -196,7 +195,7 @@ public class UiHomeFragment extends BaseFragment {
                             }
                         });
 
-                SYDialog.Builder builder2 = new SYDialog.Builder(mContext);
+                SystemDialog.Builder builder2 = new SystemDialog.Builder(mContext);
                 builder2.setTitle("标题")
                         .setContent("这是内容拉")
                         .setNegativeButton("取消", new IDialog.OnClickListener() {
@@ -211,15 +210,35 @@ public class UiHomeFragment extends BaseFragment {
                         dialog.dismiss();
 
                     }
-                }).show();
+                });
 
-                SYDialogsManager.getInstance().requestShow(new DialogWrapper(builder1));
+                SystemDialogsManager.getInstance().requestShow(new DialogWrapper(builder1));
                 //添加第二个Dialog
-                SYDialogsManager.getInstance().requestShow(new DialogWrapper(builder2));
+                SystemDialogsManager.getInstance().requestShow(new DialogWrapper(builder2));
             }
         });
 
 
+        view.findViewById(R.id.btn_dialog_fragment3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CustomDialogFragment.newInstance().setContext(mContext)
+                        .setTitle("标题")
+                        .setContent("这是内容")
+                        .setNegativeButton("取消", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                            }
+                        }).setPositiveButton("确认", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                }).show();
+
+            }
+        });
     }
 
     /**

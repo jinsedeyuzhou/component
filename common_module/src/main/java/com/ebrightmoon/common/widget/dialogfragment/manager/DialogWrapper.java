@@ -1,7 +1,7 @@
 package com.ebrightmoon.common.widget.dialogfragment.manager;
 
 
-import com.ebrightmoon.common.widget.dialogfragment.SYDialog;
+import com.ebrightmoon.common.widget.dialogfragment.SystemDialog;
 
 /**
  * 管理多个dialog 按照dialog的优先级依次弹出
@@ -11,17 +11,17 @@ import com.ebrightmoon.common.widget.dialogfragment.SYDialog;
 
 public class DialogWrapper {
 
-    private SYDialog.Builder dialog;//统一管理dialog的弹出顺序
+    private SystemDialog.Builder dialog;//统一管理dialog的弹出顺序
 
-    public DialogWrapper(SYDialog.Builder dialog) {
+    public DialogWrapper(SystemDialog.Builder dialog) {
         this.dialog = dialog;
     }
 
-    public SYDialog.Builder getDialog() {
+    public SystemDialog.Builder getDialog() {
         return dialog;
     }
 
-    public void setDialog(SYDialog.Builder dialog) {
+    public void setDialog(SystemDialog.Builder dialog) {
         this.dialog = dialog;
     }
 

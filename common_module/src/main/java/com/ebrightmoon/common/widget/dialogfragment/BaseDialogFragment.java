@@ -2,6 +2,7 @@ package com.ebrightmoon.common.widget.dialogfragment;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -15,7 +16,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.ebrightmoon.common.widget.dialogfragment.manager.SYDialogsManager;
+import com.ebrightmoon.common.widget.dialogfragment.manager.SystemDialogsManager;
 
 
 /**
@@ -23,13 +24,12 @@ import com.ebrightmoon.common.widget.dialogfragment.manager.SYDialogsManager;
  * mqcoder90@gmail.com
  */
 
-public abstract class SYBaseDialog extends DialogFragment {
+public abstract class BaseDialogFragment extends DialogFragment {
     private View view = null;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         if (getLayoutRes() > 0) {
             //调用方通过xml获取view
             view = inflater.inflate(getLayoutRes(), container, false);
@@ -126,6 +126,11 @@ public abstract class SYBaseDialog extends DialogFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        SYDialogsManager.getInstance().over();
+        SystemDialogsManager.getInstance().over();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
     }
 }

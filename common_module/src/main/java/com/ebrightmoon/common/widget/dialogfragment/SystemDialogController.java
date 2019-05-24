@@ -18,7 +18,7 @@ import java.lang.ref.WeakReference;
  * mqcoder90@gmail.com
  */
 
-public class SYDialogController {
+public class SystemDialogController {
 
     private int layoutRes;
     private int dialogWidth;
@@ -41,7 +41,7 @@ public class SYDialogController {
 
     private Button btn_ok, btn_cancel;
 
-    SYDialogController(IDialog dialog) {
+    SystemDialogController(IDialog dialog) {
         mDialog = new WeakReference<>(dialog);
     }
 
@@ -162,7 +162,7 @@ public class SYDialogController {
         boolean showBtnLeft, showBtnRight;
         int animRes;//Dialog动画style
 
-        void apply(SYDialogController controller) {
+        void apply(SystemDialogController controller) {
             controller.dimAmount = dimAmount;
             controller.gravity = gravity;
             controller.isCancelableOutside = isCancelableOutside;
@@ -189,6 +189,7 @@ public class SYDialogController {
             if (dialogHeight > 0) {
                 controller.dialogHeight = dialogHeight;
             }
+
         }
 
     }

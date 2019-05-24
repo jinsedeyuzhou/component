@@ -1,7 +1,7 @@
 package com.ebrightmoon.common.widget.dialogfragment.manager;
 
 
-import com.ebrightmoon.common.widget.dialogfragment.SYDialog;
+import com.ebrightmoon.common.widget.dialogfragment.SystemDialog;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -11,20 +11,20 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  * mqcoder90@gmail.com
  */
 
-public class SYDialogsManager {
+public class SystemDialogsManager {
 
     private volatile boolean showing = false;//是否有dialog在展示
     private ConcurrentLinkedQueue<DialogWrapper> dialogQueue = new ConcurrentLinkedQueue<>();
 
-    private SYDialogsManager() {
+    private SystemDialogsManager() {
     }
 
-    public static SYDialogsManager getInstance() {
+    public static SystemDialogsManager getInstance() {
         return DialogHolder.instance;
     }
 
     private static class DialogHolder {
-        private static SYDialogsManager instance = new SYDialogsManager();
+        private static SystemDialogsManager instance = new SystemDialogsManager();
     }
 
     /**
@@ -59,7 +59,7 @@ public class SYDialogsManager {
     private synchronized void next() {
         DialogWrapper poll = dialogQueue.poll();
         if (poll == null) return;
-        SYDialog.Builder dialog = poll.getDialog();
+        SystemDialog.Builder dialog = poll.getDialog();
         if (dialog != null) {
             showing = true;
             dialog.show();

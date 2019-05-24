@@ -20,15 +20,15 @@ import com.ebrightmoon.common.widget.dialogfragment.manager.ScreenUtil;
  * mqcoder90@gmail.com
  */
 
-public class SYDialog extends SYBaseDialog implements IDialog {
+public class SystemDialog extends BaseDialogFragment implements IDialog {
 
-    private SYDialogController controller;
+    private SystemDialogController controller;
     private IDialog.OnBuildListener buildListener;
     private static final String FTag = "dialogTag";
     private IDialog.OnDismissListener dismissListener;
 
-    public SYDialog() {
-        controller = new SYDialogController(this);
+    public SystemDialog() {
+        controller = new SystemDialogController(this);
     }
 
     @Override
@@ -79,8 +79,9 @@ public class SYDialog extends SYBaseDialog implements IDialog {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        System.out.println("DialogFragment: SystemDialog onViewCreated");
         if (controller == null) {
-            controller = new SYDialogController(this);
+            controller = new SystemDialogController(this);
         }
         //设置默认子View布局
         controller.setChildView(view);
@@ -108,7 +109,7 @@ public class SYDialog extends SYBaseDialog implements IDialog {
     }
 
     public static class Builder {
-        private SYDialogController.SYParams params;
+        private SystemDialogController.SYParams params;
         private IDialog.OnBuildListener buildListener;
         private IDialog.OnDismissListener dismissListener;
 
@@ -116,7 +117,7 @@ public class SYDialog extends SYBaseDialog implements IDialog {
             if (!(context instanceof Activity)) {
                 throw new IllegalArgumentException("Context must be Activity");
             }
-            params = new SYDialogController.SYParams();
+            params = new SystemDialogController.SYParams();
             params.fragmentManager = ((Activity) context).getFragmentManager();
             params.context = context;
         }
@@ -335,8 +336,8 @@ public class SYDialog extends SYBaseDialog implements IDialog {
             return this;
         }
 
-        private SYDialog create() {
-            SYDialog dialog = new SYDialog();
+        private SystemDialog create() {
+            SystemDialog dialog = new SystemDialog();
             params.apply(dialog.controller);
             dialog.buildListener = buildListener;
             dialog.dismissListener = dismissListener;
@@ -346,14 +347,15 @@ public class SYDialog extends SYBaseDialog implements IDialog {
         /**
          * 展示Dialog
          *
-         * @return SYDialog
+         * @return SystemDialog
          */
-        public SYDialog show() {
+        public SystemDialog show() {
             if (params.layoutRes <= 0 && params.dialogView == null) {
                 //如果没有设置布局 提供默认设置
                 setDefaultOption();
             }
-            SYDialog dialog = create();
+
+            SystemDialog dialog = create();
             if (params.context == null) return dialog;
             if (params.context instanceof Activity) {
                 Activity activity = (Activity) params.context;
