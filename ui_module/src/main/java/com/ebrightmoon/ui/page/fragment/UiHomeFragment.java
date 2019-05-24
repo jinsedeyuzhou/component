@@ -44,6 +44,7 @@ public class UiHomeFragment extends BaseFragment {
     private Button mBtnPop;
     private View content;
     private Button mBtnDialog;
+    private CustomDialogFragment customDialogFragment;
 
     public static UiHomeFragment newInstance() {
         UiHomeFragment uiHomeFragment = new UiHomeFragment();
@@ -218,22 +219,23 @@ public class UiHomeFragment extends BaseFragment {
             }
         });
 
+        customDialogFragment = CustomDialogFragment.newInstance();
 
         view.findViewById(R.id.btn_dialog_fragment3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CustomDialogFragment.newInstance().setContext(mContext)
+                customDialogFragment.setContext(mContext)
                         .setTitle("标题")
                         .setContent("这是内容")
                         .setNegativeButton("取消", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-
+                                customDialogFragment.dismiss();
                             }
                         }).setPositiveButton("确认", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        customDialogFragment.dismiss();
                     }
                 }).show();
 
