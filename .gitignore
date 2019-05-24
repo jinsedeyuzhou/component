@@ -21,5 +21,10 @@ baseLib/alertview/build/
 baseLib/kprogresshud/build/
 baseLib/dNSCache/build/
 baseLib/volley/build/
+common_data/build/
+main_module/build/
+module_user/build/
+ui_module/build/
+common_module/build/
 /gradle/
 

@@ -1,37 +1,37 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\git_project\component\baseLib\magicindicator\src\main\AndroidManifest.xml:1:1-58
-INJECTED from D:\git_project\component\baseLib\magicindicator\src\main\AndroidManifest.xml:1:1-58
-INJECTED from D:\git_project\component\baseLib\magicindicator\src\main\AndroidManifest.xml:1:1-58
-INJECTED from D:\git_project\component\baseLib\magicindicator\src\main\AndroidManifest.xml:1:1-58
-INJECTED from D:\git_project\component\baseLib\magicindicator\src\main\AndroidManifest.xml:1:1-58
-INJECTED from D:\git_project\component\baseLib\magicindicator\src\main\AndroidManifest.xml:1:1-58
-INJECTED from D:\git_project\component\baseLib\magicindicator\src\main\AndroidManifest.xml:1:1-58
+ADDED from /Users/wyy/AndroidProject/component/baseLib/magicindicator/src/main/AndroidManifest.xml:1:1-58
+INJECTED from /Users/wyy/AndroidProject/component/baseLib/magicindicator/src/main/AndroidManifest.xml:1:1-58
+INJECTED from /Users/wyy/AndroidProject/component/baseLib/magicindicator/src/main/AndroidManifest.xml:1:1-58
+INJECTED from /Users/wyy/AndroidProject/component/baseLib/magicindicator/src/main/AndroidManifest.xml:1:1-58
+INJECTED from /Users/wyy/AndroidProject/component/baseLib/magicindicator/src/main/AndroidManifest.xml:1:1-58
+INJECTED from /Users/wyy/AndroidProject/component/baseLib/magicindicator/src/main/AndroidManifest.xml:1:1-58
+INJECTED from /Users/wyy/AndroidProject/component/baseLib/magicindicator/src/main/AndroidManifest.xml:1:1-58
 	package
-		ADDED from D:\git_project\component\baseLib\magicindicator\src\main\AndroidManifest.xml:1:11-55
-		INJECTED from D:\git_project\component\baseLib\magicindicator\src\main\AndroidManifest.xml
-		INJECTED from D:\git_project\component\baseLib\magicindicator\src\main\AndroidManifest.xml
+		ADDED from /Users/wyy/AndroidProject/component/baseLib/magicindicator/src/main/AndroidManifest.xml:1:11-55
+		INJECTED from /Users/wyy/AndroidProject/component/baseLib/magicindicator/src/main/AndroidManifest.xml
+		INJECTED from /Users/wyy/AndroidProject/component/baseLib/magicindicator/src/main/AndroidManifest.xml
 	android:versionName
-		INJECTED from D:\git_project\component\baseLib\magicindicator\src\main\AndroidManifest.xml
-		ADDED from D:\git_project\component\baseLib\magicindicator\src\main\AndroidManifest.xml:1:1-58
-		INJECTED from D:\git_project\component\baseLib\magicindicator\src\main\AndroidManifest.xml
+		INJECTED from /Users/wyy/AndroidProject/component/baseLib/magicindicator/src/main/AndroidManifest.xml
+		ADDED from /Users/wyy/AndroidProject/component/baseLib/magicindicator/src/main/AndroidManifest.xml:1:1-58
+		INJECTED from /Users/wyy/AndroidProject/component/baseLib/magicindicator/src/main/AndroidManifest.xml
 	xmlns:android
-		ADDED from D:\git_project\component\baseLib\magicindicator\src\main\AndroidManifest.xml:1:1-58
+		ADDED from /Users/wyy/AndroidProject/component/baseLib/magicindicator/src/main/AndroidManifest.xml:1:1-58
 	android:versionCode
-		INJECTED from D:\git_project\component\baseLib\magicindicator\src\main\AndroidManifest.xml
-		ADDED from D:\git_project\component\baseLib\magicindicator\src\main\AndroidManifest.xml:1:1-58
-		INJECTED from D:\git_project\component\baseLib\magicindicator\src\main\AndroidManifest.xml
+		INJECTED from /Users/wyy/AndroidProject/component/baseLib/magicindicator/src/main/AndroidManifest.xml
+		ADDED from /Users/wyy/AndroidProject/component/baseLib/magicindicator/src/main/AndroidManifest.xml:1:1-58
+		INJECTED from /Users/wyy/AndroidProject/component/baseLib/magicindicator/src/main/AndroidManifest.xml
 uses-sdk
-INJECTED from D:\git_project\component\baseLib\magicindicator\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from D:\git_project\component\baseLib\magicindicator\src\main\AndroidManifest.xml
-INJECTED from D:\git_project\component\baseLib\magicindicator\src\main\AndroidManifest.xml
-INJECTED from D:\git_project\component\baseLib\magicindicator\src\main\AndroidManifest.xml
-INJECTED from D:\git_project\component\baseLib\magicindicator\src\main\AndroidManifest.xml
+INJECTED from /Users/wyy/AndroidProject/component/baseLib/magicindicator/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/wyy/AndroidProject/component/baseLib/magicindicator/src/main/AndroidManifest.xml
+INJECTED from /Users/wyy/AndroidProject/component/baseLib/magicindicator/src/main/AndroidManifest.xml
+INJECTED from /Users/wyy/AndroidProject/component/baseLib/magicindicator/src/main/AndroidManifest.xml
+INJECTED from /Users/wyy/AndroidProject/component/baseLib/magicindicator/src/main/AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from D:\git_project\component\baseLib\magicindicator\src\main\AndroidManifest.xml
-		ADDED from D:\git_project\component\baseLib\magicindicator\src\main\AndroidManifest.xml
-		INJECTED from D:\git_project\component\baseLib\magicindicator\src\main\AndroidManifest.xml
+		INJECTED from /Users/wyy/AndroidProject/component/baseLib/magicindicator/src/main/AndroidManifest.xml
+		ADDED from /Users/wyy/AndroidProject/component/baseLib/magicindicator/src/main/AndroidManifest.xml
+		INJECTED from /Users/wyy/AndroidProject/component/baseLib/magicindicator/src/main/AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from D:\git_project\component\baseLib\magicindicator\src\main\AndroidManifest.xml
-		ADDED from D:\git_project\component\baseLib\magicindicator\src\main\AndroidManifest.xml
-		INJECTED from D:\git_project\component\baseLib\magicindicator\src\main\AndroidManifest.xml
+		INJECTED from /Users/wyy/AndroidProject/component/baseLib/magicindicator/src/main/AndroidManifest.xml
+		ADDED from /Users/wyy/AndroidProject/component/baseLib/magicindicator/src/main/AndroidManifest.xml
+		INJECTED from /Users/wyy/AndroidProject/component/baseLib/magicindicator/src/main/AndroidManifest.xml
