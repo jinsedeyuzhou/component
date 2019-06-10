@@ -282,9 +282,6 @@ public class AppClient {
      * @param <T>
      */
     public <T> DisposableObserver json(String url, String jsonObject, ACallback<T> callback) {
-        if (jsonObject instanceof String) {
-
-        }
         RequestBody body = RequestBody.create(MediaTypes.APPLICATION_JSON_TYPE, jsonObject);
         DisposableObserver disposableObserver = new ApiCallbackSubscriber<T>(callback);
         ApiManager.get().add(url, disposableObserver);

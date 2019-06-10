@@ -13,7 +13,10 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            //对library 生效，但路径和包名不混淆，需要将lib混淆文件导入到主工程混淆文件
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            // 会合并lib工程中的混淆文件
+//            consumerProguardFiles 'proguard-rules.pro'
         }
     }
 

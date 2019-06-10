@@ -1,7 +1,6 @@
 package com.ebrightmoon.common.widget;
 
 import android.content.Context;
-import android.support.design.widget.BaseTransientBottomBar;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
@@ -13,7 +12,7 @@ import com.ebrightmoon.common.R;
 /**
  * 自定义弹出对话框
  * @author wyy
- *
+ * 系统自定义Toast
  */
 public class CustomToast extends Toast {
 
@@ -41,7 +40,7 @@ public class CustomToast extends Toast {
 	}
 
 
-	public static CustomToast makeText(Context context, CharSequence text, @BaseTransientBottomBar.Duration int duration) {
+	public static CustomToast makeText(Context context, CharSequence text,  int duration) {
 		CustomToast result = new CustomToast(context,text.toString(),duration);
 		return result;
 	}

@@ -2,126 +2,146 @@ package com.ebrightmoon.retrofitrx.retrofit;
 
 
 import android.content.Context;
+import android.text.TextUtils;
 
+import com.ebrightmoon.retrofitrx.body.UploadProgressRequestBody;
 import com.ebrightmoon.retrofitrx.callback.ACallback;
 import com.ebrightmoon.retrofitrx.callback.UCallback;
 import com.ebrightmoon.retrofitrx.common.AppConfig;
-import com.ebrightmoon.retrofitrx.common.HttpConfig;
 import com.ebrightmoon.retrofitrx.common.HttpUtils;
-import com.ebrightmoon.retrofitrx.core.ApiCache;
-import com.ebrightmoon.retrofitrx.core.ApiCookie;
+import com.ebrightmoon.retrofitrx.convert.GsonConverterFactory;
+import com.ebrightmoon.retrofitrx.core.ApiManager;
 import com.ebrightmoon.retrofitrx.core.ApiTransformer;
-import com.ebrightmoon.retrofitrx.func.ApiFunc;
+import com.ebrightmoon.retrofitrx.func.ApiDownloadFunc;
+import com.ebrightmoon.retrofitrx.func.ApiResultFunc;
 import com.ebrightmoon.retrofitrx.func.ApiRetryFunc;
 import com.ebrightmoon.retrofitrx.interceptor.HeadersInterceptor;
-import com.ebrightmoon.retrofitrx.interceptor.OfflineCacheInterceptor;
-import com.ebrightmoon.retrofitrx.interceptor.OnlineCacheInterceptor;
-import com.ebrightmoon.retrofitrx.interceptor.UploadProgressInterceptor;
-import com.ebrightmoon.retrofitrx.mode.ApiHost;
-import com.ebrightmoon.retrofitrx.mode.CacheMode;
-import com.ebrightmoon.retrofitrx.mode.CacheResult;
-import com.ebrightmoon.retrofitrx.mode.HttpHeaders;
+import com.ebrightmoon.retrofitrx.interceptor.HttpResponseInterceptor;
+import com.ebrightmoon.retrofitrx.interceptor.LoggingInterceptor;
 import com.ebrightmoon.retrofitrx.mode.MediaTypes;
+import com.ebrightmoon.retrofitrx.response.ResponseResult;
 import com.ebrightmoon.retrofitrx.subscriber.ApiCallbackSubscriber;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
+import com.ebrightmoon.retrofitrx.subscriber.DownCallbackSubscriber;
+import com.ebrightmoon.retrofitrx.temp.SSLUtils;
+import com.ebrightmoon.retrofitrx.util.GsonUtil;
 
 import java.io.File;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.security.cert.CertificateException;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import javax.net.ssl.X509TrustManager;
+
+import io.reactivex.BackpressureStrategy;
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.Cache;
+import okhttp3.CertificatePinner;
 import okhttp3.ConnectionPool;
-import okhttp3.Interceptor;
-import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 /**
  * Created by wyy on 2017/9/6.
+ * 利用Recycle 管理生命周期  利用返回DisposableObserver 和RxApiManager，取消网络请求
  */
 
-public class HttpClient<R extends HttpClient> {
-    protected static  Context mContext;
-    protected static OkHttpClient.Builder okHttpBuilder;
-    protected static Retrofit retrofit;
-    protected static Retrofit.Builder retrofitBuilder;
-    protected static ApiCache.Builder apiCacheBuilder;
-    protected static OkHttpClient okHttpClient;
-    protected String suffixUrl = "";//链接后缀
-    protected List<Interceptor> interceptors = new ArrayList<>();//局部请求的拦截器
-    protected List<Interceptor> networkInterceptors = new ArrayList<>();//局部请求的网络拦截器
-    protected HttpHeaders headers = new HttpHeaders();//请求头
-    protected HttpConfig httpConfig;//全局配置
-    protected   String baseUrl = AppConfig.BASE_URL;
-    protected long readTimeOut;//读取超时时间
-    protected long writeTimeOut;//写入超时时间
-    protected long connectTimeOut;//连接超时时间
-    protected boolean isHttpCache;//是否使用Http缓存
-    protected UCallback uploadCallback;//上传进度回调
-    protected ApiService apiService;//通用接口服务
-    protected int retryDelayMillis;//请求失败重试间隔时间
-    protected int retryCount;//重试次数
-    protected boolean isLocalCache;//是否使用本地缓存
-    protected CacheMode cacheMode;//本地缓存类型
-    protected String cacheKey;//本地缓存Key
-    protected long cacheTime;//本地缓存时间
-    protected Map<String, String> params = new LinkedHashMap<>();//请求参数
-    protected Map<String, Object> forms = new LinkedHashMap<>();
-    protected StringBuilder stringBuilder = new StringBuilder();
-    protected RequestBody requestBody;
-    protected MediaType mediaType;
-    protected String content;
+public class HttpClient {
+    private List<MultipartBody.Part> multipartBodyParts;
+    private Map<String, RequestBody> params;
+    private static Context mContext;
+    private final int DEFAULT_TIMEOUT = 5;
+    private OkHttpClient.Builder okHttpBuilder;
+    private Retrofit retrofit;
+    private ApiService apiService;
+    private Retrofit.Builder retrofitBuilder;
+    public static String baseUrl = AppConfig.BASE_URL;
 
-    private HttpClient(Context context, String suffixUrl, Map<String, String> headers) {
+    private HttpClient(Context context, String url, Map<String, String> headers) {
+        if (context != null)
+            mContext = context;
         okHttpBuilder = new OkHttpClient.Builder();
+        okHttpBuilder
+                .addNetworkInterceptor(new LoggingInterceptor())
+                .addNetworkInterceptor(new HttpResponseInterceptor())
+                .addInterceptor(new LoggingInterceptor())
+                .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+                .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+                .readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+
+//        headers.put("","");  设置全局header
+        if (headers != null)
+            okHttpBuilder.addInterceptor(new HeadersInterceptor(headers));
+
+        if (url != null)
+            baseUrl = url;
+        okHttpBuilder.connectionPool(new ConnectionPool(HttpUtils.DEFAULT_MAX_IDLE_CONNECTIONS,
+                HttpUtils.DEFAULT_KEEP_ALIVE_DURATION, TimeUnit.SECONDS));
+//        okHttpBuilder.hostnameVerifier(new SSL.UnSafeHostnameVerifier(baseUrl));
+//        okHttpBuilder.sslSocketFactory(SSL.getSslSocketFactory(null,null,null));
+//        okHttpBuilder.sslSocketFactory(SSL.getSSlFactory(mContext,"server.cer"));
+//        okHttpBuilder.sslSocketFactory(new SSLUtils(trustAllCert), trustAllCert);
+        okHttpBuilder.certificatePinner(new CertificatePinner.Builder()
+                .add("vapi.piccgd.com", "sha256/AqUGPVqg5Rdcq3cLU4yXtC+BsbsvFcVFcPNJA13AUIA=")
+                .add("vapi.piccgd.com", "sha256/zUIraRNo+4JoAYA7ROeWjARtIoN4rIEbCpfCRQT6N6A=")
+                .build());
+        okHttpBuilder.sslSocketFactory(new SSLUtils(trustAllCert), trustAllCert);
+
+//        设置代理
+//        okHttpBuilder .proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress("192.168.1.185", 82)));
+//        okHttpBuilder.dns(new OkHttpDns());
+
         retrofitBuilder = new Retrofit.Builder();
-        if (mContext == null && context != null) {
-            mContext = mContext.getApplicationContext();
-            apiCacheBuilder = new ApiCache.Builder(context);
+
+        retrofit = retrofitBuilder
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .baseUrl(baseUrl)
+                .client(okHttpBuilder.build())
+                .build();
+
+
+    }
+
+
+    //定义一个信任所有证书的TrustManager
+    final X509TrustManager trustAllCert = new X509TrustManager() {
+        @Override
+        public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
         }
 
-    }
-    private HttpClient() {
-        this(null, AppConfig.BASE_URL, null);
-    }
+        @Override
+        public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+        }
 
-    private HttpClient(Context context) {
-        this(context, AppConfig.BASE_URL, null);
-    }
+        @Override
+        public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+            return new java.security.cert.X509Certificate[]{};
+        }
+    };
 
-    private HttpClient(Context context, String url) {
-        this(context, url, null);
-    }
 
     private static HttpClient instance;
 
     public static HttpClient getInstance(Context context) {
         if (instance == null) {
-            synchronized (AppClient.class) {
+            synchronized (HttpClient.class) {
                 if (instance == null) {
                     instance = new HttpClient(context);
                 }
             }
         }
+
         return instance;
     }
 
@@ -148,48 +168,167 @@ public class HttpClient<R extends HttpClient> {
         if (context == null) {
             mContext = context;
         }
+
         return instance = new HttpClient(context, url, headers);
     }
 
-
-    public <T> Observable<T> request(Type type) {
-        initGlobalConfig();
-        initLocalConfig();
-        return execute(type);
+    private HttpClient() {
+        this(null, baseUrl, null);
     }
 
-    public <T> Observable<CacheResult<T>> cacheRequest(Type type) {
-        initGlobalConfig();
-        initLocalConfig();
-        return cacheExecute(type);
+    private HttpClient(Context context) {
+
+        this(context, baseUrl, null);
     }
 
-    public <T> void request(ACallback<T> callback) {
-        initGlobalConfig();
-        initLocalConfig();
-        execute(callback);
+    private HttpClient(Context context, String url) {
+
+        this(context, url, null);
     }
 
-    protected <T> Observable<T> execute(Type type) {
-        return apiService.get(suffixUrl, params).compose(this.<T>norTransformer(type));
+    public OkHttpClient.Builder getOkHttpBuilder() {
+        return okHttpBuilder;
     }
 
-    protected <T> Observable<CacheResult<T>> cacheExecute(Type type) {
-        return this.<T>execute(type).compose(apiCacheBuilder.build().<T>transformer(cacheMode, type));
+    public void setOkHttpBuilder(OkHttpClient.Builder okHttpBuilder) {
+        this.okHttpBuilder = okHttpBuilder;
     }
 
-    protected <T> void execute(ACallback<T> callback) {
-        DisposableObserver disposableObserver = new ApiCallbackSubscriber(callback);
-//        if (super.tag != null) {
-//            ApiManager.get().add(super.tag, disposableObserver);
-//        }
-        if (isLocalCache) {
-            this.cacheExecute(getSubType(callback)).subscribe(disposableObserver);
-        } else {
-            this.execute(getType(callback)).subscribe(disposableObserver);
+    public Retrofit.Builder getRetrofitBuilder() {
+        return retrofitBuilder;
+    }
+
+    public void setRetrofitBuilder(Retrofit.Builder retrofitBuilder) {
+        this.retrofitBuilder = retrofitBuilder;
+    }
+
+    public ApiService CreateApiService() {
+        return apiService = create(ApiService.class);
+    }
+
+
+    public <T> T create(final Class<T> service) {
+        if (service == null) {
+            throw new RuntimeException("Api service is null!");
         }
+        return retrofit.create(service);
     }
 
+
+    /**
+     * Get 返回数据  无模型无校验
+     *
+     * @param url
+     * @param params
+     * @param callback
+     * @param <T>
+     */
+    public <T> HttpClient get(String url, Map<String, String> params, ACallback<T> callback) {
+        DisposableObserver disposableObserver = new ApiCallbackSubscriber<T>(callback);
+        ApiManager.get().add(url, disposableObserver);
+        CreateApiService().get(url, params)
+                .compose(ApiTransformer.<T>Transformer(getSubType(callback)))
+//                .compose(RxHelper.<T>bindUntilEvent(recycle))
+                .subscribe(disposableObserver);
+
+        return this;
+    }
+
+    /**
+     * Get 返回数据  无模型无校验
+     *
+     * @param url
+     * @param params
+     * @param callback
+     * @param <T>
+     */
+    public <T> DisposableObserver getd(String url, Map<String, String> params, ACallback<T> callback) {
+        DisposableObserver disposableObserver = new ApiCallbackSubscriber<T>(callback);
+        ApiManager.get().add(url, disposableObserver);
+        CreateApiService().get(url, params)
+                .compose(ApiTransformer.<T>Transformer(getSubType(callback)))
+//                .compose(RxHelper.<T>bindUntilEvent(recycle))
+                .subscribe(disposableObserver);
+        return disposableObserver;
+    }
+
+    /**
+     * Post 返回数据  无模型无校验
+     *
+     * @param url
+     * @param params
+     * @param callback
+     * @param <T>
+     */
+    public <T> DisposableObserver post(String url, Map<String, String> params, ACallback<T> callback) {
+        RequestBody body = RequestBody.create(MediaTypes.APPLICATION_JSON_TYPE, GsonUtil.gson().toJson(params));
+        DisposableObserver disposableObserver = new ApiCallbackSubscriber<T>(callback);
+        ApiManager.get().add(url, disposableObserver);
+        CreateApiService().post(url, body)
+                .compose(ApiTransformer.<T>Transformer(getSubType(callback)))
+                .subscribe(disposableObserver);
+
+        return disposableObserver;
+    }
+
+    /**
+     * Json 返回数据  无模型无校验
+     *
+     * @param url
+     * @param jsonObject
+     * @param callback
+     * @param <T>
+     */
+    public <T> DisposableObserver json(String url, String jsonObject, ACallback<T> callback) {
+        RequestBody body = RequestBody.create(MediaTypes.APPLICATION_JSON_TYPE, jsonObject);
+        DisposableObserver disposableObserver = new ApiCallbackSubscriber<T>(callback);
+        ApiManager.get().add(url, disposableObserver);
+        CreateApiService().post(url, body)
+                .compose(ApiTransformer.<T>Transformer(getSubType(callback)))
+                .subscribe(disposableObserver);
+        return disposableObserver;
+    }
+
+
+    /**
+     * Api通用Get  返回模型中data数据
+     *
+     * @param url
+     * @param params
+     * @param callback
+     * @param <T>
+     */
+    public <T> DisposableObserver executeGet(String url, Map<String, String> params, ACallback<T> callback) {
+        DisposableObserver disposableObserver = new ApiCallbackSubscriber<T>(callback);
+        ApiManager.get().add(url, disposableObserver);
+        CreateApiService().executeGet(url, params, params)
+                .map(new ApiResultFunc<T>(getSubType(callback)))
+                .compose(ApiTransformer.<T>apiTransformer())
+                .subscribe(disposableObserver);
+
+        return disposableObserver;
+
+    }
+
+    /**
+     * Api通用post  返回模型中T  data数据
+     *
+     * @param url
+     * @param params
+     * @param callback
+     * @param <T>
+     */
+    public <T> DisposableObserver executePost(String url, Map<String, String> params, ACallback<T> callback) {
+        RequestBody body = RequestBody.create(MediaTypes.APPLICATION_JSON_TYPE, GsonUtil.gson().toJson(params));
+        DisposableObserver disposableObserver = new ApiCallbackSubscriber<T>(callback);
+        ApiManager.get().add(url, disposableObserver);
+        CreateApiService().executePost(url, params, body)
+                .map(new ApiResultFunc<T>(getSubType(callback)))
+                .compose(ApiTransformer.<T>apiTransformer())
+                .subscribe(disposableObserver);
+
+        return disposableObserver;
+    }
 
     public <T> T execute(Observable<T> observable, ACallback<T> callback) {
         DisposableObserver disposableObserver = new ApiCallbackSubscriber<T>(callback);
@@ -198,583 +337,275 @@ public class HttpClient<R extends HttpClient> {
         return null;
     }
 
-    protected <T> Observable<T> executePost(Type type) {
-        if (stringBuilder.length() > 0) {
-            suffixUrl = suffixUrl + stringBuilder.toString();
-        }
-        if (forms != null && forms.size() > 0) {
-            if (params != null && params.size() > 0) {
-                Iterator<Map.Entry<String, String>> entryIterator = params.entrySet().iterator();
-                Map.Entry<String, String> entry;
-                while (entryIterator.hasNext()) {
-                    entry = entryIterator.next();
-                    if (entry != null) {
-                        forms.put(entry.getKey(), entry.getValue());
-                    }
-                }
-            }
-            return apiService.postForm(suffixUrl, forms).compose(this.<T>norTransformer(type));
-        }
-        if (requestBody != null) {
-            return apiService.postBody(suffixUrl, requestBody).compose(this.<T>norTransformer(type));
-        }
-        if (content != null && mediaType != null) {
-            requestBody = RequestBody.create(mediaType, content);
-            return apiService.postBody(suffixUrl, requestBody).compose(this.<T>norTransformer(type));
-        }
-        return apiService.post(suffixUrl, params).compose(this.<T>norTransformer(type));
-    }
-
-
-
-
-
-
-    public HttpClient addUrlParam(String paramKey, String paramValue) {
-        if (paramKey != null && paramValue != null) {
-            if (stringBuilder.length() == 0) {
-                stringBuilder.append("?");
-            } else {
-                stringBuilder.append("&");
-            }
-            stringBuilder.append(paramKey).append("=").append(paramValue);
-        }
-        return this;
-    }
-
-    public HttpClient addForm(String formKey, Object formValue) {
-        if (formKey != null && formValue != null) {
-            forms.put(formKey, formValue);
-        }
-        return this;
-    }
-
-    public HttpClient setRequestBody(RequestBody requestBody) {
-        this.requestBody = requestBody;
-        return this;
-    }
-
-    public HttpClient setString(String string) {
-        this.content = string;
-        this.mediaType = MediaTypes.TEXT_PLAIN_TYPE;
-        return this;
-    }
-
-    public HttpClient setString(String string, MediaType mediaType) {
-        this.content = string;
-        this.mediaType = mediaType;
-        return this;
-    }
-
-    public HttpClient setJson(String json) {
-        this.content = json;
-        this.mediaType = MediaTypes.APPLICATION_JSON_TYPE;
-        return this;
-    }
-
-    public HttpClient setJson(JSONObject jsonObject) {
-        this.content = jsonObject.toString();
-        this.mediaType = MediaTypes.APPLICATION_JSON_TYPE;
-        return this;
-    }
-
-    public HttpClient setJson(JSONArray jsonArray) {
-        this.content = jsonArray.toString();
-        this.mediaType = MediaTypes.APPLICATION_JSON_TYPE;
-        return this;
-    }
-
-
-    protected <T> ObservableTransformer<ResponseBody, T> norTransformer(final Type type) {
-        return new ObservableTransformer<ResponseBody, T>() {
-            @Override
-            public ObservableSource<T> apply(Observable<ResponseBody> apiResultObservable) {
-                return apiResultObservable
-                        .subscribeOn(Schedulers.io())
-                        .unsubscribeOn(Schedulers.io())
-                        .map(new ApiFunc<T>(type))
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .retryWhen(new ApiRetryFunc(retryCount, retryDelayMillis));
-            }
-        };
-    }
 
     /**
-     * 添加请求参数
+     * Api通用put  返回模型中 T data数据
      *
-     * @param paramKey
-     * @param paramValue
-     * @return
-     */
-    public R addParam(String paramKey, String paramValue) {
-        if (paramKey != null && paramValue != null) {
-            this.params.put(paramKey, paramValue);
-        }
-        return (R) this;
-    }
-
-    /**
-     * 添加请求参数
-     *
+     * @param url
      * @param params
-     * @return
+     * @param callback
+     * @param <T>
      */
-    public R addParams(Map<String, String> params) {
-        if (params != null) {
-            this.params.putAll(params);
-        }
-        return (R) this;
+    public <T> DisposableObserver executePut(String url, Map<String, String> params, ACallback<T> callback) {
+        DisposableObserver disposableObserver = new ApiCallbackSubscriber<T>(callback);
+        ApiManager.get().add(url, disposableObserver);
+        CreateApiService().executePut(url, params, params)
+                .map(new ApiResultFunc<T>(getSubType(callback)))
+                .compose(ApiTransformer.<T>apiTransformer())
+                .subscribe(disposableObserver);
+
+        return disposableObserver;
     }
 
-    /**
-     * 移除请求参数
-     *
-     * @param paramKey
-     * @return
-     */
-    public R removeParam(String paramKey) {
-        if (paramKey != null) {
-            this.params.remove(paramKey);
-        }
-        return (R) this;
-    }
 
     /**
-     * 设置请求参数
+     * Api通用Get  返回ResponseResult数据
      *
+     * @param url
      * @param params
-     * @return
+     * @param callback
+     * @param <T>
      */
-    public R params(Map<String, String> params) {
-        if (params != null) {
-            this.params = params;
-        }
-        return (R) this;
+    public <T> DisposableObserver getResponseResult(String url, Map<String, String> params, ACallback<ResponseResult<T>> callback) {
+        DisposableObserver disposableObserver = new ApiCallbackSubscriber<ResponseResult<T>>(callback);
+        ApiManager.get().add(url, disposableObserver);
+        CreateApiService().executeGet(url, params, params)
+                .compose(ApiTransformer.<ResponseResult<T>>RRTransformer(getSubType(callback)))
+                .subscribe(disposableObserver);
+        return disposableObserver;
     }
 
     /**
-     * 设置请求失败重试间隔时间（毫秒）
+     * Api通用post  返回ResponseResult数据
      *
-     * @param retryDelayMillis
-     * @return
+     * @param url
+     * @param params
+     * @param callback
+     * @param <T>
      */
-    public R retryDelayMillis(int retryDelayMillis) {
-        this.retryDelayMillis = retryDelayMillis;
-        return (R) this;
+    public <T> DisposableObserver postResponseResult(String url, Map<String, String> params, ACallback<ResponseResult<T>> callback) {
+
+        RequestBody body = RequestBody.create(MediaTypes.APPLICATION_JSON_TYPE, GsonUtil.gson().toJson(params));
+        DisposableObserver disposableObserver = new ApiCallbackSubscriber<ResponseResult<T>>(callback);
+        ApiManager.get().add(url, disposableObserver);
+        CreateApiService().executePost(url, HttpUtils.excute(params), body)
+                .compose(ApiTransformer.<ResponseResult<T>>RRTransformer(getSubType(callback)))
+                .subscribe(disposableObserver);
+
+        return disposableObserver;
     }
 
     /**
-     * 设置请求失败重试次数
+     * Api通用put  返回ResponseResult  数据
      *
-     * @param retryCount
-     * @return
+     * @param url
+     * @param params
+     * @param callback
+     * @param <T>
      */
-    public R retryCount(int retryCount) {
-        this.retryCount = retryCount;
-        return (R) this;
+    public <T> DisposableObserver putResponseResult(String url, Map<String, String> params, ACallback<ResponseResult<T>> callback) {
+        DisposableObserver disposableObserver = new ApiCallbackSubscriber<ResponseResult<T>>(callback);
+        ApiManager.get().add(url, disposableObserver);
+        CreateApiService().executePut(url, params, params)
+                .compose(ApiTransformer.<ResponseResult<T>>RRTransformer(getSubType(callback)))
+                .subscribe(disposableObserver);
+
+        return disposableObserver;
     }
 
+
     /**
-     * 设置是否进行本地缓存
+     * 上传文件不带参数校验 返回数据 可以控制文件上传进度
      *
-     * @param isLocalCache
-     * @return
+     * @param url
+     * @param <T>
      */
-    public R setLocalCache(boolean isLocalCache) {
-        this.isLocalCache = isLocalCache;
-        return (R) this;
+    public <T> void uploadFiles(String url, ACallback<T> callback) {
+        DisposableObserver disposableObserver = new ApiCallbackSubscriber<T>(callback);
+        ApiManager.get().add(url, disposableObserver);
+        CreateApiService().uploadFiles(url, multipartBodyParts)
+                .compose(ApiTransformer.<T>Transformer(getSubType(callback)))
+                .subscribe(disposableObserver);
     }
 
+
     /**
-     * 设置本地缓存类型
+     * 上传文件不带参数校验  返回数据模型 ResponseResult中 T数据
      *
-     * @param cacheMode
-     * @return
+     * @param url
+     * @param <T>
      */
-    public R cacheMode(CacheMode cacheMode) {
-        this.cacheMode = cacheMode;
-        return (R) this;
+    public <T> void uploadFilesV(String url, ACallback<T> callback) {
+        DisposableObserver disposableObserver = new ApiCallbackSubscriber<T>(callback);
+        ApiManager.get().add(url, disposableObserver);
+        CreateApiService().uploadFiles(url, multipartBodyParts)
+                .map(new ApiResultFunc<T>(getSubType(callback)))
+                .compose(ApiTransformer.<T>apiTransformer())
+                .subscribe(disposableObserver);
+
     }
 
+
     /**
-     * 设置本地缓存Key
+     * 上传文件 无头文件 返回 返回ResponseResult  数据 不能监控文件上传进度
      *
-     * @param cacheKey
-     * @return
+     * @param url
+     * @param <T>
      */
-    public R cacheKey(String cacheKey) {
-        this.cacheKey = cacheKey;
-        return (R) this;
+    public <T> void uploadFiles(String url, Map<String, File> files, ACallback<T> callback) {
+        params = new HashMap<>();
+        for (Map.Entry<String, File> entry : files.entrySet()) {
+            RequestBody requestBody = RequestBody.create(MediaTypes.APPLICATION_FORM_URLENCODED_TYPE, entry.getValue());
+            params.put("file\"; filename=\"" + entry.getValue() + "", requestBody);
+        }
+        DisposableObserver disposableObserver = new ApiCallbackSubscriber<T>(callback);
+        ApiManager.get().add(url, disposableObserver);
+        CreateApiService().uploadFiles(url, params)
+                .map(new ApiResultFunc<T>(getSubType(callback)))
+                .compose(ApiTransformer.<T>apiTransformer())
+                .subscribe(disposableObserver);
+
+
     }
 
     /**
-     * 设置本地缓存时间(毫秒)，默认永久
+     * 下载文件
      *
-     * @param cacheTime
-     * @return
+     * @param url
+     * @param params
+     * @param fileName
+     * @param context
+     * @param callback
      */
-    public R cacheTime(long cacheTime) {
-        this.cacheTime = cacheTime;
-        return (R) this;
-    }
+    public <T> void downloadFile(String url, Map<String, String> params, String fileName, Context context, ACallback<T> callback) {
+        DisposableObserver disposableObserver = new DownCallbackSubscriber(callback);
+        ApiManager.get().add(url, disposableObserver);
+        CreateApiService().downFile(url, params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .toFlowable(BackpressureStrategy.LATEST)
+                .flatMap(new ApiDownloadFunc(context, fileName))
+                .sample(1, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .toObservable()
+                .retryWhen(new ApiRetryFunc(0, 60))
+                .subscribe(disposableObserver);
 
-    public String getSuffixUrl() {
-        return suffixUrl;
-    }
 
-    public int getRetryDelayMillis() {
-        return retryDelayMillis;
-    }
-
-    public int getRetryCount() {
-        return retryCount;
-    }
-
-    public boolean isLocalCache() {
-        return isLocalCache;
-    }
-
-    public CacheMode getCacheMode() {
-        return cacheMode;
-    }
-
-    public String getCacheKey() {
-        return cacheKey;
-    }
-
-    public long getCacheTime() {
-        return cacheTime;
-    }
-
-    public Map<String, String> getParams() {
-        return params;
     }
 
     /**
-     * 初始化局部参数
+     * 下载文件
+     *
+     * @param url
+     * @param params
      */
-    public void initLocalConfig() {
-        if (httpConfig.getGlobalHeaders() != null) {
-            headers.put(httpConfig.getGlobalHeaders());
-        }
-        if (!interceptors.isEmpty()) {
-            for (Interceptor interceptor : interceptors) {
-                okHttpBuilder.addInterceptor(interceptor);
-            }
-        }
+    public <T> void downloadFile(String url, Map<String, String> params, Context context, ACallback<T> callback) {
+        DisposableObserver disposableObserver = new DownCallbackSubscriber(callback);
+        ApiManager.get().add(url, disposableObserver);
+        CreateApiService().downFile(url, params)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .toFlowable(BackpressureStrategy.LATEST)
+                .flatMap(new ApiDownloadFunc(context))
+                .sample(1, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .toObservable()
+                .retryWhen(new ApiRetryFunc(0, 60))
+                .subscribe(disposableObserver);
 
-        if (!networkInterceptors.isEmpty()) {
-            for (Interceptor interceptor : networkInterceptors) {
-                okHttpBuilder.addNetworkInterceptor(interceptor);
-            }
-        }
 
-        if (headers.headersMap.size() > 0) {
-            okHttpBuilder.addInterceptor(new HeadersInterceptor(headers.headersMap));
-        }
+    }
 
-        if (uploadCallback != null) {
-            okHttpBuilder.addNetworkInterceptor(new UploadProgressInterceptor(uploadCallback));
-        }
 
-        if (readTimeOut > 0) {
-            okHttpBuilder.readTimeout(readTimeOut, TimeUnit.SECONDS);
-        }
+    /**
+     * 下载文件
+     *
+     * @param url
+     * @param xml
+     */
+    public <T> void downloadFile(String url, String xml, String fileName, Context context, ACallback<T> callback) {
+        RequestBody body = RequestBody.create(MediaTypes.APPLICATION_XML_TYPE, xml);
+        DisposableObserver disposableObserver = new DownCallbackSubscriber(callback);
+        ApiManager.get().add(url, disposableObserver);
+        CreateApiService().downFile(url, body)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .toFlowable(BackpressureStrategy.LATEST)
+                .flatMap(new ApiDownloadFunc(context, fileName))
+                .sample(1, TimeUnit.SECONDS)  //如果碰见小文件一秒之内下载完成会看不到进度，可以注掉也可以改变发送次数
+                .observeOn(AndroidSchedulers.mainThread())
+                .toObservable()
+                .retryWhen(new ApiRetryFunc(0, 60))
+                .subscribe(disposableObserver);
 
-        if (writeTimeOut > 0) {
-            okHttpBuilder.readTimeout(writeTimeOut, TimeUnit.SECONDS);
-        }
 
-        if (connectTimeOut > 0) {
-            okHttpBuilder.readTimeout(connectTimeOut, TimeUnit.SECONDS);
-        }
+    }
 
-        if (isHttpCache) {
-            try {
-                if (httpConfig.getHttpCache() == null) {
-                    httpConfig.httpCache(new Cache(httpConfig.getHttpCacheDirectory(), HttpUtils.CACHE_MAX_SIZE));
-                }
-                okHttpBuilder.addNetworkInterceptor(new OnlineCacheInterceptor());
-                if (mContext != null) {
-                    okHttpBuilder.addNetworkInterceptor(new OfflineCacheInterceptor(mContext));
-                }
-            } catch (Exception e) {
-            }
-            okHttpBuilder.cache(httpConfig.getHttpCache());
-        }
 
-        if (baseUrl != null) {
-            Retrofit.Builder newRetrofitBuilder = new Retrofit.Builder();
-            newRetrofitBuilder.baseUrl(baseUrl);
-            if (httpConfig.getConverterFactory() != null) {
-                newRetrofitBuilder.addConverterFactory(httpConfig.getConverterFactory());
-            }
-            if (httpConfig.getCallAdapterFactory() != null) {
-                newRetrofitBuilder.addCallAdapterFactory(httpConfig.getCallAdapterFactory());
-            }
-            if (httpConfig.getCallFactory() != null) {
-                newRetrofitBuilder.callFactory(httpConfig.getCallFactory());
-            }
-            okHttpBuilder.hostnameVerifier(new SSL.UnSafeHostnameVerifier(baseUrl));
-            newRetrofitBuilder.client(okHttpBuilder.build());
-            retrofit = newRetrofitBuilder.build();
+    /**
+     * @param params
+     * @param callback
+     */
+    public void getMobileCode(HashMap<String, String> params, ACallback<ResponseResult<String>> callback) {
+        DisposableObserver disposableObserver = new ApiCallbackSubscriber<ResponseResult<String>>(callback);
+        RequestBody body = RequestBody.create(MediaTypes.APPLICATION_JSON_TYPE, GsonUtil.gson().toJson(params));
+        CreateApiService().getMobileCode(params, body)
+                .compose(ApiTransformer.<ResponseResult<String>>norTransformer())
+                .subscribe(disposableObserver);
+    }
+
+
+    /**
+     * @param fileMap
+     * @return
+     */
+    public HttpClient addFiles(Map<String, File> fileMap) {
+        if (fileMap == null) {
+            return this;
+        }
+        for (Map.Entry<String, File> entry : fileMap.entrySet()) {
+            addFile(entry.getKey(), entry.getValue());
+        }
+        return this;
+    }
+
+    /**
+     * @param key
+     * @param file
+     * @return
+     */
+    public HttpClient addFile(String key, File file) {
+        return addFile(key, file, null);
+    }
+
+    /**
+     * 返回ResponseResult  数据
+     *
+     * @param key
+     * @param file
+     * @param callback
+     * @return
+     */
+    public HttpClient addFile(String key, File file, UCallback callback) {
+        if (key == null || file == null) {
+            return this;
+        }
+        if (multipartBodyParts == null) {
+            multipartBodyParts = new ArrayList<>();
+        }
+        RequestBody requestBody = RequestBody.create(MediaTypes.APPLICATION_OCTET_STREAM_TYPE, file);
+        if (callback != null) {
+            UploadProgressRequestBody uploadProgressRequestBody = new UploadProgressRequestBody(requestBody, callback);
+            MultipartBody.Part part = MultipartBody.Part.createFormData(key, file.getName(), uploadProgressRequestBody);
+            multipartBodyParts.add(part);
         } else {
-            retrofitBuilder.client(okHttpBuilder.build());
-            retrofit = retrofitBuilder.build();
+            MultipartBody.Part part = MultipartBody.Part.createFormData(key, file.getName(), requestBody);
+            multipartBodyParts.add(part);
         }
-
-
-        if (httpConfig.getGlobalParams() != null) {
-            params.putAll(httpConfig.getGlobalParams());
-        }
-        if (retryCount <= 0) {
-            retryCount = httpConfig.getRetryCount();
-        }
-        if (retryDelayMillis <= 0) {
-            retryDelayMillis = httpConfig.getRetryDelayMillis();
-        }
-        if (isLocalCache) {
-            if (cacheKey != null) {
-                apiCacheBuilder.cacheKey(cacheKey);
-            } else {
-                apiCacheBuilder.cacheKey(ApiHost.getHost());
-            }
-            if (cacheTime > 0) {
-                apiCacheBuilder.cacheTime(cacheTime);
-            } else {
-                apiCacheBuilder.cacheTime(HttpUtils.CACHE_NEVER_EXPIRE);
-            }
-        }
-        if (baseUrl != null && isLocalCache && cacheKey == null) {
-            apiCacheBuilder.cacheKey(baseUrl);
-        }
-        apiService = retrofit.create(ApiService.class);
+        return this;
     }
 
-    /**
-     * 初始化全局参数
-     */
-    public void initGlobalConfig() {
-        httpConfig = HttpConfig.getInstance();
-
-        if (httpConfig.getBaseUrl() == null) {
-            httpConfig.baseUrl(ApiHost.getHost());
-        }
-        retrofitBuilder.baseUrl(httpConfig.getBaseUrl());
-
-        if (httpConfig.getConverterFactory() == null) {
-            httpConfig.converterFactory(GsonConverterFactory.create());
-        }
-        retrofitBuilder.addConverterFactory(httpConfig.getConverterFactory());
-
-        if (httpConfig.getCallAdapterFactory() == null) {
-            httpConfig.callAdapterFactory(RxJava2CallAdapterFactory.create());
-        }
-        retrofitBuilder.addCallAdapterFactory(httpConfig.getCallAdapterFactory());
-
-        if (httpConfig.getCallFactory() != null) {
-            retrofitBuilder.callFactory(httpConfig.getCallFactory());
-        }
-
-        if (httpConfig.getHostnameVerifier() == null) {
-            httpConfig.hostnameVerifier(new SSL.UnSafeHostnameVerifier(httpConfig.getBaseUrl()));
-        }
-        okHttpBuilder.hostnameVerifier(httpConfig.getHostnameVerifier());
-
-        if (httpConfig.getSslSocketFactory() == null) {
-            httpConfig.SSLSocketFactory(SSL.getSslSocketFactory(null, null, null));
-        }
-        okHttpBuilder.sslSocketFactory(httpConfig.getSslSocketFactory());
-
-        if (httpConfig.getConnectionPool() == null) {
-            httpConfig.connectionPool(new ConnectionPool(HttpUtils.DEFAULT_MAX_IDLE_CONNECTIONS,
-                    HttpUtils.DEFAULT_KEEP_ALIVE_DURATION, TimeUnit.SECONDS));
-        }
-        okHttpBuilder.connectionPool(httpConfig.getConnectionPool());
-
-        if (httpConfig.isCookie() && httpConfig.getApiCookie() == null) {
-            httpConfig.apiCookie(new ApiCookie(mContext));
-        }
-        if (httpConfig.isCookie()) {
-            okHttpBuilder.cookieJar(httpConfig.getApiCookie());
-        }
-
-        if (httpConfig.getHttpCacheDirectory() == null) {
-            httpConfig.setHttpCacheDirectory(new File(mContext.getCacheDir(), HttpUtils.CACHE_HTTP_DIR));
-        }
-        if (httpConfig.isHttpCache()) {
-            try {
-                if (httpConfig.getHttpCache() == null) {
-                    httpConfig.httpCache(new Cache(httpConfig.getHttpCacheDirectory(), HttpUtils.CACHE_MAX_SIZE));
-                }
-                okHttpBuilder.addNetworkInterceptor(new OnlineCacheInterceptor());
-                if (mContext != null)
-                    okHttpBuilder.addNetworkInterceptor(new OfflineCacheInterceptor(mContext));
-            } catch (Exception e) {
-            }
-        }
-        if (httpConfig.getHttpCache() != null) {
-            okHttpBuilder.cache(httpConfig.getHttpCache());
-        }
-        okHttpBuilder.connectTimeout(HttpUtils.DEFAULT_TIMEOUT, TimeUnit.SECONDS);
-        okHttpBuilder.writeTimeout(HttpUtils.DEFAULT_TIMEOUT, TimeUnit.SECONDS);
-        okHttpBuilder.readTimeout(HttpUtils.DEFAULT_TIMEOUT, TimeUnit.SECONDS);
-    }
-
-    /**
-     * 设置基础域名，当前请求会替换全局域名
-     *
-     * @param baseUrl
-     * @return
-     */
-    public R baseUrl(String baseUrl) {
-        if (baseUrl != null) {
-            this.baseUrl = baseUrl;
-        }
-        return (R) this;
-    }
-
-    /**
-     * 添加请求头
-     *
-     * @param headerKey
-     * @param headerValue
-     * @return
-     */
-    public R addHeader(String headerKey, String headerValue) {
-        this.headers.put(headerKey, headerValue);
-        return (R) this;
-    }
-
-    /**
-     * 添加请求头
-     *
-     * @param headers
-     * @return
-     */
-    public R addHeaders(Map<String, String> headers) {
-        this.headers.put(headers);
-        return (R) this;
-    }
-
-    /**
-     * 移除请求头
-     *
-     * @param headerKey
-     * @return
-     */
-    public R removeHeader(String headerKey) {
-        this.headers.remove(headerKey);
-        return (R) this;
-    }
-
-    /**
-     * 设置请求头
-     *
-     * @param headers
-     * @return
-     */
-    public R headers(HttpHeaders headers) {
-        if (headers != null) {
-            this.headers = headers;
-        }
-        return (R) this;
-    }
-
-
-    /**
-     * 设置连接超时时间（秒）
-     *
-     * @param connectTimeOut
-     * @return
-     */
-    public R connectTimeOut(int connectTimeOut) {
-        this.connectTimeOut = connectTimeOut;
-        return (R) this;
-    }
-
-    /**
-     * 设置读取超时时间（秒）
-     *
-     * @param readTimeOut
-     * @return
-     */
-    public R readTimeOut(int readTimeOut) {
-        this.readTimeOut = readTimeOut;
-        return (R) this;
-    }
-
-    /**
-     * 设置写入超时时间（秒）
-     *
-     * @param writeTimeOut
-     * @return
-     */
-    public R writeTimeOut(int writeTimeOut) {
-        this.writeTimeOut = writeTimeOut;
-        return (R) this;
-    }
-
-    /**
-     * 设置是否进行HTTP缓存
-     *
-     * @param isHttpCache
-     * @return
-     */
-    public R setHttpCache(boolean isHttpCache) {
-        this.isHttpCache = isHttpCache;
-        return (R) this;
-    }
-
-    /**
-     * 局部设置拦截器
-     *
-     * @param interceptor
-     * @return
-     */
-    public R interceptor(Interceptor interceptor) {
-        if (interceptor != null) {
-            interceptors.add(interceptor);
-        }
-        return (R) this;
-    }
-
-    /**
-     * 局部设置网络拦截器
-     *
-     * @param interceptor
-     * @return
-     */
-    public R networkInterceptor(Interceptor interceptor) {
-        if (interceptor != null) {
-            networkInterceptors.add(interceptor);
-        }
-        return (R) this;
-    }
-
-    public HttpHeaders getHeaders() {
-        return headers;
-    }
-
-    public String getBaseUrl() {
-        return baseUrl;
-    }
-
-    public long getReadTimeOut() {
-        return readTimeOut;
-    }
-
-    public long getWriteTimeOut() {
-        return writeTimeOut;
-    }
-
-    public long getConnectTimeOut() {
-        return connectTimeOut;
-    }
-
-    public boolean isHttpCache() {
-        return isHttpCache;
-    }
 
     /**
      * 获取第一级type
@@ -820,6 +651,26 @@ public class HttpClient<R extends HttpClient> {
             }
         }
         return finalNeedType;
+    }
+
+    /**
+     * 全局添加参数添加参数
+     *
+     * @param params
+     * @return
+     */
+    private Map<String, String> addParams(Map<String, String> params) {
+        if (params == null)
+            params = new HashMap<>();
+        int userId = 0;
+        if (userId != -1 && userId != 0) {
+            params.put("UserId", userId + "");
+        }
+        if (!TextUtils.isEmpty("")) {
+            params.put("Token", "");
+        }
+        return params;
+
     }
 
 }
