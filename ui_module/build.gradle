@@ -5,8 +5,7 @@ if (isModule.toBoolean()) {
 }
 
 android {
-    compileSdkVersion rootProject.ext.android.compileSdkVersion
-
+    compileSdkVersion 28
     defaultConfig {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
@@ -23,11 +22,6 @@ android {
         }
 
     }
-
-
-
-
-
     sourceSets {
         main {
             if (isModule.toBoolean()) {
@@ -41,35 +35,33 @@ android {
             }
         }
     }
-
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
+    buildToolsVersion '28.0.3'
+    compileOptions {
+//        sourceCompatibility JavaVersion.VERSION_1_8
+//        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
-
-
     implementation project(':baseLib:banner')
+    implementation project(':baseLib:toasty')
     implementation project(':baseLib:magicindicator')
     implementation project(':baseLib:photoview')
     implementation project(':baseLib:pickerview')
     implementation project(':baseLib:retrofitrxc')
     implementation project(':baseLib:viewanimations')
-
     annotationProcessor rootProject.ext.dependencies.arouter_compiler
     implementation project(':common_data')
     implementation project(':common_module')
-
 }

@@ -30,18 +30,18 @@ public class PermissionManager {
         return this;
     }
 
-    public void request(final OnPermissionCallback permissionCallback, final String... permissions) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && this.activity != null && permissionCallback != null) {
+    public void request(Activity mActivity,final OnPermissionCallback onPermissionCallback, final String... permissions) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && this.activity != null && onPermissionCallback != null) {
             RxPermissions rxPermissions = new RxPermissions(this.activity);
             rxPermissions.requestEach(permissions).subscribe(new Consumer<Permission>() {
                 @Override
                 public void accept(Permission permission) throws Exception {
                     if (permission.granted) {
-                        permissionCallback.onRequestAllow(permission.name);
+                        onPermissionCallback.onRequestAllow(permission.name);
                     } else if (permission.shouldShowRequestPermissionRationale) {
-                        permissionCallback.onRequestRefuse(permission.name);
+                        onPermissionCallback.onRequestRefuse(permission.name);
                     } else {
-                        permissionCallback.onRequestNoAsk(permission.name);
+                        onPermissionCallback.onRequestNoAsk(permission.name);
                     }
                 }
             });

@@ -21,6 +21,7 @@ baseLib/alertview/build/
 baseLib/kprogresshud/build/
 baseLib/dNSCache/build/
 baseLib/volley/build/
+baseLib/toasty/build/
 common_data/build/
 main_module/build/
 module_user/build/

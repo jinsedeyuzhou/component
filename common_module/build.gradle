@@ -75,6 +75,7 @@ dependencies {
 
 
     implementation project(':baseLib:banner')
+    implementation project(':baseLib:toasty')
     implementation project(':baseLib:magicindicator')
     implementation project(':baseLib:photoview')
     implementation project(':baseLib:pickerview')

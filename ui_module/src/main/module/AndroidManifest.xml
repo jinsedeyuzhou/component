@@ -18,6 +18,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".page.WebViewActivity"/>
+        <activity android:name=".page.test.DialogActivity"/>
+        <activity android:name=".page.test.ToastyActivity"/>
+        <activity android:name=".page.test.HttpActivity"/>
 
     </application>
 
