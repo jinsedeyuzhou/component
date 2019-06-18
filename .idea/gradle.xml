@@ -3,11 +3,32 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <compositeConfiguration>
-          <compositeBuild compositeDefinitionSource="SCRIPT" />
-        </compositeConfiguration>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/baseLib" />
+            <option value="$PROJECT_DIR$/baseLib/alertview" />
+            <option value="$PROJECT_DIR$/baseLib/banner" />
+            <option value="$PROJECT_DIR$/baseLib/dNSCache" />
+            <option value="$PROJECT_DIR$/baseLib/kprogresshud" />
+            <option value="$PROJECT_DIR$/baseLib/magicindicator" />
+            <option value="$PROJECT_DIR$/baseLib/photoview" />
+            <option value="$PROJECT_DIR$/baseLib/pickerview" />
+            <option value="$PROJECT_DIR$/baseLib/retrofitrxc" />
+            <option value="$PROJECT_DIR$/baseLib/toasty" />
+            <option value="$PROJECT_DIR$/baseLib/viewanimations" />
+            <option value="$PROJECT_DIR$/baseLib/volley" />
+            <option value="$PROJECT_DIR$/common_data" />
+            <option value="$PROJECT_DIR$/common_logic" />
+            <option value="$PROJECT_DIR$/common_module" />
+            <option value="$PROJECT_DIR$/main_module" />
+            <option value="$PROJECT_DIR$/module_user" />
+            <option value="$PROJECT_DIR$/ui_module" />
+          </set>
+        </option>
         <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>

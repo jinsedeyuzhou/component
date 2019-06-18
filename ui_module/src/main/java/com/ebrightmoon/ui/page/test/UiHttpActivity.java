@@ -26,7 +26,7 @@ import java.util.HashMap;
  * Author:wyy
  * Description:
  */
-public class HttpActivity extends BaseActivity {
+public class UiHttpActivity extends BaseActivity {
     private ProgressBar mPb;
     private TextView mTvShowPercent;
     private int i = 1;
@@ -39,7 +39,7 @@ public class HttpActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle paramBundle) {
         super.onCreate(paramBundle);
-        setContentView(R.layout.activity_http);
+        setContentView(R.layout.ui_activity_http);
         rxPermissions = new RxPermissions(this);
     }
 

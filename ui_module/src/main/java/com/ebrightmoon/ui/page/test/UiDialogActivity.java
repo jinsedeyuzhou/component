@@ -27,7 +27,7 @@ import com.ebrightmoon.ui.page.WebViewActivity;
  * Author:wyy
  * Description:
  */
-public class DialogActivity extends BaseActivity {
+public class UiDialogActivity extends BaseActivity {
 
 
     private CustomDialogFragment customDialogFragment;
@@ -38,7 +38,7 @@ public class DialogActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle paramBundle) {
         super.onCreate(paramBundle);
-        setContentView(R.layout.activity_dialog);
+        setContentView(R.layout.ui_activity_dialog);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class DialogActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 new SystemDialog.Builder(mContext)
-                        .setDialogView(R.layout.layout_dialog)//设置dialog布局
+                        .setDialogView(R.layout.ui_layout_dialog)//设置dialog布局
                         .setAnimStyle(R.style.translate_style)//设置动画 默认没有动画
                         .setScreenWidthP(0.85f) //设置屏幕宽度比例 0.0f-1.0f
                         .setGravity(Gravity.CENTER)//设置Gravity
@@ -119,7 +119,7 @@ public class DialogActivity extends BaseActivity {
             public void onClick(View view) {
                 //Build第一个Dialog
                 SystemDialog.Builder builder1 = new SystemDialog.Builder(mContext)
-                        .setDialogView(R.layout.layout_ad_dialog)
+                        .setDialogView(R.layout.ui_layout_ad_dialog)
                         .setWindowBackgroundP(0.5f)
                         .setBuildChildListener(new IDialog.OnBuildListener() {
                             @Override
@@ -205,7 +205,7 @@ public class DialogActivity extends BaseActivity {
      * @param view
      */
     public void btClick1(View view) {
-        View contentView = LayoutInflater.from(mContext).inflate(R.layout.popup_child_menu, null);
+        View contentView = LayoutInflater.from(mContext).inflate(R.layout.ui_popup_child_menu, null);
         TextView tvLike = (TextView) contentView.findViewById(R.id.tv_like);
         if (popupWindow != null && popupWindow.isShowing()) {
             return;
@@ -222,7 +222,7 @@ public class DialogActivity extends BaseActivity {
 
     //建议使用
     public void btClick2(View view) {
-        View contentView = LayoutInflater.from(mContext).inflate(R.layout.pop_product_detail_video, null);
+        View contentView = LayoutInflater.from(mContext).inflate(R.layout.ui_pop_product_detail_video, null);
         //创建并显示popWindow
         final CustomPopWindow popWindow = new CustomPopWindow.PopupWindowBuilder(mContext)
                 .setView(contentView)

@@ -32,9 +32,21 @@ dependencies {
 
 //    implementation rootProject.ext.dependencies.multidex
     implementation project(':common_module')
-    if (!isModule.toBoolean()) {
+//    if (isModule.toBoolean()) {
+//        implementation project(':main_module')
+//        implementation project(':module_user')
+//        implementation project(':ui_module')
+//    }
+    if (!isMain.toBoolean()) {
         implementation project(':main_module')
+    }
+    if (!isUser.toBoolean())
+    {
         implementation project(':module_user')
+
+    }
+    if (!isUi.toBoolean())
+    {
         implementation project(':ui_module')
     }
 //    implementation 'com.android.support:support-v4:27.1.1'

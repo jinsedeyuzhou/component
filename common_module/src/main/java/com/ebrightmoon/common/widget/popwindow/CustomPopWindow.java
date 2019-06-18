@@ -17,7 +17,7 @@ import android.widget.PopupWindow;
  *
  * 自定义PopWindow类，封装了PopWindow的一些常用属性，用Builder模式支持链式调用
  * 调用方式一
- *  View  contentView = LayoutInflater.from(mContext).inflate(R.layout.popup_child_menu, null);
+ *  View  contentView = LayoutInflater.from(mContext).inflate(R.layout.ui_popup_child_menu, null);
  *         TextView tvLike = (TextView)contentView.findViewById(R.id.tv_like);
  *         if (popupWindow != null && popupWindow.isShowing()){
  *             return;

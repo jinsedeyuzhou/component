@@ -1,9 +1,18 @@
-if (isModule.toBoolean()) {
+if (isUi.toBoolean()) {
     apply plugin: 'com.android.application'
 } else {
     apply plugin: 'com.android.library'
 }
 
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-android-extensions"
+apply plugin: 'kotlin-kapt'
+
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -24,7 +33,7 @@ android {
     }
     sourceSets {
         main {
-            if (isModule.toBoolean()) {
+            if (isUi.toBoolean()) {
                 manifest.srcFile 'src/main/module/AndroidManifest.xml'
             } else {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
@@ -64,4 +73,8 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies.arouter_compiler
     implementation project(':common_data')
     implementation project(':common_module')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }

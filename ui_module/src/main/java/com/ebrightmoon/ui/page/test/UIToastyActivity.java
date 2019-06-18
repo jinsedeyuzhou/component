@@ -19,12 +19,12 @@ import static android.graphics.Typeface.BOLD_ITALIC;
  * Author:wyy
  * Description:
  */
-public class ToastyActivity extends BaseActivity {
+public class UIToastyActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle paramBundle) {
         super.onCreate(paramBundle);
-        setContentView(R.layout.activity_toasty);
+        setContentView(R.layout.ui_activity_toasty);
     }
 
     @Override
