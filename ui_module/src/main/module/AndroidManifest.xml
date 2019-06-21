@@ -22,6 +22,7 @@
         <activity android:name=".page.test.UIToastyActivity"/>
         <activity android:name=".page.test.UiHttpActivity"/>
         <activity android:name=".page.test.UIJsonActivity"/>
+        <activity android:name=".page.databinding.UIDataBindingActivity"/>
 
     </application>
 

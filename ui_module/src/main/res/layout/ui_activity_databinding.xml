@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data >
+
+        <import type="com.ebrightmoon.ui.data.UserInfo" />
+
+        <variable
+            name="userInfo"
+            type="UserInfo" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/text_size_16"
+            android:text="@{userInfo.firstName+userInfo.age}"
+            android:layout_marginLeft="@dimen/activity_margin_10"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/text_size_16"
+            android:layout_marginLeft="@dimen/activity_margin_10"
+            android:text="@{userInfo.lastName}"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@={userInfo.firstName}"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@={userInfo.lastName}"
+            />
+
+        <Button
+            android:id="@+id/btn_databing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="更新数据"
+            />
+
+        <Button
+            android:id="@+id/btn_databing_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="更新全部"
+            />
+
+    </LinearLayout>
+</layout>

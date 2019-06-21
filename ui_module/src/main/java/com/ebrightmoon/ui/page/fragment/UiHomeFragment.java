@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.ebrightmoon.common.base.BaseFragment;
 import com.ebrightmoon.ui.R;
+import com.ebrightmoon.ui.page.databinding.UIDataBindingActivity;
 import com.ebrightmoon.ui.page.test.UIJsonActivity;
 import com.ebrightmoon.ui.page.test.UiDialogActivity;
 import com.ebrightmoon.ui.page.test.UiHttpActivity;
@@ -55,6 +56,13 @@ public class UiHomeFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(mActivity, UIJsonActivity.class));
+            }
+        });
+
+        view.findViewById(R.id.btn_databing).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mActivity, UIDataBindingActivity.class));
             }
         });
 

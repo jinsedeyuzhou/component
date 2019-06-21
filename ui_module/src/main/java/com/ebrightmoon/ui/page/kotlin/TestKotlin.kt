@@ -1,7 +1,4 @@
-package com.ebrightmoon.ui.page.test
-
-import android.util.Log
-import android.util.Log.println
+package com.ebrightmoon.ui.page.kotlin
 
 /**
  * Time: 2019/6/17
