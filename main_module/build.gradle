@@ -4,18 +4,6 @@ if (isMain.toBoolean()) {
     apply plugin: 'com.android.library'
 }
 
-//apply plugin: "kotlin-android"
-//apply plugin: "kotlin-android-extensions"
-//apply plugin: 'kotlin-kapt'
-//kapt {
-//    arguments {
-//        arg("AROUTER_MODULE_NAME", project.getName())
-//    }
-//}
-
-//androidExtensions {
-//    experimental = true
-//}
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
