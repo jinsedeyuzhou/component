@@ -19,9 +19,12 @@ import com.ebrightmoon.ui.utils.BottomNavigationViewHelper;
 
 import java.util.ArrayList;
 
+import kotlin.jvm.JvmField;
+
 /**
  * UI相关主页
  */
+
 @Route(path = RouterURLS.UI_HOME)
 public class UiHomeActivity extends BaseActivity {
     private CustomViewPager viewPager;

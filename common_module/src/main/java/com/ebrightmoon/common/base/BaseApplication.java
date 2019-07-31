@@ -48,13 +48,13 @@ public class BaseApplication extends Application {
             @Override
             public void run() {
                 super.run();
+                //路由初始化
+                RouterConfig.init(app, true);
                 DbHelper.getInstance().init(app.getApplicationContext());
                 Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
                 Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
                 CommonApplication.initQDApp(app);
                 LoaderFactory.getLoader().init(app);
-                //路由初始化
-                RouterConfig.init(app, true);
                 //Stetho调试工具初始化
                 Stetho.initializeWithDefaults(app);
                 LogUtils.setShowLog(true);

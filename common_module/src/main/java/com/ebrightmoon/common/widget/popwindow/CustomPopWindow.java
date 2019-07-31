@@ -12,27 +12,17 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
-
 /**
- *
- * 自定义PopWindow类，封装了PopWindow的一些常用属性，用Builder模式支持链式调用
- * 调用方式一
- *  View  contentView = LayoutInflater.from(mContext).inflate(R.layout.ui_popup_child_menu, null);
- *         TextView tvLike = (TextView)contentView.findViewById(R.id.tv_like);
- *         if (popupWindow != null && popupWindow.isShowing()){
- *             return;
- *         }
- *         popupWindow = new CommonPopupWindow.Builder(mContext)
- *                 .setView(contentView)
- *                 .setWidthAndHeight(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
- *                 .setAnimationStyle(R.style.AnimRight)
- *                 .setOutsideTouchable(true)
- *                 .create();
- *         //根据view的位置设置
- *         popupWindow.showAsDropDown(view, -popupWindow.getWidth(), -view.getHeight());
- *
- * 调用方式二
- *                 .showAtLocation(content, Gravity.BOTTOM, 0, 0);
+   View contentView = LayoutInflater.from(mContext).inflate(R.layout.ui_pop_product_detail_video, null);
+//创建并显示popWindow
+final CustomPopWindow popWindow = new CustomPopWindow.PopupWindowBuilder(mContext)
+        .setView(contentView)
+        .enableBackgroundDark(true)
+        .setBgDarkAlpha(0.7f)
+        .setAnimationStyle(R.style.pop_bottom_anim)
+        .size(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)//显示大小
+        .create()
+        .showAtLocation(mBtnDialog, Gravity.BOTTOM, 0, 0);
  */
 
 public class CustomPopWindow implements PopupWindow.OnDismissListener{

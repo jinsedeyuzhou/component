@@ -26,6 +26,24 @@ import android.widget.TextView;
 
 import com.ebrightmoon.common.R;
 
+/**
+ *   customDialogFragment = CustomDialogFragment.newInstance();
+ *                 customDialogFragment.setContext(mContext)
+ *                         .setTitle("标题")
+ *                         .setContent("这是内容")
+ *                         .setNegativeButton("取消", new View.OnClickListener() {
+ *                             @Override
+ *                             public void onClick(View view) {
+ *                                 customDialogFragment.dismiss();
+ *                             }
+ *                         }).setPositiveButton("确认", new View.OnClickListener() {
+ *                     @Override
+ *                     public void onClick(View view) {
+ *                         customDialogFragment.dismiss();
+ *                     }
+ *                 }).show();
+ */
+
 public class CustomDialogFragment extends DialogFragment implements View.OnClickListener {
 
     public static final String DIALOG_FRAGMENT_TITLE = "dialog_fragment_title";

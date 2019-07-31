@@ -1,4 +1,4 @@
-package com.ebrightmoon.user.ui;
+package com.ebrightmoon.user.page;
 
 import android.os.Bundle;
 import android.view.Menu;

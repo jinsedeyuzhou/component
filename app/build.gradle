@@ -1,5 +1,17 @@
 apply plugin: 'com.android.application'
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-android-extensions"
+apply plugin: 'kotlin-kapt'
 
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
+androidExtensions {
+    experimental = true
+}
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     defaultConfig {
@@ -21,6 +33,10 @@ android {
     }
 
     lintOptions { abortOnError false }
+
+    dataBinding {
+        enabled = true
+    }
 }
 
 
@@ -42,12 +58,13 @@ dependencies {
     }
     if (!isUser.toBoolean())
     {
-        implementation project(':module_user')
+        implementation project(':user_module')
 
     }
     if (!isUi.toBoolean())
     {
         implementation project(':ui_module')
     }
+    annotationProcessor  rootProject.ext.dependencies.arouter_compiler
 //    implementation 'com.android.support:support-v4:27.1.1'
 }

@@ -165,11 +165,12 @@ public class UiDialogActivity extends BaseActivity {
             }
         });
 
-        customDialogFragment = CustomDialogFragment.newInstance();
+
 
       findViewById(R.id.btn_dialog_fragment3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                customDialogFragment = CustomDialogFragment.newInstance();
                 customDialogFragment.setContext(mContext)
                         .setTitle("标题")
                         .setContent("这是内容")

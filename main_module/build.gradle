@@ -4,6 +4,19 @@ if (isMain.toBoolean()) {
     apply plugin: 'com.android.library'
 }
 
+//apply plugin: "kotlin-android"
+//apply plugin: "kotlin-android-extensions"
+//apply plugin: 'kotlin-kapt'
+//kapt {
+//    arguments {
+//        arg("AROUTER_MODULE_NAME", project.getName())
+//    }
+//}
+
+//androidExtensions {
+//    experimental = true
+//}
+
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
 
@@ -18,7 +31,7 @@ android {
         //ARouter
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [moduleName: project.getName()]
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
 
@@ -67,6 +80,7 @@ dependencies {
     implementation project(':baseLib:viewanimations')
     //公共库导入
     annotationProcessor rootProject.ext.dependencies.arouter_compiler
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation project(':common_data')
     implementation project(':common_module')
     implementation 'com.android.support:palette-v7:27.1.1'

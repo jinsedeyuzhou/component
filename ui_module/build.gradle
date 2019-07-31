@@ -13,6 +13,11 @@ kapt {
         arg("AROUTER_MODULE_NAME", project.getName())
     }
 }
+
+androidExtensions {
+    experimental = true
+}
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -24,11 +29,11 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         //ARouter
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [moduleName: project.getName()]
-            }
-        }
+//        javaCompileOptions {
+//            annotationProcessorOptions {
+//                arguments = [AROUTER_MODULE_NAME: project.getName()]
+//            }
+//        }
 
     }
     sourceSets {
@@ -50,7 +55,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    buildToolsVersion '28.0.3'
     compileOptions {
 //        sourceCompatibility JavaVersion.VERSION_1_8
 //        targetCompatibility JavaVersion.VERSION_1_8
@@ -74,7 +78,7 @@ dependencies {
     implementation project(':baseLib:pickerview')
     implementation project(':baseLib:retrofitrxc')
     implementation project(':baseLib:viewanimations')
-    annotationProcessor rootProject.ext.dependencies.arouter_compiler
+    kapt rootProject.ext.dependencies.arouter_compiler
     implementation project(':common_data')
     implementation project(':common_module')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

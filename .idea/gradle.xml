@@ -25,8 +25,8 @@
             <option value="$PROJECT_DIR$/common_logic" />
             <option value="$PROJECT_DIR$/common_module" />
             <option value="$PROJECT_DIR$/main_module" />
-            <option value="$PROJECT_DIR$/module_user" />
             <option value="$PROJECT_DIR$/ui_module" />
+            <option value="$PROJECT_DIR$/user_module" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

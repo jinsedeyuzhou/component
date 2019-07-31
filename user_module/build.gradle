@@ -18,7 +18,7 @@ android {
         //ARouter
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [moduleName: project.getName()]
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
 
@@ -69,6 +69,7 @@ dependencies {
     implementation project(':baseLib:viewanimations')
 
     annotationProcessor rootProject.ext.dependencies.arouter_compiler
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation project(':common_data')
     implementation project(':common_module')
 
