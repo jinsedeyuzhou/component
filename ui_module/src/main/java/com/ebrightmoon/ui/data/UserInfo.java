@@ -19,8 +19,6 @@ public class UserInfo extends BaseObservable implements Serializable {
     private int age;
 
 
-
-
     public UserInfo(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -43,6 +41,7 @@ public class UserInfo extends BaseObservable implements Serializable {
         this.firstName = firstName;
         notifyPropertyChanged(BR.firstName);
     }
+
     @Bindable
     public String getLastName() {
         return lastName;
