@@ -1,12 +1,14 @@
 package com.ebrightmoon.user.debug;
 
 import android.app.Application;
+
+import com.ebrightmoon.commonlogic.base.ConApp;
+
 /**
  * 用户系统
  */
-import com.ebrightmoon.common.base.BaseApplication;
 
-public class UserApp extends BaseApplication {
+public class UserApp extends ConApp {
 
     @Override
     public void onCreate() {

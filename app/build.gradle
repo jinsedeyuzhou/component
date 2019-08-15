@@ -47,7 +47,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
 //    implementation rootProject.ext.dependencies.multidex
-    implementation project(':common_module')
+    implementation project(':common_logic')
 //    if (isModule.toBoolean()) {
 //        implementation project(':main_module')
 //        implementation project(':module_user')

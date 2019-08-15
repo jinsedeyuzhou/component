@@ -2,9 +2,9 @@ package com.ebrightmoon.main.debug;
 
 import android.app.Application;
 
-import com.ebrightmoon.common.base.BaseApplication;
+import com.ebrightmoon.commonlogic.base.ConApp;
 
-public class MainApp extends BaseApplication {
+public class MainApp extends ConApp {
 
     @Override
     public void onCreate() {

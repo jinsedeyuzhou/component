@@ -1,11 +1,11 @@
 package com.ebrightmoon.android;
 
-import com.ebrightmoon.common.base.BaseApplication;
 
-public class MainApplication extends BaseApplication {
+import com.ebrightmoon.commonlogic.base.ConApp;
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-    }
+/**
+ *
+ */
+public class MainApplication extends ConApp {
+
 }

@@ -8,7 +8,6 @@ import android.os.Process;
 import com.ebrightmoon.common.common.CommonApplication;
 import com.ebrightmoon.common.util.LogUtils;
 import com.ebrightmoon.common.widget.imageloader.LoaderFactory;
-import com.ebrightmoon.data.router.RouterConfig;
 import com.facebook.stetho.Stetho;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
@@ -48,7 +47,7 @@ public class InitializeService extends IntentService {
         CommonApplication.initQDApp(this);
         LoaderFactory.getLoader().init(this);
         //路由初始化
-        RouterConfig.init(this.getApplication(), true);
+//        RouterConfig.init(this.getApplication(), true);
         //Stetho调试工具初始化
         Stetho.initializeWithDefaults(this);
         LogUtils.setShowLog(true);

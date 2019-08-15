@@ -65,7 +65,7 @@ dependencies {
     api rootProject.ext.dependencies.cardview
 
 
-    api rootProject.ext.dependencies["tencent-bugly"]
+//    api rootProject.ext.dependencies["tencent-bugly"]
     api rootProject.ext.dependencies["stetho"]
     api rootProject.ext.dependencies["stetho-okhttp3"]
     api rootProject.ext.dependencies["logger"]
@@ -83,6 +83,6 @@ dependencies {
     implementation project(':baseLib:alertview')
     implementation project(':baseLib:kprogresshud')
     implementation project(':baseLib:viewanimations')
-    //公共库导入
-    implementation project(':common_data')
+
+
 }

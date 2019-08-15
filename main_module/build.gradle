@@ -69,7 +69,6 @@ dependencies {
     //公共库导入
     annotationProcessor rootProject.ext.dependencies.arouter_compiler
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation project(':common_data')
-    implementation project(':common_module')
+    implementation project(':common_logic')
     implementation 'com.android.support:palette-v7:27.1.1'
 }

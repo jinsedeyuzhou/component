@@ -70,7 +70,6 @@ dependencies {
 
     annotationProcessor rootProject.ext.dependencies.arouter_compiler
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation project(':common_data')
-    implementation project(':common_module')
+    implementation project(':common_logic')
 
 }

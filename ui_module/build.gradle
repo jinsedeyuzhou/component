@@ -79,8 +79,8 @@ dependencies {
     implementation project(':baseLib:retrofitrxc')
     implementation project(':baseLib:viewanimations')
     kapt rootProject.ext.dependencies.arouter_compiler
-    implementation project(':common_data')
-    implementation project(':common_module')
+
+    implementation project(':common_logic')
 }
 repositories {
     mavenCentral()
