@@ -12,6 +12,7 @@
         <activity android:name=".page.test.UiHttpActivity"/>
         <activity android:name=".page.test.UIJsonActivity"/>
         <activity android:name=".page.databinding.UIDataBindingActivity"/>
+        <activity android:name=".page.test.UISideBarActivity"/>
     </application>
 
 </manifest>

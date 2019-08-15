@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.ebrightmoon.ui">
 
     <application
@@ -9,7 +10,8 @@
         android:supportsRtl="true"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:theme="@style/BaseAppTheme">
+        android:theme="@style/BaseAppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".page.UiHomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,6 +25,7 @@
         <activity android:name=".page.test.UiHttpActivity"/>
         <activity android:name=".page.test.UIJsonActivity"/>
         <activity android:name=".page.databinding.UIDataBindingActivity"/>
+        <activity android:name=".page.test.UISideBarActivity"/>
 
     </application>
 
