@@ -18,7 +18,7 @@ import java.util.List;
  * Author:wyy
  * Description:
  */
-public class UIJsonActivity extends BaseActivity {
+public class UITouchActivity extends BaseActivity {
 
     String json="";
     @Override
@@ -34,9 +34,7 @@ public class UIJsonActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        Type type = new TypeToken<ProductBean>() {
-        }.getType();
-        GsonUtil.gson().fromJson(AssetsUtil.getJson(mContext,"test.json"),type);
+
 
     }
 

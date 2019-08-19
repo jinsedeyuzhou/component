@@ -36,7 +36,7 @@
                 android:id="@+id/btn_json"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="JsonTest"
+                android:text="UItouch"
                 />
 
         </LinearLayout>
@@ -60,10 +60,43 @@
                 android:text="SideBar"
                 />
 
+            <Button
+                android:id="@+id/btn_kotlin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kotlin"
+                />
+
         </LinearLayout>
 
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            >
+
+            <com.ebrightmoon.ui.view.CustomEditText
+                android:id="@+id/etNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxEms="6"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:text="0afdddfsafdsdafdfdfffaf66666sddfa"
+                />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:ems="6"
+                android:maxLines="1"
+                android:lines="1"
+                android:text="dsafdfs66666666adfafds" />
+        </LinearLayout>
 
 
 

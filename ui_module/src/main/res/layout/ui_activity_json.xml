@@ -9,4 +9,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <com.ebrightmoon.ui.widget.MainView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/orange"
+        >
+
+
+        <com.ebrightmoon.ui.widget.ContentView
+            android:layout_width="match_parent"
+            android:background="@color/red"
+            android:layout_height="200dp">
+
+            <com.ebrightmoon.ui.widget.BottomVIew
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@color/blue"
+                />
+
+        </com.ebrightmoon.ui.widget.ContentView>
+    </com.ebrightmoon.ui.widget.MainView>
+
 </LinearLayout>

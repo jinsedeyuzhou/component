@@ -2,13 +2,17 @@ package com.ebrightmoon.ui.page.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
 
 import com.ebrightmoon.common.base.BaseFragment;
 import com.ebrightmoon.ui.R;
 import com.ebrightmoon.ui.page.databinding.UIDataBindingActivity;
+import com.ebrightmoon.ui.page.kotlin.KotlinTestActivity;
 import com.ebrightmoon.ui.page.test.UISideBarActivity;
-import com.ebrightmoon.ui.page.test.UIJsonActivity;
+import com.ebrightmoon.ui.page.test.UITouchActivity;
 import com.ebrightmoon.ui.page.test.UiDialogActivity;
 import com.ebrightmoon.ui.page.test.UiHttpActivity;
 import com.ebrightmoon.ui.page.test.UIToastyActivity;
@@ -56,7 +60,7 @@ public class UiHomeFragment extends BaseFragment {
         view.findViewById(R.id.btn_json).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(mActivity, UIJsonActivity.class));
+                startActivity(new Intent(mActivity, UITouchActivity.class));
             }
         });
 
@@ -73,7 +77,30 @@ public class UiHomeFragment extends BaseFragment {
                 startActivity(new Intent(mActivity, UISideBarActivity.class));
             }
         });
+        view.findViewById(R.id.btn_kotlin).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mActivity, KotlinTestActivity.class));
+            }
+        });
 
+//        EditText etNum = view.findViewById(R.id.etNum);
+//        etNum.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        });
     }
 
 

@@ -10,9 +10,10 @@
         <activity android:name=".page.test.UiDialogActivity"/>
         <activity android:name=".page.test.UIToastyActivity"/>
         <activity android:name=".page.test.UiHttpActivity"/>
-        <activity android:name=".page.test.UIJsonActivity"/>
+        <activity android:name=".page.test.UITouchActivity"/>
         <activity android:name=".page.databinding.UIDataBindingActivity"/>
         <activity android:name=".page.test.UISideBarActivity"/>
+        <activity android:name=".page.kotlin.KotlinTestActivity"/>
     </application>
 
 </manifest>

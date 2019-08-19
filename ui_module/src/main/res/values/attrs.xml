@@ -7,8 +7,20 @@
 
     <!-- NodeProgressView -->
     <declare-styleable name="NodeProgressView">
-        <attr name="nodeCompleteDrawable"></attr>
+        <attr name="nodeCompleteDrawable"/>
     </declare-styleable>
 
+    <!--MainView-->
+    <declare-styleable name="MainView">
+
+    </declare-styleable>
+    <!--ContentView-->
+    <declare-styleable name="ContentView">
+
+    </declare-styleable>
+    <!--BottomVIew-->
+    <declare-styleable name="BottomVIew">
+
+    </declare-styleable>
 
 </resources>

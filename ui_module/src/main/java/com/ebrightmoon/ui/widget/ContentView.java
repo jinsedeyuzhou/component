@@ -7,25 +7,40 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Time: 2019/7/2
+ * Time: 2019-08-15
  * Author:wyy
  * Description:
  */
-public class MainView extends ViewGroup {
-    public MainView(Context context) {
+public class ContentView extends ViewGroup {
+    public ContentView(Context context) {
         super(context);
     }
 
-    public MainView(Context context, AttributeSet attrs) {
+    public ContentView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public MainView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ContentView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
-    public MainView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public ContentView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+//        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int widthMode=MeasureSpec.getMode(widthMeasureSpec);
+        int heightMode=MeasureSpec.getMode(heightMeasureSpec);
+        int sizeWidth=MeasureSpec.getSize(widthMeasureSpec);
+        int sizeHeight=MeasureSpec.getSize(heightMeasureSpec);
+        measureChildren(widthMeasureSpec,heightMeasureSpec);
+
+//        setMeasuredDimension(sizeWidth,sizeHeight);
+        setMeasuredDimension( getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec),
+                getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec));
+
     }
 
     @Override
@@ -67,21 +82,6 @@ public class MainView extends ViewGroup {
             //确定子控件的位置，四个参数分别代表（左上右下）点的坐标值
             child.layout(left, top, right, bottom);
         }
-    }
-
-
-    @Override
-    public LayoutParams generateLayoutParams(AttributeSet attrs) {
-        return new MarginLayoutParams(getContext(),attrs);
-    }
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        measureChildren(widthMeasureSpec,heightMeasureSpec);
-
-//        setMeasuredDimension(sizeWidth,sizeHeight);
-        setMeasuredDimension( getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec),
-                getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec));
 
     }
 
