@@ -75,7 +75,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone"
             >
 
             <com.ebrightmoon.ui.view.CustomEditText
@@ -83,19 +82,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxEms="6"
+                android:background="@null"
                 android:singleLine="true"
                 android:ellipsize="end"
-                android:text="0afdddfsafdsdafdfdfffaf66666sddfa"
+                android:textColorHint="@color/black"
+                android:hint="0afdddfsafdsdafdfdfffaf66666sddfa"
                 />
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:ems="6"
+                android:maxEms="6"
+                android:background="@null"
                 android:maxLines="1"
                 android:lines="1"
-                android:text="dsafdfs66666666adfafds" />
+                android:textColorHint="@color/black"
+                android:hint="dsafdfs66666666adfafds" />
         </LinearLayout>
 
 

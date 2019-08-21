@@ -32,7 +32,7 @@ public abstract class BaseFragment
     public void onAttach(Context activity) {
         super.onAttach(activity);
         mContext = activity;
-        mActivity= (Activity) activity;
+        mActivity = (Activity) activity;
         mResources = mContext.getResources();
         mInflater = LayoutInflater.from(activity);
     }
@@ -56,6 +56,7 @@ public abstract class BaseFragment
 
     /**
      * 布局的LayoutID
+     *
      * @return
      */
     protected abstract int getLayoutID();
@@ -75,8 +76,6 @@ public abstract class BaseFragment
     }
 
 
-
-
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -84,6 +83,7 @@ public abstract class BaseFragment
 
     /**
      * 初始化子View
+     *
      * @param view
      * @return
      */
@@ -145,13 +145,17 @@ public abstract class BaseFragment
      * 绑定事件
      */
     protected abstract void bindEvent();
+
     /**
      * 填充数据
+     *
      * @param savedInstanceState
      */
     protected abstract void initData(Bundle savedInstanceState);
+
     /**
      * 点击事件
+     *
      * @param v
      */
     protected abstract void processClick(View v);
@@ -172,7 +176,7 @@ public abstract class BaseFragment
     /**
      * 数据懒加载
      */
-    protected  void lazyLoad(){
+    protected void lazyLoad() {
 
     }
 
@@ -190,11 +194,12 @@ public abstract class BaseFragment
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
-            onVisible();
-        } else {
-            onInVisible();
-        }
+        if (isResumed())
+            if (isVisibleToUser) {
+                onVisible();
+            } else {
+                onInVisible();
+            }
     }
 
     /**
@@ -207,6 +212,27 @@ public abstract class BaseFragment
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        // onResume并不代表fragment可见
+        // 如果是在viewpager里，就需要判断getUserVisibleHint，不在viewpager时，getUserVisibleHint默认为true
+        // 如果是其它情况，就通过isHidden判断，因为show/hide时会改变isHidden的状态
+        // 所以，只有当fragment原来是可见状态时，进入onResume就回调onVisible
+        if (getUserVisibleHint() && !isHidden()) {
+            onVisible();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // onPause时也需要判断，如果当前fragment在viewpager中不可见，就已经回调过了，onPause时也就不需要再次回调onInvisible了
+        // 所以，只有当fragment是可见状态时进入onPause才加调onInvisible
+        if (getUserVisibleHint() && !isHidden()) {
+            onInVisible();
+        }
+    }
 
 
     /**
