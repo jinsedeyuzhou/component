@@ -2,12 +2,17 @@
 <resources>
 
 
-
-
-
     <!-- NodeProgressView -->
     <declare-styleable name="NodeProgressView">
-        <attr name="nodeCompleteDrawable"/>
+        <attr name="nodeCompleteDrawable" />
+    </declare-styleable>
+
+    <!--CustomTextView-->
+    <declare-styleable name="CustTextView">
+        <attr name="textSize" format="dimension"/>
+        <attr name="textColor" format="color"/>
+        <attr name="text" format="string"/>
+
     </declare-styleable>
 
     <!--MainView-->

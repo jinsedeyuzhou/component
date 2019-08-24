@@ -9,7 +9,6 @@ import android.text.TextUtils;
 import android.text.method.ArrowKeyMovementMethod;
 import android.text.method.MovementMethod;
 import android.util.AttributeSet;
-import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -18,7 +17,7 @@ import android.widget.TextView;
  * Author:wyy
  * Description:
  */
-public class CustomEditText extends TextView {
+public class CustomEditText extends android.support.v7.widget.AppCompatTextView {
     public CustomEditText(Context context) {
         this(context,null);
     }

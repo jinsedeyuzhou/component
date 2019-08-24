@@ -1,21 +1,33 @@
 package com.ebrightmoon.ui.page.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
-import android.widget.EditText;
 
 import com.ebrightmoon.common.base.BaseFragment;
 import com.ebrightmoon.ui.R;
 import com.ebrightmoon.ui.page.databinding.UIDataBindingActivity;
 import com.ebrightmoon.ui.page.kotlin.KotlinTestActivity;
+import com.ebrightmoon.ui.page.test.CustomViewActivity;
 import com.ebrightmoon.ui.page.test.UISideBarActivity;
 import com.ebrightmoon.ui.page.test.UITouchActivity;
 import com.ebrightmoon.ui.page.test.UiDialogActivity;
 import com.ebrightmoon.ui.page.test.UiHttpActivity;
 import com.ebrightmoon.ui.page.test.UIToastyActivity;
+
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+
+import java.io.File;
+import java.util.ArrayList;
+
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 
 public class UiHomeFragment extends BaseFragment {
 
@@ -33,6 +45,7 @@ public class UiHomeFragment extends BaseFragment {
         return R.layout.ui_fragment_home;
     }
 
+    @SuppressLint("CheckResult")
     @Override
     protected void initView(View view) {
         contentView=view;
@@ -83,6 +96,12 @@ public class UiHomeFragment extends BaseFragment {
                 startActivity(new Intent(mActivity, KotlinTestActivity.class));
             }
         });
+        view.findViewById(R.id.btn_custom).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mActivity, CustomViewActivity.class));
+            }
+        });
 
 //        EditText etNum = view.findViewById(R.id.etNum);
 //        etNum.addTextChangedListener(new TextWatcher() {
@@ -101,6 +120,12 @@ public class UiHomeFragment extends BaseFragment {
 //
 //            }
 //        });
+
+
+
+
+
+
     }
 
 

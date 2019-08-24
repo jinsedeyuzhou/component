@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+
+
+    <com.ebrightmoon.ui.widget.custom.CustTextView
+        android:id="@+id/customTextView"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/activity_margin_50"
+        android:layout_height="wrap_content"
+        app:text="dafkdaf"
+        app:textColor="@color/red"
+        />
+
+    <com.ebrightmoon.ui.widget.custom.CustomViewGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/customViewGroup"
+        >
+
+        <View
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
+            android:background="#000898"
+            />
+        <View
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
+            android:background="#000898"
+            />
+        <View
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
+            android:background="#000898"
+            />
+        <View
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
+            android:background="#000898"
+            />
+
+    </com.ebrightmoon.ui.widget.custom.CustomViewGroup>
+
+</LinearLayout>

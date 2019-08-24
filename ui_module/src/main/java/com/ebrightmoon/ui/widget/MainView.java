@@ -3,6 +3,8 @@ package com.ebrightmoon.ui.widget;
 import android.content.Context;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
  * Description:
  */
 public class MainView extends ViewGroup {
+
     public MainView(Context context) {
         super(context);
     }

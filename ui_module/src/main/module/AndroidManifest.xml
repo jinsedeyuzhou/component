@@ -27,6 +27,7 @@
         <activity android:name=".page.databinding.UIDataBindingActivity"/>
         <activity android:name=".page.test.UISideBarActivity"/>
         <activity android:name=".page.kotlin.KotlinTestActivity"/>
+        <activity android:name=".page.test.CustomViewActivity"/>
 
     </application>
 
