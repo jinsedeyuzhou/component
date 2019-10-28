@@ -21,6 +21,7 @@
             <option value="$PROJECT_DIR$/baseLib/toasty" />
             <option value="$PROJECT_DIR$/baseLib/viewanimations" />
             <option value="$PROJECT_DIR$/baseLib/volley" />
+            <option value="$PROJECT_DIR$/cameralib" />
             <option value="$PROJECT_DIR$/common_data" />
             <option value="$PROJECT_DIR$/common_logic" />
             <option value="$PROJECT_DIR$/common_module" />

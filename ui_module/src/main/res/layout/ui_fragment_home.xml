@@ -11,108 +11,77 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
+
             <Button
                 android:id="@+id/btn_http"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="http"
-                />
+                android:text="http" />
+
             <Button
                 android:id="@+id/btn_dialog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dialog"
-                />
+                android:text="Dialog" />
 
             <Button
                 android:id="@+id/btn_toasty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Toasty"
-                />
+                android:text="Toasty" />
+
             <Button
                 android:id="@+id/btn_json"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="UItouch"
-                />
+                android:text="UItouch" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
+
             <Button
                 android:id="@+id/btn_databing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="DataBinding"
-                />
+                android:text="DataBinding" />
 
             <Button
                 android:id="@+id/btn_sidebar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SideBar"
-                />
+                android:text="SideBar" />
 
             <Button
                 android:id="@+id/btn_kotlin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kotlin"
-                />
+                android:text="Kotlin" />
 
             <Button
                 android:id="@+id/btn_custom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="自定义View"
-                />
+                android:text="自定义View" />
         </LinearLayout>
-
-
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="horizontal">
 
-            <com.ebrightmoon.ui.view.CustomEditText
-                android:id="@+id/etNum"
+            <Button
+                android:id="@+id/btn_debug"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxEms="6"
-                android:background="@null"
-                android:singleLine="true"
-                android:ellipsize="end"
-                android:textColorHint="@color/black"
-                android:hint="0afdddfsafdsdafdfdfffaf66666sddfa"
-                />
+                android:text="Debug" />
 
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxEms="6"
-                android:background="@null"
-                android:maxLines="1"
-                android:lines="1"
-                android:textColorHint="@color/black"
-                android:hint="dsafdfs66666666adfafds" />
+
         </LinearLayout>
-
-
-
-
-
-
-
     </LinearLayout>
 
 </ScrollView>

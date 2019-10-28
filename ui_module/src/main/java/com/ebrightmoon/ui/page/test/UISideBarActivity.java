@@ -13,7 +13,7 @@ import com.ebrightmoon.commonlogic.sidebar.StickyDecoration;
 import com.ebrightmoon.commonlogic.sidebar.listener.GroupListener;
 import com.ebrightmoon.commonlogic.sidebar.listener.OnGroupClickListener;
 import com.ebrightmoon.ui.R;
-import com.ebrightmoon.ui.adapter.test.ContactsAdapter;
+import com.ebrightmoon.ui.adapter.contact.ContactsAdapter;
 import com.ebrightmoon.ui.data.test.Contact;
 
 import java.util.ArrayList;

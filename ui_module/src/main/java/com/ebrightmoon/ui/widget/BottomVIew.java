@@ -4,10 +4,12 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+
 
 /**
  * Time: 2019-08-15
@@ -15,8 +17,13 @@ import android.view.View;
  * Description:
  */
 public class BottomVIew extends View {
+    public static final String TAG = BottomVIew.class.getSimpleName();
+
     public float currentX = 80;
     public float currentY = 60;
+    private int width; //  测量宽度 FreeView的宽度
+    private int height; // 测量高度 FreeView的高度
+    private Paint paint;
 
     public BottomVIew(Context context) {
         super(context);
@@ -47,7 +54,6 @@ public class BottomVIew extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
         canvas.drawCircle(currentX,  currentY,30, paint);
     }
 
@@ -63,26 +69,36 @@ public class BottomVIew extends View {
         invalidate();
     }
 
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent event) {
-        return super.dispatchTouchEvent(event);
-    }
 
 
-    private int width; //  测量宽度 FreeView的宽度
-    private int height; // 测量高度 FreeView的高度
-    private int maxWidth; // 最大宽度 window 的宽度
-    private int maxHeight; // 最大高度 window 的高度
-    private float downX;
-    private float downY;
-    private Rect rect;
-    private String text;
-    private Paint paint;
+
+    float downX, downY;
+    float moveX, moveY;
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        currentX=event.getX();
-        currentY=event.getY();
-        invalidate();
+
+
+        switch (event.getAction())
+        {
+            case MotionEvent.ACTION_DOWN:
+                downX=event.getRawX();
+                downY=event.getRawY();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                moveX=event.getRawX();
+                moveY=event.getRawY();
+                Log.e(TAG,"getTop:"+this.getTop()+"==getLeft():"+getLeft()+"==getRight():"+getRight()+"==getBottom():"+getBottom()+"====moveY-downY:"+(moveY-downY));
+                Log.e(TAG,"getX():"+this.getX()+"==getY():"+getY()+"====moveY-downY:"+(moveX-downX));
+                Log.e(TAG,"getTranslationX():"+this.getTranslationX()+"==getTranslationY():"+getTranslationY());
+                setY(getY()+moveY-downY);
+                downY=moveY;
+                setX(getX()+moveX-downX);
+                downX=moveX;
+                break;
+            case MotionEvent.ACTION_UP:
+                break;
+
+        }
         return true;
     }
 }

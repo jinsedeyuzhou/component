@@ -25,6 +25,7 @@ public class ViewHolder extends RecyclerView.ViewHolder
     private SparseArray<View> mViews;
     private View mConvertView;
     private Context mContext;
+    private RecyclerView mRecyclerView;
 
     public ViewHolder(Context context, View itemView)
     {

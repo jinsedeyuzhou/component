@@ -50,6 +50,7 @@ public class PrefUtils {
 		} else if (oldKey.equals(KEY.SWITCH_GESTURE)) {
 			return oldKey;
 		}
+		//统一新增后缀
 		return oldKey + "_" + PrefUtils.getLong(context, KEY.LAST_UID, 0);
 	}
 
@@ -64,7 +65,7 @@ public class PrefUtils {
 		if (sp == null)
 			sp = context.getSharedPreferences(SP_NAME, 0);
 		key = getNewKey(context, key);
-		sp.edit().putBoolean(key, value).commit();
+		sp.edit().putBoolean(key, value).apply();
 	}
 
 	/**
@@ -78,14 +79,14 @@ public class PrefUtils {
 		if (sp == null)
 			sp = context.getSharedPreferences(SP_NAME, 0);
 		key = getNewKey(context, key);
-		sp.edit().putString(key, value).commit();
+		sp.edit().putString(key, value).apply();
 
 	}
 
 	public static void clear(Context context) {
 		if (sp == null)
 			sp = context.getSharedPreferences(SP_NAME, 0);
-		sp.edit().clear().commit();
+		sp.edit().clear().apply();
 	}
 
 	/**
@@ -99,7 +100,7 @@ public class PrefUtils {
 		if (sp == null)
 			sp = context.getSharedPreferences(SP_NAME, 0);
 		key = getNewKey(context, key);
-		sp.edit().putLong(key, value).commit();
+		sp.edit().putLong(key, value).apply();
 	}
 
 	/**
@@ -113,7 +114,7 @@ public class PrefUtils {
 		if (sp == null)
 			sp = context.getSharedPreferences(SP_NAME, 0);
 		key = getNewKey(context, key);
-		sp.edit().putInt(key, value).commit();
+		sp.edit().putInt(key, value).apply();
 	}
 
 	/**
@@ -127,7 +128,7 @@ public class PrefUtils {
 		if (sp == null)
 			sp = context.getSharedPreferences(SP_NAME, 0);
 		key = getNewKey(context, key);
-		sp.edit().putFloat(key, value).commit();
+		sp.edit().putFloat(key, value).apply();
 	}
 
 	/**
@@ -226,7 +227,7 @@ public class PrefUtils {
 			String objBase64 = new String(Base64.encode(baos.toByteArray(),
 					Base64.NO_WRAP));
 
-			sp.edit().putString(key, objBase64).commit();
+			sp.edit().putString(key, objBase64).apply();
 			oos.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -290,7 +291,7 @@ public class PrefUtils {
 			editor.putLong(key, (Long) object);
 		}
 
-		editor.commit();
+		editor.apply();
 	}
 
 

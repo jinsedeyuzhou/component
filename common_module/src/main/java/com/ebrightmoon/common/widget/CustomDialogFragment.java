@@ -48,7 +48,7 @@ public class CustomDialogFragment extends DialogFragment implements View.OnClick
 
     public static final String DIALOG_FRAGMENT_TITLE = "dialog_fragment_title";
     public static final String DIALOG_FRAGMENT_CONTENT = "dialog_fragment_title";
-    public static final String TAG = CustomDialogFragment.class.getSimpleName().toString();
+    private static final String TAG =CustomDialogFragment.class.getSimpleName() ;
     private Button btnCancel;
     private Button btnOk;
     private TextView dialogTitle;

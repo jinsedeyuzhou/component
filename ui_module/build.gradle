@@ -78,6 +78,7 @@ dependencies {
     implementation project(':baseLib:pickerview')
     implementation project(':baseLib:retrofitrxc')
     implementation project(':baseLib:viewanimations')
+    implementation project(':cameralib')
     kapt rootProject.ext.dependencies.arouter_compiler
 
     implementation project(':common_logic')

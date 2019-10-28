@@ -3,13 +3,18 @@ package com.ebrightmoon.ui.page.fragment;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.ebrightmoon.common.base.BaseFragment;
 import com.ebrightmoon.ui.R;
 import com.ebrightmoon.ui.page.databinding.UIDataBindingActivity;
 import com.ebrightmoon.ui.page.kotlin.KotlinTestActivity;
 import com.ebrightmoon.ui.page.test.CustomViewActivity;
+import com.ebrightmoon.ui.page.test.DebugActivity;
 import com.ebrightmoon.ui.page.test.UISideBarActivity;
 import com.ebrightmoon.ui.page.test.UITouchActivity;
 import com.ebrightmoon.ui.page.test.UiDialogActivity;
@@ -102,6 +107,12 @@ public class UiHomeFragment extends BaseFragment {
                 startActivity(new Intent(mActivity, CustomViewActivity.class));
             }
         });
+        view.findViewById(R.id.btn_debug).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mActivity, DebugActivity.class));
+            }
+        });
 
 //        EditText etNum = view.findViewById(R.id.etNum);
 //        etNum.addTextChangedListener(new TextWatcher() {
@@ -120,7 +131,6 @@ public class UiHomeFragment extends BaseFragment {
 //
 //            }
 //        });
-
 
 
 

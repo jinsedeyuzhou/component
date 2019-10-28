@@ -213,6 +213,9 @@ public abstract class BaseActivity
 
     }
 
+    //Rxbus注解
+    @com.ebrightmoon.common.ebus.Subscribe(threadMode = com.ebrightmoon.common.ebus.inner.ThreadMode.MAIN_THREAD)
+    //eventBus 注解 选择对应的否则不生效
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(IEvent event) {
 
@@ -242,6 +245,7 @@ public abstract class BaseActivity
     @Override
     protected void onStop() {
         super.onStop();
+        // 也可以在OnDestory 中解除注册
         if (isRegisterEvent()) {
             BusManager.getBus().unregister(this);
         }

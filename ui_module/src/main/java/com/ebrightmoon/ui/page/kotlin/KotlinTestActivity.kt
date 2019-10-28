@@ -2,8 +2,10 @@ package com.ebrightmoon.ui.page.kotlin
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import com.ebrightmoon.common.base.BaseActivity
 import com.ebrightmoon.ui.R
+import kotlinx.android.synthetic.main.activity_kotlin_test.*
 
 /**
  * Time: 2019-08-15
@@ -12,6 +14,7 @@ import com.ebrightmoon.ui.R
  *
  */
 class KotlinTestActivity : BaseActivity() {
+    private var str:String="dsaff"
 
     override fun onCreate(paramBundle: Bundle?) {
         super.onCreate(paramBundle)
@@ -25,6 +28,9 @@ class KotlinTestActivity : BaseActivity() {
     }
 
     override fun bindEvent() {
+        btn_kotlin.setOnClickListener {
+            Toast.makeText(mContext,"kotlin",Toast.LENGTH_LONG).show()
+        }
     }
 
     override fun processClick(paramView: View?) {

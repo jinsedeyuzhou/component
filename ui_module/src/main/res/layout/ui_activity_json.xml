@@ -17,7 +17,7 @@
 
 
         <com.ebrightmoon.ui.widget.ContentView
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:background="@color/red"
             android:layout_height="200dp">
 
@@ -30,8 +30,6 @@
         </com.ebrightmoon.ui.widget.ContentView>
     </com.ebrightmoon.ui.widget.MainView>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></ScrollView>
+
 
 </LinearLayout>

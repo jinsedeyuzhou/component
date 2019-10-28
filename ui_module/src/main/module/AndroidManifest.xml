@@ -28,6 +28,7 @@
         <activity android:name=".page.test.UISideBarActivity"/>
         <activity android:name=".page.kotlin.KotlinTestActivity"/>
         <activity android:name=".page.test.CustomViewActivity"/>
+        <activity android:name=".page.test.DebugActivity"/>
 
     </application>
 

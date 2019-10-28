@@ -30,6 +30,7 @@ import com.ebrightmoon.main.adapter.NewsChannelAdapter;
 import com.ebrightmoon.main.arouter.RouterCenter;
 import com.ebrightmoon.main.entity.Channel;
 import com.ebrightmoon.main.ui.fragment.NewsMainFragment;
+import com.ebrightmoon.main.utils.IntentAction;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -242,13 +243,13 @@ public class HomeMainActivity extends BaseActivity
             toOtherActivity(SearchMainActivity.class,null,false);
             return true;
         } else if (id == R.id.action_share) {
-            RouterCenter.toLogin();
+            IntentAction.send(mContext,"分享测试");
             return true;
         } else if (id == R.id.action_settings) {
             RouterCenter.toSetting();
             return true;
         } else if (id == R.id.action_about) {
-            RouterCenter.toRegister();
+            RouterCenter.toLogin();
             return true;
         }
 

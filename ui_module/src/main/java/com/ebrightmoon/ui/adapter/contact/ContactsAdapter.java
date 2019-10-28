@@ -1,4 +1,4 @@
-package com.ebrightmoon.ui.adapter.test;
+package com.ebrightmoon.ui.adapter.contact;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,7 +13,7 @@ import com.ebrightmoon.ui.data.test.Contact;
 import java.util.List;
 
 /**
- * Created by gjz on 9/4/16.
+ *  联系人列表适配
  */
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ContactsViewHolder> {
 
