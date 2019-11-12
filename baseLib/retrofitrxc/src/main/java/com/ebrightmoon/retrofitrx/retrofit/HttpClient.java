@@ -92,8 +92,8 @@ public class HttpClient {
 //        okHttpBuilder.sslSocketFactory(SSL.getSSlFactory(mContext,"server.cer"));
 //        okHttpBuilder.sslSocketFactory(new SSLUtils(trustAllCert), trustAllCert);
         okHttpBuilder.certificatePinner(new CertificatePinner.Builder()
-                .add("vapi.piccgd.com", "sha256/AqUGPVqg5Rdcq3cLU4yXtC+BsbsvFcVFcPNJA13AUIA=")
-                .add("vapi.piccgd.com", "sha256/zUIraRNo+4JoAYA7ROeWjARtIoN4rIEbCpfCRQT6N6A=")
+                .add("com.ebrightmoon", "sha256/AqUGPVqg5Rdcq3cLU4yXtC+BsbsvFcVFcPNJA13AUIA=")
+                .add("com.ebrightmoon", "sha256/zUIraRNo+4JoAYA7ROeWjARtIoN4rIEbCpfCRQT6N6A=")
                 .build());
         okHttpBuilder.sslSocketFactory(new SSLUtils(trustAllCert), trustAllCert);
 

@@ -7,6 +7,7 @@ if (isUi.toBoolean()) {
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-android-extensions"
 apply plugin: 'kotlin-kapt'
+apply from: 'derobot.gradle'
 
 kapt {
     arguments {
@@ -82,6 +83,7 @@ dependencies {
     kapt rootProject.ext.dependencies.arouter_compiler
 
     implementation project(':common_logic')
+    implementation project(':derobot')
 }
 repositories {
     mavenCentral()

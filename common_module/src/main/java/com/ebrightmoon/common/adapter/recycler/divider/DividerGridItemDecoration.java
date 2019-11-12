@@ -12,10 +12,7 @@ import android.support.v7.widget.RecyclerView.State;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
-/**
- *
- *
- */
+
 public class DividerGridItemDecoration extends RecyclerView.ItemDecoration
 {
 

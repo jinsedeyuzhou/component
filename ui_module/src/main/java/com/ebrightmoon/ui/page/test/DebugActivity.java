@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.ebrightmoon.common.base.BaseActivity;
+import com.ebrightmoon.derobot.reboot.Derobot;
 import com.ebrightmoon.ui.R;
 
 /**
@@ -38,6 +39,13 @@ public class DebugActivity extends BaseActivity {
             public void onClick(View v) {
                 count=5;
                 test(count);
+                if (Derobot.isShow())
+                {
+                    Derobot.hide();
+                }else
+                {
+                    Derobot.show();
+                }
 
             }
         });

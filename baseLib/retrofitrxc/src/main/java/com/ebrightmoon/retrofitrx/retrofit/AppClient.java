@@ -74,7 +74,6 @@ public class AppClient {
             mContext = context;
         okHttpBuilder = new OkHttpClient.Builder();
         okHttpBuilder
-                .addNetworkInterceptor(new LoggingInterceptor())
                 .addNetworkInterceptor(new HttpResponseInterceptor())
                 .addInterceptor(new LoggingInterceptor())
                 .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
@@ -94,8 +93,8 @@ public class AppClient {
 //        okHttpBuilder.sslSocketFactory(SSL.getSSlFactory(mContext,"server.cer"));
 //        okHttpBuilder.sslSocketFactory(new SSLUtils(trustAllCert), trustAllCert);
         okHttpBuilder.certificatePinner(new CertificatePinner.Builder()
-                .add("vapi.piccgd.com", "sha256/AqUGPVqg5Rdcq3cLU4yXtC+BsbsvFcVFcPNJA13AUIA=")
-                .add("vapi.piccgd.com", "sha256/zUIraRNo+4JoAYA7ROeWjARtIoN4rIEbCpfCRQT6N6A=")
+                .add("com.ebrightmoon", "sha256/AqUGPVqg5Rdcq3cLU4yXtC+BsbsvFcVFcPNJA13AUIA=")
+                .add("com.ebrightmoon", "sha256/zUIraRNo+4JoAYA7ROeWjARtIoN4rIEbCpfCRQT6N6A=")
                 .build());
         okHttpBuilder.sslSocketFactory(new SSLUtils(trustAllCert), trustAllCert);
 

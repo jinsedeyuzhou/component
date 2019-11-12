@@ -64,7 +64,10 @@ dependencies {
     if (!isUi.toBoolean())
     {
         implementation project(':ui_module')
+        implementation project(':derobot')
     }
+
+
     annotationProcessor  rootProject.ext.dependencies.arouter_compiler
 //    implementation 'com.android.support:support-v4:27.1.1'
 }

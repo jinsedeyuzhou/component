@@ -25,7 +25,8 @@ public class LoggingInterceptor implements Interceptor {
         Request request = chain.request();
 
         long t1 = System.nanoTime();
-        logger.setLevel(Level.WARNING);
+        // 设置日志打印级别
+//        logger.setLevel(Level.WARNING);
         if (request.body() == null) {
             logger.info(String.format("Sending request %s on %s%n%s%n%s",
                     request.url(), chain.connection(), request.headers(), request.body()));

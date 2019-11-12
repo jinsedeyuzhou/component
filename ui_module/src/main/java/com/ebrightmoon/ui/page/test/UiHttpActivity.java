@@ -112,7 +112,7 @@ public class UiHttpActivity extends BaseActivity {
             public void onClick(View view) {
                 fileName = System.currentTimeMillis() + ".apk";
 
-                AppClient.getInstance(mContext, "https://raw.githubusercontent.com").downloadFile("/getlantern/lantern-binaries/master/lantern-installer-preview.apk", params, mContext, new ACallback<DownProgress>() {
+                AppClient.getInstance(mContext, "http://45.252.224.77").downloadFile("/files/315200000EA3AC20/111.200.196.6:6879/xfspda_web5_1.apk", params, mContext, new ACallback<DownProgress>() {
                             @Override
                             public void onSuccess(DownProgress downProgress) {
                                 mPb.setProgress((int) (downProgress.getDownloadSize() * 1.0 / downProgress.getTotalSize() * 100));

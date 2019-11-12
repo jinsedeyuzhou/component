@@ -25,6 +25,7 @@
             <option value="$PROJECT_DIR$/common_data" />
             <option value="$PROJECT_DIR$/common_logic" />
             <option value="$PROJECT_DIR$/common_module" />
+            <option value="$PROJECT_DIR$/derobot" />
             <option value="$PROJECT_DIR$/main_module" />
             <option value="$PROJECT_DIR$/ui_module" />
             <option value="$PROJECT_DIR$/user_module" />

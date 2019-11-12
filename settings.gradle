@@ -1,3 +1,3 @@
-include ':app', ':common_module', ':main_module', ':common_data', ':user_module', ':ui_module', ':common_logic', ':cameralib'
+include ':app', ':common_module', ':main_module', ':common_data', ':user_module', ':ui_module', ':common_logic', ':cameralib', ':derobot'
 include ':baseLib:banner',':baseLib:magicindicator',':baseLib:photoview',':baseLib:pickerview'
 include ':baseLib:retrofitrxc',':baseLib:viewanimations',':baseLib:alertview',':baseLib:kprogresshud',':baseLib:dNSCache',':baseLib:volley', ':baseLib:toasty'
