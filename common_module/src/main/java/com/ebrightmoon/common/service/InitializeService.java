@@ -21,7 +21,7 @@ import com.orhanobut.logger.PrettyFormatStrategy;
  */
 public class InitializeService extends IntentService {
     private static final String TAG = InitializeService.class.getSimpleName();
-    private static final String ACTION_INIT_WHEN_APP_CREATE = "com.picc.gdvmeng.util.action.INIT";
+    private static final String ACTION_INIT_WHEN_APP_CREATE = "com.ebrightmoon.util.action.INIT";
     public InitializeService() {
         super("InitializeService");
     }
