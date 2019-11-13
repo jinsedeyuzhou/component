@@ -16,7 +16,6 @@ import com.orhanobut.logger.PrettyFormatStrategy;
 
 /**
  * 作者：create by  Administrator on 2018/9/6
- * 邮箱：2315813288@qq.com
  * 需要在清单文件里面注册
  */
 public class InitializeService extends IntentService {
