@@ -27,7 +27,7 @@ import java.util.regex.Pattern;
 
 /**
  * 作者：create by  Administrator on 2018/9/30
- * 邮箱：2315813288@qq.com
+ * 邮箱：
  */
 @Route(path = RouterURLS.USER_REGISTER)
 public class RegisterUserActivity extends BaseActivity {

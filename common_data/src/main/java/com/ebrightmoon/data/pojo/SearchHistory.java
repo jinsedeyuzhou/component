@@ -7,7 +7,7 @@ import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * 作者：create by  Administrator on 2018/9/12
- * 邮箱：2315813288@qq.com
+ * 邮箱：
  */
 @Entity
 public class SearchHistory {

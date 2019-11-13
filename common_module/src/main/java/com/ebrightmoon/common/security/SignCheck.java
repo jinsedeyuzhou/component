@@ -16,7 +16,7 @@ import java.security.cert.X509Certificate;
 
 /**
  * 作者：create by  Administrator on 2019/1/24
- * 邮箱：2315813288@qq.com
+ * 邮箱：
  */
 public class SignCheck {
 

@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 作者：create by  Administrator on 2019/3/7
- * 邮箱：2315813288@qq.com
+ * 邮箱：
  * 解决通知权限关闭导致Toast 弹不出来
  * 自己仿照系统的Toast然后用自己的消息队列来维护，让其不受NotificationManagerService影响。
  */

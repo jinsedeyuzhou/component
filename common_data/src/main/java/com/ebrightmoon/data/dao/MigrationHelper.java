@@ -17,7 +17,7 @@ import java.util.List;
 
 /**
  * 作者：create by  Administrator on 2019/2/13
- * 邮箱：2315813288@qq.com
+ * 邮箱：
  */
 public class MigrationHelper {
 

@@ -2,7 +2,7 @@ package com.ebrightmoon.main.entity;
 
 /**
  * 作者：create by  Administrator on 2018/9/13
- * 邮箱：2315813288@qq.com
+ * 邮箱：
  */
 public class HotTag {
     private String name;

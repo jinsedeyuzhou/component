@@ -7,7 +7,7 @@ import android.view.View;
 
 /**
  * 作者：create by  Administrator on 2018/9/4
- * 邮箱：2315813288@qq.com
+ * 邮箱：
  */
 public class NodeProgressView extends View {
 

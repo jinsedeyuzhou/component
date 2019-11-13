@@ -4,7 +4,7 @@ import android.view.View;
 
 /**
  * 作者：create by  Administrator on 2019/3/7
- * 邮箱：2315813288@qq.com
+ * 邮箱：
  */
 public interface IToast {
     IToast setGravity(int gravity, int xOffset, int yOffset);

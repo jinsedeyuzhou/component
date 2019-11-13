@@ -8,7 +8,7 @@ import android.util.DisplayMetrics;
 
 /**
  * 作者：create by  Administrator on 2018/9/7
- * 邮箱：2315813288@qq.com
+ * 邮箱：
  * 屏幕适配 以360dp 采用今日头条适配方案
  */
 public class ScreenAdapter {
