@@ -55,7 +55,7 @@ public class LoadingDialog extends Dialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        this.setContentView(R.layout.dialog_loading);
+//        this.setContentView(R.toolbar.dialog_loading);
         this.setContentView(view);
         mIvProgress = (ImageView) findViewById(R.id.iv_progress);
         mProgressDrawable = new ProgressDrawable();
@@ -105,4 +105,14 @@ public class LoadingDialog extends Dialog {
         mProgressDrawable = null;
     }
 
+    @Override
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        if (mProgressDrawable==null)
+        {
+            mProgressDrawable = new ProgressDrawable();
+            mProgressDrawable.setColor(0xffffffff);
+            mIvProgress.setImageDrawable(mProgressDrawable);
+        }
+    }
 }

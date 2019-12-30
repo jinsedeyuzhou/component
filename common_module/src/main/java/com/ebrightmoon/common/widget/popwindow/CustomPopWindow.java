@@ -13,7 +13,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
 /**
-   View contentView = LayoutInflater.from(mContext).inflate(R.layout.ui_pop_product_detail_video, null);
+   View contentView = LayoutInflater.from(mContext).inflate(R.toolbar.ui_pop_product_detail_video, null);
 //创建并显示popWindow
 final CustomPopWindow popWindow = new CustomPopWindow.PopupWindowBuilder(mContext)
         .setView(contentView)

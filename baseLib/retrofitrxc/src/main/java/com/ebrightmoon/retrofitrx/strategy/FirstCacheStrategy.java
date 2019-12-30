@@ -12,7 +12,7 @@ import io.reactivex.functions.Predicate;
 
 /**
  * @Description: 缓存策略--优先缓存
- * @author: <a href="http://www.xiaoyaoyou1212.com">DAWI</a>
+ *
  * @date: 16/12/31 14:31.
  */
 public class FirstCacheStrategy<T> extends CacheStrategy<T> {

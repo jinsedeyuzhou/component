@@ -2,7 +2,7 @@ package com.ebrightmoon.retrofitrx.util;
 
 /**
  * @Description:
- * @author: <a href="http://xiaoyaoyou1212.360doc.com">DAWI</a>
+ *
  * @date: 2018/1/20 16:37
  */
 public class Utils {

@@ -19,8 +19,8 @@ import com.ebrightmoon.common.widget.dialogfragment.manager.DialogWrapper;
 import com.ebrightmoon.common.widget.dialogfragment.manager.SystemDialogsManager;
 import com.ebrightmoon.common.widget.popwindow.CommonPopupWindow;
 import com.ebrightmoon.common.widget.popwindow.CustomPopWindow;
+import com.ebrightmoon.commonlogic.page.WebViewActivity;
 import com.ebrightmoon.ui.R;
-import com.ebrightmoon.ui.page.WebViewActivity;
 
 /**
  * Time: 2019/6/11
@@ -43,7 +43,7 @@ public class UiDialogActivity extends BaseActivity {
 
     @Override
     public void initData() {
-
+        mActivity.getApplication().getApplicationContext();
     }
 
     @Override

@@ -90,7 +90,7 @@ public class NewsMainFragment extends BaseFragment {
         loadMoreView.setLayoutParams(layoutParams);
         mLoadMoreWrapper = new LoadMoreWrapper(mEmptyWrapper);
         mLoadMoreWrapper.setLoadMoreView(loadMoreView);
-//        mLoadMoreWrapper.setLoadMoreView(R.layout.default_loading);
+//        mLoadMoreWrapper.setLoadMoreView(R.toolbar.default_loading);
         mainRecyclerView.setAdapter(mLoadMoreWrapper);
 
     }
@@ -136,7 +136,7 @@ public class NewsMainFragment extends BaseFragment {
                     getData();
                 }else
                 {
-//                    loadMoreView.hideLoading();
+                    loadMoreView.hideLoading();
                 }
             }
 

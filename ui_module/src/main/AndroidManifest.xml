@@ -6,7 +6,6 @@
 
     <application>
         <activity android:name=".page.UiHomeActivity"/>
-        <activity android:name=".page.WebViewActivity"/>
         <activity android:name=".page.test.UiDialogActivity"/>
         <activity android:name=".page.test.UIToastyActivity"/>
         <activity android:name=".page.test.UiHttpActivity"/>

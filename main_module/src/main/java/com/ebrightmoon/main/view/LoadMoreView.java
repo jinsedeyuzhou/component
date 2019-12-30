@@ -122,4 +122,15 @@ public class LoadMoreView extends RelativeLayout {
         super.onDetachedFromWindow();
         mProgressDrawable = null;
     }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        if (mProgressDrawable==null)
+        {
+            mProgressDrawable=new ProgressDrawable();
+            mProgressDrawable.setColor(0xff666666);
+            mIvProgress.setImageDrawable(mProgressDrawable);
+        }
+    }
 }

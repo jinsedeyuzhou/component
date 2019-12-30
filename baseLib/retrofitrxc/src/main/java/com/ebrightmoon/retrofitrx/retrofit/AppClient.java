@@ -24,7 +24,6 @@ import com.ebrightmoon.retrofitrx.mode.MediaTypes;
 import com.ebrightmoon.retrofitrx.response.ResponseResult;
 import com.ebrightmoon.retrofitrx.subscriber.ApiCallbackSubscriber;
 import com.ebrightmoon.retrofitrx.subscriber.DownCallbackSubscriber;
-import com.ebrightmoon.retrofitrx.util.OkHttpDns;
 
 
 import java.io.File;
@@ -88,7 +87,7 @@ public class AppClient {
             baseUrl = url;
         okHttpBuilder.connectionPool(new ConnectionPool(HttpUtils.DEFAULT_MAX_IDLE_CONNECTIONS,
                 HttpUtils.DEFAULT_KEEP_ALIVE_DURATION, TimeUnit.SECONDS));
-//        okHttpBuilder.hostnameVerifier(new SSL.UnSafeHostnameVerifier(baseUrl));
+        okHttpBuilder.hostnameVerifier(new SSL.UnSafeHostnameVerifier(baseUrl));
 //        okHttpBuilder.sslSocketFactory(SSL.getSslSocketFactory(null,null,null));
 //        okHttpBuilder.sslSocketFactory(SSL.getSSlFactory(mContext,"server.cer"));
 //        okHttpBuilder.sslSocketFactory(new SSLUtils(trustAllCert), trustAllCert);

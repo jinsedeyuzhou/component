@@ -100,13 +100,13 @@ public class CustomDialogFragment extends DialogFragment implements View.OnClick
     }
 
     /**
-     * The system calls this to get the DialogFragment's layout, regardless
+     * The system calls this to get the DialogFragment's toolbar, regardless
      * of whether it's being displayed as a dialog or an embedded fragment.
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout to use as dialog or embedded fragment
+        // Inflate the toolbar to use as dialog or embedded fragment
         return inflater.inflate(R.layout.layout_dialog_fragment, container, false);
     }
 

@@ -19,7 +19,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".page.WebViewActivity"/>
         <activity android:name=".page.test.UiDialogActivity"/>
         <activity android:name=".page.test.UIToastyActivity"/>
         <activity android:name=".page.test.UiHttpActivity"/>

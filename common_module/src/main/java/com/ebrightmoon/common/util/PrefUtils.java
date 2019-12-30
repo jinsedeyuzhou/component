@@ -19,6 +19,9 @@ public class PrefUtils {
 	private final static String SP_NAME = "config";
 	private static SharedPreferences sp;
 
+	/**
+	 * 应用配置界面
+	 */
 	public interface KEY {
 		String LAST_UID = "last_uid"; // 第一次登陆
 		String FIRST_LAUNCH = "first_launch";// 首次登录
@@ -33,6 +36,9 @@ public class PrefUtils {
 		String AUTO_UPDATE="auto_update";
 	}
 
+	/**
+	 * 帮助配置属性
+	 */
 	public interface HELP_PAGE_KEY {
 
 		String HELP_PAGE_HOME = "help_page_home";// NEWS 帮助界面

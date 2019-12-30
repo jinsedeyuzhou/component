@@ -224,7 +224,7 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener,
         final ImageView imageView = mImageView.get();
 
         if (null != imageView) {
-            // Remove this as a global layout listener
+            // Remove this as a global toolbar listener
             ViewTreeObserver observer = imageView.getViewTreeObserver();
             if (null != observer && observer.isAlive()) {
                 observer.removeGlobalOnLayoutListener(this);

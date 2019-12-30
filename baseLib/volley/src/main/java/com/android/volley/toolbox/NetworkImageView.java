@@ -98,7 +98,7 @@ public class NetworkImageView extends ImageView {
 
     /**
      * Loads the image for the view if it isn't already loaded.
-     * @param isInLayoutPass True if this was invoked from a layout pass, false otherwise.
+     * @param isInLayoutPass True if this was invoked from a toolbar pass, false otherwise.
      */
     void loadImageIfNecessary(final boolean isInLayoutPass) {
         int width = getWidth();
@@ -158,9 +158,9 @@ public class NetworkImageView extends ImageView {
 
                     @Override
                     public void onResponse(final ImageContainer response, boolean isImmediate) {
-                        // If this was an immediate response that was delivered inside of a layout
+                        // If this was an immediate response that was delivered inside of a toolbar
                         // pass do not set the image immediately as it will trigger a requestLayout
-                        // inside of a layout. Instead, defer setting the image by posting back to
+                        // inside of a toolbar. Instead, defer setting the image by posting back to
                         // the main thread.
                         if (isImmediate && isInLayoutPass) {
                             post(new Runnable() {

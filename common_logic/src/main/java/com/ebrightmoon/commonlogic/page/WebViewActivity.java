@@ -1,5 +1,6 @@
-package com.ebrightmoon.ui.page;
+package com.ebrightmoon.commonlogic.page;
 
+import android.annotation.SuppressLint;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,15 +11,16 @@ import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
-
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.ebrightmoon.common.base.BaseActivity;
-import com.ebrightmoon.common.util.Tools;
 import com.ebrightmoon.common.widget.ProgressWebView;
-import com.ebrightmoon.ui.R;
+import com.ebrightmoon.commonlogic.R;
 
 import static android.view.KeyEvent.KEYCODE_BACK;
 
@@ -40,7 +42,7 @@ public class WebViewActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle paramBundle) {
         super.onCreate(paramBundle);
-        setContentView(R.layout.ui_activity_webview);
+        setContentView(R.layout.activity_webview);
     }
 
     @Override
@@ -48,68 +50,43 @@ public class WebViewActivity extends BaseActivity {
         title = getIntent().getStringExtra("title");
         url = getIntent().getStringExtra("url");
         html = getIntent().getStringExtra("html");
-        setTitle("设置");
+
+        initTitle();
         mWebViewContent = (FrameLayout) findViewById(R.id.fl_content);
         mWebView = new ProgressWebView(this, null);
         mWebViewContent.addView(mWebView);
-        // 同步cookies
-        // synCookies(this, protocolUrl);
-        // 设置webview属性
-        Tools.initWebViewSettings(mWebView.getSettings());
-//        initWebViewSettings(mWebView.getSettings());
-        mWebView.setWebChromeClient(new WebChromeClient() {
-            @Override
-            public void onProgressChanged(WebView view, int newProgress) {
-                super.onProgressChanged(view, newProgress);
-            }
-        });
+
+        initWebView(mWebView);
+
+//        mWebView.setWebChromeClient(new WebChromeClient() {
+//            @Override
+//            public void onProgressChanged(WebView view, int newProgress) {
+//                super.onProgressChanged(view, newProgress);
+//            }
+//        });
+
         mWebView.setWebViewClient(new WebViewClient() {
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                String url=request.getUrl().toString();
                 return super.shouldOverrideUrlLoading(view, request);
             }
 
             @Nullable
             @Override
             public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
-                String url=request.getUrl().toString();
                 return super.shouldInterceptRequest(view, request);
-            }
-
-            @Override
-            public WebResourceResponse shouldInterceptRequest(WebView view,
-                                                              String url) {
-
-                WebResourceResponse response = null;
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                    response = super.shouldInterceptRequest(view, url);
-                    //引用本地文件
-//                    if (url.contains("index.css")) {
-//                        try {
-//                            response = new WebResourceResponse("text/css",
-//                                    "UTF-8", getAssets().open("index.css"));
-//                        } catch (IOException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-                }
-                return response;
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                mWebView.loadUrl("javascript:setHeight()");
 
             }
 
             @Override
-            public void onReceivedSslError(WebView view,
-                                           SslErrorHandler handler, SslError error) {
-                // super.onReceivedSslError(view, handler, error);
-                handler.proceed();
+            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+                super.onReceivedSslError(view, handler, error);
             }
         });
 
@@ -122,11 +99,63 @@ public class WebViewActivity extends BaseActivity {
 //        });
 
         if (html != null) {
-            mWebView.loadDataWithBaseURL(null,html,"text/html","UTF-8",null);
+            mWebView.loadDataWithBaseURL(null, html, "text/html", "UTF-8", null);
         } else {
             mWebView.loadUrl(url);
         }
 
+    }
+
+    /**
+     * 设置标题
+     */
+    private void initTitle() {
+
+        RelativeLayout bar_rl_left = findViewById(R.id.bar_rl_left);
+        bar_rl_left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        ImageView bar_iv_left = findViewById(R.id.bar_iv_left);
+
+        RelativeLayout bar_rl_right = findViewById(R.id.bar_rl_right);
+        bar_rl_right.setVisibility(View.VISIBLE);
+
+        ImageView bar_iv_right = findViewById(R.id.bar_iv_right);
+
+    }
+
+    /**
+     * 设置WebView参数
+     */
+    private void initWebView(ProgressWebView webView) {
+        WebSettings wSet = webView.getSettings();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            wSet.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        }
+        // 是否显示缩放按钮
+        wSet.setBuiltInZoomControls(false);
+        // 支持缩放
+        wSet.setSupportZoom(false);
+        wSet.setTextZoom(100);
+        // 默认字体大小
+        wSet.setDefaultFontSize(12);
+        wSet.setAllowFileAccess(false);
+        // 设置可以访问文件
+        wSet.setAllowFileAccess(true);
+        // 设置支持webView JavaScript
+        wSet.setJavaScriptEnabled(true);
+        // 设置缓冲的模式
+        wSet.setCacheMode(WebSettings.LOAD_NO_CACHE);
+        // 设置字符编码
+        wSet.setDefaultTextEncodingName("utf-8");
+        //优先使用缓存
+//        wSet.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        wSet.setAppCacheEnabled(false);
+        wSet.setDomStorageEnabled(true);
+        wSet.setDatabaseEnabled(true);
     }
 
     @Override
@@ -138,8 +167,6 @@ public class WebViewActivity extends BaseActivity {
     public void initData() {
 
     }
-
-
 
 
     @Override

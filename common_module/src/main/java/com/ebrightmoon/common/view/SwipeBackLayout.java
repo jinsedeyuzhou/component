@@ -55,7 +55,7 @@ public class SwipeBackLayout extends ViewGroup {
     private int draggingOffset;
 
     /**
-     * Whether allow to pull this layout.
+     * Whether allow to pull this toolbar.
      */
     private boolean enablePullToBack = true;
 
@@ -78,7 +78,7 @@ public class SwipeBackLayout extends ViewGroup {
     private boolean enableFlingBack = true;
 
     /**
-     * Whether allow to finish activity by fling the layout.
+     * Whether allow to finish activity by fling the toolbar.
      *
      * @param b
      */
@@ -474,7 +474,7 @@ public class SwipeBackLayout extends ViewGroup {
     public interface SwipeBackListener {
 
         /**
-         * Return scrolled fraction of the layout.
+         * Return scrolled fraction of the toolbar.
          *
          * @param fractionAnchor relative to the anchor.
          * @param fractionScreen relative to the screen.
