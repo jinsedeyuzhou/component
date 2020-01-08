@@ -293,7 +293,6 @@ public class StringUtils {
 	 */
 	public static String getTextforDecimalFormat(Double d,String str){
 		DecimalFormat df = new DecimalFormat(str);
-
 		return df.format(d);
 	}
 	/**

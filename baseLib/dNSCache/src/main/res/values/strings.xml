@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">DNSCache</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_printf_domain">打印域名表</string>

@@ -22,6 +22,19 @@ android {
         versionName rootProject.ext.android.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+        config {
+            keyAlias 'component'
+            keyPassword '123456'
+            storeFile file('component.jks')
+            storePassword '123456'
+        }
+    }
+
+
+
+
     buildTypes {
         release {
             minifyEnabled false
