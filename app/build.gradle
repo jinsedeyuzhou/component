@@ -19,6 +19,7 @@ android {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
+        flavorDimensions "versionCode"
         versionName rootProject.ext.android.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -27,22 +28,95 @@ android {
         config {
             keyAlias 'component'
             keyPassword '123456'
-            storeFile file('component.jks')
+            storeFile file('../component.jks')
             storePassword '123456'
+
         }
     }
 
+//移除lint检测的error
+    lintOptions {
+        abortOnError false
+    }
+
+    dexOptions {
+        preDexLibraries = false
+    }
+
+    productFlavors {
+        dev {
+            // 每个环境包名不同
+            applicationId "com.lyl.boon.dev"
+            // 动态添加 string.xml 字段；
+            // 注意，这里是添加，在 string.xml 不能有这个字段，会重名！！！
+            resValue "string", "app_name", "dev_boon"
+            resValue "bool", "isrRank", 'false'
+//            // 动态修改 常量 字段
+            buildConfigField "String", "ENVIRONMENT", '"dev"'
+//            buildConfigField "String", "BUGLYAPPID", properties.getProperty('appIdMark')
+//            buildConfigField "String", "LEANCLOUD_APPID", properties.getProperty('leancloudAppId')
+//            buildConfigField "String", "LEANCLOUD_APPKEY", properties.getProperty('leancloudAppKey')
+            // 修改 AndroidManifest.xml 里渠道变量
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "dev",
+                                    app_icon           : "@drawable/didi_luncher"]
+        }
+        stage {
+            applicationId "com.lyl.boon.stage"
+
+            resValue "string", "app_name", "stage_boon"
+            resValue "bool", "isrRank", 'true'
+//
+            buildConfigField "String", "ENVIRONMENT", '"stage"'
+//            buildConfigField "String", "BUGLYAPPID", properties.getProperty('appIdMark')
+//            buildConfigField "String", "LEANCLOUD_APPID", properties.getProperty('leancloudAppId')
+//            buildConfigField "String", "LEANCLOUD_APPKEY", properties.getProperty('leancloudAppKey')
+
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "stage",
+                                    app_icon           : "@mipmap/ic_launcher"]
+        }
+        prod {
+            applicationId "com.lyl.boon"
+
+            resValue "string", "app_name", "boon"
+            resValue "bool", "isrRank", 'true'
+
+            buildConfigField "String", "ENVIRONMENT", '"prod"'
+//            buildConfigField "String", "BUGLYAPPID", properties.getProperty('appIdMark')
+//            buildConfigField "String", "LEANCLOUD_APPID", properties.getProperty('leancloudAppId')
+//            buildConfigField "String", "LEANCLOUD_APPKEY", properties.getProperty('leancloudAppKey')
 
 
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "prod",
+                                    app_icon           : "@mipmap/ic_launcher"]
+        }
+    }
+//    productFlavors.all {
+//        flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+//    }
 
     buildTypes {
         release {
             minifyEnabled false
+            zipAlignEnabled true
+            //移除无用的resource文件
+            shrinkResources false
             //对library 生效，但路径和包名不混淆，需要将lib混淆文件导入到主工程混淆文件
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             // 会合并lib工程中的混淆文件
 //            consumerProguardFiles 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "${variant.productFlavors[0].name}_v${defaultConfig.versionName}_${releaseTime()}.apk"
+                }
+            }
         }
+
+        debug {
+            signingConfig signingConfigs.config
+        }
+
     }
 
     lintOptions { abortOnError false }
@@ -52,6 +126,9 @@ android {
     }
 }
 
+static def releaseTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
+}
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -69,18 +146,16 @@ dependencies {
     if (!isMain.toBoolean()) {
         implementation project(':main_module')
     }
-    if (!isUser.toBoolean())
-    {
+    if (!isUser.toBoolean()) {
         implementation project(':user_module')
 
     }
-    if (!isUi.toBoolean())
-    {
+    if (!isUi.toBoolean()) {
         implementation project(':ui_module')
         implementation project(':derobot')
     }
 
 
-    annotationProcessor  rootProject.ext.dependencies.arouter_compiler
+    annotationProcessor rootProject.ext.dependencies.arouter_compiler
 //    implementation 'com.android.support:support-v4:27.1.1'
 }
