@@ -19,7 +19,7 @@ android {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
-        flavorDimensions "versionCode"
+        flavorDimensions "versionCode","dev","stage"
         versionName rootProject.ext.android.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -59,6 +59,7 @@ android {
             // 修改 AndroidManifest.xml 里渠道变量
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "dev",
                                     app_icon           : "@drawable/didi_luncher"]
+            dimension "dev"
         }
         stage {
             applicationId "com.lyl.boon.stage"
@@ -73,6 +74,7 @@ android {
 
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "stage",
                                     app_icon           : "@mipmap/ic_launcher"]
+            dimension "stage"
         }
         prod {
             applicationId "com.lyl.boon"
@@ -88,6 +90,7 @@ android {
 
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "prod",
                                     app_icon           : "@mipmap/ic_launcher"]
+            dimension "versionCode"
         }
     }
 //    productFlavors.all {
@@ -143,6 +146,10 @@ dependencies {
 //        implementation project(':module_user')
 //        implementation project(':ui_module')
 //    }
+
+    devImplementation project(':devmodule')
+    stageImplementation project(':stagemodule')
+    prodImplementation project(':stagemodule')
     if (!isMain.toBoolean()) {
         implementation project(':main_module')
     }

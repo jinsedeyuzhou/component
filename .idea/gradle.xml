@@ -26,12 +26,15 @@
             <option value="$PROJECT_DIR$/common_logic" />
             <option value="$PROJECT_DIR$/common_module" />
             <option value="$PROJECT_DIR$/derobot" />
+            <option value="$PROJECT_DIR$/devmodule" />
             <option value="$PROJECT_DIR$/main_module" />
+            <option value="$PROJECT_DIR$/stagemodule" />
             <option value="$PROJECT_DIR$/ui_module" />
             <option value="$PROJECT_DIR$/user_module" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
+        <option name="testRunner" value="PLATFORM" />
       </GradleProjectSettings>
     </option>
   </component>
