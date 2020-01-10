@@ -167,6 +167,7 @@ public final class TimeUtil {
      *                     EEEE yyyy-MM-dd HH:mm:ss zzzz    星期五 2016-08-12 15:44:40 中国标准时间
      *                          yyyy-MM-dd HH:mm:ss.SSSZ    2016-08-12 15:44:40.461+0800
      *                        yyyy-MM-dd'T'HH:mm:ss.SSSZ    2016-08-12T15:44:40.461+0800
+     *                     yyyy-MM-dd'T'HH:mm:ss.SSSZZZZ 2016-08-12T15:44:40.000+0000
      *                      yyyy.MM.dd G 'at' HH:mm:ss z    2016.08.12 公元 at 15:44:40 CST
      *                                            K:mm a    3:44 下午
      *                                  EEE, MMM d, ''yy    星期五, 八月 12, '16
@@ -525,7 +526,7 @@ public final class TimeUtil {
      * @param format 时间格式
      * @param unit   单位类型
      *               <ul>
-
+     *
      *               </ul>
      * @return unit时间戳
      */
@@ -539,7 +540,7 @@ public final class TimeUtil {
      * @param date Date类型时间
      * @param unit 单位类型
      *             <ul>
-
+     *
      *             </ul>
      * @return unit时间戳
      */
@@ -753,7 +754,7 @@ public final class TimeUtil {
      * @param timeSpan 时间差的毫秒时间戳
      * @param unit     单位类型
      *                 <ul>
-
+     *
      *                 </ul>
      * @return 与给定时间等于时间差的时间戳
      */
@@ -769,7 +770,7 @@ public final class TimeUtil {
      * @param timeSpan 时间差的毫秒时间戳
      * @param unit     单位类型
      *                 <ul>
-
+     *
      *                 </ul>
      * @return 与给定时间等于时间差的时间戳
      */
@@ -786,7 +787,7 @@ public final class TimeUtil {
      * @param timeSpan 时间差的毫秒时间戳
      * @param unit     单位类型
      *                 <ul>
-
+     *
      *                 </ul>
      * @return 与给定时间等于时间差的时间戳
      */
@@ -801,7 +802,7 @@ public final class TimeUtil {
      * @param timeSpan 时间差的毫秒时间戳
      * @param unit     单位类型
      *                 <ul>
-
+     *
      *                 </ul>
      * @return 与给定时间等于时间差的时间戳
      */
@@ -831,7 +832,7 @@ public final class TimeUtil {
      * @param timeSpan 时间差的毫秒时间戳
      * @param unit     单位类型
      *                 <ul>
-
+     *
      *                 </ul>
      * @return 与给定时间等于时间差的时间字符串
      */
@@ -847,7 +848,7 @@ public final class TimeUtil {
      * @param timeSpan 时间差的毫秒时间戳
      * @param unit     单位类型
      *                 <ul>
-
+     *
      *                 </ul>
      * @return 与给定时间等于时间差的时间字符串
      */
@@ -864,7 +865,7 @@ public final class TimeUtil {
      * @param timeSpan 时间差的毫秒时间戳
      * @param unit     单位类型
      *                 <ul>
-
+     *
      *                 </ul>
      * @return 与给定时间等于时间差的时间字符串
      */
@@ -880,7 +881,7 @@ public final class TimeUtil {
      * @param timeSpan 时间差的毫秒时间戳
      * @param unit     单位类型
      *                 <ul>
-
+     *
      *                 </ul>
      * @return 与给定时间等于时间差的时间字符串
      */
@@ -897,7 +898,7 @@ public final class TimeUtil {
      * @param timeSpan 时间差的毫秒时间戳
      * @param unit     单位类型
      *                 <ul>
-
+     *
      *                 </ul>
      * @return 与给定时间等于时间差的时间字符串
      */
@@ -912,7 +913,7 @@ public final class TimeUtil {
      * @param timeSpan 时间差的毫秒时间戳
      * @param unit     单位类型
      *                 <ul>
-
+     *
      *                 </ul>
      * @return 与给定时间等于时间差的Date
      */
@@ -928,7 +929,7 @@ public final class TimeUtil {
      * @param timeSpan 时间差的毫秒时间戳
      * @param unit     单位类型
      *                 <ul>
-
+     *
      *                 </ul>
      * @return 与给定时间等于时间差的Date
      */
@@ -945,7 +946,7 @@ public final class TimeUtil {
      * @param timeSpan 时间差的毫秒时间戳
      * @param unit     单位类型
      *                 <ul>
-
+     *
      *                 </ul>
      * @return 与给定时间等于时间差的Date
      */
@@ -960,7 +961,7 @@ public final class TimeUtil {
      * @param timeSpan 时间差的毫秒时间戳
      * @param unit     单位类型
      *                 <ul>
-
+     *
      *                 </ul>
      * @return 与给定时间等于时间差的Date
      */
@@ -974,7 +975,7 @@ public final class TimeUtil {
      * @param timeSpan 时间差的毫秒时间戳
      * @param unit     单位类型
      *                 <ul>
-
+     *
      *                 </ul>
      * @return 与当前时间等于时间差的时间戳
      */
@@ -989,7 +990,7 @@ public final class TimeUtil {
      * @param timeSpan 时间差的毫秒时间戳
      * @param unit     单位类型
      *                 <ul>
-
+     *
      *                 </ul>
      * @return 与当前时间等于时间差的时间字符串
      */
@@ -1005,7 +1006,7 @@ public final class TimeUtil {
      * @param format   时间格式
      * @param unit     单位类型
      *                 <ul>
-
+     *
      *                 </ul>
      * @return 与当前时间等于时间差的时间字符串
      */
@@ -1019,7 +1020,7 @@ public final class TimeUtil {
      * @param timeSpan 时间差的毫秒时间戳
      * @param unit     单位类型
      *                 <ul>
-
+     *
      *                 </ul>
      * @return 与当前时间等于时间差的Date
      */
@@ -1848,27 +1849,22 @@ public final class TimeUtil {
     }
 
     /**
-     * @param oldDate
+     * 解析 2020-01-10T01:22:50.000+0000 时间格式
+     *
+     * @param time
      * @return
      */
-    public static String dealDateFormat(String oldDate) {
-        if (oldDate==null|| TextUtils.isEmpty(oldDate))
+    public static String getRealTime(String time) {
+        if (time == null || TextUtils.isEmpty(time))
             return "";
-        Date date1 = null;
-        DateFormat df2 = null;
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.SSSZZZZ");
+        DateFormat df2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = null;
         try {
-            DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-            Date date = df.parse(oldDate);
-            SimpleDateFormat df1 = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.UK);
-            date1 = df1.parse(date.toString());
-            df2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            date = df.parse(time);
         } catch (ParseException e) {
-
             e.printStackTrace();
         }
-        if (date1 == null) {
-            return "";
-        }
-        return df2.format(date1);
+        return df2.format(date);
     }
 }
