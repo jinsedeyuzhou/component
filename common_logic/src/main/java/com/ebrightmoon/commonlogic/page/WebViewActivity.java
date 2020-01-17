@@ -1,6 +1,5 @@
 package com.ebrightmoon.commonlogic.page;
 
-import android.annotation.SuppressLint;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.SslErrorHandler;
-import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
