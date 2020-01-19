@@ -8,7 +8,7 @@ import com.ebrightmoon.user.page.LoginUserActivity;
 import com.ebrightmoon.user.page.RegisterUserActivity;
 import com.ebrightmoon.user.page.SettingUserActivity;
 
-public class MainActivity extends BaseActivity {
+public class UserMainActivity extends BaseActivity {
 
 
     @Override

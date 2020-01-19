@@ -9,7 +9,7 @@
 
 
 
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".UserMainActivity"/>
 
         <activity
             android:name=".page.LoginUserActivity"
