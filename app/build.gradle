@@ -12,6 +12,10 @@ kapt {
 androidExtensions {
     experimental = true
 }
+Properties properties = new Properties()
+InputStream inputStream = project.rootProject.file('local.properties').newDataInputStream() ;
+properties.load( inputStream )
+
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     defaultConfig {
@@ -19,7 +23,7 @@ android {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
-        flavorDimensions "versionCode","dev","stage"
+        flavorDimensions "dev","versionCode","stage"
         versionName rootProject.ext.android.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
@@ -141,26 +145,30 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
 //    implementation rootProject.ext.dependencies.multidex
-    implementation project(':common_logic')
 //    if (isModule.toBoolean()) {
 //        implementation project(':main_module')
 //        implementation project(':module_user')
 //        implementation project(':ui_module')
 //    }
+// 引用本的项目
+//    devImplementation project(':devmodule')
+//    stageImplementation project(':stagemodule')
+//    prodImplementation project(':stagemodule')
 
-    devImplementation project(':devmodule')
-    stageImplementation project(':stagemodule')
-    prodImplementation project(':stagemodule')
+    // 也可以分渠道引用网络的。因为这里都相同，所以地址也就都一样了
+//    devImplementation 'com.roughike:bottom-bar:2.0.2'
+//    stageImplementation 'com.roughike:bottom-bar:2.0.2'
+//    prodImplementation 'com.roughike:bottom-bar:2.0.2'
     if (!isMain.toBoolean()) {
-        implementation project(':main_module')
+        api project(':main_module')
     }
     if (!isUser.toBoolean()) {
-        implementation project(':user_module')
+        api project(':user_module')
 
     }
     if (!isUi.toBoolean()) {
-        implementation project(':ui_module')
-        implementation project(':derobot')
+        api project(':ui_module')
+        api project(':derobot')
     }
 
 

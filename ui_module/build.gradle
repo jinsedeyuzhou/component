@@ -26,7 +26,7 @@ android {
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
-
+//        flavorDimensions "dev","versionCode","stage"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         //ARouter
@@ -64,6 +64,20 @@ android {
     dataBinding {
         enabled = true
     }
+
+//    productFlavors {
+//        dev {
+//            dimension "dev"
+//        }
+//        stage {
+//            dimension "stage"
+//        }
+//        prod {
+//            dimension "versionCode"
+//        }
+//    }
+
+
 }
 
 dependencies {
@@ -81,6 +95,12 @@ dependencies {
     implementation project(':baseLib:viewanimations')
     implementation project(':cameralib')
     kapt rootProject.ext.dependencies.arouter_compiler
+
+//   暂时不能根据渠道变更，需要注掉
+//    devImplementation project(':devmodule')
+//    stageImplementation project(':stagemodule')
+//    prodImplementation project(':stagemodule')
+
 
     implementation project(':common_logic')
     implementation project(':derobot')

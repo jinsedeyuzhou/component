@@ -53,7 +53,11 @@ public class UiHomeActivity extends BaseActivity {
         tabTitles = new ArrayList();
         tabTitles.add("发现");
         tabTitles.add("消息");
+        tabTitles.add("消息");
+        tabTitles.add("消息");
         fragmentList = new ArrayList();
+        fragmentList.add(new UiHomeFragment());
+        fragmentList.add(new UiAccountFragment());
         fragmentList.add(new UiHomeFragment());
         fragmentList.add(new UiAccountFragment());
 
@@ -63,7 +67,7 @@ public class UiHomeActivity extends BaseActivity {
 //        viewPager.setCurrentItem(3);
         viewPager.setScrollable(true);
         //默认 >3 的选中效果会影响ViewPager的滑动切换时的效果，故利用反射去掉
-        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
+//        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -72,15 +76,17 @@ public class UiHomeActivity extends BaseActivity {
                             viewPager.setCurrentItem(0);
                         } else if (item.getItemId() == R.id.navigation_home) {
                             viewPager.setCurrentItem(1);
+                        } else if (item.getItemId() == R.id.navigation_practice1) {
+                            viewPager.setCurrentItem(2);
+                        } else if (item.getItemId() == R.id.navigation_home1) {
+                            viewPager.setCurrentItem(3);
                         }
 
                         return false;
                     }
                 });
 
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
-
-        {
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 

@@ -35,7 +35,7 @@ ext {
 
             eventbus = "3.0.0",
 
-            multidex = "1.0.1",
+            multidex = "1.0.3",
 
             arouter_compiler = "1.2.2",
             arouter_api = "1.5.0",

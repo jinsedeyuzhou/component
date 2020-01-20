@@ -90,7 +90,7 @@ public class HttpUtils {
 //                .build());
 //        Glide.with(context)
 //                .load(glideUrl)
-//                .error(R.mipmap.ic_launcher)
+//                .error(R.mipmap.launcher)
 //                .into(imageView);
 //    }
 //
