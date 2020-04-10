@@ -2,8 +2,8 @@ package com.ebrightmoon.main.adapter;
 
 import com.ebrightmoon.common.adapter.recycler.absrecyclerview.ItemViewDelegate;
 import com.ebrightmoon.common.adapter.recycler.absrecyclerview.ViewHolder;
+import com.ebrightmoon.data.pojo.NewsFeed;
 import com.ebrightmoon.main.R;
-import com.ebrightmoon.main.entity.NewsFeed;
 
 
 public class NewsFeedItemDelagate implements ItemViewDelegate<NewsFeed> {

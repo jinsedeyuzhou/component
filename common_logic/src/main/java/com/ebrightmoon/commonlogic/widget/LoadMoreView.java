@@ -1,4 +1,4 @@
-package com.ebrightmoon.main.view;
+package com.ebrightmoon.commonlogic.widget;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.ebrightmoon.common.util.DensityUtils;
 import com.ebrightmoon.common.view.ProgressDrawable;
-import com.ebrightmoon.main.R;
+import com.ebrightmoon.commonlogic.R;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
@@ -64,7 +64,7 @@ public class LoadMoreView extends RelativeLayout {
         mIvProgress = new ImageView(context);
         progressParams.gravity = Gravity.CENTER_VERTICAL;
         mIvProgress.animate().setInterpolator(new LinearInterpolator());
-        mIvProgress.setImageResource(R.mipmap.ic_launcher);
+        mIvProgress.setImageResource(R.drawable.empty);
         mLlContent.addView(mIvProgress, progressParams);
 
 

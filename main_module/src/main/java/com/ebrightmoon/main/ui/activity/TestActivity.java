@@ -9,6 +9,7 @@ import com.ebrightmoon.common.base.BaseActivity;
 import com.ebrightmoon.main.R;
 import com.ebrightmoon.main.ui.fragment.FragmentTest1;
 import com.ebrightmoon.main.ui.fragment.FragmentTest2;
+import com.ebrightmoon.main.ui.fragment.NewsListFragment;
 
 /**
  * Time: 2020-04-09
@@ -23,12 +24,12 @@ import com.ebrightmoon.main.ui.fragment.FragmentTest2;
 public class TestActivity extends BaseActivity {
 
 
-    private FragmentTest1 fragmentTest1;
+    private NewsListFragment fragmentTest1;
     private FragmentTest2 fragmentTest2;
 
     @Override
     public void initData() {
-        fragmentTest1 = new FragmentTest1();
+        fragmentTest1 = new NewsListFragment();
         fragmentTest2 = new FragmentTest2();
         getSupportFragmentManager()
                 .beginTransaction()

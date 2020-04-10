@@ -25,10 +25,10 @@ import com.ebrightmoon.common.view.flowlayout.TagAdapter;
 import com.ebrightmoon.common.view.flowlayout.TagFlowLayout;
 import com.ebrightmoon.data.dao.DbHelper;
 import com.ebrightmoon.data.gen.SearchHistoryDao;
+import com.ebrightmoon.data.pojo.NewsFeed;
 import com.ebrightmoon.data.pojo.SearchHistory;
 import com.ebrightmoon.main.R;
 import com.ebrightmoon.main.adapter.NewsFeedAdapter;
-import com.ebrightmoon.main.entity.NewsFeed;
 
 import java.util.ArrayList;
 import java.util.List;

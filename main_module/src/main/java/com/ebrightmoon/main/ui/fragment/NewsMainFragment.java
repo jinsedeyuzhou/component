@@ -17,11 +17,11 @@ import com.ebrightmoon.common.adapter.recycler.absrecyclerview.HeaderAndFooterWr
 import com.ebrightmoon.common.adapter.recycler.absrecyclerview.LoadMoreWrapper;
 import com.ebrightmoon.common.base.BaseFragment;
 import com.ebrightmoon.common.util.Tools;
+import com.ebrightmoon.commonlogic.widget.LoadMoreView;
+import com.ebrightmoon.data.pojo.NewsFeed;
 import com.ebrightmoon.main.R;
 import com.ebrightmoon.main.adapter.NewsFeedAdapter;
 import com.ebrightmoon.main.entity.Channel;
-import com.ebrightmoon.main.entity.NewsFeed;
-import com.ebrightmoon.main.view.LoadMoreView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,8 +68,8 @@ public class NewsMainFragment extends BaseFragment {
         newsFeedList.add(new NewsFeed());
         newsFeedList.add(new NewsFeed());
         newsFeedList.add(new NewsFeed());
-        mainSwipe = view.findViewById(R.id.main_swipe);
-        mainRecyclerView = view.findViewById(R.id.main_recyclerView);
+        mainSwipe = view.findViewById(R.id.swipe);
+        mainRecyclerView = view.findViewById(R.id.recyclerView);
         mainSwipe.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light,
                 android.R.color.holo_orange_light, android.R.color.holo_red_light);
         mainSwipe.setSize(SwipeRefreshLayout.DEFAULT);
