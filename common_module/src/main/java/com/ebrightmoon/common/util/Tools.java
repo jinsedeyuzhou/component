@@ -2,11 +2,10 @@ package com.ebrightmoon.common.util;
 
 import android.content.Context;
 import android.content.res.AssetManager;
-import android.os.Build;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
-import android.webkit.WebSettings;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,7 +20,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
+import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE;
 
 /**
  * Created by Administrator on 2017/10/24.

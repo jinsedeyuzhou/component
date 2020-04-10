@@ -1,6 +1,6 @@
 package com.ebrightmoon.derobot.reboot;
 
-import android.support.v4.content.FileProvider;
+import androidx.core.content.FileProvider;
 
 /**
  *  on 2018/11/14.

@@ -3,11 +3,12 @@ package com.ebrightmoon.common.widget.colortrackview;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
+import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import com.google.android.material.tabs.TabLayout;
 
 import java.lang.reflect.Field;
 

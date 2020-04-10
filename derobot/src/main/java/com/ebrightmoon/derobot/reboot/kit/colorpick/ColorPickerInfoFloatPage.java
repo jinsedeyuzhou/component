@@ -2,7 +2,7 @@ package com.ebrightmoon.derobot.reboot.kit.colorpick;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
-import android.support.annotation.ColorInt;
+import androidx.annotation.ColorInt;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;

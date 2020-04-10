@@ -9,7 +9,7 @@
 
 package com.ebrightmoon.derobot.reboot.kit.network.httpurlconnection.inspector;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.Pair;
 
 import com.ebrightmoon.derobot.reboot.kit.network.core.NetworkInterpreter;

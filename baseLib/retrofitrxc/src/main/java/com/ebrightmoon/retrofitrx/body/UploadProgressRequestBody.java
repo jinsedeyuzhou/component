@@ -1,6 +1,6 @@
 package com.ebrightmoon.retrofitrx.body;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.ebrightmoon.retrofitrx.callback.UCallback;
 

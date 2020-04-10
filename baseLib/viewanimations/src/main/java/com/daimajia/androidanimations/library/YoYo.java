@@ -27,7 +27,7 @@ package com.daimajia.androidanimations.library;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
-import android.support.v4.view.ViewCompat;
+import androidx.core.view.ViewCompat;
 import android.view.View;
 import android.view.animation.Interpolator;
 

@@ -1,7 +1,7 @@
 package com.ebrightmoon.common.adapter.recycler.absrecyclerview;
 
-import android.support.v4.util.SparseArrayCompat;
 
+import androidx.collection.SparseArrayCompat;
 
 /**
  * Created by wyy on 16/6/22.

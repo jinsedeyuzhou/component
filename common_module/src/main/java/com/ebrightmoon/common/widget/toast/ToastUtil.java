@@ -2,7 +2,7 @@ package com.ebrightmoon.common.widget.toast;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.v4.app.NotificationManagerCompat;
+import androidx.core.app.NotificationManagerCompat;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.widget.Toast;

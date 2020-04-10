@@ -8,15 +8,15 @@ ext {
             targetSdkVersion : 28,
             versionCode      : 1,
             versionName      : "1.0",
-            applicationId  : "com.ebrightmoon.android"
+            applicationId    : "com.ebrightmoon.android"
     ]
 
     libsVersion = [
-            kotlin_version = '1.2.71',
+            kotlin_version = '1.3.31',
             supportLibraryVersion = "27.1.1",
             support_v4 = "28.0.0",
             constraint_layout = "1.1.3",
-            design = "27.1.1",
+            design = "1.1.0",
 
             retrofit = "2.3.0",
             retrofit_converter_gson = "2.3.0",
@@ -39,25 +39,22 @@ ext {
 
             arouter_compiler = "1.2.2",
             arouter_api = "1.5.0",
-            logger="2.2.0",
-            greendao="3.2.2",
-            circleimageview="2.2.0",
-            cardview="27.1.1",
-            rxbus="1.0.6"
+            logger = "2.2.0",
+            greendao = "3.2.2",
+            circleimageview = "2.2.0",
+            cardview = "27.1.1",
+            rxbus = "1.0.6"
     ]
-
-
-
 
 
     dependencies = [
             //V7支持包
-            appcompat_v7            : "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion",
-            support_v4            : "com.android.support:support-v4:$rootProject.support_v4",
+            appcompat_v7            : "androidx.appcompat:appcompat:1.0.0",
+            support_v4              : "androidx.legacy:legacy-support-v4:1.0.0",
             // design 支持包
-            design                  : "com.android.support:design:$rootProject.supportLibraryVersion",
-            constraint_layout       : "com.android.support.constraint:constraint-layout:$rootProject.constraint_layout",
-            cardview       : "com.android.support:cardview-v7:$rootProject.cardview",
+            design                  : "com.google.android.material:material:$rootProject.design",
+            constraint_layout       : "androidx.constraintlayout:constraintlayout:1.1.3",
+            cardview                : "androidx.cardview:cardview:1.0.0",
             //网络请求框架有关
             retrofit                : "com.squareup.retrofit2:retrofit:$rootProject.retrofit",
             retrofit_converter_gson : "com.squareup.retrofit2:converter-gson:$rootProject.retrofit_converter_gson",
@@ -67,7 +64,7 @@ ext {
             okhttp                  : "com.squareup.okhttp3:okhttp:$rootProject.okhttp",
             rxandroid               : "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroid",
             rxjava                  : "io.reactivex.rxjava2:rxjava:$rootProject.rxjava",
-            logging_interceptor         : "com.squareup.okhttp3:logging-interceptor:$rootProject.logging_interceptor",
+            logging_interceptor     : "com.squareup.okhttp3:logging-interceptor:$rootProject.logging_interceptor",
             //gson 解析
             gson                    : "com.google.code.gson:gson:$rootProject.gson",
             //图片加载框架
@@ -76,22 +73,22 @@ ext {
             //主线通信
             eventbus                : "org.greenrobot:eventbus:$rootProject.eventbus",
             //rxbus
-            rxbus                : "com.hwangjr.rxbus:rxbus:$rootProject.rxbus",
+            rxbus                   : "com.hwangjr.rxbus:rxbus:$rootProject.rxbus",
             //分包
-            multidex                : "com.android.support:multidex:$rootProject.multidex",
+            multidex                : "androidx.multidex:multidex:2.0.0",
             //圆形头像
-            circleimage               : "de.hdodenhof:circleimageview:$rootProject.circleimageview",
+            circleimage             : "de.hdodenhof:circleimageview:$rootProject.circleimageview",
             //下拉加载
             //阿里router
             arouter_compiler        : "com.alibaba:arouter-compiler:$rootProject.arouter_compiler",
             arouter_api             : "com.alibaba:arouter-api:$rootProject.arouter_api",
-            "tencent-bugly"                  : 'com.tencent.bugly:crashreport:latest.release',
+            "tencent-bugly"         : 'com.tencent.bugly:crashreport:latest.release',
             //安卓调试神器-Stetho
-            "stetho"                         : 'com.facebook.stetho:stetho:1.5.0',
-            "stetho-okhttp3"                 : 'com.facebook.stetho:stetho-okhttp3:1.5.0',
+            "stetho"                : 'com.facebook.stetho:stetho:1.5.0',
+            "stetho-okhttp3"        : 'com.facebook.stetho:stetho-okhttp3:1.5.0',
             //日志系统
             logger                  : 'com.orhanobut:logger:2.2.0',
 //            orhanobut_logger                  : "com.orhanobut:logger:$rootProject.logger",
-            greendao                             :"org.greenrobot:greendao:$rootProject.greendao"
+            greendao                : "org.greenrobot:greendao:$rootProject.greendao"
     ]
 }

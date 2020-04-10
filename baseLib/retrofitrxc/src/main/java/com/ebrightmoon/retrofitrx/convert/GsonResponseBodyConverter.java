@@ -1,12 +1,11 @@
 package com.ebrightmoon.retrofitrx.convert;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.ebrightmoon.retrofitrx.common.ResponseHelper;
 import com.ebrightmoon.retrofitrx.response.ResponseResult;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
 
 import java.io.IOException;
 import java.net.UnknownServiceException;

@@ -1,6 +1,6 @@
 package com.ebrightmoon.derobot.reboot.kit.network.common;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.ebrightmoon.derobot.reboot.kit.network.NetworkManager;
 import com.ebrightmoon.derobot.reboot.kit.network.bean.NetworkRecord;

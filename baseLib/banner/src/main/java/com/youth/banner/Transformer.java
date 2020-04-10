@@ -1,6 +1,6 @@
 package com.youth.banner;
 
-import android.support.v4.view.ViewPager.PageTransformer;
+import androidx.viewpager.widget.ViewPager.PageTransformer;
 
 import com.youth.banner.transformer.AccordionTransformer;
 import com.youth.banner.transformer.BackgroundToForegroundTransformer;

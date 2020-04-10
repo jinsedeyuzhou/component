@@ -5,9 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +49,6 @@ public abstract class BaseFragment
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        LogUtils.d(TAG, "onCreateView");
         mConvertView = inflater.inflate(getLayoutID(), container, false);
         return mConvertView;
     }
@@ -68,11 +67,12 @@ public abstract class BaseFragment
         initView(view);
         bindEvent();
         initData(savedInstanceState);
-        boolean isVis = isHidden() || getUserVisibleHint();
-        if (isVis && mIsFirstVisible) {
-            lazyLoad();
-            mIsFirstVisible = false;
-        }
+        // 暂时没有用
+//        boolean isVis = isHidden() || getUserVisibleHint();
+//        if (isVis && mIsFirstVisible) {
+//            lazyLoad();
+//            mIsFirstVisible = false;
+//        }
     }
 
 
@@ -184,6 +184,7 @@ public abstract class BaseFragment
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
+        LogUtils.d(TAG, "onHiddenChanged"+hidden);
         if (!hidden) {
             onVisible();
         } else {
@@ -194,6 +195,7 @@ public abstract class BaseFragment
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
+        LogUtils.d(TAG, "setUserVisibleHint"+isVisibleToUser);
         if (isResumed())
             if (isVisibleToUser) {
                 onVisible();

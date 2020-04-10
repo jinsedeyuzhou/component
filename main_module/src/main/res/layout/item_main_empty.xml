@@ -10,8 +10,8 @@
         android:id="@+id/iv_norder_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
         android:src="@mipmap/ic_nodata" />
 
     <TextView
@@ -21,18 +21,19 @@
         android:layout_below="@+id/iv_norder_data"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="没有学习中课程"
+        android:text="没有数据"
         android:textColor="#666666"
         android:textSize="@dimen/text_size_16" />
+
     <TextView
+        android:id="@+id/tv_retry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_norder_data"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
-        android:textSize="@dimen/text_size_12"
         android:layout_marginBottom="60dp"
-        android:textColor="#999999"
-        android:layout_below="@+id/tv_norder_data"
         android:text="快去学习课程吧"
-        />
+        android:textColor="#999999"
+        android:textSize="@dimen/text_size_12" />
 </RelativeLayout>

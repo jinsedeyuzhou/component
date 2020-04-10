@@ -3,11 +3,8 @@ package com.ebrightmoon.ui.page.fragment;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.ebrightmoon.common.base.BaseFragment;
 import com.ebrightmoon.ui.R;
@@ -20,19 +17,6 @@ import com.ebrightmoon.ui.page.test.UITouchActivity;
 import com.ebrightmoon.ui.page.test.UiDialogActivity;
 import com.ebrightmoon.ui.page.test.UiHttpActivity;
 import com.ebrightmoon.ui.page.test.UIToastyActivity;
-
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
-
-import java.io.File;
-import java.util.ArrayList;
-
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
 
 public class UiHomeFragment extends BaseFragment {
 

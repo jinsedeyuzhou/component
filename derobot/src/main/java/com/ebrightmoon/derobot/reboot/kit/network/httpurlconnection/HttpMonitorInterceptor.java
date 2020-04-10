@@ -1,6 +1,6 @@
 package com.ebrightmoon.derobot.reboot.kit.network.httpurlconnection;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.Pair;
 
 import com.ebrightmoon.derobot.reboot.kit.network.NetworkManager;

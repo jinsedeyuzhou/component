@@ -1,6 +1,6 @@
 package com.ebrightmoon.commonlogic.sidebar;
 
-import android.support.annotation.IntRange;
+import androidx.annotation.IntRange;
 
 /**
  * Provides information about a sorted scrollable collection with sectioned contents.

@@ -1,7 +1,7 @@
 package com.ebrightmoon.ui.page.databinding;
 
-import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
+import androidx.databinding.DataBindingUtil;
+
 import android.os.Bundle;
 import android.view.View;
 

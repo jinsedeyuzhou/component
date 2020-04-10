@@ -1,7 +1,7 @@
 package com.ebrightmoon.main.adapter;
 
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
+import androidx.fragment.app.FragmentManager;
 
 
 import com.ebrightmoon.common.base.BaseFragment;

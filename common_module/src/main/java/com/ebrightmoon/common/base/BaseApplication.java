@@ -3,11 +3,9 @@ package com.ebrightmoon.common.base;
 import android.app.Application;
 import android.content.Context;
 import android.os.Process;
-import android.support.multidex.MultiDex;
-import android.text.TextUtils;
+import androidx.multidex.MultiDex;
 
 import com.ebrightmoon.common.common.CommonApplication;
-import com.ebrightmoon.common.service.InitializeService;
 import com.ebrightmoon.common.util.LogUtils;
 import com.ebrightmoon.common.widget.imageloader.LoaderFactory;
 import com.facebook.stetho.Stetho;

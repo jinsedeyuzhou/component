@@ -25,7 +25,7 @@ android {
         versionCode rootProject.ext.android.versionCode
         flavorDimensions "dev","versionCode","stage"
         versionName rootProject.ext.android.versionName
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
 
@@ -141,8 +141,8 @@ static def releaseTime() {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
 
 //    implementation rootProject.ext.dependencies.multidex
 //    if (isModule.toBoolean()) {

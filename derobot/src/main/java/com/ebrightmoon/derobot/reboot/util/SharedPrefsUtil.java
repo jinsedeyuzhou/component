@@ -2,7 +2,7 @@ package com.ebrightmoon.derobot.reboot.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 /**
  *  on 2018/9/14.

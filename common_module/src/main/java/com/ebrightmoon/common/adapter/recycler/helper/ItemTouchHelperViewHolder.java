@@ -16,11 +16,11 @@
 
 package com.ebrightmoon.common.adapter.recycler.helper;
 
-import android.support.v7.widget.helper.ItemTouchHelper;
+import androidx.recyclerview.widget.ItemTouchHelper;
 
 /**
  * Interface to notify an item ViewHolder of relevant callbacks from {@link
- * android.support.v7.widget.helper.ItemTouchHelper.Callback}.  设置选中和和非选中背景颜色
+ * androidx.recyclerview.widget.ItemTouchHelper.Callback}.  设置选中和和非选中背景颜色
  *
  * @author Paul Burke (ipaulpro)
  */

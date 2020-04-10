@@ -3,20 +3,24 @@ package com.ebrightmoon.common.widget.colortrackview;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.ebrightmoon.common.R;
+import com.google.android.material.tabs.TabLayout;
+import androidx.viewpager.widget.ViewPager;
+
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
 
-import static android.support.v4.view.ViewPager.SCROLL_STATE_DRAGGING;
-import static android.support.v4.view.ViewPager.SCROLL_STATE_IDLE;
-import static android.support.v4.view.ViewPager.SCROLL_STATE_SETTLING;
+import static androidx.viewpager.widget.ViewPager.SCROLL_STATE_DRAGGING;
+import static androidx.viewpager.widget.ViewPager.SCROLL_STATE_IDLE;
+import static androidx.viewpager.widget.ViewPager.SCROLL_STATE_SETTLING;
 
 /**
  * Created by Administrator on 2017/4/14 0014.
@@ -47,28 +51,28 @@ public class ColorTrackTabLayout extends TabLayout {
     public ColorTrackTabLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         if (attrs != null) {
-            TypedArray a = context.obtainStyledAttributes(attrs, android.support.design.R.styleable.TabLayout,
-                    defStyleAttr, android.support.design.R.style.Widget_Design_TabLayout);
+            TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TabLayout,
+                    defStyleAttr,R.style.Widget_Design_TabLayout);
             try {
-                int tabTextAppearance = a.getResourceId(android.support.design.R.styleable.TabLayout_tabTextAppearance,
-                        android.support.design.R.style.TextAppearance_Design_Tab);
+                int tabTextAppearance = a.getResourceId(R.styleable.TabLayout_tabTextAppearance,
+                        R.style.TextAppearance_Design_Tab);
 
                 // Text colors/sizes come from the text appearance first
                 final TypedArray ta = context.obtainStyledAttributes(tabTextAppearance,
-                        android.support.v7.appcompat.R.styleable.TextAppearance);
+                        R.styleable.TextAppearance);
                 try {
                     //Tab字体大小
                     mTabTextSize = ta.getDimensionPixelSize(
-                            android.support.v7.appcompat.R.styleable.TextAppearance_android_textSize, 0);
+                            R.styleable.TextAppearance_android_textSize, 0);
                     //Tab文字颜色
                     mTabTextColor = ta.getColor(
-                            android.support.v7.appcompat.R.styleable.TextAppearance_android_textColor, 0);
+                            R.styleable.TextAppearance_android_textColor, 0);
                 } finally {
                     ta.recycle();
                 }
 
                 //Tab文字选中颜色
-                mTabSelectedTextColor = a.getColor(android.support.design.R.styleable.TabLayout_tabSelectedTextColor, Color.BLACK);
+                mTabSelectedTextColor = a.getColor(R.styleable.TabLayout_tabSelectedTextColor, Color.BLACK);
 
             } finally {
                 a.recycle();

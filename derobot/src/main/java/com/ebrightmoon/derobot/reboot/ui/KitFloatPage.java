@@ -1,11 +1,12 @@
 package com.ebrightmoon.derobot.reboot.ui;
 
 import android.content.Context;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.ebrightmoon.derobot.reboot.Derobot;
 import com.ebrightmoon.derobot.R;

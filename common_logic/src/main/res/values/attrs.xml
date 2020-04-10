@@ -2,9 +2,34 @@
 <resources>
 
     <declare-styleable name="BubbleScroller">
-        <attr name="bubbleScroller_textSize" format="reference"/>
-        <attr name="bubbleScroller_textColor" format="reference"/>
-        <attr name="bubbleScroller_highlightColor" format="reference"/>
-        <attr name="bubbleScroller_highlightSize" format="reference"/>
+        <attr name="bubbleScroller_textSize" format="reference" />
+        <attr name="bubbleScroller_textColor" format="reference" />
+        <attr name="bubbleScroller_highlightColor" format="reference" />
+        <attr name="bubbleScroller_highlightSize" format="reference" />
+    </declare-styleable>
+
+
+    <declare-styleable name="MultiStateView">
+        <attr name="emptyView" format="reference" />
+        <attr name="loadingView" format="reference" />
+        <attr name="errorView" format="reference" />
+        <attr name="contentView" format="reference" />
+        <attr name="viewState" format="enum">
+            <enum name="content" value="10001" />
+            <enum name="loading" value="10002" />
+            <enum name="empty" value="10003" />
+            <enum name="fail" value="10004" />
+        </attr>
+
+        <attr name="animateViewChanges" format="boolean" />
+    </declare-styleable>
+
+
+    <declare-styleable name="SimpleMultiStateView">
+        <attr name="empty" format="integer" />
+        <attr name="loading" format="integer" />
+        <attr name="fail" format="integer" />
+        <attr name="nonetwork" format="integer" />
+
     </declare-styleable>
 </resources>

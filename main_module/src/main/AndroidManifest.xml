@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ebrightmoon.main">
 
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+
     <application>
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -17,6 +19,9 @@
         <activity
             android:name=".ui.activity.SearchMainActivity"
             android:screenOrientation="portrait" />
+
+        <activity android:name=".ui.activity.TestActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

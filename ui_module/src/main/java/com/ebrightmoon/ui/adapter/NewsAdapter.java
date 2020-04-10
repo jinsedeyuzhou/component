@@ -1,8 +1,12 @@
 package com.ebrightmoon.ui.adapter;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.lifecycle.Lifecycle;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import java.util.ArrayList;
 
@@ -12,32 +16,41 @@ import java.util.ArrayList;
  * @author wyy
  * 
  */
-public class NewsAdapter extends FragmentPagerAdapter {
+public class NewsAdapter extends FragmentStateAdapter {
 
 	private ArrayList<Fragment> list;
-	private ArrayList<String> titles;
 
-	public NewsAdapter(FragmentManager fm, ArrayList<Fragment> list, ArrayList<String> titles) {
-		super(fm);
+
+
+
+	public NewsAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, ArrayList<Fragment> list) {
+		super(fragmentManager, lifecycle);
 		this.list = list;
-		this.titles=titles;
 	}
 
-
+	@NonNull
 	@Override
-	public Fragment getItem(int position) {
+	public Fragment createFragment(int position) {
 		return list.get(position);
 	}
 
 	@Override
-	public int getCount() {
+	public int getItemCount() {
 		return list.size();
 	}
 
-
+	/**
+	 * 更新fragment需要重写如下方法
+	 * @param position
+	 * @return
+	 */
 	@Override
-	public CharSequence getPageTitle(int position) {
-		return titles.get(position);
+	public long getItemId(int position) {
+		return super.getItemId(position);
 	}
 
+	@Override
+	public boolean containsItem(long itemId) {
+		return super.containsItem(itemId);
+	}
 }

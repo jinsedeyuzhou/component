@@ -29,6 +29,8 @@ import com.ebrightmoon.retrofitrx.subscriber.DownCallbackSubscriber;
 import java.io.File;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.security.cert.CertificateException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -98,7 +100,7 @@ public class AppClient {
         okHttpBuilder.sslSocketFactory(new SSLUtils(trustAllCert), trustAllCert);
 
 //        设置代理
-//        okHttpBuilder .proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress("192.168.1.185", 82)));
+        okHttpBuilder .proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress("192.168.1.185", 82)));
 //        okHttpBuilder.dns(new OkHttpDns());
 
         retrofitBuilder = new Retrofit.Builder();

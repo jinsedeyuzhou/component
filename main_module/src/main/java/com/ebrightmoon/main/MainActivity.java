@@ -7,6 +7,7 @@ import android.view.View;
 import com.ebrightmoon.common.base.BaseActivity;
 import com.ebrightmoon.main.arouter.RouterCenter;
 import com.ebrightmoon.main.ui.activity.HomeMainActivity;
+import com.ebrightmoon.main.ui.activity.TestActivity;
 import com.ebrightmoon.retrofitrx.callback.ACallback;
 
 public class MainActivity extends BaseActivity {
@@ -31,6 +32,12 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+        findViewById(R.id.tv_test).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(mContext, TestActivity.class));
+            }
+        });
     }
 
     @Override

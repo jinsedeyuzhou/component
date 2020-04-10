@@ -1,6 +1,6 @@
 package com.ebrightmoon.derobot.reboot.kit.custom;
 
-import android.support.annotation.StringRes;
+import androidx.annotation.StringRes;
 import android.view.View;
 
 public class PageDataItem {

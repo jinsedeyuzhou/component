@@ -1,10 +1,12 @@
 package com.ebrightmoon.ui.page;
 
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.view.ViewPager;
+import androidx.annotation.NonNull;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
+
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -16,10 +18,9 @@ import com.ebrightmoon.ui.adapter.NewsAdapter;
 import com.ebrightmoon.ui.page.fragment.UiAccountFragment;
 import com.ebrightmoon.ui.page.fragment.UiHomeFragment;
 import com.ebrightmoon.ui.utils.BottomNavigationViewHelper;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
-
-import kotlin.jvm.JvmField;
 
 /**
  * UI相关主页
@@ -27,7 +28,7 @@ import kotlin.jvm.JvmField;
 
 @Route(path = RouterURLS.UI_HOME)
 public class UiHomeActivity extends BaseActivity {
-    private CustomViewPager viewPager;
+    private ViewPager2 viewpager2;
     private BottomNavigationView bottomNavigationView;
     private MenuItem menuItem;
     private ArrayList tabTitles;
@@ -47,8 +48,8 @@ public class UiHomeActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        viewPager = (CustomViewPager) findViewById(R.id.viewpager);
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        viewpager2 = findViewById(R.id.viewpager2);
+        bottomNavigationView =  findViewById(R.id.bottom_navigation);
 
         tabTitles = new ArrayList();
         tabTitles.add("发现");
@@ -62,10 +63,9 @@ public class UiHomeActivity extends BaseActivity {
         fragmentList.add(new UiAccountFragment());
 
 
-        newsAdapter = new NewsAdapter(getSupportFragmentManager(), fragmentList, tabTitles);
-        viewPager.setAdapter(newsAdapter);
-//        viewPager.setCurrentItem(3);
-        viewPager.setScrollable(true);
+        newsAdapter = new NewsAdapter(getSupportFragmentManager(),getLifecycle(), fragmentList);
+        viewpager2.setAdapter(newsAdapter);
+//        viewpager2.setOffscreenPageLimit(4);
         //默认 >3 的选中效果会影响ViewPager的滑动切换时的效果，故利用反射去掉
 //        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(
@@ -73,27 +73,29 @@ public class UiHomeActivity extends BaseActivity {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         if (item.getItemId() == R.id.navigation_practice) {
-                            viewPager.setCurrentItem(0);
+                            viewpager2.setCurrentItem(0);
                         } else if (item.getItemId() == R.id.navigation_home) {
-                            viewPager.setCurrentItem(1);
+                            viewpager2.setCurrentItem(1);
                         } else if (item.getItemId() == R.id.navigation_practice1) {
-                            viewPager.setCurrentItem(2);
+                            viewpager2.setCurrentItem(2);
                         } else if (item.getItemId() == R.id.navigation_home1) {
-                            viewPager.setCurrentItem(3);
+                            viewpager2.setCurrentItem(3);
                         }
 
                         return false;
                     }
                 });
 
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+        viewpager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
             }
 
             @Override
             public void onPageSelected(int position) {
+                super.onPageSelected(position);
                 if (menuItem != null) {
                     menuItem.setChecked(false);
                 } else {
@@ -105,16 +107,13 @@ public class UiHomeActivity extends BaseActivity {
 
             @Override
             public void onPageScrollStateChanged(int state) {
+                super.onPageScrollStateChanged(state);
             }
         });
 
-        //禁止ViewPager滑动
-//        viewPager.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                return true;
-//            }
-//        });
+        viewpager2.setUserInputEnabled(false);
+
+
 
     }
 

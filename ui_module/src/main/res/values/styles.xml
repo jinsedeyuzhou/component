@@ -20,5 +20,13 @@
     </style>
 
 
+    <style name="bottom_normal_text">
+        <item name="android:textColor">@color/colorSecondTitle</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+    </style>
 
+    <style name="bottom_selected_text">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+    </style>
 </resources>

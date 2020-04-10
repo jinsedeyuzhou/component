@@ -1,7 +1,7 @@
 package com.ebrightmoon.retrofitrx.interceptor;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.ebrightmoon.retrofitrx.common.HttpUtils;
 import com.ebrightmoon.retrofitrx.common.Network;

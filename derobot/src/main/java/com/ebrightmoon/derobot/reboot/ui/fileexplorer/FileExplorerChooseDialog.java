@@ -1,8 +1,9 @@
 package com.ebrightmoon.derobot.reboot.ui.fileexplorer;
 
 
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
 
 import com.ebrightmoon.derobot.R;

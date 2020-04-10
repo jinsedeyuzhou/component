@@ -2,7 +2,6 @@ package com.ebrightmoon.user.page;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.design.widget.TextInputLayout;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -19,6 +18,7 @@ import com.ebrightmoon.retrofitrx.retrofit.AppClient;
 import com.ebrightmoon.retrofitrx.util.MD5;
 import com.ebrightmoon.user.R;
 import com.ebrightmoon.user.entity.UserInfo;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.HashMap;
 import java.util.Map;

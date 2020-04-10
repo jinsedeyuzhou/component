@@ -12,7 +12,7 @@ import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 
 import com.ebrightmoon.derobot.reboot.util.UIUtils;
 

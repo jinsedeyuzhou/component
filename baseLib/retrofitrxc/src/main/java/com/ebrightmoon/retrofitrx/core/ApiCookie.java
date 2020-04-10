@@ -1,7 +1,7 @@
 package com.ebrightmoon.retrofitrx.core;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 
 import com.ebrightmoon.retrofitrx.mode.CookiesStore;

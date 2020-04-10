@@ -1,20 +1,26 @@
 package com.ebrightmoon.main.ui.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.view.ViewPager;
-import android.support.v7.graphics.Palette;
+import android.os.PowerManager;
+import android.provider.Settings;
+import androidx.annotation.RequiresApi;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.palette.graphics.Palette;
+import androidx.viewpager.widget.ViewPager;
 import android.view.View;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -31,6 +37,7 @@ import com.ebrightmoon.main.arouter.RouterCenter;
 import com.ebrightmoon.main.entity.Channel;
 import com.ebrightmoon.main.ui.fragment.NewsMainFragment;
 import com.ebrightmoon.main.utils.IntentAction;
+import com.google.android.material.navigation.NavigationView;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -59,6 +66,7 @@ public class HomeMainActivity extends BaseActivity
     private CommonNavigator commonNavigator;
     private LinePagerIndicator indicator;
     private static boolean isExit = false;
+    @SuppressLint("HandlerLeak")
     Handler mHandler = new Handler() {
 
         @Override
@@ -102,6 +110,7 @@ public class HomeMainActivity extends BaseActivity
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void initView() {
         initToolbar();
@@ -118,6 +127,32 @@ public class HomeMainActivity extends BaseActivity
         mainHomeIndicator = findViewById(R.id.main_home_indicator);
         mainHomeViewPager = findViewById(R.id.main_home_viewpager);
 
+        if (getApplicationInfo().targetSdkVersion >= Build.VERSION_CODES.M && !isIgnoringBatteryOptimizations()) {
+            requestIgnoreBatteryOptimizations();
+
+        }
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private boolean isIgnoringBatteryOptimizations() {
+        boolean isIgnoring = false;
+        PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        if (powerManager != null) {
+            isIgnoring = powerManager.isIgnoringBatteryOptimizations(getPackageName());
+        }
+        return isIgnoring;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void requestIgnoreBatteryOptimizations() {
+        try {
+            Intent intent = new Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+            intent.setData(Uri.parse("package:" + getPackageName()));
+            startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -168,7 +203,7 @@ public class HomeMainActivity extends BaseActivity
         });
         mainHomeIndicator.setNavigator(commonNavigator);
         ViewPagerHelper.bind(mainHomeIndicator, mainHomeViewPager);
-//        changeTopBgColor(0);
+        changeTopBgColor(0);
     }
 
 
@@ -182,7 +217,7 @@ public class HomeMainActivity extends BaseActivity
 
             @Override
             public void onPageSelected(int position) {
-//                changeTopBgColor(position);
+                changeTopBgColor(position);
             }
 
             @Override
@@ -240,10 +275,10 @@ public class HomeMainActivity extends BaseActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_search) {
-            toOtherActivity(SearchMainActivity.class,null,false);
+            toOtherActivity(SearchMainActivity.class, null, false);
             return true;
         } else if (id == R.id.action_share) {
-            IntentAction.send(mContext,"分享测试");
+            IntentAction.send(mContext, "分享测试");
             return true;
         } else if (id == R.id.action_settings) {
             RouterCenter.toSetting();

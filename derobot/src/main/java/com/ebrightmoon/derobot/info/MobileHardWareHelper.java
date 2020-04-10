@@ -1,7 +1,7 @@
 package com.ebrightmoon.derobot.info;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.ebrightmoon.derobot.info.app.PackageHelper;
 import com.ebrightmoon.derobot.info.applist.ListAppHelper;

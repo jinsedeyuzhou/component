@@ -4,6 +4,7 @@
     package="com.ebrightmoon.android">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".MainApplication"
         android:allowBackup="true"

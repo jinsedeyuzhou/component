@@ -1,6 +1,6 @@
 package com.ebrightmoon.derobot.reboot.kit.network.httpurlconnection.interceptor;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.io.IOException;
 

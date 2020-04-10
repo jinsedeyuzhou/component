@@ -1,10 +1,11 @@
 package com.ebrightmoon.derobot.reboot.ui.widget.recyclerview;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.ebrightmoon.derobot.reboot.util.LogHelper;
 
@@ -25,7 +26,7 @@ public abstract class AbsRecyclerAdapter<T extends AbsViewBinder, V> extends Rec
     private LayoutInflater mInflater;
 
     public AbsRecyclerAdapter(Context context) {
-        if (context == null) {
+        if(context == null) {
             LogHelper.e(TAG, "Context should not be null");
             return;
         }

@@ -1,8 +1,8 @@
 package com.ebrightmoon.derobot.reboot.ui;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 import android.widget.Toast;
 
 import com.ebrightmoon.derobot.reboot.constant.BundleKey;

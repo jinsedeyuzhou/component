@@ -1,7 +1,7 @@
 package com.ebrightmoon.common.widget.imageloader.progressglide;
 
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.bumptech.glide.request.Request;
 import com.bumptech.glide.request.animation.GlideAnimation;

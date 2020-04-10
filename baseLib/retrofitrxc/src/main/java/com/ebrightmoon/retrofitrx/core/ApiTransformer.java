@@ -2,36 +2,21 @@ package com.ebrightmoon.retrofitrx.core;
 
 
 
-import android.support.annotation.NonNull;
-
 import com.ebrightmoon.retrofitrx.common.HttpUtils;
 import com.ebrightmoon.retrofitrx.func.ApiDataFunc;
 import com.ebrightmoon.retrofitrx.func.ApiFunc;
 import com.ebrightmoon.retrofitrx.func.ApiResultFunc;
 import com.ebrightmoon.retrofitrx.func.ApiRetryFunc;
-import com.ebrightmoon.retrofitrx.mode.CacheMode;
-import com.ebrightmoon.retrofitrx.mode.CacheResult;
-import com.ebrightmoon.retrofitrx.recycle.ActivityLifeCycleEvent;
-import com.ebrightmoon.retrofitrx.recycle.RecycleBaseActivity;
 import com.ebrightmoon.retrofitrx.response.ResponseResult;
-import com.ebrightmoon.retrofitrx.strategy.ICacheStrategy;
 
-import org.reactivestreams.Publisher;
-
-import java.io.File;
 import java.lang.reflect.Type;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.BackpressureStrategy;
-import io.reactivex.Flowable;
-import io.reactivex.FlowableEmitter;
-import io.reactivex.FlowableOnSubscribe;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Function;
-import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 

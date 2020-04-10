@@ -1,7 +1,7 @@
 package com.ebrightmoon.derobot.reboot.ui.setting;
 
-import android.support.annotation.DrawableRes;
-import android.support.annotation.StringRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.StringRes;
 
 /**
  *  on 2018/9/14.
