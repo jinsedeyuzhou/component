@@ -50,6 +50,7 @@ public class CustomPopWindow extends PopupWindow {
     private List<String> strs = new ArrayList<>();
     private PopAdapter popAdapter;
     private AdapterView.OnItemClickListener onItemClickListeners;
+    private TextView tv_pop_title;
 
     public CustomPopWindow(Context context) {
         super(context);
@@ -63,6 +64,7 @@ public class CustomPopWindow extends PopupWindow {
     private void init() {
         mPopView = LayoutInflater.from(mContext).inflate(R.layout.layout_custom_pop, null);
         mGridViewPop = (GridView) mPopView.findViewById(R.id.gv_pop);
+        tv_pop_title = mPopView.findViewById(R.id.tv_pop_title);
         popAdapter = new PopAdapter();
         mGridViewPop.setAdapter(popAdapter);
         mGridViewPop.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -80,6 +82,14 @@ public class CustomPopWindow extends PopupWindow {
 
     public CustomPopWindow setGridView(int numColumns) {
         mGridViewPop.setNumColumns(numColumns);
+        return this;
+    }
+
+    public CustomPopWindow setTitle(String title) {
+        if (title == null) {
+            title = "";
+        }
+        tv_pop_title.setText(title);
         return this;
     }
 

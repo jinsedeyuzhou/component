@@ -28,5 +28,7 @@ main_module/build/
 module_user/build/
 ui_module/build/
 common_module/build/
+cameralib/build/
+webviewlib/build/
 /gradle/
 

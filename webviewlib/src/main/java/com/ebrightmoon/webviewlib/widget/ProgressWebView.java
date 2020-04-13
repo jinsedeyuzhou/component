@@ -1,17 +1,18 @@
-package com.ebrightmoon.common.widget;
+package com.ebrightmoon.webviewlib.widget;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
-import com.ebrightmoon.common.R;
-import com.ebrightmoon.common.util.StringUtils;
+import com.ebrightmoon.webviewlib.R;
+import com.ebrightmoon.webviewlib.utils.WebUtil;
 
 
 /**
@@ -19,7 +20,7 @@ import com.ebrightmoon.common.util.StringUtils;
  */
 public class ProgressWebView extends WebView {
 
-    private ProgressBar progressbar;
+    public ProgressBar progressbar;
 
     public ProgressWebView(Context context) {
         super(context);
@@ -36,7 +37,7 @@ public class ProgressWebView extends WebView {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 boolean isShould;
-                if (StringUtils.isNetworkUrl(url)) {
+                if (WebUtil.isNetworkUrl(url)) {
                     view.loadUrl(url);
                     isShould = true;
                 } else {
@@ -46,7 +47,19 @@ public class ProgressWebView extends WebView {
             }
 
         });
-        setWebChromeClient(new WebChromeClient());
+        setWebChromeClient(new WebChromeClient(){
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                if (newProgress == 100) {
+                    progressbar.setVisibility(GONE);
+                } else {
+                    if (progressbar.getVisibility() == GONE)
+                        progressbar.setVisibility(VISIBLE);
+                    progressbar.setProgress(newProgress);
+                }
+                super.onProgressChanged(view, newProgress);
+            }
+        });
         WebSettings settings = getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setUseWideViewPort(true);
@@ -75,21 +88,6 @@ public class ProgressWebView extends WebView {
     }
 
 
-    public class WebChromeClient extends android.webkit.WebChromeClient {
-        @Override
-        public void onProgressChanged(WebView view, int newProgress) {
-            if (newProgress == 100) {
-                progressbar.setVisibility(GONE);
-            } else {
-                if (progressbar.getVisibility() == GONE)
-                    progressbar.setVisibility(VISIBLE);
-                progressbar.setProgress(newProgress);
-            }
-            super.onProgressChanged(view, newProgress);
-        }
-
-
-    }
 
     public void setTextSize(int size) {
 
