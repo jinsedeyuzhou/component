@@ -18,7 +18,7 @@ import com.ebrightmoon.webviewlib.utils.WebUtil;
 /**
  * 带进度条的WebView
  */
-public class ProgressWebView extends WebView {
+public class ProgressWebView extends SafeWebView {
 
     public ProgressBar progressbar;
 
@@ -47,7 +47,7 @@ public class ProgressWebView extends WebView {
             }
 
         });
-        setWebChromeClient(new WebChromeClient(){
+        setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 if (newProgress == 100) {
@@ -61,33 +61,34 @@ public class ProgressWebView extends WebView {
             }
         });
         WebSettings settings = getSettings();
+        initWebSettings(settings);
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+
+        int mDensity = metrics.densityDpi;
+        if (mDensity == 240) {
+            settings.setDefaultZoom(WebSettings.ZoomDensity.FAR);
+        } else if (mDensity == 160) {
+            settings.setDefaultZoom(WebSettings.ZoomDensity.MEDIUM);
+        } else if (mDensity == 120) {
+            settings.setDefaultZoom(WebSettings.ZoomDensity.CLOSE);
+        } else if (mDensity == DisplayMetrics.DENSITY_XHIGH) {
+            settings.setDefaultZoom(WebSettings.ZoomDensity.FAR);
+        } else if (mDensity == DisplayMetrics.DENSITY_TV) {
+            settings.setDefaultZoom(WebSettings.ZoomDensity.FAR);
+        } else {
+            settings.setDefaultZoom(WebSettings.ZoomDensity.MEDIUM);
+        }
+    }
+
+
+    private void initWebSettings(WebSettings settings) {
         settings.setJavaScriptEnabled(true);
         settings.setUseWideViewPort(true);
         settings.setLoadWithOverviewMode(true);
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
         settings.setDomStorageEnabled(true);
-
-        DisplayMetrics metrics = getResources().getDisplayMetrics();
-
-        int mDensity = metrics.densityDpi;
-        Log.d("maomao", "densityDpi = " + mDensity);
-        if (mDensity == 240) {
-            settings.setDefaultZoom(WebSettings.ZoomDensity.FAR);
-        } else if (mDensity == 160) {
-            settings.setDefaultZoom(WebSettings.ZoomDensity.MEDIUM);
-        } else if(mDensity == 120) {
-            settings.setDefaultZoom(WebSettings.ZoomDensity.CLOSE);
-        }else if(mDensity == DisplayMetrics.DENSITY_XHIGH){
-            settings.setDefaultZoom(WebSettings.ZoomDensity.FAR);
-        }else if (mDensity == DisplayMetrics.DENSITY_TV){
-            settings.setDefaultZoom(WebSettings.ZoomDensity.FAR);
-        }else{
-            settings.setDefaultZoom(WebSettings.ZoomDensity.MEDIUM);
-        }
     }
-
-
 
     public void setTextSize(int size) {
 

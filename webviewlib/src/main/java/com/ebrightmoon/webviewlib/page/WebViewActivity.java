@@ -1,6 +1,7 @@
 package com.ebrightmoon.webviewlib.page;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -63,6 +64,7 @@ public class WebViewActivity extends BaseActivity {
     }
 
 
+    @SuppressLint("JavascriptInterface")
     @Override
     public void initView() {
         title = getIntent().getStringExtra("title");
@@ -88,6 +90,8 @@ public class WebViewActivity extends BaseActivity {
         mWebView.setHorizontalScrollBarEnabled(false);//水平不显示
         mWebView.setVerticalScrollBarEnabled(false); //垂直不显示
         mWebViewContent.addView(mWebView);
+        JavaScriptInterface javaScriptInterface = new JavaScriptInterface(mContext);
+        mWebView.addJavascriptInterface(javaScriptInterface, "ebrightmoon");
         WebUtil.initWebViewSettings(mWebView.getSettings());
 
     }
@@ -154,6 +158,7 @@ public class WebViewActivity extends BaseActivity {
 
         });
         mWebView.setWebViewClient(new WebViewClient() {
+            // 处理重定向问题
             private String startUrl;
 
             @Override
@@ -327,7 +332,7 @@ public class WebViewActivity extends BaseActivity {
         PermissionManager.instance().request(mActivity, new OnPermissionCallback() {
             @Override
             public void onRequestAllow(String permissionName) {
-                CustomPopWindow mCustomPpW = new CustomPopWindow(mContext)
+              new CustomPopWindow(mContext)
                         .setTitle("请选择图片")
                         .setData(new ArrayList<String>() {{
                             add("拍照");
@@ -353,7 +358,7 @@ public class WebViewActivity extends BaseActivity {
                 cancelCallback();
                 CustomDialog customDialogView = new CustomDialog(mActivity);
                 customDialogView.setTsingTitle("提示");
-                customDialogView.setTsingDescrition("请到应用权限中心打开拨号权限，否则不能使用此功能。");
+                customDialogView.setTsingDescrition("请到应用权限中心存储权限，否则不能使用此功能。");
                 customDialogView.setButton(CustomDialog.BUTTON_NEGATIVE, "取消", null);
                 customDialogView.setButton(CustomDialog.BUTTON_POSITIVE, "去打开", (dialog, which) -> {
                     startActivity(WebUtil.getAppDetailSettingIntent(mActivity));
