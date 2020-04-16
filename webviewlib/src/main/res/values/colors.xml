@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#E24542</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+    <!-- 常用颜色 -->
+    <color name="transparent">#00000000</color>
+    <color name="dialog_transparent">#55000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="red">#FF0000</color>
+    <color name="green">#008000</color>
+    <color name="blue">#0000FF</color>
+    <color name="orange">#FFA500</color>
+    <color name="grey">#808080</color>
+    <!-- 浅橘色 -->
+    <color name="fleetorange">#FFFF7D25</color>
+    <!-- 暗红色 -->
+    <color name="kermesinus">#bb0d18</color>
+    <!-- 暗灰色 -->
+    <color name="darkgrey">#A9A9A9</color>
+    <!-- 象牙色 -->
+    <color name="ivory">#FFFFF0</color>
+    <!-- 淡灰色 -->
+    <color name="gainsboro">#DCDCDC</color>
+    <!-- 暗蓝色 -->
+    <color name="darkblue">#00008B</color>
+    <!-- 浅蓝色 -->
+    <color name="fleetblue">#FF4285E9</color>
+    <!-- 暗绿色 -->
+    <color name="darkgreen">#006400</color>
+    <!-- 暗灰蓝色 -->
+    <color name="darkslateblue">#483D8B</color>
+    <!-- 水蓝色 -->
+    <color name="aqua">#66ccff</color>
+    <!-- 浅黑 -->
+    <color name="somber">#666666</color>
+    <color name="order">#999999</color>
+    <!--分割线-->
+    <color name="cut_line">#1A000000</color>
+    <!--分割线-->
+    <color name="province_red">#FFED4A47</color>
+    <color name="product_red">#ED4A47</color>
+    <color name="time_151515">#151515</color>
+    <color name="line_orange">#FFBE92</color>
+    <color name="red_state">#F32A2A</color>
+
+    <color name="subject_item_title_3_text">#333333</color>
+    <color name="ban_transparent">#30000000</color><!-- 半透明 -->
+    <color name="color_topic_text_blue_normal">#47a3f0</color>
+
+    <color name="primaryTitle1">#ff333333</color>
+    <color name="primaryTitle2">#ff666666</color>
+    <color name="primaryTitle3">#ff999999</color>
+    <color name="bgPrimary">#FFEEEEEE</color>
+    <color name="bg_acuuont">#EEEEEE</color>
+    <color name="bgSecond">#FFCCCCCC</color>
+    <color name="statusBar">#BCBCBD</color>
+    <color name="more_service">#FFF5F2</color>
+
+    <color name="line">#1A000000</color>
+    <color name="topLine">#4D000000</color>
+
+    <color name="colorText">#333333</color>
+    <color name="colorHintText">#999999</color>
+    <color name="colorLine">#e4e4e4</color>
+
+    <color name="colorDialg">#47a3f0</color>
+    <!--lockView-->
+    <color name="grey_b2b2b2">#B2B2B2</color>
+    <color name="blue_78d2f6">#78D2F6</color>
+    <color name="blue_01aaee">#01AAEE</color>
+    <color name="blue_00aaee">#00AAEE</color>
+    <color name="red_f3323b">#D92421</color>
+    <color name="white_color">#ffffff</color>
+
+    <color name="grey_f6f6f6">#f6f6f6</color>
+    <color name="grey_a5a5a5">#A5A5A5</color>
+    <color name="grey_dde1e7">#DDE1E7</color>
+    <color name="red_f4333c">#D92421</color>
+    <!--order-->
+    <color name="orger_FF7D25">#FF7D25</color>
+    <color name="red_F04F4C">#F04F4C</color>
+    <color name="gray_F1F1F1">#F1F1F1</color>
+    <color name="gray_CCCCCC">#CCCCCC</color>
+    <color name="line_FFA025">#FFA025</color>
+    <color name="ic_bg_default">#FFF4F4F4</color>
+
+    <!--ocr-->
+    <color name="viewfinder_mask">#60000000</color><!-- 灰度 -->
+    <color name="viewfinder_frame">#00cc00</color><!-- 绿色 -->
+    <color name="result_view">#b0000000</color>
+    <color name="viewfinder_laser">#ffff0000</color><!-- 红色 -->
+    <color name="subject_item_background">#ffffff</color>
+    <color name="blue_4285E9">#4285E9</color>
+    <color name="red_e5261f">#e5261f</color>
+    <color name="buue_09BB07">#09BB07</color>
+
+
+    <color name="tab_text_unselected">#828990</color>
+
+    <color name="app_main_color">#3F51B5</color>
+    <color name="app_main_color_deep">#303F9F</color>
+
+
+    <!--聊天文字的颜色-->
+    <color name="font_black_gray">#000</color>
+
+    <color name="deep_orange">#FF6600</color>
+    <color name="deep_gray">#bfbfbf</color>
+    <color name="purple">#e16bc7</color>
+    <color name="gream">#28BC33</color>
+    <color name="color_F0F6FE">#F0F6FE</color>
+
+
+    <color name="half_transparent_black">#7a000000</color>
+    <!--线索分享title下划线颜色-->
+    <color name="share_clue_title_line_color">#FFE24542</color>
+</resources>
+

@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.ebrightmoon.ui">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application>
-        <activity android:name=".page.UiHomeActivity"/>
-        <activity android:name=".page.test.UiDialogActivity"/>
-        <activity android:name=".page.test.UIToastyActivity"/>
-        <activity android:name=".page.test.UiHttpActivity"/>
-        <activity android:name=".page.test.UITouchActivity"/>
-        <activity android:name=".page.databinding.UIDataBindingActivity"/>
-        <activity android:name=".page.test.UISideBarActivity"/>
-        <activity android:name=".page.kotlin.KotlinTestActivity"/>
-        <activity android:name=".page.test.CustomViewActivity"/>
-        <activity android:name=".page.test.DebugActivity"/>
+        <activity android:name=".page.UiHomeActivity" />
+        <activity android:name=".page.test.UiDialogActivity" />
+        <activity android:name=".page.test.UIToastyActivity" />
+        <activity android:name=".page.test.UiHttpActivity" />
+        <activity android:name=".page.test.UITouchActivity" />
+        <activity android:name=".page.databinding.UIDataBindingActivity" />
+        <activity android:name=".page.test.UISideBarActivity" />
+        <activity android:name=".page.kotlin.KotlinTestActivity" />
+        <activity android:name=".page.test.CustomViewActivity" />
+        <activity android:name=".page.test.DebugActivity" />
+
+
     </application>
 
 </manifest>

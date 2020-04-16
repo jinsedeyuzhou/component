@@ -4,8 +4,7 @@
     <TextView
         style="@style/TitleBig"
         android:id="@+id/title"
-        android:layout_gravity="left|center_vertical"
-        android:layout_marginLeft="15dp"
+        android:layout_gravity="center"
         android:visibility="gone" />
 
     <ImageView

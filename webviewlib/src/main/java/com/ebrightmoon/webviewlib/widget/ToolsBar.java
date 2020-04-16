@@ -42,7 +42,7 @@ public class ToolsBar extends FrameLayout {
 
 
     private void init(Context context, AttributeSet attrs) {
-        LayoutInflater.from(context).inflate(R.layout.toolsbar, this, true);
+        LayoutInflater.from(context).inflate(R.layout.title_toolsbar, this, true);
         TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.ToolsBar);
         int icon = a.getResourceId(R.styleable.ToolsBar_icon, 0);
         String title = a.getString(R.styleable.ToolsBar_title);

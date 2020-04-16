@@ -59,7 +59,7 @@
                 android:inputType="textPassword"
                 android:visibility="gone"
                 android:padding="5dp"
-                android:textColor="@color/primaryTitle1"
+                android:textColor="#333333"
                 android:textSize="14dp"
                 />
 

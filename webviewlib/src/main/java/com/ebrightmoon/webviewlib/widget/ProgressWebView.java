@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -18,7 +17,7 @@ import com.ebrightmoon.webviewlib.utils.WebUtil;
 /**
  * 带进度条的WebView
  */
-public class ProgressWebView extends SafeWebView {
+public class ProgressWebView extends WebView {
 
     public ProgressBar progressbar;
 

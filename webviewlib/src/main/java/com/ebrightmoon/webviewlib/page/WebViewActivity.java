@@ -3,6 +3,7 @@ package com.ebrightmoon.webviewlib.page;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -12,32 +13,37 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.ConsoleMessage;
 import android.webkit.SslErrorHandler;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
-import com.ebrightmoon.common.base.BaseActivity;
-import com.ebrightmoon.common.permission.OnPermissionCallback;
-import com.ebrightmoon.common.permission.PermissionManager;
-import com.ebrightmoon.common.widget.CustomPopWindow;
+import com.ebrightmoon.webviewlib.BuildConfig;
 import com.ebrightmoon.webviewlib.R;
+import com.ebrightmoon.webviewlib.permission.OnPermissionCallback;
+import com.ebrightmoon.webviewlib.permission.PermissionManager;
+import com.ebrightmoon.webviewlib.permission.RxPermissions;
 import com.ebrightmoon.webviewlib.utils.WebUtil;
 import com.ebrightmoon.webviewlib.widget.CustomDialog;
+import com.ebrightmoon.webviewlib.widget.CustomPopWindow;
 import com.ebrightmoon.webviewlib.widget.ProgressWebView;
 import com.ebrightmoon.webviewlib.widget.ToolsBar;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static android.view.KeyEvent.KEYCODE_BACK;
 
@@ -46,7 +52,7 @@ import static android.view.KeyEvent.KEYCODE_BACK;
  * Author:wyy
  * Description:
  */
-public class WebViewActivity extends BaseActivity {
+public class WebViewActivity extends AppCompatActivity {
     private ProgressWebView mWebView;
     private String title;
     private String html;
@@ -56,16 +62,28 @@ public class WebViewActivity extends BaseActivity {
     private String phoneNumber;
     private ValueCallback<Uri> uploadMessage;
     private ValueCallback<Uri[]> uploadMessageAboveL;
+    private Context mContext;
+    private Activity mActivity;
+    private JavaScriptInterface javaScriptInterface;
+
+    private RxPermissions rxPermissions;
+
 
     @Override
     protected void onCreate(Bundle paramBundle) {
         super.onCreate(paramBundle);
+        mContext = this;
+        mActivity = this;
+        rxPermissions = new RxPermissions(mActivity);
         setContentView(R.layout.activity_webview);
+        initView();
+        bindEvent();
+        initData();
+
     }
 
 
     @SuppressLint("JavascriptInterface")
-    @Override
     public void initView() {
         title = getIntent().getStringExtra("title");
         url = getIntent().getStringExtra("url");
@@ -86,17 +104,19 @@ public class WebViewActivity extends BaseActivity {
             }
         });
         mWebViewContent = findViewById(R.id.fl_content);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         mWebView = new ProgressWebView(this, null);
         mWebView.setHorizontalScrollBarEnabled(false);//水平不显示
         mWebView.setVerticalScrollBarEnabled(false); //垂直不显示
+        mWebView.setLayoutParams(params);
         mWebViewContent.addView(mWebView);
-        JavaScriptInterface javaScriptInterface = new JavaScriptInterface(mContext);
+        initWebViewSettings(mWebView.getSettings());
+        javaScriptInterface = new JavaScriptInterface(mContext);
         mWebView.addJavascriptInterface(javaScriptInterface, "ebrightmoon");
-        WebUtil.initWebViewSettings(mWebView.getSettings());
+//        WebUtil.initWebViewSettings(mWebView.getSettings());
 
     }
 
-    @Override
     public void initData() {
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
@@ -279,6 +299,33 @@ public class WebViewActivity extends BaseActivity {
         }
     }
 
+    public void initWebViewSettings(WebSettings wSet) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            wSet.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        }
+        // 是否显示缩放按钮
+        wSet.setBuiltInZoomControls(false);
+        // 支持缩放
+        wSet.setSupportZoom(false);
+        wSet.setTextZoom(100);
+        // 默认字体大小
+        wSet.setDefaultFontSize(12);
+        wSet.setAllowFileAccess(false);
+        // 设置可以访问文件
+        // 设置支持webView JavaScript
+        wSet.setJavaScriptEnabled(true);
+        // 设置缓冲的模式
+        wSet.setCacheMode(WebSettings.LOAD_NO_CACHE);
+        // 设置字符编码
+        wSet.setDefaultTextEncodingName("utf-8");
+        //优先使用缓存
+//        wSet.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        wSet.setAppCacheEnabled(false);
+        wSet.setDomStorageEnabled(true);
+        wSet.setDatabaseEnabled(true);
+
+    }
+
 
     /**
      * 调用电话
@@ -327,50 +374,47 @@ public class WebViewActivity extends BaseActivity {
     /**
      * 选择拍照还是选择照片
      */
+    @SuppressLint("CheckResult")
     private void getICCarD() {
 
-        PermissionManager.instance().request(mActivity, new OnPermissionCallback() {
-            @Override
-            public void onRequestAllow(String permissionName) {
-              new CustomPopWindow(mContext)
-                        .setTitle("请选择图片")
-                        .setData(new ArrayList<String>() {{
-                            add("拍照");
-                            add("从手机相册选择");
-                        }})
-                        .setPopupWindow()
-                        .setOnItemClickListener((title, position) -> {
-                            if (position == 0) {
-                                //拍照
-                                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                                startActivityForResult(intent, 1);
-                            } else if (position == 1) {
-                                //从手机相册选择
-                                Intent intent_gallsy = new Intent(Intent.ACTION_GET_CONTENT);
-                                intent_gallsy.setType("image/*");
-                                startActivityForResult(intent_gallsy, 2);
-                            }
-                        }).openPopWindow();
-            }
+        rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+                .subscribe(granted -> {
+                    if (granted) {
+                        // All requested permissions are granted
+                        new CustomPopWindow(mContext)
+                                .setTitle("请选择图片")
+                                .setData(new ArrayList<String>() {{
+                                    add("拍照");
+                                    add("从手机相册选择");
+                                }})
+                                .setPopupWindow()
+                                .setOnItemClickListener((title, position) -> {
+                                    if (position == 0) {
+                                        //拍照
+                                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                        startActivityForResult(intent, 1);
+                                    } else if (position == 1) {
+                                        //从手机相册选择
+                                        Intent intent_gallsy = new Intent(Intent.ACTION_GET_CONTENT);
+                                        intent_gallsy.setType("image/*");
+                                        startActivityForResult(intent_gallsy, 2);
+                                    }
+                                }).openPopWindow();
+                    } else {
+                        cancelCallback();
+                        CustomDialog customDialogView = new CustomDialog(mActivity);
+                        customDialogView.setTsingTitle("提示");
+                        customDialogView.setTsingDescrition("请到应用权限中心存储权限，否则不能使用此功能。");
+                        customDialogView.setButton(CustomDialog.BUTTON_NEGATIVE, "取消", null);
+                        customDialogView.setButton(CustomDialog.BUTTON_POSITIVE, "去打开", (dialog, which) -> {
+                            startActivity(WebUtil.getAppDetailSettingIntent(mActivity));
+                        });
+                        customDialogView.show();
+                        // At least one permission is denied
 
-            @Override
-            public void onRequestRefuse(String permissionName) {
-                cancelCallback();
-                CustomDialog customDialogView = new CustomDialog(mActivity);
-                customDialogView.setTsingTitle("提示");
-                customDialogView.setTsingDescrition("请到应用权限中心存储权限，否则不能使用此功能。");
-                customDialogView.setButton(CustomDialog.BUTTON_NEGATIVE, "取消", null);
-                customDialogView.setButton(CustomDialog.BUTTON_POSITIVE, "去打开", (dialog, which) -> {
-                    startActivity(WebUtil.getAppDetailSettingIntent(mActivity));
+                    }
                 });
-                customDialogView.show();
-            }
 
-            @Override
-            public void onRequestNoAsk(String permissionName) {
-
-            }
-        }, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA);
 
     }
 
@@ -388,20 +432,24 @@ public class WebViewActivity extends BaseActivity {
             if (uploadMessageAboveL == null)
                 return;
             String imageFilePath = WebUtil.getCameraUriCompress(mActivity, data);
-            if (imageFilePath == null)
+            if (imageFilePath == null) {
+                cancelCallback();
                 return;
+            }
             Uri imageFileUri;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 //针对Android7.0，需要通过FileProvider封装过的路径，提供给外部调用
-                imageFileUri = FileProvider.getUriForFile(mActivity.getApplicationContext(), mActivity.getApplicationContext().getPackageName(), new File(imageFilePath));
+                imageFileUri = FileProvider.getUriForFile(Objects.requireNonNull(getApplicationContext()),  mContext.getPackageName()+".provider", new File(imageFilePath));
             } else {
                 imageFileUri = Uri.fromFile(new File(imageFilePath));
             }
             uploadMessageAboveL.onReceiveValue(new Uri[]{imageFileUri});
             uploadMessageAboveL = null;
         } else if (requestCode == 2 && resultCode == Activity.RESULT_OK && null != data) {
-            if (uploadMessageAboveL == null)
+            if (uploadMessageAboveL == null) {
+                cancelCallback();
                 return;
+            }
             Bitmap galleryPicture = null;
             try {
                 galleryPicture = WebUtil.getGalleryPicture(this, data);
@@ -438,15 +486,10 @@ public class WebViewActivity extends BaseActivity {
         }
     }
 
-    @Override
     protected void bindEvent() {
 
     }
 
-    @Override
-    public void processClick(View paramView) {
-
-    }
 
     @Override
     protected void onResume() {

@@ -12,9 +12,10 @@ kapt {
 androidExtensions {
     experimental = true
 }
+
 Properties properties = new Properties()
-InputStream inputStream = project.rootProject.file('local.properties').newDataInputStream() ;
-properties.load( inputStream )
+InputStream inputStream = project.rootProject.file('local.properties').newDataInputStream();
+properties.load(inputStream)
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -23,7 +24,8 @@ android {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
-        flavorDimensions "dev","versionCode","stage"
+
+        flavorDimensions "stage", "versionCode", "dev"
         versionName rootProject.ext.android.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
@@ -67,9 +69,9 @@ android {
             dimension "dev"
         }
         stage {
-            applicationId "com.lyl.boon.stage"
+            applicationId "com.ebrightmoon.android"
 
-            resValue "string", "app_name", "stage_boon"
+            resValue "string", "app_name", "新资讯"
             resValue "bool", "isrRank", 'true'
 //
             buildConfigField "String", "ENVIRONMENT", '"stage"'
@@ -131,6 +133,10 @@ android {
 
     dataBinding {
         enabled = true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 

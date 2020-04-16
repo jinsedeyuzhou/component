@@ -20,8 +20,12 @@ androidExtensions {
 }
 
 android {
+
     compileSdkVersion 28
     defaultConfig {
+        if (isUi.toBoolean()) {
+            applicationId "com.ebrightmoon.ui"
+        }
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
@@ -57,8 +61,8 @@ android {
         }
     }
     compileOptions {
-//        sourceCompatibility JavaVersion.VERSION_1_8
-//        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     dataBinding {
