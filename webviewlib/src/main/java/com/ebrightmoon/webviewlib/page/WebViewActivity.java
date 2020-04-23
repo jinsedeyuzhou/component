@@ -231,9 +231,11 @@ public class WebViewActivity extends AppCompatActivity {
                     }
                     return true;
                 }
+                //解决不是URL不能跳转
                 if (!WebUtil.isNetworkUrl(url)) {
                     return true;
                 }
+                // 解决重定向问题
                 WebView.HitTestResult hitTestResult = view.getHitTestResult();
                 if (!TextUtils.isEmpty(url) && hitTestResult == null) {
                     view.loadUrl(url);
