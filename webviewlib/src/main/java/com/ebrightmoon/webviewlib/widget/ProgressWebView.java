@@ -35,6 +35,7 @@ public class ProgressWebView extends WebView {
         setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
+
                 boolean isShould;
                 if (WebUtil.isNetworkUrl(url)) {
                     view.loadUrl(url);

@@ -11,6 +11,7 @@ import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -178,13 +179,10 @@ public class WebViewActivity extends AppCompatActivity {
 
         });
         mWebView.setWebViewClient(new WebViewClient() {
-            // 处理重定向问题
-            private String startUrl;
 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
-                startUrl = url;
             }
 
             @Override
@@ -203,13 +201,17 @@ public class WebViewActivity extends AppCompatActivity {
                     return true;
                 }
 
-                if (startUrl != null && startUrl.equals(url)) {
-                    view.loadUrl(url);
-                } else {
-                    //交给系统处理
-                    return super.shouldOverrideUrlLoading(view, url);
+                if (!WebUtil.isNetworkUrl(url)) {
+                    return true;
                 }
-                return true;
+
+                WebView.HitTestResult hitTestResult = view.getHitTestResult();
+                if (!TextUtils.isEmpty(url) && hitTestResult == null) {
+                    view.loadUrl(url);
+                    return true;
+                }
+                return super.shouldOverrideUrlLoading(view, url);
+
             }
 
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -229,12 +231,13 @@ public class WebViewActivity extends AppCompatActivity {
                     }
                     return true;
                 }
-
-                if (startUrl != null && startUrl.equals(url)) {
+                if (!WebUtil.isNetworkUrl(url)) {
+                    return true;
+                }
+                WebView.HitTestResult hitTestResult = view.getHitTestResult();
+                if (!TextUtils.isEmpty(url) && hitTestResult == null) {
                     view.loadUrl(url);
-                } else {
-                    //交给系统处理
-                    return super.shouldOverrideUrlLoading(view, url);
+                    return true;
                 }
                 return true;
             }
@@ -439,7 +442,7 @@ public class WebViewActivity extends AppCompatActivity {
             Uri imageFileUri;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 //针对Android7.0，需要通过FileProvider封装过的路径，提供给外部调用
-                imageFileUri = FileProvider.getUriForFile(Objects.requireNonNull(getApplicationContext()),  mContext.getPackageName()+".provider", new File(imageFilePath));
+                imageFileUri = FileProvider.getUriForFile(Objects.requireNonNull(getApplicationContext()), mContext.getPackageName() + ".provider", new File(imageFilePath));
             } else {
                 imageFileUri = Uri.fromFile(new File(imageFilePath));
             }

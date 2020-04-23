@@ -72,17 +72,18 @@ dependencies {
 
 
 
-
-
-    implementation project(':baseLib:banner')
-    implementation project(':baseLib:toasty')
-    implementation project(':baseLib:magicindicator')
-    implementation project(':baseLib:photoview')
-    implementation project(':baseLib:pickerview')
-    implementation project(':baseLib:retrofitrxc')
-    implementation project(':baseLib:alertview')
-    implementation project(':baseLib:kprogresshud')
-    implementation project(':baseLib:viewanimations')
+    api project(':baseLib:retrofitrxc')
+//
+//    implementation project(':baseLib:RecylerViewAdapter')
+//    implementation project(':baseLib:banner')
+//    implementation project(':baseLib:toasty')
+//    implementation project(':baseLib:magicindicator')
+//    implementation project(':baseLib:photoview')
+//    implementation project(':baseLib:pickerview')
+//    implementation project(':baseLib:retrofitrxc')
+//    implementation project(':baseLib:alertview')
+//    implementation project(':baseLib:kprogresshud')
+//    implementation project(':baseLib:viewanimations')
 
 
 }

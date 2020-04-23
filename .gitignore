@@ -11,6 +11,8 @@
 /build
 /captures
 .externalNativeBuild
+/gradle/
+app/build
 baseLib/magicindicator/build/
 baseLib/photoview/build/
 baseLib/banner/build/
@@ -30,5 +32,6 @@ ui_module/build/
 common_module/build/
 cameralib/build/
 webviewlib/build/
-/gradle/
+
+
 

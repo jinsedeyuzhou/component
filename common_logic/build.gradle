@@ -35,4 +35,15 @@ dependencies {
     api project(':common_data')
     api project(':common_module')
     api project(':webviewlib')
+
+
+    api project(':baseLib:RecylerViewAdapter')
+    api project(':baseLib:banner')
+    api project(':baseLib:toasty')
+    api project(':baseLib:magicindicator')
+    api project(':baseLib:photoview')
+    api project(':baseLib:pickerview')
+    api project(':baseLib:alertview')
+    api project(':baseLib:kprogresshud')
+    api project(':baseLib:viewanimations')
 }
