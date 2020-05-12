@@ -1,4 +1,4 @@
-package com.ebrightmoon.webviewlib.widget;
+package com.ebrightmoon.webviewlib.web;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

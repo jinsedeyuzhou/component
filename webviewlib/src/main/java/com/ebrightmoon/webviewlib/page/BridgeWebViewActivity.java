@@ -36,9 +36,10 @@ import com.ebrightmoon.webviewlib.permission.OnPermissionCallback;
 import com.ebrightmoon.webviewlib.permission.PermissionManager;
 import com.ebrightmoon.webviewlib.permission.RxPermissions;
 import com.ebrightmoon.webviewlib.utils.WebUtil;
+import com.ebrightmoon.webviewlib.web.BridgeWebView;
+import com.ebrightmoon.webviewlib.web.ProgressWebView;
 import com.ebrightmoon.webviewlib.widget.CustomDialog;
 import com.ebrightmoon.webviewlib.widget.CustomPopWindow;
-import com.ebrightmoon.webviewlib.web.ProgressWebView;
 import com.ebrightmoon.webviewlib.widget.ToolsBar;
 
 import java.io.File;
@@ -52,8 +53,8 @@ import static android.view.KeyEvent.KEYCODE_BACK;
  * Author:wyy
  * Description:
  */
-public class WebViewActivity extends AppCompatActivity {
-    private ProgressWebView mWebView;
+public class BridgeWebViewActivity extends AppCompatActivity {
+    private BridgeWebView mWebView;
     private String title;
     private String html;
     private String url;
@@ -107,7 +108,7 @@ public class WebViewActivity extends AppCompatActivity {
         });
         mWebViewContent = findViewById(R.id.fl_content);
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        mWebView = new ProgressWebView(this, null);
+        mWebView = new BridgeWebView(this, null);
         mWebView.setHorizontalScrollBarEnabled(false);//水平不显示
         mWebView.setVerticalScrollBarEnabled(false); //垂直不显示
         mWebView.setLayoutParams(params);
@@ -189,7 +190,7 @@ public class WebViewActivity extends AppCompatActivity {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 if (url.equals("tel:")) {
-                    Toast.makeText(WebViewActivity.this, "等待网页加载完毕再试", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BridgeWebViewActivity.this, "等待网页加载完毕再试", Toast.LENGTH_SHORT).show();
                     return true;
                 }
                 if (url.contains("tel")) {
@@ -197,7 +198,7 @@ public class WebViewActivity extends AppCompatActivity {
                     if (phoneNumber != null && phoneNumber != "") {
                         callPhone(phoneNumber);
                     } else {
-                        Toast.makeText(WebViewActivity.this, "等待网页加载完毕再试", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(BridgeWebViewActivity.this, "等待网页加载完毕再试", Toast.LENGTH_SHORT).show();
                     }
                     return true;
                 }
@@ -220,7 +221,7 @@ public class WebViewActivity extends AppCompatActivity {
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 String url = request.getUrl().toString();
                 if (url.equals("tel:")) {
-                    Toast.makeText(WebViewActivity.this, "等待网页加载完毕再试", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BridgeWebViewActivity.this, "等待网页加载完毕再试", Toast.LENGTH_SHORT).show();
                     return true;
                 }
                 if (url.contains("tel")) {
@@ -228,7 +229,7 @@ public class WebViewActivity extends AppCompatActivity {
                     if (phoneNumber != null && phoneNumber != "") {
                         callPhone(phoneNumber);
                     } else {
-                        Toast.makeText(WebViewActivity.this, "等待网页加载完毕再试", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(BridgeWebViewActivity.this, "等待网页加载完毕再试", Toast.LENGTH_SHORT).show();
                     }
                     return true;
                 }

@@ -1,4 +1,4 @@
-package com.ebrightmoon.webviewlib.widget;
+package com.ebrightmoon.webviewlib.web;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;

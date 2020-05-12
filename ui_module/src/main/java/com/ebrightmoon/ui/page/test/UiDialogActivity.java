@@ -20,6 +20,7 @@ import com.ebrightmoon.common.widget.dialogfragment.manager.SystemDialogsManager
 import com.ebrightmoon.common.widget.popwindow.CommonPopupWindow;
 import com.ebrightmoon.common.widget.popwindow.CustomPopWindow;
 import com.ebrightmoon.ui.R;
+import com.ebrightmoon.webviewlib.page.BridgeWebViewActivity;
 import com.ebrightmoon.webviewlib.page.WebViewActivity;
 
 /**
@@ -194,8 +195,8 @@ public class UiDialogActivity extends BaseActivity {
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
                 bundle.putString("title", "测试");
-                bundle.putString("url", "https://kefu.huayunworld.com/H5/index.html#/chat?skillGroupId=43&enterpriseId=9&account=gdvqsc361728");
-                toOtherActivity(WebViewActivity.class, bundle, false);
+                bundle.putString("url", "https://www.jianshu.com/");
+                toOtherActivity(BridgeWebViewActivity.class, bundle, false);
             }
         });
 
