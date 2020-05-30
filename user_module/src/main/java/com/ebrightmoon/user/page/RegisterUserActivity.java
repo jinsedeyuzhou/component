@@ -11,11 +11,6 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.ebrightmoon.common.base.BaseActivity;
 import com.ebrightmoon.common.util.SystemUtils;
 import com.ebrightmoon.data.router.RouterURLS;
-import com.ebrightmoon.retrofitrx.callback.ACallback;
-import com.ebrightmoon.retrofitrx.common.AppConfig;
-import com.ebrightmoon.retrofitrx.response.ResponseResult;
-import com.ebrightmoon.retrofitrx.retrofit.AppClient;
-import com.ebrightmoon.retrofitrx.util.MD5;
 import com.ebrightmoon.user.R;
 import com.ebrightmoon.user.entity.UserInfo;
 import com.google.android.material.textfield.TextInputLayout;
@@ -90,21 +85,6 @@ public class RegisterUserActivity extends BaseActivity {
      * 注册方法
      */
         private void doRegister (String mobile,String password) {
-            Map<String, String> registers = new HashMap<>();
-            registers.put("mobile",mobile);
-            registers.put("userPwd", MD5.encode(password));
-            registers.put("uuid", SystemUtils.getUUID(mContext));
-            AppClient.getInstance().postResponseResult(AppConfig.URL_REGISTER, registers, new ACallback<ResponseResult<UserInfo>>() {
-                @Override
-                public void onSuccess(ResponseResult<UserInfo> data) {
-                    Toast.makeText(getApplicationContext(),data.getMsg(),Toast.LENGTH_LONG).show();
-                }
-
-                @Override
-                public void onFail(int errCode, String errMsg) {
-                    Toast.makeText(getApplicationContext(),errMsg,Toast.LENGTH_LONG).show();
-                }
-            });
         }
 
 

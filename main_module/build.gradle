@@ -3,6 +3,14 @@ if (isMain.toBoolean()) {
 } else {
     apply plugin: 'com.android.library'
 }
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-android-extensions"
+apply plugin: 'kotlin-kapt'
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
 
 
 android {
@@ -16,16 +24,8 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        //ARouter
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
-            }
-        }
 
     }
-
-
 
 
     sourceSets {
@@ -65,15 +65,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
-    implementation project(':baseLib:banner')
-    implementation project(':baseLib:magicindicator')
-    implementation project(':baseLib:photoview')
-    implementation project(':baseLib:pickerview')
-    implementation project(':baseLib:retrofitrxc')
-    implementation project(':baseLib:viewanimations')
-    //公共库导入
-    annotationProcessor rootProject.ext.dependencies.arouter_compiler
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     api project(':common_logic')
     implementation 'androidx.palette:palette:1.0.0'
+    //公共库导入
+    kapt rootProject.ext.dependencies.arouter_compiler
 }

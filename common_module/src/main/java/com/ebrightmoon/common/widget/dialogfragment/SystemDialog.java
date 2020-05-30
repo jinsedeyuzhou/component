@@ -17,7 +17,7 @@ import com.ebrightmoon.common.widget.dialogfragment.manager.ScreenUtil;
 
 /**
  * Created by mq on 2018/9/1 上午10:57
- * mqcoder90@gmail.com
+ *
  */
 
 public class SystemDialog extends BaseDialogFragment implements IDialog {

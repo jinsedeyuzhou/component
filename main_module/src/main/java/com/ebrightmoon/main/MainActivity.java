@@ -8,7 +8,6 @@ import com.ebrightmoon.common.base.BaseActivity;
 import com.ebrightmoon.main.arouter.RouterCenter;
 import com.ebrightmoon.main.ui.activity.HomeMainActivity;
 import com.ebrightmoon.main.ui.activity.TestActivity;
-import com.ebrightmoon.retrofitrx.callback.ACallback;
 
 public class MainActivity extends BaseActivity {
 
@@ -38,6 +37,19 @@ public class MainActivity extends BaseActivity {
                 startActivity(new Intent(mContext, TestActivity.class));
             }
         });
+        findViewById(R.id.btn_login).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RouterCenter.toLogin();
+            }
+        });
+
+//        findViewById(R.id.tv_login,new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
     }
 
     @Override

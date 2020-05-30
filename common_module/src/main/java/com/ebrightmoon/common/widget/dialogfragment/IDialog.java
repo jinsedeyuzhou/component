@@ -4,7 +4,7 @@ import android.view.View;
 
 /**
  * Created by mq on 2018/9/2 下午6:01
- * mqcoder90@gmail.com
+ *
  */
 
 public interface IDialog {

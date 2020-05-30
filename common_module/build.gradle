@@ -72,7 +72,7 @@ dependencies {
 
 
 
-    api project(':baseLib:retrofitrxc')
+
 //
 //    implementation project(':baseLib:RecylerViewAdapter')
 //    implementation project(':baseLib:banner')

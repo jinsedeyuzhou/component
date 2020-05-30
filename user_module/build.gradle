@@ -62,18 +62,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
-
-
-
-    implementation project(':baseLib:banner')
-    implementation project(':baseLib:magicindicator')
-    implementation project(':baseLib:photoview')
-    implementation project(':baseLib:pickerview')
-    implementation project(':baseLib:retrofitrxc')
-    implementation project(':baseLib:viewanimations')
-
-    annotationProcessor rootProject.ext.dependencies.arouter_compiler
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation project(':common_logic')
+    //公共库导入
+    annotationProcessor rootProject.ext.dependencies.arouter_compiler
 
 }

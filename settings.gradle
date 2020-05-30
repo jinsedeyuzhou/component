@@ -1,6 +1,15 @@
-include ':app', ':common_module', ':main_module', ':common_data', ':user_module', ':ui_module', ':common_logic', ':cameralib', ':derobot', ':devmodule', ':stagemodule', ':webviewlib'
-include ':baseLib:banner',':baseLib:magicindicator',':baseLib:photoview',':baseLib:pickerview'
-include ':baseLib:retrofitrxc',
+include ':app'
+
+
+include ':CusLib:webviewlib',
+        ':CusLib:HttpClient',
+        ':CusLib:cameralib',
+        ':common_module'
+
+include ':baseLib:banner',
+        ':baseLib:magicindicator',
+        ':baseLib:photoview',
+        ':baseLib:pickerview',
         ':baseLib:viewanimations',
         ':baseLib:alertview',
         ':baseLib:kprogresshud',
@@ -8,3 +17,12 @@ include ':baseLib:retrofitrxc',
         ':baseLib:volley',
         ':baseLib:toasty',
         ':baseLib:RecylerViewAdapter'
+
+include ':common_data',
+        ':common_logic'
+
+include ':main_module',
+        ':user_module',
+        ':ui_module'
+
+include  ':derobot'

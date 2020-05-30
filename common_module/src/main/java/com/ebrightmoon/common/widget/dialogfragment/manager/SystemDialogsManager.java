@@ -8,7 +8,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 /**
  * 支持多个Dialog依次弹出
  * Created by mq on 2018/9/1 下午4:35
- * mqcoder90@gmail.com
+ *
  */
 
 public class SystemDialogsManager {

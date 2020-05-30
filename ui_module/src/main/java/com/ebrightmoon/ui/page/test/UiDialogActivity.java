@@ -160,6 +160,7 @@ public class UiDialogActivity extends BaseActivity {
                     }
                 });
 
+
                 SystemDialogsManager.getInstance().requestShow(new DialogWrapper(builder1));
                 //添加第二个Dialog
                 SystemDialogsManager.getInstance().requestShow(new DialogWrapper(builder2));

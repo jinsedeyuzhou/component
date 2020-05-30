@@ -21,7 +21,7 @@ import com.ebrightmoon.common.widget.dialogfragment.manager.SystemDialogsManager
 
 /**
  * Created by mq on 2018/8/31 上午11:39
- * mqcoder90@gmail.com
+ *
  */
 
 public abstract class BaseDialogFragment extends DialogFragment {

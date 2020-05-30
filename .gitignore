@@ -18,7 +18,6 @@ baseLib/photoview/build/
 baseLib/banner/build/
 baseLib/pickerview/build/
 baseLib/magicindicator/build/
-baseLib/retrofitrxc/build/
 baseLib/viewanimations/build/
 baseLib/alertview/build/
 baseLib/kprogresshud/build/
@@ -29,6 +28,7 @@ common_data/build/
 main_module/build/
 module_user/build/
 ui_module/build/
+HttpClient/build/
 common_module/build/
 cameralib/build/
 webviewlib/build/

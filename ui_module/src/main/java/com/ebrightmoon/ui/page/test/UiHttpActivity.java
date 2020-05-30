@@ -12,9 +12,6 @@ import com.ebrightmoon.common.base.BaseActivity;
 import com.ebrightmoon.common.permission.OnPermissionCallback;
 import com.ebrightmoon.common.permission.PermissionManager;
 import com.ebrightmoon.common.permission.RxPermissions;
-import com.ebrightmoon.retrofitrx.callback.ACallback;
-import com.ebrightmoon.retrofitrx.mode.DownProgress;
-import com.ebrightmoon.retrofitrx.retrofit.AppClient;
 import com.ebrightmoon.ui.R;
 
 import java.io.IOException;
@@ -31,7 +28,6 @@ public class UiHttpActivity extends BaseActivity {
     private TextView mTvShowPercent;
     private int i = 1;
     private TextView mTvShowCount;
-    private DownProgress downProgress;
     private String fileName;
     private HashMap<String, String> params;
     private RxPermissions rxPermissions;
@@ -112,19 +108,6 @@ public class UiHttpActivity extends BaseActivity {
             public void onClick(View view) {
                 fileName = System.currentTimeMillis() + ".apk";
 
-                AppClient.getInstance(mContext, "http://45.252.224.77").downloadFile("/files/315200000EA3AC20/111.200.196.6:6879/xfspda_web5_1.apk", params, mContext, new ACallback<DownProgress>() {
-                            @Override
-                            public void onSuccess(DownProgress downProgress) {
-                                mPb.setProgress((int) (downProgress.getDownloadSize() * 1.0 / downProgress.getTotalSize() * 100));
-                                mTvShowPercent.setText(downProgress.getPercent());
-                            }
-
-                            @Override
-                            public void onFail(int errCode, String errMsg) {
-
-                            }
-                        }
-                );
             }
         });
     }

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="@dimen/activity_horizontal_margin"
     android:background="#88e3e3e3"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="@dimen/activity_horizontal_margin">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.2"
         android:layout_marginLeft="@dimen/activity_margin_15"
         android:layout_marginRight="@dimen/activity_margin_15"
+        android:layout_weight="0.2"
         android:gravity="center">
 
         <TextView
@@ -32,68 +32,64 @@
         android:layout_weight="0.8"
         android:orientation="vertical">
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/usernameWrapper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:colorControlNormal="@color/colorPrimary"
+            android:layout_marginTop="4dp"
             app:colorControlActivated="@color/white"
+            app:colorControlNormal="@color/colorPrimary"
             app:errorTextAppearance="@style/MyErrorText"
-            app:hintTextAppearance="@style/MyHintText"
-            android:layout_marginTop="4dp">
+            app:hintTextAppearance="@style/MyHintText">
 
             <EditText
                 android:id="@+id/et_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="手机号码"
-                android:inputType="textPhonetic"
-                />
+                android:inputType="textPhonetic" />
 
-        </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordWrapper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/passwordWrapper"
-            app:passwordToggleEnabled="true"
+            android:layout_marginTop="12dp"
             app:errorTextAppearance="@style/MyErrorText"
             app:hintTextAppearance="@style/MyHintText"
-            android:layout_marginTop="12dp">
+            app:passwordToggleEnabled="true">
 
             <EditText
                 android:id="@+id/et_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
                 android:hint="密码"
-                />
+                android:inputType="textPassword" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_common_ripple"
             android:layout_marginTop="20dp"
-            android:textSize="@dimen/text_size_16"
+            android:text="登录"
             android:textColor="@color/white"
-            android:text="登录" />
+            android:textSize="@dimen/text_size_16" />
 
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            >
-            
+            android:layout_marginTop="12dp">
+
             <TextView
                 android:id="@+id/tv_register"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="立即注册"
-                />
+                android:text="立即注册" />
 
 
             <TextView
@@ -101,14 +97,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="忘记密码"
-                />
+                android:text="忘记密码" />
 
 
         </RelativeLayout>
     </LinearLayout>
-    
-    
 
 
 </LinearLayout>

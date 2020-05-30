@@ -3,11 +3,7 @@ apply plugin: "kotlin-android"
 apply plugin: "kotlin-android-extensions"
 apply plugin: 'kotlin-kapt'
 
-kapt {
-    arguments {
-        arg("AROUTER_MODULE_NAME", project.getName())
-    }
-}
+
 
 androidExtensions {
     experimental = true
@@ -29,6 +25,13 @@ android {
         versionName rootProject.ext.android.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+
+        //ARouter
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 
     signingConfigs {
@@ -149,22 +152,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    //公共库导入
+    annotationProcessor rootProject.ext.dependencies.arouter_compiler
 
-//    implementation rootProject.ext.dependencies.multidex
-//    if (isModule.toBoolean()) {
-//        implementation project(':main_module')
-//        implementation project(':module_user')
-//        implementation project(':ui_module')
-//    }
-// 引用本的项目
-//    devImplementation project(':devmodule')
-//    stageImplementation project(':stagemodule')
-//    prodImplementation project(':stagemodule')
-
-    // 也可以分渠道引用网络的。因为这里都相同，所以地址也就都一样了
-//    devImplementation 'com.roughike:bottom-bar:2.0.2'
-//    stageImplementation 'com.roughike:bottom-bar:2.0.2'
-//    prodImplementation 'com.roughike:bottom-bar:2.0.2'
     if (!isMain.toBoolean()) {
         api project(':main_module')
     }
@@ -174,10 +164,6 @@ dependencies {
     }
     if (!isUi.toBoolean()) {
         api project(':ui_module')
-        api project(':derobot')
     }
 
-
-    annotationProcessor rootProject.ext.dependencies.arouter_compiler
-//    implementation 'com.android.support:support-v4:27.1.1'
 }

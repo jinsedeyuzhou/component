@@ -7,13 +7,14 @@ if (isUi.toBoolean()) {
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-android-extensions"
 apply plugin: 'kotlin-kapt'
-apply from: 'derobot.gradle'
-
 kapt {
     arguments {
         arg("AROUTER_MODULE_NAME", project.getName())
     }
 }
+
+apply from: 'derobot.gradle'
+
 
 androidExtensions {
     experimental = true
@@ -33,12 +34,6 @@ android {
 //        flavorDimensions "dev","versionCode","stage"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        //ARouter
-//        javaCompileOptions {
-//            annotationProcessorOptions {
-//                arguments = [AROUTER_MODULE_NAME: project.getName()]
-//            }
-//        }
 
     }
     sourceSets {
@@ -69,18 +64,6 @@ android {
         enabled = true
     }
 
-//    productFlavors {
-//        dev {
-//            dimension "dev"
-//        }
-//        stage {
-//            dimension "stage"
-//        }
-//        prod {
-//            dimension "versionCode"
-//        }
-//    }
-
 
 }
 
@@ -90,24 +73,11 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
-    implementation project(':baseLib:banner')
-    implementation project(':baseLib:toasty')
-    implementation project(':baseLib:magicindicator')
-    implementation project(':baseLib:photoview')
-    implementation project(':baseLib:pickerview')
-    implementation project(':baseLib:retrofitrxc')
-    implementation project(':baseLib:viewanimations')
-    implementation project(':cameralib')
+    //公共库导入
+
+    api project(':common_logic')
+    api project(':derobot')
     kapt rootProject.ext.dependencies.arouter_compiler
-
-//   暂时不能根据渠道变更，需要注掉
-//    devImplementation project(':devmodule')
-//    stageImplementation project(':stagemodule')
-//    prodImplementation project(':stagemodule')
-
-
-    implementation project(':common_logic')
-    implementation project(':derobot')
 }
 repositories {
     mavenCentral()

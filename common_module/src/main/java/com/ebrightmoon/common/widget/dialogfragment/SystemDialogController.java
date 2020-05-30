@@ -15,7 +15,7 @@ import java.lang.ref.WeakReference;
 
 /**
  * Created by mq on 2018/9/1 上午10:58
- * mqcoder90@gmail.com
+ *
  */
 
 public class SystemDialogController {

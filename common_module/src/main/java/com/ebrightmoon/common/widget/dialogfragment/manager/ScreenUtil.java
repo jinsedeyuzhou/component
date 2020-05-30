@@ -11,7 +11,7 @@ import android.view.ViewConfiguration;
 
 /**
  * Created by mq on 2018/10/26 下午6:05
- * mqcoder90@gmail.com
+ *
  */
 
 public class ScreenUtil {

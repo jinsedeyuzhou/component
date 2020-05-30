@@ -21,7 +21,6 @@ import com.ebrightmoon.common.R;
 import com.ebrightmoon.common.common.CommonBaseActivity;
 import com.ebrightmoon.common.ebus.BusManager;
 import com.ebrightmoon.common.ebus.IEvent;
-import com.ebrightmoon.retrofitrx.recycle.ActivityLifeCycleEvent;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -102,7 +101,6 @@ public abstract class BaseActivity
             overridePendingTransition(R.anim.enter_anim, R.anim.exit_anim);
         }
 
-        lifecycleSubject.onNext(ActivityLifeCycleEvent.CREATE);
 
 
         // 软件盘模式
@@ -231,7 +229,6 @@ public abstract class BaseActivity
         if (isRegisterEvent()) {
             BusManager.getBus().register(this);
         }
-        lifecycleSubject.onNext(ActivityLifeCycleEvent.START);
 
         super.onStart();
 
@@ -307,41 +304,19 @@ public abstract class BaseActivity
     }
 
 
-    public static final PublishSubject<ActivityLifeCycleEvent> lifecycleSubject = PublishSubject.create();
 
 
     @Override
     protected void onResume() {
         super.onResume();
-        lifecycleSubject.onNext(ActivityLifeCycleEvent.RESUME);
     }
 
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        lifecycleSubject.onNext(ActivityLifeCycleEvent.DESTROY);
     }
 
 
-    public static <T> ObservableTransformer<T, T> bindUntilEvent(@NonNull final ActivityLifeCycleEvent event) {
-        return new ObservableTransformer<T, T>() {
-            @Override
-            public ObservableSource<T> apply(Observable<T> upstream) {
-                Observable<ActivityLifeCycleEvent> compareLifecycleObservable =
-                        lifecycleSubject.filter(new Predicate<ActivityLifeCycleEvent>() {
-                            @Override
-                            public boolean test(ActivityLifeCycleEvent activityLifeCycleEvent) throws Exception {
-                                return activityLifeCycleEvent.equals(event);
-                            }
-                        });
-
-
-                return upstream.takeUntil(compareLifecycleObservable);
-            }
-
-
-        };
-    }
 
 }

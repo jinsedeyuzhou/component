@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.ebrightmoon.common.base.BaseActivity;
-import com.ebrightmoon.retrofitrx.util.GsonUtil;
 import com.ebrightmoon.ui.R;
 import com.ebrightmoon.ui.data.ProductBean;
 import com.ebrightmoon.ui.utils.AssetsUtil;
