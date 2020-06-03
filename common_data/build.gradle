@@ -61,8 +61,10 @@ dependencies {
 
 
     api project(':CusLib:webviewlib')
-    api project(':CusLib:HttpClient')
-    api project(':CusLib:cameralib')
     api project(':common_module')
+
+
+    api 'com.github.jinsedeyuzhou.HttpClient:HttpClient:-SNAPSHOT'
+
 
 }

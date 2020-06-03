@@ -12,6 +12,6 @@ if (configurations.findByName("testImplementation")) {
         implementation 'com.squareup.okio:okio:1.13.0'
         implementation 'com.squareup.okhttp:okhttp-apache:2.5.0'
         implementation 'com.squareup.okhttp:okhttp-urlconnection:2.5.0'
-        implementation 'com.google.code.gson:gson:2.8.1'
+        implementation 'com.google.code.gson:gson:2.8.5'
     }
 }

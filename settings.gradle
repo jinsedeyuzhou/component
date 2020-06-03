@@ -2,8 +2,6 @@ include ':app'
 
 
 include ':CusLib:webviewlib',
-        ':CusLib:HttpClient',
-        ':CusLib:cameralib',
         ':common_module'
 
 include ':baseLib:banner',
