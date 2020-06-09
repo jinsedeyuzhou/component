@@ -21,6 +21,7 @@ import com.ebrightmoon.common.R;
 import com.ebrightmoon.common.common.CommonBaseActivity;
 import com.ebrightmoon.common.ebus.BusManager;
 import com.ebrightmoon.common.ebus.IEvent;
+import com.ebrightmoon.common.util.ScreenAdapter;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -97,6 +98,7 @@ public abstract class BaseActivity
 
     protected void onCreate(Bundle paramBundle) {
         super.onCreate(paramBundle);
+        ScreenAdapter.setCustomDensity(getApplication());
         if (isNeedAnimation()) {
             overridePendingTransition(R.anim.enter_anim, R.anim.exit_anim);
         }

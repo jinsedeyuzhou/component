@@ -8,8 +8,7 @@ import android.util.DisplayMetrics;
 
 /**
  * 作者：create by  Administrator on 2018/9/7
- * 邮箱：
- * 屏幕适配 以360dp 采用今日头条适配方案
+ * 邮箱：2315813288@qq.com
  */
 public class ScreenAdapter {
 
@@ -18,7 +17,7 @@ public class ScreenAdapter {
     // 系统的ScaledDensity
     private static float sNoncompatScaledDensity;
 
-    public static void setCustomDensity(Activity activity,final Application application) {
+    public static void setCustomDensity(final Application application) {
         DisplayMetrics displayMetrics = application.getResources().getDisplayMetrics();
         if (sNoncompatDensity == 0) {
             sNoncompatDensity = displayMetrics.density;
@@ -28,7 +27,7 @@ public class ScreenAdapter {
                 @Override
                 public void onConfigurationChanged(Configuration newConfig) {
                     if (newConfig != null && newConfig.fontScale > 0) {
-                        sNoncompatScaledDensity=application.getResources().getDisplayMetrics().scaledDensity;
+                        sNoncompatScaledDensity = application.getResources().getDisplayMetrics().scaledDensity;
                     }
                 }
 
@@ -39,14 +38,14 @@ public class ScreenAdapter {
             });
         }
         // 此处以360dp的设计图作为例子
-        float targetDensity=displayMetrics.widthPixels/360;
-        float targetScaledDensity=targetDensity*(sNoncompatScaledDensity/sNoncompatDensity);
-        int targetDensityDpi= (int) (160 * targetDensity);
+        float targetDensity = displayMetrics.widthPixels / 360;
+        float targetScaledDensity = targetDensity * (sNoncompatScaledDensity / sNoncompatDensity);
+        int targetDensityDpi = (int) (160 * targetDensity);
         displayMetrics.density = targetDensity;
         displayMetrics.scaledDensity = targetScaledDensity;
         displayMetrics.densityDpi = targetDensityDpi;
 
-        DisplayMetrics activityDisplayMetrics = activity.getResources().getDisplayMetrics();
+        DisplayMetrics activityDisplayMetrics = application.getResources().getDisplayMetrics();
         activityDisplayMetrics.density = targetDensity;
         activityDisplayMetrics.scaledDensity = targetScaledDensity;
         activityDisplayMetrics.densityDpi = targetDensityDpi;
