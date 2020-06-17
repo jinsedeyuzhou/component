@@ -14,7 +14,6 @@ import java.lang.reflect.Proxy;
 
 /**
  * 作者：create by  Administrator on 2019/3/7
- * 邮箱：
  * 下图是系统INotificationManager的实现源码 当pkg = “android”时不会校验通知关闭逻辑
  所以只需要hook INotificationManager 将参数pkg始终传“android” 就行了
  */

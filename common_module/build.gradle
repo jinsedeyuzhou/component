@@ -8,8 +8,6 @@ android {
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
-        renderscriptTargetApi 19
-        renderscriptSupportModeEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
@@ -22,6 +20,10 @@ android {
     }
 
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
 
 }
@@ -69,8 +71,11 @@ dependencies {
     api rootProject.ext.dependencies["stetho"]
     api rootProject.ext.dependencies["stetho-okhttp3"]
     api rootProject.ext.dependencies["logger"]
-
-
+    api rootProject.ext.dependencies.rxlifecycle
+    api rootProject.ext.dependencies.rxlifecycle_android
+    api rootProject.ext.dependencies.rxlifecycle_components
+    api rootProject.ext.dependencies.rxlifecycle_kotlin
+    api rootProject.ext.dependencies.rxlifecycle_kotlin_android
 
 
 //

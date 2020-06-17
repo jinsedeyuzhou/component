@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ebrightmoon.common.util.LogUtils;
+import com.trello.rxlifecycle2.components.support.RxFragment;
 
 
 /**
@@ -23,7 +24,7 @@ import com.ebrightmoon.common.util.LogUtils;
  * 只有最顶层的父Fragment才能接收到，这是一个support v4库的一个BUG，不过在前两天发布的support 23.2.0库中，
  * 已经修复了该问题，嵌套的子Fragment也能正常接收到返回数据了!
  */
-public abstract class CommonBaseFragment extends Fragment {
+public abstract class CommonBaseFragment extends RxFragment {
     private static final String TAG = "CommonBaseFragment";
     private static final String STATE_SAVE_IS_HIDDEN = "STATE_SAVE_IS_HIDDEN";
     @Override

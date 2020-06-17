@@ -2,18 +2,19 @@ package com.ebrightmoon.common.common;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
+import com.ebrightmoon.common.ebus.RxBus;
 import com.ebrightmoon.common.util.AppManager;
 import com.ebrightmoon.common.util.LogUtils;
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 
 /**
  * Created by wyy on 2016/9/11.
  * 所有模块通用的可以在这里面设置
  */
-public abstract  class CommonBaseActivity extends AppCompatActivity implements View.OnClickListener{
+public abstract  class CommonBaseActivity extends RxAppCompatActivity implements View.OnClickListener{
     private static final String TAG = "CommonBaseActivity";
     private static final int ACTIVITY_DESTROY = 4;
     private static final int ACTIVITY_PAUSE = 3;
@@ -27,6 +28,9 @@ public abstract  class CommonBaseActivity extends AppCompatActivity implements V
     {
         super.onActivityResult(paramInt1, paramInt2, paramIntent);
         LogUtils.i(TAG, "onActivityResult");
+        RxBus.get().toFlowable(String.class).subscribe(str ->{
+
+        });
     }
 
     protected void onCreate(Bundle paramBundle)

@@ -43,7 +43,8 @@ ext {
             greendao = "3.2.2",
             circleimageview = "2.2.0",
             cardview = "27.1.1",
-            rxbus = "1.0.6"
+            rxbus = "1.0.6",
+            lifecycle_version="2.2.1",
     ]
 
 
@@ -89,6 +90,11 @@ ext {
             //日志系统
             logger                  : 'com.orhanobut:logger:2.2.0',
 //            orhanobut_logger                  : "com.orhanobut:logger:$rootProject.logger",
-            greendao                : "org.greenrobot:greendao:$rootProject.greendao"
+            greendao                : "org.greenrobot:greendao:$rootProject.greendao",
+            rxlifecycle               :"com.trello.rxlifecycle2:rxlifecycle:$rootProject.lifecycle_version",
+            rxlifecycle_android       :"com.trello.rxlifecycle2:rxlifecycle-android:$rootProject.lifecycle_version",
+            rxlifecycle_components    :"com.trello.rxlifecycle2:rxlifecycle-components:$rootProject.lifecycle_version",
+            rxlifecycle_kotlin               :"com.trello.rxlifecycle2:rxlifecycle-kotlin:$rootProject.lifecycle_version",
+            rxlifecycle_kotlin_android               :"com.trello.rxlifecycle2:rxlifecycle-android-lifecycle-kotlin:$rootProject.lifecycle_version",
     ]
 }
