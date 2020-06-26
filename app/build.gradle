@@ -155,6 +155,7 @@ dependencies {
     //公共库导入
     annotationProcessor rootProject.ext.dependencies.arouter_compiler
 
+    api project(':user_module')
     if (!isMain.toBoolean()) {
         api project(':main_module')
     }

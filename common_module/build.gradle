@@ -65,9 +65,9 @@ dependencies {
     api rootProject.ext.dependencies.rxbus
     api rootProject.ext.dependencies.circleimage
     api rootProject.ext.dependencies.cardview
+    api rootProject.ext.dependencies.luban
 
 
-//    api rootProject.ext.dependencies["tencent-bugly"]
     api rootProject.ext.dependencies["stetho"]
     api rootProject.ext.dependencies["stetho-okhttp3"]
     api rootProject.ext.dependencies["logger"]
@@ -78,17 +78,6 @@ dependencies {
     api rootProject.ext.dependencies.rxlifecycle_kotlin_android
 
 
-//
-//    implementation project(':baseLib:RecylerViewAdapter')
-//    implementation project(':baseLib:banner')
-//    implementation project(':baseLib:toasty')
-//    implementation project(':baseLib:magicindicator')
-//    implementation project(':baseLib:photoview')
-//    implementation project(':baseLib:pickerview')
-//    implementation project(':baseLib:retrofitrxc')
-//    implementation project(':baseLib:alertview')
-//    implementation project(':baseLib:kprogresshud')
-//    implementation project(':baseLib:viewanimations')
 
 
 }

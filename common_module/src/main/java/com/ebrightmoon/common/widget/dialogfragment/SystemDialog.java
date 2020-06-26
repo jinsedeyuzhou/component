@@ -375,7 +375,7 @@ public class SystemDialog extends BaseDialogFragment implements IDialog {
             params.gravity = Gravity.CENTER;
             params.layoutRes = R.layout.layout_dialog_fragment;
             params.dimAmount = 0.5f;
-            params.dialogWidth = (int) (ScreenUtil.getScreenWidth((Activity) params.context) * 0.85f);
+            params.dialogWidth = (int) (ScreenUtil.getScreenWidth((Activity) params.context) * 0.8f);
             params.dialogHeight = WindowManager.LayoutParams.WRAP_CONTENT;
         }
 

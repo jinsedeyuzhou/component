@@ -3,6 +3,9 @@ package com.ebrightmoon.ui.page.fragment;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
@@ -38,6 +41,7 @@ public class UiHomeFragment extends BaseFragment {
     @Override
     protected void initView(View view) {
         contentView=view;
+        ViewDataBinding viewDataBinding = DataBindingUtil.bind(view);
 
         view.findViewById(R.id.btn_http).setOnClickListener(new View.OnClickListener() {
             @Override

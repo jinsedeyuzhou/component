@@ -36,7 +36,7 @@ ext {
             eventbus = "3.0.0",
 
             multidex = "1.0.3",
-
+            luban = "1.1.8",
             arouter_compiler = "1.2.2",
             arouter_api = "1.5.0",
             logger = "2.2.0",
@@ -89,6 +89,7 @@ ext {
             "stetho-okhttp3"        : 'com.facebook.stetho:stetho-okhttp3:1.5.0',
             //日志系统
             logger                  : 'com.orhanobut:logger:2.2.0',
+            luban                     : "top.zibin:Luban:$rootProject.luban",
 //            orhanobut_logger                  : "com.orhanobut:logger:$rootProject.logger",
             greendao                : "org.greenrobot:greendao:$rootProject.greendao",
             rxlifecycle               :"com.trello.rxlifecycle2:rxlifecycle:$rootProject.lifecycle_version",
