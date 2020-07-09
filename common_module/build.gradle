@@ -25,7 +25,9 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-
+    dataBinding {
+        enabled true
+    }
 }
 //
 
@@ -76,6 +78,8 @@ dependencies {
     api rootProject.ext.dependencies.rxlifecycle_components
     api rootProject.ext.dependencies.rxlifecycle_kotlin
     api rootProject.ext.dependencies.rxlifecycle_kotlin_android
+    api rootProject.ext.dependencies.lifecycle_viewmodel
+    api rootProject.ext.dependencies.rxbinding
 
 
 

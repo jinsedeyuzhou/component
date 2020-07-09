@@ -41,7 +41,6 @@ public class UiHomeFragment extends BaseFragment {
     @Override
     protected void initView(View view) {
         contentView=view;
-        ViewDataBinding viewDataBinding = DataBindingUtil.bind(view);
 
         view.findViewById(R.id.btn_http).setOnClickListener(new View.OnClickListener() {
             @Override

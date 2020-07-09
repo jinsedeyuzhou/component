@@ -1,6 +1,7 @@
 package com.ebrightmoon.common.util.compression;
 
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 
 final class Preconditions {
 

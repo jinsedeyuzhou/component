@@ -45,6 +45,7 @@ ext {
             cardview = "27.1.1",
             rxbus = "1.0.6",
             lifecycle_version="2.2.1",
+            lifecycle_extensions = "2.2.0",
     ]
 
 
@@ -75,6 +76,7 @@ ext {
             eventbus                : "org.greenrobot:eventbus:$rootProject.eventbus",
             //rxbus
             rxbus                   : "com.hwangjr.rxbus:rxbus:$rootProject.rxbus",
+            rxbinding                          : "com.jakewharton.rxbinding2:rxbinding:2.1.1",
             //分包
             multidex                : "androidx.multidex:multidex:2.0.0",
             //圆形头像
@@ -92,6 +94,8 @@ ext {
             luban                     : "top.zibin:Luban:$rootProject.luban",
 //            orhanobut_logger                  : "com.orhanobut:logger:$rootProject.logger",
             greendao                : "org.greenrobot:greendao:$rootProject.greendao",
+            lifecycle_viewmodel       : "androidx.lifecycle:lifecycle-viewmodel:$rootProject.lifecycle_extensions",
+            lifecycle_livedata        : "androidx.lifecycle:lifecycle-livedata:$rootProject.lifecycle_extensions",
             rxlifecycle               :"com.trello.rxlifecycle2:rxlifecycle:$rootProject.lifecycle_version",
             rxlifecycle_android       :"com.trello.rxlifecycle2:rxlifecycle-android:$rootProject.lifecycle_version",
             rxlifecycle_components    :"com.trello.rxlifecycle2:rxlifecycle-components:$rootProject.lifecycle_version",

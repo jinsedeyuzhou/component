@@ -3,6 +3,8 @@ package com.ebrightmoon.common.util;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.ebrightmoon.common.util.constant.TimeConstants;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.ParsePosition;
@@ -722,16 +724,16 @@ public final class TimeUtil {
         }
         if (span < 1000) {
             return "刚刚";
-        } else if (span < TimeConstant.MIN) {
-            return String.format(Locale.getDefault(), "%d秒前", span / TimeConstant.SEC);
-        } else if (span < TimeConstant.HOUR) {
-            return String.format(Locale.getDefault(), "%d分钟前", span / TimeConstant.MIN);
+        } else if (span < TimeConstants.MIN) {
+            return String.format(Locale.getDefault(), "%d秒前", span / TimeConstants.SEC);
+        } else if (span < TimeConstants.HOUR) {
+            return String.format(Locale.getDefault(), "%d分钟前", span / TimeConstants.MIN);
         }
         // 获取当天00:00
         long wee = getWeeOfToday();
         if (millis >= wee) {
             return String.format("今天%tR", millis);
-        } else if (millis >= wee - TimeConstant.DAY) {
+        } else if (millis >= wee - TimeConstants.DAY) {
             return String.format("昨天%tR", millis);
         } else {
             return String.format("%tF", millis);
@@ -1069,7 +1071,7 @@ public final class TimeUtil {
      */
     public static boolean isToday(final long millis) {
         long wee = getWeeOfToday();
-        return millis >= wee && millis < wee + TimeConstant.DAY;
+        return millis >= wee && millis < wee + TimeConstants.DAY;
     }
 
     /**

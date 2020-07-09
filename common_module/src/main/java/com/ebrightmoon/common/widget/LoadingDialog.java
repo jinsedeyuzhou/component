@@ -42,7 +42,7 @@ public class LoadingDialog extends Dialog {
     private ImageView mIvProgress;
     private ProgressDrawable mProgressDrawable;
 
-    public LoadingDialog(Context context, int themeResId, String content) {
+    public LoadingDialog(Context context,  String content) {
         super(context, R.style.LoadDialog);
         this.context = context;
         mActivity = (Activity) context;
