@@ -74,10 +74,10 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     //公共库导入
-
     api project(':common_logic')
     api project(':derobot')
-    kapt rootProject.ext.dependencies.arouter_compiler
+    kapt rootProject.ext.annotationProcessor.arouter_compiler
+
 }
 repositories {
     mavenCentral()

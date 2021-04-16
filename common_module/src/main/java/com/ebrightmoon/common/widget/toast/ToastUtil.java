@@ -54,7 +54,7 @@ public class ToastUtil {
             if(isNotificationEnabled(context)){
                 toast.show();
             }else{
-                showSystemToast(toast);
+                CustomToast.makeText(context,message,duration).show();
             }
         }
 
@@ -75,39 +75,6 @@ public class ToastUtil {
                 } else {
                     show(context, message, Toast.LENGTH_SHORT, Gravity.CENTER);
                 }
-            }
-        }
-
-        /**
-         * 显示系统Toast
-         */
-        private static void showSystemToast(Toast toast){
-            try{
-                Method getServiceMethod = Toast.class.getDeclaredMethod("getService");
-                getServiceMethod.setAccessible(true);
-                //hook INotificationManager
-                if(iNotificationManagerObj == null){
-                    iNotificationManagerObj = getServiceMethod.invoke(null);
-
-                    Class iNotificationManagerCls = Class.forName("android.app.INotificationManager");
-                    Object iNotificationManagerProxy = Proxy.newProxyInstance(toast.getClass().getClassLoader(), new Class[]{iNotificationManagerCls}, new InvocationHandler() {
-                        @Override
-                        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                            //强制使用系统Toast
-                            if("enqueueToast".equals(method.getName())
-                                    || "enqueueToastEx".equals(method.getName())){  //华为p20 pro上为enqueueToastEx
-                                args[0] = "android";
-                            }
-                            return method.invoke(iNotificationManagerObj, args);
-                        }
-                    });
-                    Field sServiceFiled = Toast.class.getDeclaredField("sService");
-                    sServiceFiled.setAccessible(true);
-                    sServiceFiled.set(null, iNotificationManagerProxy);
-                }
-                toast.show();
-            }catch (Exception e){
-                e.printStackTrace();
             }
         }
 

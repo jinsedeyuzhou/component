@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'org.greenrobot.greendao'
+apply from:'../greendao_config.gradle'
 android {
     compileSdkVersion 28
 
@@ -27,25 +27,18 @@ android {
 
 
 }
-greendao {
-    schemaVersion 1
-    targetGenDir 'src/main/java'
-    daoPackage 'com.ebrightmoon.data.gen'
-}
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-
     implementation 'androidx.appcompat:appcompat:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    api rootProject.ext.dependencies.greendao
-    api rootProject.ext.dependencies.arouter_api
-
+    api rootProject.ext.singleDependencies.greendao
+    api rootProject.ext.singleDependencies.room_runtime
+    annotationProcessor rootProject.ext.singleDependencies.room_compiler
 
     api project(':baseLib:RecylerViewAdapter')
     api project(':baseLib:banner')
@@ -59,11 +52,7 @@ dependencies {
     api project(':baseLib:dNSCache')
     api project(':baseLib:volley')
 
-
-    api project(':CusLib:webviewlib')
     api project(':common_module')
-
-
     api 'com.github.jinsedeyuzhou.HttpClient:HttpClient:-SNAPSHOT'
 
 

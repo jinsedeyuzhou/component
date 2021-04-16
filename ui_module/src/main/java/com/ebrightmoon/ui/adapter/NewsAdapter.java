@@ -12,45 +12,43 @@ import java.util.ArrayList;
 
 /**
  * 主页HomeFragment 适配,其他有关fragment也可以用
- * 
+ *
  * @author wyy
- * 
  */
 public class NewsAdapter extends FragmentStateAdapter {
 
-	private ArrayList<Fragment> list;
+    private ArrayList<Fragment> list;
 
 
+    public NewsAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, ArrayList<Fragment> list) {
+        super(fragmentManager, lifecycle);
+        this.list = list;
+    }
 
+    @NonNull
+    @Override
+    public Fragment createFragment(int position) {
+        return list.get(position);
+    }
 
-	public NewsAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, ArrayList<Fragment> list) {
-		super(fragmentManager, lifecycle);
-		this.list = list;
-	}
+    @Override
+    public int getItemCount() {
+        return list.size();
+    }
 
-	@NonNull
-	@Override
-	public Fragment createFragment(int position) {
-		return list.get(position);
-	}
+    /**
+     * 更新fragment需要重写如下方法
+     *
+     * @param position
+     * @return
+     */
+    @Override
+    public long getItemId(int position) {
+        return super.getItemId(position);
+    }
 
-	@Override
-	public int getItemCount() {
-		return list.size();
-	}
-
-	/**
-	 * 更新fragment需要重写如下方法
-	 * @param position
-	 * @return
-	 */
-	@Override
-	public long getItemId(int position) {
-		return super.getItemId(position);
-	}
-
-	@Override
-	public boolean containsItem(long itemId) {
-		return super.containsItem(itemId);
-	}
+    @Override
+    public boolean containsItem(long itemId) {
+        return super.containsItem(itemId);
+    }
 }

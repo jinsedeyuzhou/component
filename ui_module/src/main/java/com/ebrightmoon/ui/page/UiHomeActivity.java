@@ -54,11 +54,7 @@ public class UiHomeActivity extends BaseActivity {
         tabTitles = new ArrayList();
         tabTitles.add("发现");
         tabTitles.add("消息");
-        tabTitles.add("消息");
-        tabTitles.add("消息");
         fragmentList = new ArrayList();
-        fragmentList.add(new UiHomeFragment());
-        fragmentList.add(new UiAccountFragment());
         fragmentList.add(new UiHomeFragment());
         fragmentList.add(new UiAccountFragment());
 
@@ -76,10 +72,6 @@ public class UiHomeActivity extends BaseActivity {
                             viewpager2.setCurrentItem(0);
                         } else if (item.getItemId() == R.id.navigation_home) {
                             viewpager2.setCurrentItem(1);
-                        } else if (item.getItemId() == R.id.navigation_practice1) {
-                            viewpager2.setCurrentItem(2);
-                        } else if (item.getItemId() == R.id.navigation_home1) {
-                            viewpager2.setCurrentItem(3);
                         }
 
                         return false;

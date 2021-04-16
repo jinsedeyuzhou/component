@@ -65,9 +65,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     api project(':common_logic')
     implementation 'androidx.palette:palette:1.0.0'
-    //公共库导入
-    kapt rootProject.ext.dependencies.arouter_compiler
+    kapt rootProject.ext.annotationProcessor.arouter_compiler
+
 }

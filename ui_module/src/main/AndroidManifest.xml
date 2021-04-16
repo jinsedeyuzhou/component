@@ -6,16 +6,46 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application>
-        <activity android:name=".page.UiHomeActivity" />
-        <activity android:name=".page.test.UiDialogActivity" />
-        <activity android:name=".page.test.UIToastyActivity" />
-        <activity android:name=".page.test.UiHttpActivity" />
-        <activity android:name=".page.test.UITouchActivity" />
-        <activity android:name=".page.databinding.UIDataBindingActivity" />
-        <activity android:name=".page.test.UISideBarActivity" />
-        <activity android:name=".page.kotlin.KotlinTestActivity" />
-        <activity android:name=".page.test.CustomViewActivity" />
-        <activity android:name=".page.test.DebugActivity" />
+        <activity
+            android:name=".page.UiHomeActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".page.test.UiDialogActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".page.test.UIToastyActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".page.test.UiHttpActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".page.test.UITouchActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".page.databinding.UIDataBindingActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".page.test.UISideBarActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".page.kotlin.KotlinTestActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".page.test.CustomViewActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".page.test.DebugActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
 
 
     </application>

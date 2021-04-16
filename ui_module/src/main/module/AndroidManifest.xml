@@ -6,10 +6,10 @@
     <application
         android:name=".debug.UiAPP"
         android:allowBackup="true"
-        android:label="@string/app_name"
-        android:supportsRtl="true"
         android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
         android:theme="@style/BaseAppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".page.UiHomeActivity">
@@ -19,15 +19,42 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".page.test.UiDialogActivity"/>
-        <activity android:name=".page.test.UIToastyActivity"/>
-        <activity android:name=".page.test.UiHttpActivity"/>
-        <activity android:name=".page.test.UITouchActivity"/>
-        <activity android:name=".page.databinding.UIDataBindingActivity"/>
-        <activity android:name=".page.test.UISideBarActivity"/>
-        <activity android:name=".page.kotlin.KotlinTestActivity"/>
-        <activity android:name=".page.test.CustomViewActivity"/>
-        <activity android:name=".page.test.DebugActivity"/>
+        <activity
+            android:name=".page.test.UiDialogActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".page.test.UIToastyActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".page.test.UiHttpActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".page.test.UITouchActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".page.databinding.UIDataBindingActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".page.test.UISideBarActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".page.kotlin.KotlinTestActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".page.test.CustomViewActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".page.test.DebugActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
 
     </application>
 

@@ -1,4 +1,4 @@
-package com.ebrightmoon.commonlogic.entity;
+package com.ebrightmoon.data.pojo;
 
 import java.io.Serializable;
 

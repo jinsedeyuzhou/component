@@ -1,5 +1,12 @@
 apply plugin: 'com.android.library'
 
+def implementationDependencies = rootProject.ext.dependencies
+def processors = rootProject.ext.annotationProcessor
+def apiProject = rootProject.ext.apiFileDependencies
+def implementationExcludes = rootProject.ext.implementationExcludes
+def debugDependencies = rootProject.ext.debugImplementationDependencies
+
+
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
 
@@ -9,7 +16,12 @@ android {
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
+        //ARouter
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 
     buildTypes {
@@ -29,10 +41,6 @@ android {
         enabled true
     }
 }
-//
-
-
-
 
 
 dependencies {
@@ -41,47 +49,28 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
 
-    api rootProject.ext.dependencies.appcompat_v7
-    api rootProject.ext.dependencies.support_v4
-    api rootProject.ext.dependencies.constraint_layout
-    api rootProject.ext.dependencies.design
-    api rootProject.ext.dependencies.multidex
 
+    //系统组件依赖库
+    rootProject.ext.systemDependencies.each { k, v -> api v }
+    // 处理所有的 xxximplementation 依赖
+    implementationDependencies.each { k, v -> api v }
+    // 处理 annotationProcessor 依赖
+    processors.each { k, v -> annotationProcessor v }
 
-    api rootProject.ext.dependencies.retrofit
-    api rootProject.ext.dependencies.retrofit_converter_gson
-    api rootProject.ext.dependencies.retrofit_adapter_rxjava2
-    api rootProject.ext.dependencies.urlconnection
-    api rootProject.ext.dependencies.okhttp_apache
-    api rootProject.ext.dependencies.okhttp
-    api rootProject.ext.dependencies.logging_interceptor
-    api rootProject.ext.dependencies.rxandroid
-    api rootProject.ext.dependencies.rxjava
+    debugDependencies.each { k, v -> api v }
 
-    api rootProject.ext.dependencies.gson
+    apiProject.each { k, v -> api project(v) }
+    // 处理所有包含 exclude 的依赖
+    implementationExcludes.each { entry ->
+        implementation(entry.key) {
+            entry.value.each { childEntry ->
+                exclude(group: childEntry)
+            }
+        }
+    }
 
-    api rootProject.ext.dependencies.glide
-    api rootProject.ext.dependencies.fresco
-
-    api rootProject.ext.dependencies.eventbus
-    api rootProject.ext.dependencies.rxbus
-    api rootProject.ext.dependencies.circleimage
-    api rootProject.ext.dependencies.cardview
-    api rootProject.ext.dependencies.luban
-
-
-    api rootProject.ext.dependencies["stetho"]
-    api rootProject.ext.dependencies["stetho-okhttp3"]
-    api rootProject.ext.dependencies["logger"]
-    api rootProject.ext.dependencies.rxlifecycle
-    api rootProject.ext.dependencies.rxlifecycle_android
-    api rootProject.ext.dependencies.rxlifecycle_components
-    api rootProject.ext.dependencies.rxlifecycle_kotlin
-    api rootProject.ext.dependencies.rxlifecycle_kotlin_android
-    api rootProject.ext.dependencies.lifecycle_viewmodel
-    api rootProject.ext.dependencies.rxbinding
-
-
+    //需要httpClient
+    api project(':CusLib:webviewlib')
 
 
 }
