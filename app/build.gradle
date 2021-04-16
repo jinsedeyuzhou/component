@@ -12,6 +12,11 @@ Properties properties = new Properties()
 InputStream inputStream = project.rootProject.file('local.properties').newDataInputStream();
 properties.load(inputStream)
 
+def keystorePropertiesFile = rootProject.file("key.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     defaultConfig {
@@ -20,7 +25,8 @@ android {
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
 
-        flavorDimensions "stage", "versionCode", "dev"
+        //"stage", "versionCode", "dev"
+        flavorDimensions "stage"//, "prod", "dev"
         versionName rootProject.ext.android.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
@@ -35,10 +41,10 @@ android {
 
     signingConfigs {
         config {
-            keyAlias 'component'
-            keyPassword '123456'
-            storeFile file('../component.jks')
-            storePassword '123456'
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
 
         }
     }
@@ -58,7 +64,7 @@ android {
             applicationId "com.lyl.boon.dev"
             // 动态添加 string.xml 字段；
             // 注意，这里是添加，在 string.xml 不能有这个字段，会重名！！！
-            resValue "string", "app_name", "dev_boon"
+            resValue "string", "app_name", "七点资讯"
             resValue "bool", "isrRank", 'false'
 //            // 动态修改 常量 字段
             buildConfigField "String", "ENVIRONMENT", '"dev"'
@@ -67,8 +73,9 @@ android {
 //            buildConfigField "String", "LEANCLOUD_APPKEY", properties.getProperty('leancloudAppKey')
             // 修改 AndroidManifest.xml 里渠道变量
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "dev",
-                                    app_icon           : "@drawable/didi_luncher"]
-            dimension "dev"
+                                    app_icon           : "@drawable/didi_luncher",
+                                    icon               : "@drawable/didi_luncher"]
+//            dimension "dev"
         }
         stage {
             applicationId "com.ebrightmoon.android"
@@ -82,13 +89,14 @@ android {
 //            buildConfigField "String", "LEANCLOUD_APPKEY", properties.getProperty('leancloudAppKey')
 
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "stage",
-                                    app_icon           : "@mipmap/ic_launcher"]
+                                    app_icon           : "@mipmap/ic_launcher",
+                                    icon               : "@mipmap/ic_launcher"]
             dimension "stage"
         }
         prod {
             applicationId "com.lyl.boon"
 
-            resValue "string", "app_name", "boon"
+            resValue "string", "app_name", "新闻"
             resValue "bool", "isrRank", 'true'
 
             buildConfigField "String", "ENVIRONMENT", '"prod"'
@@ -96,10 +104,11 @@ android {
 //            buildConfigField "String", "LEANCLOUD_APPID", properties.getProperty('leancloudAppId')
 //            buildConfigField "String", "LEANCLOUD_APPKEY", properties.getProperty('leancloudAppKey')
 
-
+            //不同环境不同的名称和应用名
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "prod",
-                                    app_icon           : "@mipmap/ic_launcher"]
-            dimension "versionCode"
+                                    app_icon           : "@mipmap/ic_launcher",
+                                    icon               : "@mipmap/ic_launcher"]
+//            dimension "prod"
         }
     }
 //    productFlavors.all {
@@ -139,6 +148,21 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    sourceSets {
+        main {
+            res.srcDirs = ['src/main/res', 'src/main/res/']
+        }
+
+        dev {
+            res {
+                srcDirs 'src/dev/res', 'src/dev/res/'
+            }
+        }
+
+        prod {
+            res.srcDirs = ['src/main/res', 'src/main/res/']
+        }
     }
 }
 

@@ -1,7 +1,8 @@
 package com.sina.util.dnscache.net.networktype;
 
-public class Constants {
 
+
+public class Constants {
 	// //网络类型////
 
 	/**
