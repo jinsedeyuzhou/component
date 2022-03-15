@@ -67,6 +67,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     api project(':common_logic')
     implementation 'androidx.palette:palette:1.0.0'
-    kapt rootProject.ext.annotationProcessor.arouter_compiler
+    annotationProcessor rootProject.ext.annotationProcessor.arouter_compiler
 
 }

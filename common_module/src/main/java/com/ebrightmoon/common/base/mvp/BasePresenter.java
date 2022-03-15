@@ -1,4 +1,4 @@
-package com.ebrightmoon.common.base;
+package com.ebrightmoon.common.base.mvp;
 
 /**
  * Time: 2019-08-26

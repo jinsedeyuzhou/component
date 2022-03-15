@@ -19,7 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ebrightmoon.common.adapter.recycler.absrecyclerview.MultiItemTypeAdapter;
-import com.ebrightmoon.common.base.BaseActivity;
+import com.ebrightmoon.common.base.mvc.BaseActivity;
 import com.ebrightmoon.common.view.flowlayout.FlowLayout;
 import com.ebrightmoon.common.view.flowlayout.TagAdapter;
 import com.ebrightmoon.common.view.flowlayout.TagFlowLayout;

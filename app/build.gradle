@@ -1,12 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: "kotlin-android"
-apply plugin: "kotlin-android-extensions"
 apply plugin: 'kotlin-kapt'
 
-
-androidExtensions {
-    experimental = true
-}
 
 Properties properties = new Properties()
 InputStream inputStream = project.rootProject.file('local.properties').newDataInputStream();
@@ -26,7 +21,7 @@ android {
         versionCode rootProject.ext.android.versionCode
 
         //"stage", "versionCode", "dev"
-        flavorDimensions "stage"//, "prod", "dev"
+        flavorDimensions "app"//, "prod", "dev"
         versionName rootProject.ext.android.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
@@ -75,7 +70,7 @@ android {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "dev",
                                     app_icon           : "@drawable/didi_luncher",
                                     icon               : "@drawable/didi_luncher"]
-//            dimension "dev"
+            dimension "app"
         }
         stage {
             applicationId "com.ebrightmoon.android"
@@ -91,7 +86,7 @@ android {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "stage",
                                     app_icon           : "@mipmap/ic_launcher",
                                     icon               : "@mipmap/ic_launcher"]
-            dimension "stage"
+            dimension "app"
         }
         prod {
             applicationId "com.lyl.boon"
@@ -108,7 +103,7 @@ android {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "prod",
                                     app_icon           : "@mipmap/ic_launcher",
                                     icon               : "@mipmap/ic_launcher"]
-//            dimension "prod"
+            dimension "app"
         }
     }
 //    productFlavors.all {
@@ -142,26 +137,38 @@ android {
 
     lintOptions { abortOnError false }
 
-    dataBinding {
-        enabled = true
+
+    buildFeatures {
+        dataBinding true
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
     sourceSets {
-        main {
-            res.srcDirs = ['src/main/res', 'src/main/res/']
+        stage {
+            res.srcDirs = [ 'src/stage/res/']
+            sourceSets.all{set ->
+                println "${set.name}的文件是 ${set.java.srcDirs}"
+            }
         }
 
         dev {
             res {
-                srcDirs 'src/dev/res', 'src/dev/res/'
+                srcDirs =['src/dev/res','src/main/res']
+            }
+            sourceSets.all{set ->
+                println "${set.name}的文件是 ${set.java.srcDirs}"
             }
         }
 
+
         prod {
-            res.srcDirs = ['src/main/res', 'src/main/res/']
+            res.srcDirs = ['src/prod/res']
+            sourceSets.all{set ->
+                println "${set.name}的文件是 ${set.java.srcDirs}"
+            }
         }
     }
 }
@@ -186,6 +193,6 @@ dependencies {
     if (!isUi.toBoolean()) {
         api project(':ui_module')
     }
-    kapt rootProject.ext.annotationProcessor.arouter_compiler
+    annotationProcessor rootProject.ext.annotationProcessor.arouter_compiler
 
 }

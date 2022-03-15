@@ -4,12 +4,9 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
-import com.ebrightmoon.common.base.BaseFragment;
+import com.ebrightmoon.common.base.mvc.BaseFragment;
 import com.ebrightmoon.ui.R;
 import com.ebrightmoon.ui.page.databinding.UIDataBindingActivity;
 import com.ebrightmoon.ui.page.kotlin.KotlinTestActivity;

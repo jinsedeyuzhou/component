@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.ebrightmoon.common.base.BaseActivity;
+import com.ebrightmoon.common.base.mvc.BaseActivity;
 import com.ebrightmoon.main.arouter.RouterCenter;
 import com.ebrightmoon.main.ui.activity.HomeMainActivity;
 import com.ebrightmoon.main.ui.activity.TestActivity;

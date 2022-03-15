@@ -3,11 +3,9 @@ package com.ebrightmoon.main.ui.activity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.FrameLayout;
 
-import com.ebrightmoon.common.base.BaseActivity;
+import com.ebrightmoon.common.base.mvc.BaseActivity;
 import com.ebrightmoon.main.R;
-import com.ebrightmoon.main.ui.fragment.FragmentTest1;
 import com.ebrightmoon.main.ui.fragment.FragmentTest2;
 import com.ebrightmoon.main.ui.fragment.NewsListFragment;
 

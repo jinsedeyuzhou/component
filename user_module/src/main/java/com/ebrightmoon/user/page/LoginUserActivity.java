@@ -6,17 +6,13 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.ebrightmoon.common.base.BaseActivity;
+import com.ebrightmoon.common.base.mvc.BaseActivity;
 import com.ebrightmoon.data.router.RouterURLS;
 import com.ebrightmoon.user.R;
-import com.ebrightmoon.user.entity.UserInfo;
 import com.google.android.material.textfield.TextInputLayout;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

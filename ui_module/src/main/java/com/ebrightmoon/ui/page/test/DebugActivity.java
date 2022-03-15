@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.ebrightmoon.common.base.BaseActivity;
+import com.ebrightmoon.common.base.mvc.BaseActivity;
 import com.ebrightmoon.derobot.reboot.Derobot;
 import com.ebrightmoon.ui.R;
 

@@ -1,10 +1,9 @@
 package com.ebrightmoon.ui.page.test;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.View;
 
-import com.ebrightmoon.common.base.BaseActivity;
+import com.ebrightmoon.common.base.mvc.BaseActivity;
 import com.ebrightmoon.ui.R;
 import com.ebrightmoon.ui.widget.custom.CustTextView;
 import com.ebrightmoon.ui.widget.custom.CustomViewGroup;

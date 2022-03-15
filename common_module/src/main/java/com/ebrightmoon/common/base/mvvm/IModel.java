@@ -1,4 +1,4 @@
-package com.ebrightmoon.common.base;
+package com.ebrightmoon.common.base.mvvm;
 
 
 public interface IModel {

@@ -1,4 +1,4 @@
-package com.ebrightmoon.common.base;
+package com.ebrightmoon.common.base.mvc;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.ebrightmoon.common.R;
+import com.ebrightmoon.common.base.mvvm.MvvmFragment;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import java.lang.ref.WeakReference;

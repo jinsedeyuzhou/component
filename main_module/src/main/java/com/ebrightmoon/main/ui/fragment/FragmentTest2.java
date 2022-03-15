@@ -3,7 +3,7 @@ package com.ebrightmoon.main.ui.fragment;
 import android.os.Bundle;
 import android.view.View;
 
-import com.ebrightmoon.common.base.BaseFragment;
+import com.ebrightmoon.common.base.mvc.BaseFragment;
 import com.ebrightmoon.commonlogic.widget.SimpleMultiStateView;
 import com.ebrightmoon.main.R;
 

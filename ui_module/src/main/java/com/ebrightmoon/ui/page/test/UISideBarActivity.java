@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
-import com.ebrightmoon.common.base.BaseActivity;
+import com.ebrightmoon.common.base.mvc.BaseActivity;
 import com.ebrightmoon.common.util.DensityUtils;
 import com.ebrightmoon.common.widget.WaveSideBar;
 import com.ebrightmoon.commonlogic.sidebar.StickyDecoration;

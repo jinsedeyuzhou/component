@@ -1,4 +1,4 @@
-package com.ebrightmoon.common.base;
+package com.ebrightmoon.common.base.mvc;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 
 
 import com.ebrightmoon.common.R;
+import com.ebrightmoon.common.base.BaseApplication;
 import com.ebrightmoon.common.common.CommonBaseActivity;
 import com.ebrightmoon.common.ebus.BusManager;
 import com.ebrightmoon.common.view.SwipeBackLayout;

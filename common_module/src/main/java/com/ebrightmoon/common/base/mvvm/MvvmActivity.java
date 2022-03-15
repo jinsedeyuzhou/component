@@ -1,4 +1,4 @@
-package com.ebrightmoon.common.base;
+package com.ebrightmoon.common.base.mvvm;
 
 import android.app.Activity;
 import android.content.Context;
@@ -22,6 +22,8 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.ebrightmoon.common.R;
+import com.ebrightmoon.common.base.mvc.ContainerActivity;
+import com.ebrightmoon.common.base.mvvm.BaseViewModel;
 import com.ebrightmoon.common.ebus.BusManager;
 import com.ebrightmoon.common.ebus.IEvent;
 import com.ebrightmoon.common.ebus.Messenger;
@@ -39,7 +41,7 @@ import java.lang.reflect.Type;
 import java.util.Map;
 
 
-public abstract class MvvmActivity<V extends ViewDataBinding, VM extends BaseViewModel> extends RxAppCompatActivity implements View.OnClickListener {
+public abstract class MvvmActivity<V extends ViewDataBinding, VM extends BaseViewModel> extends RxAppCompatActivity implements IBaseView,View.OnClickListener {
     private static final String TAG = "BaseActivity";
     protected Context mContext;
     protected Activity mActivity;
@@ -63,17 +65,20 @@ public abstract class MvvmActivity<V extends ViewDataBinding, VM extends BaseVie
                 WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         //默认取消所有title，可使用自定义title。
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        base();
         this.mContext = this;
         this.mActivity = this;
         screenWidth = getResources().getDisplayMetrics().widthPixels;
         screenHeight = getResources().getDisplayMetrics().heightPixels;
-        registorUIChangeLiveDataCallBack();
+        initParam();
         initViewDataBinding(paramBundle);
+        registorUIChangeLiveDataCallBack();
         initViewObservable();
         initData();
-
+        viewModel.registerRxBus();
     }
+
+
+
 
     protected void show() {
         if (mLoadingDialog==null) {
@@ -182,16 +187,6 @@ public abstract class MvvmActivity<V extends ViewDataBinding, VM extends BaseVie
     public <T extends ViewModel> T createViewModel(FragmentActivity activity, Class<T> cls) {
         return new ViewModelProvider(activity).get(cls);
     }
-
-    /**
-     * 绑定事件
-     */
-    protected abstract void initViewObservable();
-
-    /**
-     * 数据逻辑处理
-     */
-    public abstract void initData();
 
 
     /**

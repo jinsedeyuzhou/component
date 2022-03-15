@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply from:'../greendao_config.gradle'
 android {
-    compileSdkVersion 28
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
 
     defaultConfig {
         minSdkVersion rootProject.ext.android.minSdkVersion
@@ -53,7 +53,6 @@ dependencies {
     api project(':baseLib:volley')
 
     api project(':common_module')
-    api 'com.github.jinsedeyuzhou.HttpClient:HttpClient:-SNAPSHOT'
 
 
 }

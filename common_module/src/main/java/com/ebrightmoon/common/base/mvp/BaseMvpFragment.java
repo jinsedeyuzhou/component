@@ -1,6 +1,8 @@
-package com.ebrightmoon.common.base;
+package com.ebrightmoon.common.base.mvp;
 
 import androidx.annotation.Nullable;
+
+import com.ebrightmoon.common.base.mvc.BaseFragment;
 
 /**
  * Time: 2019-12-12

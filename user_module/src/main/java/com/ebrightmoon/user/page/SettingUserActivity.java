@@ -5,7 +5,7 @@ import android.view.Menu;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.ebrightmoon.common.base.BaseActivity;
+import com.ebrightmoon.common.base.mvc.BaseActivity;
 import com.ebrightmoon.data.router.RouterURLS;
 import com.ebrightmoon.user.R;
 

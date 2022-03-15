@@ -1,4 +1,4 @@
-package com.ebrightmoon.common.base;
+package com.ebrightmoon.common.base.mvvm;
 
 import android.app.Application;
 import android.os.Bundle;
@@ -146,34 +146,42 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
 
     @Override
     public void onCreate() {
+
     }
 
     @Override
     public void onDestroy() {
+
     }
 
     @Override
     public void onStart() {
+
     }
 
     @Override
     public void onStop() {
+
     }
 
     @Override
     public void onResume() {
+
     }
 
     @Override
     public void onPause() {
+
     }
 
     @Override
     public void registerRxBus() {
+
     }
 
     @Override
     public void removeRxBus() {
+
     }
 
     @Override

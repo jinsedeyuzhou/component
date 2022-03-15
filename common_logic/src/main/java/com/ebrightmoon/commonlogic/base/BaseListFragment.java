@@ -2,7 +2,6 @@ package com.ebrightmoon.commonlogic.base;
 
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -13,7 +12,7 @@ import com.ebrightmoon.common.adapter.recycler.absrecyclerview.EmptyWrapper;
 import com.ebrightmoon.common.adapter.recycler.absrecyclerview.HeaderAndFooterWrapper;
 import com.ebrightmoon.common.adapter.recycler.absrecyclerview.LoadMoreWrapper;
 import com.ebrightmoon.common.adapter.recycler.absrecyclerview.MultiItemTypeAdapter;
-import com.ebrightmoon.common.base.BaseFragment;
+import com.ebrightmoon.common.base.mvc.BaseFragment;
 import com.ebrightmoon.common.util.Tools;
 import com.ebrightmoon.commonlogic.R;
 import com.ebrightmoon.commonlogic.widget.LoadMoreView;

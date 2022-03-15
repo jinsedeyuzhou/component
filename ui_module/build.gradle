@@ -22,7 +22,7 @@ androidExtensions {
 
 android {
 
-    compileSdkVersion 28
+    compileSdkVersion 30
     defaultConfig {
         if (isUi.toBoolean()) {
             applicationId "com.ebrightmoon.ui"
@@ -76,7 +76,7 @@ dependencies {
     //公共库导入
     api project(':common_logic')
     api project(':derobot')
-    kapt rootProject.ext.annotationProcessor.arouter_compiler
+    annotationProcessor rootProject.ext.annotationProcessor.arouter_compiler
 
 }
 repositories {

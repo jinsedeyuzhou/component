@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.ebrightmoon.common.base.BaseFragment;
+import com.ebrightmoon.common.base.mvc.BaseFragment;
 import com.ebrightmoon.common.widget.CustomToast;
 import com.ebrightmoon.ui.R;
 

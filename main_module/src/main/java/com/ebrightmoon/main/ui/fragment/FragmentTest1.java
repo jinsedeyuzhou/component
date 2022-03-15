@@ -6,7 +6,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.ebrightmoon.common.base.BaseFragment;
+import com.ebrightmoon.common.base.mvc.BaseFragment;
 import com.ebrightmoon.commonlogic.widget.MultiStateView;
 import com.ebrightmoon.main.R;
 

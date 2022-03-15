@@ -5,11 +5,10 @@ import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
 
-import com.ebrightmoon.common.base.BaseActivity;
+import com.ebrightmoon.common.base.mvc.BaseActivity;
 import com.ebrightmoon.ui.R;
 import com.ebrightmoon.ui.data.UserInfo;
 import com.ebrightmoon.ui.databinding.UiActivityDatabindingBinding;
-import com.ebrightmoon.ui.page.fragment.UiHomeFragment;
 
 /**
  * Time: 2019/6/21

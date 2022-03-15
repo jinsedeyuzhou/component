@@ -3,7 +3,7 @@ package com.ebrightmoon.user;
 import android.os.Bundle;
 import android.view.View;
 
-import com.ebrightmoon.common.base.BaseActivity;
+import com.ebrightmoon.common.base.mvc.BaseActivity;
 import com.ebrightmoon.user.page.LoginUserActivity;
 import com.ebrightmoon.user.page.RegisterUserActivity;
 import com.ebrightmoon.user.page.SettingUserActivity;

@@ -31,10 +31,10 @@ repositories {
 }
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 30
 
     useLibrary 'org.apache.http.legacy'
 }
 
 apply from: 'rules.gradle'
-apply from: 'bintray.gradle'
+

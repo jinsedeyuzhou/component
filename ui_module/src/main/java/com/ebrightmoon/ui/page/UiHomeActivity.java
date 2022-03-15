@@ -1,23 +1,19 @@
 package com.ebrightmoon.ui.page;
 
 import androidx.annotation.NonNull;
-import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.ebrightmoon.common.base.BaseActivity;
-import com.ebrightmoon.common.widget.CustomViewPager;
+import com.ebrightmoon.common.base.mvc.BaseActivity;
 import com.ebrightmoon.data.router.RouterURLS;
 import com.ebrightmoon.ui.R;
 import com.ebrightmoon.ui.adapter.NewsAdapter;
 import com.ebrightmoon.ui.page.fragment.UiAccountFragment;
 import com.ebrightmoon.ui.page.fragment.UiHomeFragment;
-import com.ebrightmoon.ui.utils.BottomNavigationViewHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;

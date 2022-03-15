@@ -3,7 +3,7 @@ package com.ebrightmoon.ui.page.kotlin
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import com.ebrightmoon.common.base.BaseActivity
+import com.ebrightmoon.common.base.mvc.BaseActivity
 import com.ebrightmoon.ui.R
 import kotlinx.android.synthetic.main.activity_kotlin_test.*
 

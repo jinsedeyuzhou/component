@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ebrightmoon.common.base.BaseActivity;
+import com.ebrightmoon.common.base.mvc.BaseActivity;
 import com.ebrightmoon.common.widget.CustomDialogFragment;
 import com.ebrightmoon.common.widget.dialogfragment.IDialog;
 import com.ebrightmoon.common.widget.dialogfragment.SystemDialog;
@@ -21,7 +21,6 @@ import com.ebrightmoon.common.widget.popwindow.CommonPopupWindow;
 import com.ebrightmoon.common.widget.popwindow.CustomPopWindow;
 import com.ebrightmoon.ui.R;
 import com.ebrightmoon.webviewlib.page.BridgeWebViewActivity;
-import com.ebrightmoon.webviewlib.page.WebViewActivity;
 
 /**
  * Time: 2019/6/11

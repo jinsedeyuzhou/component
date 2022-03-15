@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.ebrightmoon.common.base.BaseActivity;
+import com.ebrightmoon.common.base.mvc.BaseActivity;
 import com.ebrightmoon.common.permission.OnPermissionCallback;
 import com.ebrightmoon.common.permission.PermissionManager;
 import com.ebrightmoon.common.permission.RxPermissions;

@@ -1,4 +1,4 @@
-package com.ebrightmoon.common.base;
+package com.ebrightmoon.common.base.mvvm;
 
 import android.app.Activity;
 import android.content.Context;
@@ -21,6 +21,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.ebrightmoon.common.base.AppExecutors;
+import com.ebrightmoon.common.base.mvc.ContainerActivity;
 import com.ebrightmoon.common.ebus.BusManager;
 import com.ebrightmoon.common.ebus.Messenger;
 import com.ebrightmoon.common.util.LogUtils;
@@ -35,7 +37,7 @@ import java.util.Map;
 
 
 public abstract class MvvmFragment<V extends ViewDataBinding, VM extends BaseViewModel>
-        extends RxFragment implements View.OnClickListener {
+        extends RxFragment implements View.OnClickListener, IBaseView {
     private static final String TAG = "BaseFragment";
     private static final String STATE_SAVE_IS_HIDDEN = "STATE_SAVE_IS_HIDDEN";
 
@@ -76,7 +78,16 @@ public abstract class MvvmFragment<V extends ViewDataBinding, VM extends BaseVie
         initParam();
     }
 
-    protected void initParam() {
+
+    @Override
+    public void initParam() {
+        AppExecutors appExecutors = new AppExecutors();
+        appExecutors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        });
 
     }
 
@@ -105,9 +116,6 @@ public abstract class MvvmFragment<V extends ViewDataBinding, VM extends BaseVie
         initViewObservable();
         //注册RxBus
         viewModel.registerRxBus();
-    }
-
-    protected void initViewObservable() {
     }
 
 

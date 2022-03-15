@@ -26,8 +26,8 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Toast;
 
-import com.ebrightmoon.common.base.BaseActivity;
-import com.ebrightmoon.common.base.BaseFragment;
+import com.ebrightmoon.common.base.mvc.BaseActivity;
+import com.ebrightmoon.common.base.mvc.BaseFragment;
 import com.ebrightmoon.common.util.DensityUtils;
 import com.ebrightmoon.common.util.StatusBarUtils;
 
