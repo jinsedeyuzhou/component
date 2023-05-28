@@ -3,8 +3,8 @@
 buildscript {
 
     apply from: "config.gradle"
-    ext.kotlin_version = '1.4.30'
-    ext.gradleVersion = '4.1.2'
+    ext.kotlin_version = '1.7.20'
+    ext.gradleVersion = '7.0.2'
     repositories {
         maven{ url 'https://maven.aliyun.com/repository/central' }
         maven{ url 'https://maven.aliyun.com/repository/public' }

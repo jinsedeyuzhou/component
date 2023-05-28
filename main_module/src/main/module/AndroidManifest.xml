@@ -12,6 +12,7 @@
         android:theme="@style/BaseAppTheme">
         <activity
             android:name=".MainActivity"
+            android:exported="true"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,12 +24,14 @@
         <activity
             android:name=".ui.activity.HomeMainActivity"
             android:label="@string/title_activity_home_main"
+            android:exported="true"
             android:theme="@style/AppMainTheme" />
 
 
 
         <activity
             android:name=".ui.activity.SearchMainActivity"
+            android:exported="false"
             android:screenOrientation="portrait" />
 
 

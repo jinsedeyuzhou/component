@@ -5,7 +5,9 @@
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
     <application>
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:exported="true"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -14,13 +16,16 @@
         <activity
             android:name=".ui.activity.HomeMainActivity"
             android:screenOrientation="portrait"
+            android:exported="false"
             android:theme="@style/AppMainTheme" />
 
         <activity
             android:name=".ui.activity.SearchMainActivity"
+            android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity android:name=".ui.activity.TestActivity"
+            android:exported="false"
             android:screenOrientation="portrait"/>
     </application>
 

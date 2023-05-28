@@ -10,9 +10,11 @@
     <application>
         <activity
             android:name=".page.WebViewActivity"
+            android:exported="false"
             android:screenOrientation="portrait" />
         <activity
             android:name=".page.BridgeWebViewActivity"
+            android:exported="false"
             android:screenOrientation="portrait" />
         <!-- 必须放到使用的库中，否则找不到meta-data-->
         <provider

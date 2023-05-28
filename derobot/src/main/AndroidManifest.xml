@@ -30,15 +30,18 @@
         <activity
             android:name=".reboot.ui.UniversalActivity"
             android:screenOrientation="portrait"
+            android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:windowSoftInputMode="stateHidden|stateUnchanged" />
         <activity
             android:name=".reboot.ui.TranslucentActivity"
             android:theme="@style/DK.Theme.Translucent"
+            android:exported="false"
             android:windowSoftInputMode="stateHidden|stateUnchanged" />
         <activity
             android:name=".reboot.zxing.activity.CaptureActivity"
             android:screenOrientation="portrait"
+            android:exported="false"
             android:windowSoftInputMode="stateHidden|stateUnchanged" />
 
         <provider

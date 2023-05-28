@@ -8,6 +8,7 @@ import java.text.NumberFormat;
  * Time: 2020-01-04
  * Author:wyy
  * Description:
+ * 格式化输入百分数字符
  */
 public class DecimalFormatUtil {
 

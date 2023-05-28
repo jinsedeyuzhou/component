@@ -9,20 +9,25 @@
 
 
 
-        <activity android:name=".UserMainActivity"/>
+        <activity android:name=".UserMainActivity"
+            android:exported="false"
+            />
 
         <activity
             android:name=".page.LoginUserActivity"
             android:screenOrientation="portrait"
+            android:exported="false"
             android:theme="@style/AppThemeLogin"
             />
         <activity
             android:name=".page.RegisterUserActivity"
             android:screenOrientation="portrait"
+            android:exported="false"
             android:theme="@style/AppThemeLogin"
             />
         <activity
             android:name=".page.SettingUserActivity"
+            android:exported="false"
             android:screenOrientation="portrait" />
 
     </application>

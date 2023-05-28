@@ -13,7 +13,9 @@
         <!-- 主要注册一个广播 -->
         <receiver
             android:name="com.sina.util.dnscache.net.networktype.NetworkStateReceiver"
-            android:label="NetworkConnection">
+            android:label="NetworkConnection"
+            android:exported="false"
+            >
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
                 <action android:name="android.intent.action.USER_PRESENT"/>

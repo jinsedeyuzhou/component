@@ -22,7 +22,7 @@ androidExtensions {
 
 android {
 
-    compileSdkVersion 30
+    compileSdkVersion 33
     defaultConfig {
         if (isUi.toBoolean()) {
             applicationId "com.ebrightmoon.ui"
@@ -34,7 +34,12 @@ android {
 //        flavorDimensions "dev","versionCode","stage"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-
+        //ARouter
+//        javaCompileOptions {
+//            annotationProcessorOptions {
+//                arguments = [AROUTER_MODULE_NAME: project.getName()]
+//            }
+//        }
     }
     sourceSets {
         main {
@@ -69,14 +74,14 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     //公共库导入
     api project(':common_logic')
     api project(':derobot')
-    annotationProcessor rootProject.ext.annotationProcessor.arouter_compiler
+    kapt  rootProject.ext.annotationProcessor.arouter_compiler
 
 }
 repositories {
